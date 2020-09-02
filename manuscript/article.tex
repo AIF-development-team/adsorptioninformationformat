@@ -1,0 +1,234 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is a (brief) model paper using the achemso class
+%% The document class accepts keyval options, which should include
+%% the target journal and optionally the manuscript type. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[journal=jacsat,manuscript=communication]{achemso}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional packages needed here.  Only include packages
+%% which are essential, to avoid problems later. Do NOT use any
+%% packages which require e-TeX (for example etoolbox): the e-TeX
+%% extensions are not currently available on the ACS conversion
+%% servers.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% If issues arise when submitting your manuscript, you may want to
+%% un-comment the next line.  This provides information on the
+%% version of every file you have used.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%\listfiles
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Place any additional macros here.  Please use \newcommand* where
+%% possible, and avoid layout-changing macros (which are not used
+%% when typesetting).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Meta-data block
+%% ---------------
+%% Each author should be given as a separate \author command.
+%%
+%% Corresponding authors should have an e-mail given after the author
+%% name as an \email command. Phone and fax numbers can be given
+%% using \phone and \fax, respectively; this information is optional.
+%%
+%% The affiliation of authors is given after the authors; each
+%% \affiliation command applies to all preceding authors not already
+%% assigned an affiliation.
+%%
+%% The affiliation takes an option argument for the short name.  This
+%% will typically be something like "University of Somewhere".
+%%
+%% The \altaffiliation macro should be used for new address, etc.
+%% On the other hand, \alsoaffiliation is used on a per author basis
+%% when authors are associated with multiple institutions.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\author{Ruben Goeminne}
+\affiliation[TU Ghent]
+{Center for Molecular Modeling
+Ghent University
+Tech Lane Ghent Science Park Campus A, 9052 Zwijnaarde, Belgium}
+
+\author{Simon Krause}
+\affiliation[University of Groningen]
+{Stratingh Institute for Chemistry
+Faculty of Mathematics and Natural Sciences
+University of Groningen
+Nijenborgh 4, 9747 AG Groningen, The Netherlands}
+
+
+\author{Toon Verstraelen}
+\affiliation[TU Ghent]
+{Center for Molecular Modeling
+Ghent University
+Tech Lane Ghent Science Park Campus A, 9052 Zwijnaarde, Belgium}
+\email{toon.verstraelen@ugent.be}
+
+\author{Jack D. Evans}
+\affiliation[TU Dresden]
+{Department of inorganic chemistry
+Technische Universität Dresden
+Bergstraße 66, 01062 Dresden, Germany}
+\email{jack.evans@tu-dresden.de}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The document title should be given as usual. Some journals require
+%% a running title from the author: this should be supplied as an
+%% optional argument to \title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[]
+  {Mapping the complete thermodynamic landscape of gas adsorption for a responsive metal-organic framework}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Some journals require a list of abbreviations or keywords to be
+%% supplied. These should be set up here, and will be printed after
+%% the title and author information, if needed.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\abbreviations{IR,NMR,UV}
+\keywords{American Chemical Society, \LaTeX}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The manuscript does not need to include \maketitle, which is
+%% executed automatically.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The "tocentry" environment can be used to create an entry for the
+%% graphical table of contents. It is given here as some journals
+%% require that it is printed as part of the abstract page. It will
+%% be automatically moved as appropriate.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{tocentry}
+
+
+The surrounding frame is 9\,cm by 3.5\,cm, which is the maximum
+permitted for  \emph{Journal of the American Chemical Society}
+graphical table of content entries. The box will not resize if the
+content is too big: instead it will overflow the edge of the box.
+
+
+\end{tocentry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The abstract environment will automatically gobble the contents
+%% if an abstract is not used by the target journal.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+  To do.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Start the main part of the manuscript here.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+Advanced porous materials are poised for application.
+
+It is often the flexibility of porous adsorbents that enables unparalleled performance in separation applications.
+
+Responsive adsorbents, such as metal-organic frameworks, can significantly change pore structure and volume in response to stimuli.\cite{10.1021/acs.chemmater.5b00046}
+
+One particularly challenging example is negative gas adsorption (NGA).
+
+To completely describe the thermodynamics of responsive frameworks simulations of a fully flexible solid in presence of adsorbate are necessary.
+Simulations, within this osmotic ensemble provide access to the grand canonical potential ($\Omega$).
+This potential completely describes the thermodynamic features of the system with respect to the energies of the framework, the chemical potential of the adsorbed fluid, external pressure and temperature.
+Atomistic simulations within the osmotic ensemble remain challenging because dynamics must be combined with particle insertion/deletion, which has only been applied to handful of systems.
+
+Analysis of the grand canonical potential are often achieved using analytical descriptions of gas adsorption.
+This has been particularly insightful the relative stability of two distinct and porous phases.
+For example, the process of ``breathing'' can be directly seen for two different porous phases based on the difference in grand canonical potential, $\Omega$ (Figure~\ref{fgr:figure1}a,b).
+
+In the present work we have employed state-of-the-art molecular simulations to produce a detailed picture of the entire landscape of grand canonical potential for changes in pressure, amount adsorbed and cell volume for DUT-49.
+This complete thermodynamic analysis provides unprecedented insight into the phase stability under adsorption.
+Our analysis recreates experimental observations, demonstrates the effects of temperature and outlines the kinetic and thermodynamics phases present during NGA.
+
+% \begin{figure}[htb]
+%   \includegraphics{../figures/figure1-01.png}
+%     \caption{}
+%     \label{fgr:figure1}
+%   \end{figure}
+
+
+Our methodology uses grand canonical Monte Carlo moves combined with molecular dynamics trajectories in the $(N,V,\sigma_{a}=0,T)$ ensemble, to effectively constraining the volume while allowing the cell shape to fluctuate. Subsequently, adsorption isotherms at each unit cell volume then are used to construct the grand canonical potential as Equation~{\ref{eqn:osmoticequation}}.
+
+% \begin{equation}
+%   \Omega\left(N_{\mathrm{host}}, p, \sigma_{a}=\mathbf{0}, T ; V\right)=F_{\mathrm{host}}\left(N_{\mathrm{host}}, T ; V\right)+p V-\int_{-\infty}^{\mu(p, T)} N_{\mathrm{guest}}\left(N_{\mathrm{host}}, \mu^{\prime}, \sigma_{a}=\mathbf{0}, T ; V\right) \mathrm{d} \mu^{\prime}
+%   \label{eqn:osmoticequation}
+% \end{equation}
+
+The resulting potential at different methane gas pressures and cell volumes is displayed in Figure~\ref{fgr:figure1}c. To obtain accurate integrals of the number of adsorbed particles (third term in Equation~{\ref{eqn:osmoticequation}}), a large number of chemical potentials were considered.
+
+This detailed potential landscape contains metastable and equilibrium states that change with  increasing gas pressure (Figure~\ref{fgr:figure2}). The system, at zero gas pressure, begins at equilibrium in the $op$ phase (large cell volume) where there is also a metastable $cp$ phase (small cell volume. The observed states correspond are in quantitative agreement with in situ studies.
+Intermediate phases, between the $op$ and $cp$ phases, are observed by simulation and experiment further highlighting the accuracy of our proposed landscape.
+  
+  % \begin{figure}[htb]
+  %   \includegraphics{../figures/figure2-01.png}
+  %     \caption{}
+  %     \label{fgr:figure2}
+  %   \end{figure}
+
+Simulations were completed for three temperatures (90$\,$K, 120$\,$ and 150$\,$) to provide insight to the thermodynamic trends responsible for the observations of different phases for DUT-49.
+Particularly, temperature demonstrates a fascinating non-monotonic relationship with amount of gas released during the negative gas adsorption process.
+The relative grand potential between the $op$ and $cp$ phases can be directly computed from these simulations, in addition to the energy barrier between these states (Figure~\ref{fgr:figure3}a). It is observed that the pressure window for stability of the $cp$ phase is correlated with temperature, due to the entropic effects of condensing gas to a smaller pore structure.
+The maximum energy difference is also correlated with temperature.
+Contrastingly, the minimum barrier height shows a weaker trend with temperature.
+A temperature of 90 and 120$\,$K shows no energy barrier between the states.
+We can alternatively consider these trends with respect to the difference in  adsorbed amount in the $op$ and $cp$ phases ((Figure~\ref{fgr:figure3}b), which represents the magnitude of negative gas adsorption. 
+Interestingly, the $cp$ phase can become more favorable than the $op$ phase before the crossing point of the individual isotherms, represent by 0.
+This is especially true for the.
+
+%     \begin{figure}[htb]
+%       \includegraphics{../figures/figure3-01.png}
+%         \caption{}
+%         \label{fgr:figure3}
+%       \end{figure}
+
+% The finally.
+
+%       \begin{figure*}[htb]
+%         \includegraphics{../figures/figure4-01.png}
+%           \caption{}
+%           \label{fgr:figure4}
+%         \end{figure*}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The "Acknowledgement" section can be given in all manuscript
+%% classes.  This should be given within the "acknowledgement"
+%% environment, which will make the correct section or running title.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{acknowledgement}
+  J. D. E. acknowledges the support of the Alexander von Humboldt foundation and HPC platforms provided by a GENCI grant (A0070807069) and the Center for Information Services and High Performance Computing (ZIH) at TU Dresden.
+\end{acknowledgement}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The same is true for Supporting Information, which should use the
+%% suppinfo environment.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{suppinfo}
+
+% This will usually read something like: ``Experimental procedures and
+% characterization data for all new compounds. The class will
+% automatically add a sentence pointing to the information on-line:
+
+% \end{suppinfo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% The appropriate \bibliography command should be placed here.
+%% Notice that the class file automatically sets \bibliographystyle
+%% and also names the section correctly.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{article}
+
+\end{document}
