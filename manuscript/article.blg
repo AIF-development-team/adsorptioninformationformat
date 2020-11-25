@@ -5,45 +5,49 @@ The style file: achemso.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: acs-article.bib
 Database file #2: article.bib
+Warning--entry type for "webplotdigitizer" isn't style-file defined
+--line 27 of file article.bib
+Warning--I didn't find a database entry for ""
 achemso 2019-02-14 v3.12a
-You've used 2 entries,
+You've used 4 entries,
             2538 wiz_defined-function locations,
-            755 strings with 6694 characters,
-and the built_in function-call counts, 504 in all, are:
-= -- 39
-> -- 13
+            766 strings with 7989 characters,
+and the built_in function-call counts, 1812 in all, are:
+= -- 81
+> -- 215
 < -- 5
-+ -- 7
-- -- 5
-* -- 31
-:= -- 66
-add.period$ -- 2
-call.type$ -- 2
++ -- 77
+- -- 73
+* -- 203
+:= -- 253
+add.period$ -- 6
+call.type$ -- 4
 change.case$ -- 4
 chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 29
-empty$ -- 40
-format.name$ -- 3
-if$ -- 93
+cite$ -- 4
+duplicate$ -- 65
+empty$ -- 69
+format.name$ -- 73
+if$ -- 305
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
-newline$ -- 34
-num.names$ -- 3
-pop$ -- 3
+newline$ -- 46
+num.names$ -- 9
+pop$ -- 7
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 2
+skip$ -- 3
 stack$ -- 0
 substring$ -- 36
-swap$ -- 19
-text.length$ -- 2
+swap$ -- 163
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 11
+type$ -- 25
 warning$ -- 0
-while$ -- 7
+while$ -- 11
 width$ -- 0
-write$ -- 41
+write$ -- 64
+(There were 2 warnings)

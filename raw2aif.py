@@ -243,27 +243,27 @@ from monty.io import zopen
 block = OrderedDict()
 loops = []
 
-block["_operator"] = operator
-block["_date"] = date
-block["_instrument"] = instrument
-block["_adsorptive"] = adsorptive
-block["_temperature"] = temperature
-block["_sample_mass"] = sample_mass
+block["_exptl_operator"] = operator
+block["_exptl_date"] = date
+block["_exptl_instrument"] = instrument
+block["_exptl_adsorptive"] = adsorptive
+block["_exptl_temperature"] = temperature
+block["_exptl_sample_mass"] = sample_mass
 block["_sample_id"] = sample_id
-block["_material_id"] = material_id
+block["_sample_material_id"] = material_id
 
-block["_adsorption_pressure"] = ads_press
-block["_adsorption_p0"] = ads_p0
-block["_adsorption_amount"] = ads_vol
+block["_adsorp_pressure"] = ads_press
+block["_adsorp_p0"] = ads_p0
+block["_adsorp_amount"] = ads_vol
 
-loops.append(["_adsorption_pressure","_adsorption_p0", "_adsorption_amount"])
+loops.append(["_adsorp_pressure","_adsorp_p0", "_adsorp_amount"])
 
 
-block["_desorption_pressure"] = des_press
-block["_desorption_p0"] = des_p0
-block["_desorption_amount"] = des_vol
+block["_desorp_pressure"] = des_press
+block["_desorp_p0"] = des_p0
+block["_desorp_amount"] = des_vol
 
-loops.append(["_desorption_pressure","_desorption_p0", "_desorption_amount"])
+loops.append(["_desorp_pressure","_desorp_p0", "_desorp_amount"])
 
 d = OrderedDict()
 header = "raw2ciftest"

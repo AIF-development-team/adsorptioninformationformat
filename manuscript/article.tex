@@ -3,7 +3,7 @@
 %% The document class accepts keyval options, which should include
 %% the target journal and optionally the manuscript type. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[journal=jacsat,manuscript=communication]{achemso}
+\documentclass[journal=langd5,manuscript=article]{achemso}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Place any additional packages needed here.  Only include packages
@@ -13,7 +13,10 @@
 %% servers.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
+\usepackage{lineno}
+\usepackage{booktabs}
 
+\linenumbers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
@@ -27,6 +30,7 @@
 %% when typesetting).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand*\mycommand[1]{\texttt{\emph{#1}}}
+\renewcommand{\arraystretch}{1.2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Meta-data block
@@ -48,26 +52,7 @@
 %% On the other hand, \alsoaffiliation is used on a per author basis
 %% when authors are associated with multiple institutions.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\author{Ruben Goeminne}
-\affiliation[TU Ghent]
-{Center for Molecular Modeling
-Ghent University
-Tech Lane Ghent Science Park Campus A, 9052 Zwijnaarde, Belgium}
 
-\author{Simon Krause}
-\affiliation[University of Groningen]
-{Stratingh Institute for Chemistry
-Faculty of Mathematics and Natural Sciences
-University of Groningen
-Nijenborgh 4, 9747 AG Groningen, The Netherlands}
-
-
-\author{Toon Verstraelen}
-\affiliation[TU Ghent]
-{Center for Molecular Modeling
-Ghent University
-Tech Lane Ghent Science Park Campus A, 9052 Zwijnaarde, Belgium}
-\email{toon.verstraelen@ugent.be}
 
 \author{Jack D. Evans}
 \affiliation[TU Dresden]
@@ -77,13 +62,20 @@ Bergstraße 66, 01062 Dresden, Germany}
 \email{jack.evans@tu-dresden.de}
 
 
+\author{Stefan Kaskel}
+\affiliation[TU Dresden]
+{Department of inorganic chemistry
+Technische Universität Dresden
+Bergstraße 66, 01062 Dresden, Germany}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The document title should be given as usual. Some journals require
 %% a running title from the author: this should be supplied as an
 %% optional argument to \title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[]
-  {Mapping the complete thermodynamic landscape of gas adsorption for a responsive metal-organic framework}
+  {A universal standard archive file for adsorption data}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Some journals require a list of abbreviations or keywords to be
@@ -92,6 +84,8 @@ Bergstraße 66, 01062 Dresden, Germany}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \abbreviations{IR,NMR,UV}
 \keywords{American Chemical Society, \LaTeX}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The manuscript does not need to include \maketitle, which is
@@ -121,84 +115,170 @@ content is too big: instead it will overflow the edge of the box.
 %% if an abstract is not used by the target journal.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-  To do.
+  The rise in interest of new advanced adsorbents for application in promising areas has followed a lack of detailed and open reporting of experimental or even computational studies.
+  This report details the specification of a new standard adsorption information file (AIF) inspired by the ubiquitous crystallographic information file (CIF) and based on the self-defining text archive and retrieval (STAR) procedure, also used to represent biological nuclear magnetic resonance experiments (NMR-STAR).
+  The AIF is a flexible, general and easily extended free-format archive file and is readily human and machine readable --- simple to edit using a basic text editor or parse for database curation.
+  This format represents the first steps to an open adsorption data format.
+  An open format sorely needed for the electronic transmission of adsorption data between laboratories, journals and larger databases in the effort to increase open science in the field of porous materials. 
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Start the main part of the manuscript here.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
+It is important in many branches of science for there to exist a uniform and flexible method of archiving and exchanging data.
+The data presented in research contributions must be readily accessible and easily verifiable.
+Key to scientific discovery and innovation the use of good data management practices can  provide significant knowledge through the reuse of original data by the community after the data publication process.\cite{10.1038/sdata.2016.18}
+Unfortunately, the existing ecosystem surrounding scholarly data publication often prevent the community extracting maximum benefit from published research.
+This lead to the foundational principles discussed by Wilkinson et al.--- Findability, Accessibility, Interoperability, and Reusability--- that serve as a guideline to to maximize the added-value gained by digital publishing.\cite{10.1038/sdata.2016.18}
 
-Advanced porous materials are poised for application.
+Porous solids are of important scientific and industrial interest owing to their impressive ability to interact with all manner of atoms, ions and molecules throughout the entirety of the solid, not only the surface.\cite{}
+This has led to many exciting applications of , traditional applications of porous materials thus involve ion exchange, adsorption (for separation) and catalysis, and many of these benefit from the high order that can be achieved in solids such as zeolites.\cite{}
 
-It is often the flexibility of porous adsorbents that enables unparalleled performance in separation applications.
+Measuring the interaction of gas with porous materials is crucial to understanding and comparing the plethora of different materials.
+The quantity of gas adsorbed is measured in any convenient units, but for the presentation of the data, it is recommended that the amount adsorbed should be expressed in moles per gram of outgassed adsorbent. If possible, the composition of the adsorbent should be specified and its surface characterised. To facilitate the comparison of adsorption data, it is recommended that adsorption isotherms are displayed in a graphica form with the amount adsorbed (preferably presented using mol$\,$g$^-1$) plotted against the equilibrium relative pressure ($p/p_0$), where $p_0$ is the saturation pressure of the pure adsorptive at the operational temperature, or against absolute pressure, when the temperature is above the critical temperature of the adsorptive. If the adsorption measurements are made under conditions where the gas phase deviates appreciably from ideality (e.g., at high pressure), it is desirable that the isotherms should be presented in terms of gas fugacity rather than pressure.
 
-Responsive adsorbents, such as metal-organic frameworks, can significantly change pore structure and volume in response to stimuli.\cite{10.1021/acs.chemmater.5b00046}
+Rapid advances in computer technology, coupled with the expansion of local, national and international networks, have fuelled the need for such a facility. The variety and relative inflexibility of existing data exchange formats have inhibited their ef- fective use. This is true even in fields where the basic data requirements are well defined. Problems of data ex- changearefurtherexacerbatedif thenumberandnatureof data types change rapidly and continuously. Under these conditions specialized and local file formats have prolif- erated. This diversity was tolerable when electronic data transfer was infrequent, or when data processing speeds required file formats finely tuned to specific applications. The developments cited above signal an end to this ration- ale. A general, flexible, rapidly extensible and universal file format protocol is now essential.It must be machine- independent and portable so that accessibility to data items is independent of their point of origin. It must allow new data items to be incorporated without the need to modify existing files.
+Since the development of the first porous materials, there has been a sharp rise in the design of highly ordered and structured porous materials (Fig. S1). The advent of materials with more complex pore networks and dynamic frameworks through materials design strategies such as reticular chemistry has given rise to reported BET areas in excess of 8,000 m2 g1.[11,2528] Often, these complex materials have complex adsorption isotherms which have become harder to fit into the BET model. In response to these advances, materials scientists have developed a new generation of porosimetry equipment with pressure transducers capable of the collection of high-resolution gas adsorption isotherms at ultra-low pressures (<10-5 mmHg). Despite these advances, scientists still rely on the manual calculation of surface areas using BET theory
 
-One particularly challenging example is negative gas adsorption (NGA).
+\section{AIF structure and syntax}
+The information contained within an AIF is arranged in a strict structural arrangement.
+Alternative data storage structures were considered, during the development the AIF,  such as the comma-separated-value (CSV) file.
+The key, however, is that a universal data format must also include a well-structured record of metadata associated with the adsorption experiment.
+Without the metadata of, containing at the very least, what gas or temperature was used during the experiment the resulting adsorption data is meaningless.
+Metadata is also important in the development of databases.
+This is crucial to identify identical or related data, understand the evolution of databases over time, and also permit further examination for specific data items.
+As a result the STAR data structure was adopted, which is famously used in the crystallographic information file (CIF) and biological nuclear magnetic resonance experiments (NMR-STAR).
+An important property of the STAR format is that its syntax is defined by a few simple rules using an object/relational model.
+The data stored in a STAR file is self-descriptive as the underpinning data structure consists of tag-value pairs or data item.
+This data item is the combination a data value with the data name, an identifying unique tag.
+This approach is flexible and able to represent. nested and repetitive data, which are particularly important for the collection of pressure and adsorbed amount that comprise an adsorption isotherm experiment.
 
-To completely describe the thermodynamics of responsive frameworks simulations of a fully flexible solid in presence of adsorbate are necessary.
-Simulations, within this osmotic ensemble provide access to the grand canonical potential ($\Omega$).
-This potential completely describes the thermodynamic features of the system with respect to the energies of the framework, the chemical potential of the adsorbed fluid, external pressure and temperature.
-Atomistic simulations within the osmotic ensemble remain challenging because dynamics must be combined with particle insertion/deletion, which has only been applied to handful of systems.
+The data structure of an AIF is comprised of comment lines and data blocks, which contains the required metadata and quantities related to the adsorption experiment, separated for adsorption and desorption (Figure~\ref{fgr:datastructure}).
+Files can contain any number of data blocks to represent multiple experiments.
+Fundamentally, a data block is a data cell containing a sequence of data items, data loops.
+It starts with a data block code statement (\texttt{data\_example}) where a block code is a unique identifying code with in a file.
+A data block is closed by another either another data block code statement or the end of file.
+Comment lines can be placed anywhere in the file and are identified by a hash (\texttt{\#}) symbol.
+As these comment lines do not necessarily represent structured data, which is able to be easily parsed, it is not recommended to solely include important experimental conditions in this way.
+Single values or strings can be included within a data block using the data name and data value pairs.
+Data values are preceded by an identifying data name that is identify by an underscore character, for example \texttt{\_temperature}.
+A data loop structure consists of a loop statement (\texttt{loop\_}) followed by a list of data names and then a list of data, each of which contains data values that matches the data names in the list of data names. 
+Though data loops can be nested at any level this is not necessary for the current implementation.
+Importantly, data values that follow the nested data declarations must be in exact multiples of the number of data names (which are referred to as loop packets).
+The data loops, as used here, are terminated by a new data item, a new data loop or an end of file.
+These data loops can thus straightforwardly represent the data recorded at each point of an adsorption and desorption experiment, for example the pressure and quantities adsorbed.
 
-Analysis of the grand canonical potential are often achieved using analytical descriptions of gas adsorption.
-This has been particularly insightful the relative stability of two distinct and porous phases.
-For example, the process of ``breathing'' can be directly seen for two different porous phases based on the difference in grand canonical potential, $\Omega$ (Figure~\ref{fgr:figure1}a,b).
-
-In the present work we have employed state-of-the-art molecular simulations to produce a detailed picture of the entire landscape of grand canonical potential for changes in pressure, amount adsorbed and cell volume for DUT-49.
-This complete thermodynamic analysis provides unprecedented insight into the phase stability under adsorption.
-Our analysis recreates experimental observations, demonstrates the effects of temperature and outlines the kinetic and thermodynamics phases present during NGA.
-
-% \begin{figure}[htb]
-%   \includegraphics{../figures/figure1-01.png}
-%     \caption{}
-%     \label{fgr:figure1}
-%   \end{figure}
+  
+  \begin{figure}[htb]
+    \includegraphics{./figures/structure-01.png}
+      \caption{The structure of a typical adsorption information file (AIF) with the different data areas representing metadata (experimental and sample information) and the adsorption and desorption data.}
+      \label{fgr:datastructure}
+    \end{figure}
 
 
-Our methodology uses grand canonical Monte Carlo moves combined with molecular dynamics trajectories in the $(N,V,\sigma_{a}=0,T)$ ensemble, to effectively constraining the volume while allowing the cell shape to fluctuate. Subsequently, adsorption isotherms at each unit cell volume then are used to construct the grand canonical potential as Equation~{\ref{eqn:osmoticequation}}.
+The above data structures of the STAR format prove ideal for describing the detailed quantities relating to an adsorption experiment.
+An entire experiment can be described within a single data block.
+Initially, data name and data value pairs can be used to identify quantities relating to the whole experiment such as the date and time, temperature and adsorptive.
+The data points for the adsorption and desorption branch can then be detailed in separate data loops.
+For each point, quantities such as the absolute pressure, relative pressure and amount adsorbed can be detailed.
+This leads us to the general data structure for the AIF (Figure~\ref{fgr:datastructure}).
+
+
+\section{AIF dictionary}
+Each data item within a data block is identified using a unique data name.
+The currently accepted AIF data names are listed and defined in Table~\ref{tbl:example}.
+These data items form a first version of a core dictionary, which are intended for primarily reporting primary physisorption data for gas on porous materials.
+As a result the dictionary contains information about crucial experimental parameters, basic sample characterization, adsorption and desorption measures, each distinguished by a data name prefix (\texttt{\_exptl\_}, \texttt{\_sample\_}, \texttt{\_adsorp\_} and \texttt{\_desorp\_}).
+
+\begin{table}
+  \caption{Core dictionary of data items}
+  \label{tbl:example}
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    data name & description  \\
+    \midrule
+    \texttt{\_exptl\_operator}  & name of the person who ran the experiment (string)  \\
+    \texttt{\_exptl\_date} & date and time of the experiment (datetime string representation) \\
+    \texttt{\_exptl\_instrument}  & instrument id used for the experiment (string)  \\
+    \texttt{\_exptl\_adsorptive}  & name of the adsorptive (string)  \\
+    \texttt{\_exptl\_temperature}  & temperature of the experiment (float)  \\
+    \texttt{\_exptl\_sample\_mass}  & mass of the sample (float, gram) \\
+    \texttt{\_sample\_id}  & unique identifying code used by the operator (string)\\
+    \texttt{\_sample\_material\_name}  & designated name for the material (string) \\
+    \texttt{\_adsorp\_pressure} & pressure of the adsorption measurement (float, pascal)\\
+    \texttt{\_adsorp\_p0} & saturation pressure of the adsorption measurement (float, pascal) \\
+    \texttt{\_adsorp\_amount} & amount adsorbed during the adsorption measurement (float, mol$\,$kg$^{-1}$) \\
+    \texttt{\_desorp\_pressure} & pressure of the desorption measurement (float, pascal) \\
+    \texttt{\_desorp\_p0} & saturation pressure of the desorption measurement (float, pascal) \\
+    \texttt{\_desorp\_amount} & amount adsorbed during the desorption measurement (float, mol$\,$kg$^{-1}$) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The goal of the experimental data names is to capture the information required to accurately portray the results of experiment, which at the very minimum are the temperature and adsorptive.
+As metadata should include information that may aid in identifying possible errors this also includes the mass of sample used in the experiment.
+Additionally, data is included relative to the date, time and person responsible for the measurement to produce a general picture of the provenance of the experiment.
+
+Details of the sample are recorded for comparison and to uniquely identify the sample that was used in the experiment.
+Simply, this includes the sample identity code (\texttt{\_sample\_id}), a laboratory code used to record and represent the sample and a string relating to the general designation given to the material (\texttt{\_sample\_material\_name}).
+
+For each data point measured during an adsorption experiments data can be stored that relates to the equilibrated pressure, the saturation pressure and the amount adsorbed. Importantly, these should be stored in units of pascal and mol$\,$kg$^{-1}$ to follow the IUPAC recommendations.
+The saturation pressure can be recorded at each data point as we have discovered that some instruments will calculate and report this value for every point.
+
+The above features serve as an example of the data that can be archived in a AIF and can be extended in future versions.
+For example, the intention of this initial version is to provide digital archive of the presented primary data of an adsorption experiment, the isotherm.
+As a result, it describes only basic information that usually exported from adsorption instruments and a few convenient metadata items.
+The flexibility of this approach can be extended in future versions to include more detailed parameters not commonly presented, such as dead volume measurements, or combined with CIF data names to archive in situ measurements.
+
+\section{Creating and using the AIF}
+A simple python 3.7 routine was produced during the development of the AIF to convert the plain text data output from Quantachrome and Belsorb instruments, used in our lab and many others.
+Specifically, this has been written to parse raw analysis text files exported by Quantachrome software and the raw data files (.DAT) and csv files exported by Belsorb software.
+At this moment we are unable to read binary data files that are saved by Quatachrome instruments (.qps).
+
+This simple program will parse the output data to find data items detailed in the AIF dictionary.
+These data items are converted to the appropriate units and the isotherm is split into the adsorption and desorption parts.
+Subsequently an AIF is produced using the pymatgen CIF routines.
+This demonstrated that routines and methods developed for treating CIF files can be used in this application to adsorption data.
+Furthermore, produced AIF files can also be read using existing CIF methods, such as the \texttt{gemmi} python module, which we have used to demonstrate how an isotherm can be displayed from an AIF using a few lines.
+This is a very simple implementation and it is hoped that future versions, following the cooperation of several manufactures, could result in to routines to parse the information directly from binary data used by the instruments.
+
+To illustrate the importance of a universal data format for adsorption data we can compare data contained within an AIF to data digitized from a figure in a manuscript, for the same experiment.
+The porous material DUT-6 (also referred to as MOF-206) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylic acid and benzene-1,3,5-tribenzoic acid.\cite{10.1002/anie.200904599}
+DUT-6 has mesopores with dodecahedral geometry and smaller cages that produce an extremely porous material with large adsorption capacities for\textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
+The nitrogen adsorption isotherm at 77~K was reported in the original manuscript using relative pressure and a linear axis (Figure~/ref{fgr:example}).
+From this plot the isotherm can be classified  as  type  Ib clearly exhibiting characteristics of a hierarchal pore system with micropore and mesopores.
+Clearly there is a distinct step $p/p_0$ = 0.17, however, from this plot it is not possible to correctly identify low pressure features.
+The low pressure regions is important for understanding the process of initial pore filling or for independent application of analysis methods, such as the Brunauer–Emmett–Teller (BET) method.
+The reported isotherm was digitized using WebPlotDigitizer, which uses a time-consuming but powerful point-picking methodology.\cite{webplotdigitizer}
+In this methodology each point in the graph is identified by clicking on the image area and the point's location in on-screen pixels is then converted to data valued based on an axes calibration.
+The digitized isotherm and the data from the experiment, when plotted on semi-log axes, clearly shows important low pressure information is lost when this information is simply included as a figure in a manuscript (Figure~/ref{fgr:example}).
+To prevent this information loss and to allow further analysis of reported adsorption experiments by other researchers adsorption data should be archived and shared using the a universal and complete data format like that of the AIF.
+
+  
+  \begin{figure}[htb]
+    \includegraphics{./figures/example-01.png}
+      \caption{The reported nitrogen adsorption isotherm of DUT-6 recorded at 77$\,$K (a). A digitized representation of this reported isotherm was achieved using a point-picking method (b) and compared to the experimental data as contained within an AIF (c).}
+      \label{fgr:example}
+    \end{figure}
+
+
+\section{Summary and perspective}
+The 
+
 
 % \begin{equation}
 %   \Omega\left(N_{\mathrm{host}}, p, \sigma_{a}=\mathbf{0}, T ; V\right)=F_{\mathrm{host}}\left(N_{\mathrm{host}}, T ; V\right)+p V-\int_{-\infty}^{\mu(p, T)} N_{\mathrm{guest}}\left(N_{\mathrm{host}}, \mu^{\prime}, \sigma_{a}=\mathbf{0}, T ; V\right) \mathrm{d} \mu^{\prime}
 %   \label{eqn:osmoticequation}
 % \end{equation}
 
-The resulting potential at different methane gas pressures and cell volumes is displayed in Figure~\ref{fgr:figure1}c. To obtain accurate integrals of the number of adsorbed particles (third term in Equation~{\ref{eqn:osmoticequation}}), a large number of chemical potentials were considered.
 
-This detailed potential landscape contains metastable and equilibrium states that change with  increasing gas pressure (Figure~\ref{fgr:figure2}). The system, at zero gas pressure, begins at equilibrium in the $op$ phase (large cell volume) where there is also a metastable $cp$ phase (small cell volume. The observed states correspond are in quantitative agreement with in situ studies.
-Intermediate phases, between the $op$ and $cp$ phases, are observed by simulation and experiment further highlighting the accuracy of our proposed landscape.
   
   % \begin{figure}[htb]
   %   \includegraphics{../figures/figure2-01.png}
   %     \caption{}
   %     \label{fgr:figure2}
   %   \end{figure}
-
-Simulations were completed for three temperatures (90$\,$K, 120$\,$ and 150$\,$) to provide insight to the thermodynamic trends responsible for the observations of different phases for DUT-49.
-Particularly, temperature demonstrates a fascinating non-monotonic relationship with amount of gas released during the negative gas adsorption process.
-The relative grand potential between the $op$ and $cp$ phases can be directly computed from these simulations, in addition to the energy barrier between these states (Figure~\ref{fgr:figure3}a). It is observed that the pressure window for stability of the $cp$ phase is correlated with temperature, due to the entropic effects of condensing gas to a smaller pore structure.
-The maximum energy difference is also correlated with temperature.
-Contrastingly, the minimum barrier height shows a weaker trend with temperature.
-A temperature of 90 and 120$\,$K shows no energy barrier between the states.
-We can alternatively consider these trends with respect to the difference in  adsorbed amount in the $op$ and $cp$ phases ((Figure~\ref{fgr:figure3}b), which represents the magnitude of negative gas adsorption. 
-Interestingly, the $cp$ phase can become more favorable than the $op$ phase before the crossing point of the individual isotherms, represent by 0.
-This is especially true for the.
-
-%     \begin{figure}[htb]
-%       \includegraphics{../figures/figure3-01.png}
-%         \caption{}
-%         \label{fgr:figure3}
-%       \end{figure}
-
-% The finally.
-
-%       \begin{figure*}[htb]
-%         \includegraphics{../figures/figure4-01.png}
-%           \caption{}
-%           \label{fgr:figure4}
-%         \end{figure*}
-
 
 
 

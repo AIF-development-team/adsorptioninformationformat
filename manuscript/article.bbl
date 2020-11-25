@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{2}
+\begin{mcitethebibliography}{4}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -26,10 +26,33 @@
   {\relax}
   {\relax}
 
-\bibitem[Coudert(2015)]{10.1021/acs.chemmater.5b00046}
-Coudert,~F.-X. Responsive Metal{\textendash}Organic Frameworks and Framework
-  Materials: Under Pressure, Taking the Heat, in the Spotlight, with Friends.
-  \emph{Chemistry of Materials} \textbf{2015}, \emph{27}, 1905--1916\relax
+\bibitem[Wilkinson \latin{et~al.}(2016)Wilkinson, Dumontier, Aalbersberg,
+  Appleton, Axton, Baak, Blomberg, Boiten, da~Silva~Santos, Bourne, Bouwman,
+  Brookes, Clark, Crosas, Dillo, Dumon, Edmunds, Evelo, Finkers,
+  Gonzalez-Beltran, Gray, Groth, Goble, Grethe, Heringa, 't~Hoen, Hooft, Kuhn,
+  Kok, Kok, Lusher, Martone, Mons, Packer, Persson, Rocca-Serra, Roos, van
+  Schaik, Sansone, Schultes, Sengstag, Slater, Strawn, Swertz, Thompson,
+  van~der Lei, van Mulligen, Velterop, Waagmeester, Wittenburg, Wolstencroft,
+  Zhao, and Mons]{10.1038/sdata.2016.18}
+Wilkinson,~M.~D. \latin{et~al.}  The {FAIR} Guiding Principles for scientific
+  data management and stewardship. \emph{Scientific Data} \textbf{2016},
+  \emph{3}\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Klein \latin{et~al.}(2009)Klein, Senkovska, Gedrich, Stoeck, Henschel,
+  Mueller, and Kaskel]{10.1002/anie.200904599}
+Klein,~N.; Senkovska,~I.; Gedrich,~K.; Stoeck,~U.; Henschel,~A.; Mueller,~U.;
+  Kaskel,~S. A mesoporous metal-organic framework. \emph{Angewandte Chemie
+  International Edition} \textbf{2009}, \emph{48}, 9954--9957\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Rohatgi(2020)]{webplotdigitizer}
+Rohatgi,~A. WebPlotDigitizer. 2020;
+  \url{https://automeris.io/WebPlotDigitizer}\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
