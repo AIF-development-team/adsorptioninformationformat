@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{4}
+\begin{mcitethebibliography}{13}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -26,6 +26,14 @@
   {\relax}
   {\relax}
 
+\bibitem[Coudert(2019)]{10.1002/adts.201900131}
+Coudert,~F.-X. Materials Databases: The Need for Open, Interoperable Databases
+  with Standardized Data and Rich Metadata. \emph{Advanced Theory and
+  Simulations} \textbf{2019}, \emph{2}, 1900131\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Wilkinson \latin{et~al.}(2016)Wilkinson, Dumontier, Aalbersberg,
   Appleton, Axton, Baak, Blomberg, Boiten, da~Silva~Santos, Bourne, Bouwman,
   Brookes, Clark, Crosas, Dillo, Dumon, Edmunds, Evelo, Finkers,
@@ -37,6 +45,85 @@
 Wilkinson,~M.~D. \latin{et~al.}  The {FAIR} Guiding Principles for scientific
   data management and stewardship. \emph{Scientific Data} \textbf{2016},
   \emph{3}\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Davis(2002)]{10.1038/nature00785}
+Davis,~M.~E. Ordered porous materials for emerging applications. \emph{Nature}
+  \textbf{2002}, \emph{417}, 813--821\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Sun \latin{et~al.}(2016)Sun, Huang, Chen, Li, Yang, Yuan, and
+  Su]{10.1039/C6CS00135A}
+Sun,~M.-H.; Huang,~S.-Z.; Chen,~L.-H.; Li,~Y.; Yang,~X.-Y.; Yuan,~Z.-Y.;
+  Su,~B.-L. Applications of hierarchically structured porous materials from
+  energy storage and conversion, catalysis, photocatalysis, adsorption,
+  separation, and sensing to biomedicine. \emph{Chemical Society Reviews}
+  \textbf{2016}, \emph{45}, 3479--3563\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Thommes \latin{et~al.}(2015)Thommes, Kaneko, Neimark, Olivier,
+  Rodriguez-Reinoso, Rouquerol, and Sing]{10.1515/pac-2014-1117}
+Thommes,~M.; Kaneko,~K.; Neimark,~A.~V.; Olivier,~J.~P.; Rodriguez-Reinoso,~F.;
+  Rouquerol,~J.; Sing,~K.~S. Physisorption of gases, with special reference to
+  the evaluation of surface area and pore size distribution ({IUPAC} Technical
+  Report). \emph{Pure and Applied Chemistry} \textbf{2015}, \emph{87},
+  1051--1069\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Hall and Spadaccini(1994)Hall, and Spadaccini]{10.1021/ci00019a005}
+Hall,~S.~R.; Spadaccini,~N. The {STAR} File: detailed specifications.
+  \emph{Journal of Chemical Information and Modeling} \textbf{1994}, \emph{34},
+  505--508\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Hall \latin{et~al.}(1991)Hall, Allen, and
+  Brown]{10.1107/S010876739101067X}
+Hall,~S.~R.; Allen,~F.~H.; Brown,~I.~D. The crystallographic information file
+  ({CIF}): a new standard archive file for crystallography. \emph{Acta
+  Crystallographica Section A Foundations of Crystallography} \textbf{1991},
+  \emph{47}, 655--685\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ulrich \latin{et~al.}(2018)Ulrich, Baskaran, Dashti, Ioannidis, Livny,
+  Romero, Maziuk, Wedell, Yao, Eghbalnia, Hoch, and
+  Markley]{10.1007/s10858-018-0220-3}
+Ulrich,~E.~L.; Baskaran,~K.; Dashti,~H.; Ioannidis,~Y.~E.; Livny,~M.;
+  Romero,~P.~R.; Maziuk,~D.; Wedell,~J.~R.; Yao,~H.; Eghbalnia,~H.~R.;
+  Hoch,~J.~C.; Markley,~J.~L. {NMR}-{STAR}: comprehensive ontology for
+  representing, archiving and exchanging data from nuclear magnetic resonance
+  spectroscopic experiments. \emph{Journal of Biomolecular {NMR}}
+  \textbf{2018}, \emph{73}, 5--9\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ong \latin{et~al.}(2013)Ong, Richards, Jain, Hautier, Kocher, Cholia,
+  Gunter, Chevrier, Persson, and Ceder]{10.1016/j.commatsci.2012.10.028}
+Ong,~S.~P.; Richards,~W.~D.; Jain,~A.; Hautier,~G.; Kocher,~M.; Cholia,~S.;
+  Gunter,~D.; Chevrier,~V.~L.; Persson,~K.~A.; Ceder,~G. Python Materials
+  Genomics (pymatgen): A robust, open-source python library for materials
+  analysis. \emph{Computational Materials Science} \textbf{2013}, \emph{68},
+  314--319\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Global Phasing Ltd} and {CCP4}(2020){Global Phasing Ltd}, and
+  {CCP4}]{gemmi}
+{Global Phasing Ltd},; {CCP4}, GEMMI - library for structural biology. 2020;
+  \url{https://github.com/project-gemmi/gemmi}\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
