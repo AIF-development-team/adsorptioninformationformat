@@ -141,10 +141,13 @@ Rohatgi,~A. WebPlotDigitizer. 2020;
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[10.()]{10.1021/acs.chemmater.9b03376}
-\relax
-\mciteBstWouldAddEndPunctfalse
+\bibitem[Iacomi and Llewellyn(2020)Iacomi, and
+  Llewellyn]{10.1021/acs.chemmater.9b03376}
+Iacomi,~P.; Llewellyn,~P.~L. Data Mining for Binary Separation Materials in
+  Published Adsorption Isotherms. \emph{Chemistry of Materials} \textbf{2020},
+  \emph{32}, 982--991\relax
+\mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{}{\mcitedefaultseppunct}\relax
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
 \end{mcitethebibliography}

@@ -12,43 +12,43 @@ Warning--entry type for "gemmi" isn't style-file defined
 achemso 2019-02-14 v3.12a
 You've used 14 entries,
             2538 wiz_defined-function locations,
-            846 strings with 10671 characters,
-and the built_in function-call counts, 5380 in all, are:
-= -- 372
-> -- 432
-< -- 10
-+ -- 163
-- -- 149
-* -- 581
-:= -- 732
-add.period$ -- 24
+            852 strings with 10860 characters,
+and the built_in function-call counts, 5601 in all, are:
+= -- 394
+> -- 445
+< -- 11
++ -- 167
+- -- 153
+* -- 611
+:= -- 766
+add.period$ -- 25
 call.type$ -- 14
 change.case$ -- 4
 chr.to.int$ -- 2
-cite$ -- 15
-duplicate$ -- 263
-empty$ -- 308
-format.name$ -- 162
-if$ -- 1008
+cite$ -- 14
+duplicate$ -- 273
+empty$ -- 320
+format.name$ -- 169
+if$ -- 1048
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
 newline$ -- 106
-num.names$ -- 36
-pop$ -- 27
+num.names$ -- 39
+pop$ -- 24
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
 skip$ -- 13
 stack$ -- 0
-substring$ -- 225
-swap$ -- 378
+substring$ -- 248
+swap$ -- 390
 text.length$ -- 27
 text.prefix$ -- 0
 top$ -- 1
 type$ -- 95
 warning$ -- 0
-while$ -- 45
+while$ -- 49
 width$ -- 0
-write$ -- 186
+write$ -- 191
 (There were 2 warnings)

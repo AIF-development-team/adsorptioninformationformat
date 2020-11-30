@@ -16,7 +16,7 @@
 \usepackage{lineno}
 \usepackage{booktabs}
 
-\linenumbers
+% \linenumbers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
@@ -258,14 +258,14 @@ This simple program will parse the output data to find data items detailed in th
 These data items are converted to the appropriate units and the isotherm is split into the adsorption and desorption parts.
 Subsequently an AIF is produced using \textit{gemmi} CIF routines.\cite{gemmi}
 As a consequence routines and methods developed for treating CIF files can be used in this application to adsorption data.
-For example produced AIF files can also be read using existing CIF methods, such as the \texttt{gemmi} python library that is considered the the fastest open-source CIF parser.\cite{gemmi}
+For example produced AIF files can also be read using existing CIF methods, such as the \texttt{gemmi} python library that is considered the fastest open-source CIF parser.\cite{gemmi}
 We have used \texttt{gemmi} library to demonstrate how an isotherm can be displayed from an AIF using a few lines.
 This is a very simple implementation and it is hoped that future versions, following the cooperation of several manufactures, could result in to routines to parse the information directly from binary data used by the instruments.
 
 To illustrate the importance of a universal data format for adsorption data we can compare data contained within an AIF to data digitized from a figure in a manuscript, for the same experiment.
 The porous material DUT-6 (also referred to as MOF-206) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylic acid and benzene-1,3,5-tribenzoic acid.\cite{10.1002/anie.200904599}
 DUT-6 has mesopores with dodecahedral geometry and smaller cages that produce an extremely porous material with large adsorption capacities for\textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
-The nitrogen adsorption isotherm at 77~K was reported in the original manuscript using relative pressure and a linear axis (Figure~/ref{fgr:example}).
+The nitrogen adsorption isotherm at 77~K was reported in the original manuscript using relative pressure and a linear axis (Figure~\ref{fgr:example}a).
 From this plot the isotherm can be classified  as  type  Ib, clearly exhibiting characteristics of a hierarchal pore system with micropores and mesopores.
 There is evidently a distinct step $p/p_0$ = 0.17, however, from this plot it is not possible to correctly identify low pressure features.
 The low pressure regions is important for understanding the process of initial pore filling or for independent application of analysis methods, such as the Brunauer–Emmett–Teller (BET) method.\cite{10.1016/S0167-2991(07)80008-5}
