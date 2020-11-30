@@ -6,49 +6,49 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: acs-article.bib
 Database file #2: article.bib
 Warning--entry type for "webplotdigitizer" isn't style-file defined
---line 27 of file article.bib
+--line 37 of file article.bib
 Warning--entry type for "gemmi" isn't style-file defined
---line 148 of file article.bib
+--line 158 of file article.bib
 achemso 2019-02-14 v3.12a
-You've used 13 entries,
+You've used 14 entries,
             2538 wiz_defined-function locations,
-            845 strings with 10812 characters,
-and the built_in function-call counts, 5438 in all, are:
-= -- 363
-> -- 467
-< -- 9
-+ -- 176
-- -- 163
-* -- 607
-:= -- 754
-add.period$ -- 24
-call.type$ -- 13
+            854 strings with 11076 characters,
+and the built_in function-call counts, 5850 in all, are:
+= -- 401
+> -- 485
+< -- 10
++ -- 183
+- -- 169
+* -- 641
+:= -- 806
+add.period$ -- 25
+call.type$ -- 14
 change.case$ -- 4
 chr.to.int$ -- 2
-cite$ -- 13
-duplicate$ -- 265
-empty$ -- 282
-format.name$ -- 176
-if$ -- 988
+cite$ -- 14
+duplicate$ -- 289
+empty$ -- 320
+format.name$ -- 183
+if$ -- 1086
 int.to.chr$ -- 0
 int.to.str$ -- 1
 missing$ -- 0
-newline$ -- 100
-num.names$ -- 36
-pop$ -- 23
+newline$ -- 106
+num.names$ -- 39
+pop$ -- 25
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 11
+skip$ -- 13
 stack$ -- 0
-substring$ -- 225
-swap$ -- 399
-text.length$ -- 24
+substring$ -- 248
+swap$ -- 422
+text.length$ -- 27
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 88
+type$ -- 95
 warning$ -- 0
-while$ -- 44
+while$ -- 49
 width$ -- 0
-write$ -- 179
+write$ -- 191
 (There were 2 warnings)

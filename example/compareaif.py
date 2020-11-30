@@ -25,8 +25,8 @@ f, (ax1, ax2) = plt.subplots(1, 2, sharey=True, sharex=True)
 f.tight_layout()
 f.set_size_inches(3,2.2)
 
-ax2.semilogx(ads_press/ads_p0,ads_amount, 'o', color='tab:blue')
-ax2.plot(des_press/des_p0,des_amount, 'o', markerfacecolor='white', color='tab:blue')
+ax2.semilogx(ads_press/ads_p0,ads_amount, 'o', color='tab:blue', ms=5)
+ax2.plot(des_press/des_p0,des_amount, 'o', markerfacecolor='white', color='tab:blue', ms=5)
 
 digit_ads_press = np.genfromtxt("example/Default Dataset.csv", delimiter=',')[:,0]
 digit_ads_amount = np.genfromtxt("example/Default Dataset.csv", delimiter=',')[:,1]
@@ -38,8 +38,8 @@ digit_des_amount = np.genfromtxt("example/Default Dataset2.csv", delimiter=',')[
 digit_ads_amount = digit_ads_amount/22.414
 digit_des_amount = digit_des_amount/22.414
 
-ax1.semilogx(digit_ads_press,digit_ads_amount , 'o', color='tab:orange')
-ax1.semilogx(digit_des_press,digit_des_amount , 'o', markerfacecolor='white', color='tab:orange')
+ax1.semilogx(digit_ads_press,digit_ads_amount , 'o', color='tab:orange', ms=5)
+ax1.semilogx(digit_des_press,digit_des_amount , 'o', markerfacecolor='white', color='tab:orange', ms=5)
 
 ax1.set_ylabel("amount adsorbed / mol$\,$kg$^{-1}$")
 ax2.set_xlabel(r'relative pressure / $p/p_0$')

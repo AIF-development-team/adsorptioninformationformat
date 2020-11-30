@@ -76,7 +76,7 @@ des_amount = np.array(block.find_loop('_desorp_amount'),dtype=float)
 
 
 #convert to cm3/g to mol/g
-# ads_amount=data[:,1]/22400
+ads_amount=ads_amount/1000
 pp0=ads_press/ads_p0
 roq_consistency, lo_limit, hi_limit, pp0_limited, BETeq, results = BETanalysis(pp0,ads_amount)
 

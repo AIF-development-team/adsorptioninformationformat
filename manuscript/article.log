@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.24)  27 NOV 2020 15:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.24)  30 NOV 2020 15:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -550,35 +550,35 @@ Overfull \hbox (30.17502pt too wide) in paragraph at lines 215--235
  [][] 
  []
 
-[6] [7]
-<./figures/example-01.png, id=41, 239.09325pt x 325.215pt>
+[6] [7] [8]
+<./figures/example-01.png, id=44, 239.09325pt x 325.215pt>
 File: ./figures/example-01.png Graphic file (type png)
 <use ./figures/example-01.png>
-Package pdftex.def Info: ./figures/example-01.png  used on input line 279.
+Package pdftex.def Info: ./figures/example-01.png  used on input line 280.
 (pdftex.def)             Requested size: 239.09265pt x 325.2142pt.
- [8] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.bbl [9 <./figures/example-01.png>] [10]) [11]
+ [9 <./figures/example-01.png>] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.bbl [10] [11]) [12]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <12> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 333.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 338.
 
 
-Underfull \vbox (badness 10000) detected at line 333
+Underfull \vbox (badness 10000) detected at line 338
  []
 
-[12] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.aux) ) 
+[13] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.aux) ) 
 Here is how much of TeX's memory you used:
- 15841 strings out of 492616
- 292399 string characters out of 6129481
- 348151 words of memory out of 5000000
- 19638 multiletter control sequences out of 15000+600000
+ 15845 strings out of 492616
+ 292562 string characters out of 6129481
+ 348222 words of memory out of 5000000
+ 19642 multiletter control sequences out of 15000+600000
  541842 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,9n,94p,663b,462s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf (12 pages, 564107 bytes).
+Output written on /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf (13 pages, 567515 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
- 71 compressed objects within 1 object stream
+ 108 PDF objects out of 1000 (max. 8388607)
+ 74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
