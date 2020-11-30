@@ -235,42 +235,30 @@ sample_id = re.sub('[^a-zA-Z0-9-_*.]', '', sample_id)
 
 
 # write adsorption file
-from collections import OrderedDict
-from pymatgen.io.cif import CifBlock
-from pymatgen.io.cif import CifFile
-from monty.io import zopen
+from gemmi import cif
 
-block = OrderedDict()
-loops = []
+#initialize aif block
+d = cif.Document()
+d.add_new_block('data_raw2aif')
+block = d.sole_block()
 
-block["_exptl_operator"] = operator
-block["_exptl_date"] = date
-block["_exptl_instrument"] = instrument
-block["_exptl_adsorptive"] = adsorptive
-block["_exptl_temperature"] = temperature
-block["_exptl_sample_mass"] = sample_mass
-block["_sample_id"] = sample_id
-block["_sample_material_id"] = material_id
+#write metadata
+block.set_pair('_exptl_operator', operator)
+block.set_pair('_exptl_date', str(date))
+block.set_pair('_exptl_instrument', instrument)
+block.set_pair('_exptl_adsorptive', adsorptive)
+block.set_pair('_exptl_temperature', temperature)
+block.set_pair('_exptl_sample_mass', str(sample_mass))
+block.set_pair('_sample_id', sample_id)
+block.set_pair('_sample_material_id', material_id)
 
-block["_adsorp_pressure"] = ads_press
-block["_adsorp_p0"] = ads_p0
-block["_adsorp_amount"] = ads_vol
+#write adsorption data
+loop_ads = block.init_loop('_adsorp_', ['pressure','p0', 'amount'])
+loop_ads.set_all_values([list(ads_press.astype(str)), list(ads_p0.astype(str)), list(ads_vol.astype(str))])
 
-loops.append(["_adsorp_pressure","_adsorp_p0", "_adsorp_amount"])
+#write desorption data
+loop_des = block.init_loop('_desorp_', ['pressure','p0', 'amount'])
+loop_des.set_all_values([list(des_press.astype(str)), list(des_p0.astype(str)), list(des_vol.astype(str))])
 
-
-block["_desorp_pressure"] = des_press
-block["_desorp_p0"] = des_p0
-block["_desorp_amount"] = des_vol
-
-loops.append(["_desorp_pressure","_desorp_p0", "_desorp_amount"])
-
-d = OrderedDict()
-header = "raw2ciftest"
-d[header] = CifBlock(block, loops,header)
-out = CifFile(d)
-
-with zopen(str(sample_id)+'.aif', "wt") as f:
-    f.write(out.__str__())
-
+d.write_file(str(sample_id)+'.aif')
 
