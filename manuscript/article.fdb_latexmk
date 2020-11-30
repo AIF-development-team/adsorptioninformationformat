@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex article"] 1606746872 "article.aux" "article.bbl" "article" 1606746874
+["bibtex article"] 1606751430 "article.aux" "article.bbl" "article" 1606752155
   "/usr/local/texlive/2019/texmf-dist/bibtex/bst/achemso/achemso.bst" 1550182315 30161 4b811239b3090397af1382931b52d2b7 ""
-  "acs-article.bib" 1606746874 306 2ec6e2c563f7f14bcefed0d36c308168 "pdflatex"
-  "article.aux" 1606746874 4149 936528c074d78f5f1f81d6879deeb4ff "pdflatex"
-  "article.bib" 1606746397 7473 883b6050cec43167c507b6dfc2409191 ""
+  "acs-article.bib" 1606752154 306 2ec6e2c563f7f14bcefed0d36c308168 "pdflatex"
+  "article.aux" 1606752154 4067 c34725b5b76129dba90faab91eb19900 "pdflatex"
+  "article.bib" 1606751470 7930 4ceb0818d06662865223261ebcd5c53c ""
   (generated)
-  "article.blg"
   "article.bbl"
-["pdflatex"] 1606746872 "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.tex" "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf" "article" 1606746874
-  "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.aux" 1606746874 4149 936528c074d78f5f1f81d6879deeb4ff ""
-  "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.tex" 1606746603 25812 e7bce89bf3376703e4d9534778166b13 ""
-  "/dev/null" 1606746873 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "article.blg"
+["pdflatex"] 1606752152 "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.tex" "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf" "article" 1606752155
+  "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.aux" 1606752154 4067 c34725b5b76129dba90faab91eb19900 ""
+  "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.tex" 1606752150 25545 b51beccae6c859042073d1928e1d01cf ""
+  "/dev/null" 1606752155 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2019/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2019/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -106,15 +106,15 @@
   "/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1557342064 3277517 23507ed665b4dd9046f0f2a94bbef2be ""
   "/usr/local/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt" 1579866794 4259636 a4ad26b344d68217cdce0ca0921f3c68 ""
   "/usr/local/texlive/2019/texmf.cnf" 1557341546 577 d150fef99ac436ad1156e86b0892f6ef ""
-  "article.aux" 1606746874 4149 936528c074d78f5f1f81d6879deeb4ff "pdflatex"
-  "article.bbl" 1606746872 7546 d3abb8d151e59a2b15748b09eafb2d7f "bibtex article"
-  "article.tex" 1606746603 25812 e7bce89bf3376703e4d9534778166b13 ""
+  "article.aux" 1606752154 4067 c34725b5b76129dba90faab91eb19900 "pdflatex"
+  "article.bbl" 1606751430 7110 8732eb3cf6150c7522a079b33b070a23 "bibtex article"
+  "article.tex" 1606752150 25545 b51beccae6c859042073d1928e1d01cf ""
   "figures/example-01.png" 1606746860 246582 6b1e69d497ca3c7432e2ea601b57aee9 ""
   "figures/structure-01.png" 1599818500 265020 15d71c2d922a07e52b8f424c32f8b5e2 ""
   (generated)
   "acs-article.bib"
-  "article.pdf"
-  "article.log"
-  "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.log"
-  "article.aux"
   "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf"
+  "article.log"
+  "article.pdf"
+  "article.aux"
+  "/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.log"

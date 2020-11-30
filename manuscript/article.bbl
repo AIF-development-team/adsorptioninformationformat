@@ -109,17 +109,6 @@ Ulrich,~E.~L.; Baskaran,~K.; Dashti,~H.; Ioannidis,~Y.~E.; Livny,~M.;
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Ong \latin{et~al.}(2013)Ong, Richards, Jain, Hautier, Kocher, Cholia,
-  Gunter, Chevrier, Persson, and Ceder]{10.1016/j.commatsci.2012.10.028}
-Ong,~S.~P.; Richards,~W.~D.; Jain,~A.; Hautier,~G.; Kocher,~M.; Cholia,~S.;
-  Gunter,~D.; Chevrier,~V.~L.; Persson,~K.~A.; Ceder,~G. Python Materials
-  Genomics (pymatgen): A robust, open-source python library for materials
-  analysis. \emph{Computational Materials Science} \textbf{2013}, \emph{68},
-  314--319\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[{Global Phasing Ltd} and {CCP4}(2020){Global Phasing Ltd}, and
   {CCP4}]{gemmi}
 {Global Phasing Ltd},; {CCP4}, GEMMI - library for structural biology. 2020;
@@ -151,5 +140,11 @@ Rohatgi,~A. WebPlotDigitizer. 2020;
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[10.()]{10.1021/acs.chemmater.9b03376}
+\relax
+\mciteBstWouldAddEndPunctfalse
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
 \end{mcitethebibliography}
