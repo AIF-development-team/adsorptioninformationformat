@@ -8,14 +8,14 @@ material_id = "DUT-67"
 
 if filetype == "BELSORP-max":
 
-    #load datafile
+    # load datafile
     with open(filename, "r", encoding="ISO-8859-1") as fp:
         lines = fp.readlines()
 
 
     # get experimental and material parameters
 
-    for index,line in enumerate(lines):
+    for index, line in enumerate(lines):
         if "Comment2" in line:
             operator = line.split()[1][1:-1]
         if "Date of measurement" in line:
@@ -38,13 +38,13 @@ if filetype == "BELSORP-max":
             ads_start = (index+3)
         if "Desorption data" in line:
             des_start = (index+3)
-        
+
     # # get the adsorption data
 
     raw_press = []
     raw_p0 = []
     raw_vol = []
-    for index,line in enumerate(lines):
+    for index, line in enumerate(lines):
         try:
             if int(line.split()[0]) > 0:
                 if index >= ads_start:
@@ -61,7 +61,7 @@ if filetype == "BELSORP-max":
 
     # change units to standard units
 
-    #pressure from kPa to Pa
+    # pressure from kPa to Pa
     raw_press = np.array(raw_press)*1000
     raw_p0 = np.array(raw_p0)*1000
 
@@ -106,20 +106,19 @@ if filetype == "BELSORP-max":
     block["_adsorption_p0"] = ads_p0
     block["_adsorption_amount"] = ads_vol
 
-    loops.append(["_adsorption_pressure","_adsorption_p0", "_adsorption_amount"])
+    loops.append(["_adsorption_pressure", "_adsorption_p0", "_adsorption_amount"])
 
 
     block["_desorption_pressure"] = des_press
     block["_desorption_p0"] = des_p0
     block["_desorption_amount"] = des_vol
 
-    loops.append(["_desorption_pressure","_desorption_p0", "_desorption_amount"])
+    loops.append(["_desorption_pressure", "_desorption_p0", "_desorption_amount"])
 
     d = OrderedDict()
     header = "raw2ciftest"
-    d[header] = CifBlock(block, loops,header)
+    d[header] = CifBlock(block, loops, header)
     out = CifFile(d)
 
     with zopen(str(sample_id)+'.aif', "wt") as f:
         f.write(out.__str__())
-
