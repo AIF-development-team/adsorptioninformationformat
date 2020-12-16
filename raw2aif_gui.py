@@ -24,33 +24,33 @@ def browsefunc():
 #     print(outputfilename)
 
 
-#covert txt files to aif
+# covert txt files to aif
 def convertAIF():
     filetype = var.get()
     material_id = matID.get()
 
     if filetype == "quantachrome":
 
-        #load datafile
+        # load datafile
         with open(filename, "r", encoding="ISO-8859-1") as fp:
             lines = fp.readlines()
 
         # get experimental and material parameters
 
-        for index,line in enumerate(lines):
+        for index, line in enumerate(lines):
             if "Operator" in line:
                 operator = line.split()[1]
                 if operator.split(":")[0] == "Date":
                     operator = ' '
             if "Date" in line:
                 date = []
-                for index,element in enumerate(line.split()):
+                for index, element in enumerate(line.split()):
                     if element.startswith('Date'):
                         date.append(line.split()[index])
                 date = date[0]
                 date = parse(date.split(':')[-1])
             if "Instrument" in line:
-                for index,element in enumerate(line.split()):
+                for index, element in enumerate(line.split()):
                     if element == "Instrument:":
                         instrument = line.split()[index+1]
             if "Analysis gas" in line:
@@ -58,7 +58,7 @@ def convertAIF():
             if "Bath temp." in line:
                 temperature = line.split()[-2]
             if "Sample Weight" in line:
-                for index,element in enumerate(line.split()):
+                for index, element in enumerate(line.split()):
                     if element == "Weight:":
                         sample_mass = float(line.split()[index+1])
             if "Sample ID:" in line:
@@ -67,13 +67,13 @@ def convertAIF():
 
             if "Press" in line:
                 ads_start = (index+4)
-            
+
         # get the adsorption data
 
         raw_press = []
         raw_p0 = []
         raw_vol = []
-        for index,line in enumerate(lines):
+        for index, line in enumerate(lines):
             if index >= ads_start:
                 raw_press.append(float(line.split()[0]))
                 raw_p0.append(float(line.split()[1]))
@@ -82,7 +82,7 @@ def convertAIF():
 
         # change units to standard units
 
-        #pressure from Torr to Pa
+        # pressure from Torr to Pa
         raw_press = np.array(raw_press)*133.3224
         raw_p0 = np.array(raw_p0)*133.3224
 
@@ -106,14 +106,14 @@ def convertAIF():
 
     if filetype == "BELSORP-max":
 
-        #load datafile
+        # load datafile
         with open(filename, "r", encoding="ISO-8859-1") as fp:
             lines = fp.readlines()
 
 
         # get experimental and material parameters
 
-        for index,line in enumerate(lines):
+        for index, line in enumerate(lines):
             if "Comment2" in line:
                 operator = line.split()[1][1:-1]
             if "Date of measurement" in line:
@@ -136,13 +136,13 @@ def convertAIF():
                 ads_start = (index+3)
             if "Desorption data" in line:
                 des_start = (index+3)
-            
+
         # # get the adsorption data
 
         raw_press = []
         raw_p0 = []
         raw_vol = []
-        for index,line in enumerate(lines):
+        for index, line in enumerate(lines):
             try:
                 if int(line.split()[0]) > 0:
                     if index >= ads_start:
@@ -159,7 +159,7 @@ def convertAIF():
 
         # change units to standard units
 
-        #pressure from kPa to Pa
+        # pressure from kPa to Pa
         raw_press = np.array(raw_press)*1000
         raw_p0 = np.array(raw_p0)*1000
 
@@ -183,14 +183,14 @@ def convertAIF():
 
     if filetype == "BELSORP-max-csv":
 
-        #load datafile
+        # load datafile
         with open(filename, "r", encoding="ISO-8859-1") as fp:
             lines = fp.readlines()
 
 
         # get experimental and material parameters
 
-        for index,line in enumerate(lines):
+        for index, line in enumerate(lines):
             if "COMMENT2" in line:
                 operator = line.split(',')[-1]
             if "Date of measurement" in line:
@@ -211,13 +211,13 @@ def convertAIF():
 
             if "ADS" in line:
                 ads_start = index+1
-    
+
         # # get the adsorption data
 
         raw_press = []
         raw_p0 = []
         raw_vol = []
-        for index,line in enumerate(lines):
+        for index, line in enumerate(lines):
             if index >= ads_start:
                 if line.split(',')[0] != "DES\n":
                     if int(line.split(',')[0]) > 0:
@@ -229,7 +229,7 @@ def convertAIF():
 
         # change units to standard units
 
-        #pressure from kPa to Pa
+        # pressure from kPa to Pa
         raw_press = np.array(raw_press)*1000
         raw_p0 = np.array(raw_p0)*1000
 
@@ -251,7 +251,7 @@ def convertAIF():
         des_vol = raw_vol[turning_point+1:]
 
 
-    #clean sampleid
+    # clean sampleid
 
     sample_id = re.sub('[^a-zA-Z0-9-_*.]', '', sample_id)
 
@@ -259,12 +259,12 @@ def convertAIF():
     # write adsorption file
     from gemmi import cif
 
-    #initialize aif block
+    # initialize aif block
     d = cif.Document()
     d.add_new_block('data_raw2aif')
     block = d.sole_block()
 
-    #write metadata
+    # write metadata
     block.set_pair('_exptl_operator', operator)
     block.set_pair('_exptl_date', str(date))
     block.set_pair('_exptl_instrument', instrument)
@@ -274,23 +274,23 @@ def convertAIF():
     block.set_pair('_sample_id', sample_id)
     block.set_pair('_sample_material_id', material_id)
 
-    #write adsorption data
-    loop_ads = block.init_loop('_adsorp_', ['pressure','p0', 'amount'])
+    # write adsorption data
+    loop_ads = block.init_loop('_adsorp_', ['pressure', 'p0', 'amount'])
     loop_ads.set_all_values([list(ads_press.astype(str)), list(ads_p0.astype(str)), list(ads_vol.astype(str))])
 
-    #write desorption data
-    loop_des = block.init_loop('_desorp_', ['pressure','p0', 'amount'])
+    # write desorption data
+    loop_des = block.init_loop('_desorp_', ['pressure', 'p0', 'amount'])
     loop_des.set_all_values([list(des_press.astype(str)), list(des_p0.astype(str)), list(des_vol.astype(str))])
 
     outputfilename = filename+".aif"
     d.write_file(outputfilename)
 
-    #tkinter popup 
+    # tkinter popup
     toplevel = Toplevel()
     popupmessage = "AIF file created"
     label = Label(toplevel, text=popupmessage, height=0, width=100)
     label.pack()
-    toplevel.focus_force() 
+    toplevel.focus_force()
 
 
 # gui details
