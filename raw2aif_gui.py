@@ -1,13 +1,13 @@
 import numpy as np
-import sys
 from dateutil.parser import parse
 import re
 
 import tkinter as tk
-from tkinter import Tk, filedialog, Button, Label, mainloop, Radiobutton, Entry
+from tkinter import Tk, filedialog, Button, Label, mainloop, Radiobutton, Entry, Toplevel
 
 # load tkinter
 root = Tk()
+root.title('raw2aif')
 
 # define a browse file function
 def browsefunc():
@@ -15,13 +15,14 @@ def browsefunc():
     filename = filedialog.askopenfilename()
     pathlabel.config(text=filename)
 
-# for debuging
+# # for debuging
 # def writetofile():
 #     print(filename)
 #     print(var.get())
 #     print(matID.get())
 #     outputfilename = filename+".aif"
 #     print(outputfilename)
+
 
 #covert txt files to aif
 def convertAIF():
@@ -284,6 +285,13 @@ def convertAIF():
     outputfilename = filename+".aif"
     d.write_file(outputfilename)
 
+    #tkinter popup 
+    toplevel = Toplevel()
+    popupmessage = "AIF file created"
+    label = Label(toplevel, text=popupmessage, height=0, width=100)
+    label.pack()
+    toplevel.focus_force() 
+
 
 # gui details
 
@@ -295,11 +303,11 @@ pathlabel.pack()
 
 
 var = tk.StringVar()
-r1 = tk.Radiobutton(root, text='Quantachrome', variable=var, value='quantachrome')
+r1 = tk.Radiobutton(root, text='Quantachrome (.txt)', variable=var, value='quantachrome')
 r1.pack()
-r2 = tk.Radiobutton(root, text='BELSORP-max', variable=var, value='BELSORP-max')
+r2 = tk.Radiobutton(root, text='BELSORP-max (.dat)', variable=var, value='BELSORP-max')
 r2.pack()
-r3 = tk.Radiobutton(root, text='BELSORP-max-csv', variable=var, value='BELSORP-max-csv')
+r3 = tk.Radiobutton(root, text='BELSORP-max-csv (.csv)', variable=var, value='BELSORP-max-csv')
 r3.pack()
 
 matID = tk.StringVar()
