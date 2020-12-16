@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.24)  30 NOV 2020 17:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.24)  16 DEC 2020 17:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -539,46 +539,61 @@ Package chemgreek Info: Activating mapping `default' on line 105.
 
  [1
 
-{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-<./figures/structure-01.png, id=23, 239.09325pt x 200.06744pt>
+{/usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 153.
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 153.
+ [2] [3] [4]
+<./figures/structure-01.png, id=27, 239.09325pt x 200.06744pt>
 File: ./figures/structure-01.png Graphic file (type png)
 <use ./figures/structure-01.png>
-Package pdftex.def Info: ./figures/structure-01.png  used on input line 192.
+Package pdftex.def Info: ./figures/structure-01.png  used on input line 199.
 (pdftex.def)             Requested size: 239.09265pt x 200.06694pt.
- [4] [5 <./figures/structure-01.png>]
-Overfull \hbox (30.17502pt too wide) in paragraph at lines 215--235
+ [5 <./figures/structure-01.png>]
+Overfull \hbox (30.17502pt too wide) in paragraph at lines 222--242
  [][] 
  []
 
-[6] [7]
-<./figures/example-01.png, id=40, 239.09325pt x 325.215pt>
+[6]
+
+LaTeX Warning: Reference `www.github.com/jackevansadl/jubilant-waddle' on page 7 undefined on input line 265.
+
+[7] [8]
+<./figures/example-01.png, id=43, 239.09325pt x 325.215pt>
 File: ./figures/example-01.png Graphic file (type png)
 <use ./figures/example-01.png>
-Package pdftex.def Info: ./figures/example-01.png  used on input line 280.
+Package pdftex.def Info: ./figures/example-01.png  used on input line 290.
 (pdftex.def)             Requested size: 239.09265pt x 325.2142pt.
- [8] [9 <./figures/example-01.png>] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.bbl [10]) [11]
+ [9] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.bbl [10 <./figures/example-01.png>] [11]) [12]
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <12> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 338.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 349.
 
 
-Underfull \vbox (badness 10000) detected at line 338
+Underfull \vbox (badness 10000) detected at line 349
  []
 
-[12] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.aux) ) 
+[13] (/Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 15844 strings out of 492616
- 292540 string characters out of 6129481
- 348168 words of memory out of 5000000
- 19641 multiletter control sequences out of 15000+600000
+ 15861 strings out of 492616
+ 292869 string characters out of 6129481
+ 349169 words of memory out of 5000000
+ 19655 multiletter control sequences out of 15000+600000
  541542 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,9n,94p,663b,458s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf (12 pages, 557144 bytes).
+Output written on /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf (13 pages, 559889 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 104 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

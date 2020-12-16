@@ -155,6 +155,8 @@ INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 OUTPUT /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf
 INPUT /usr/local/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/base/omlcmr.fd
+INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/base/omlcmr.fd
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmtt12.tfm
 INPUT /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/./figures/structure-01.png
 INPUT ./figures/structure-01.png

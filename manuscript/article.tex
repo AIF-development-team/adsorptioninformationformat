@@ -127,12 +127,12 @@ content is too big: instead it will overflow the edge of the box.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
   New advanced adsorbents are a crucial driver for the development of energy and environmental applications.
-  A tremendous potential is nowadays provided by machine learning and data mining techniques to identify an adsorbent for a particular application.
-  However, the current scientific reporting of adsorption isotherms in graphs and figures is not adequate to reproduce original experimentally measured data. 
+  Tremendous potential is provided by machine learning and data mining techniques able to identify an adsorbent for a particular application.
+  However, the current scientific reporting of adsorption isotherms in graphs and figures is not adequate to reproduce original experimentally measured data.
   This report proposes the specification of a new standard adsorption information file (AIF) inspired by the ubiquitous crystallographic information file (CIF) and based on the self-defining text archive and retrieval (STAR) procedure, also used to represent biological nuclear magnetic resonance experiments (NMR-STAR).
   The AIF  is a flexible, general and easily extended free-format archive file and is readily human and machine readable--- simple to edit using a basic text editor or parse for database curation.
   This format represents the first steps toward an open adsorption data format as a basis for a decentralized adsorption data library.
-  Such an open format may facilitate the electronic transmission of adsorption data between laboratories, journals and larger databases in the effort to increase open science in the field of porous materials in future.
+  An open format is key to facilitate the electronic transmission of adsorption data between laboratories, journals and larger databases in the effort to increase open science in the field of porous materials for the future.
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -143,18 +143,23 @@ It is important in many branches of science for there to exist a uniform and fle
 The data presented in research contributions must be readily accessible and easily verifiable.
 Key to scientific discovery and innovation the use of good data management practices can  provide significant knowledge through the reuse of original data by the community after the data publication process.\cite{10.1002/adts.201900131}
 Unfortunately, the existing ecosystem surrounding scholarly data publication often prevents the research community extracting maximum benefit from published reports.
-This led to the foundational principles as discussed by Wilkinson et al.--- Findability, Accessibility, Interoperability, and Reusability--- that serve as a guideline to to maximize the added-value gained by digital publishing.\cite{10.1038/sdata.2016.18}
+This led to the foundational principles as discussed by Wilkinson et al.--- Findability, Accessibility, Interoperability, and Reusability--- that serve as a guideline to maximize the added-value gained by digital publishing.\cite{10.1038/sdata.2016.18}
 
 Porous solids are of important scientific and industrial interest owing to their impressive ability to interact with all manner of atoms, ions and molecules throughout the entirety of the solid, not only the surface.\cite{10.1038/nature00785}
 This has led to many exciting applications for porous materials, including ion exchange, gas storage, separations and catalysis.\cite{10.1039/C6CS00135A}
 Measuring the interaction of gas with a material is crucial to understanding and comparing different porous materials.
 The quantity of gas adsorbed is measured in any convenient units, but for the presentation of the data, the International Union of Pure and Applied Chemistry (IUPAC) has recommended that the amount adsorbed should be expressed in moles per gram of outgassed adsorbent.\cite{10.1515/pac-2014-1117}
 To facilitate the comparison of adsorption data, the IUPAC also recommended that adsorption isotherms are displayed in a graphical form with the amount adsorbed (preferably presented using mol$\,$g$^-1$ plotted against the equilibrium relative pressure ($p/p_0$), where $p_0$ is the saturation pressure of the pure adsorptive at the experiment temperature, or when the temperature is above the critical temperature of the adsorbing gas, against absolute pressure.
+However, in particular for microporous materials, this documentation leads to severe loss of information, as the pore filling occurs at a characteristic $p/p_0$ \textless\textless 0.01 that is not retractable from the isotherm plot.
+Only a logarithmic plot can reveal the characteristic$ p/p_0$ of pore filling, which is an important information to estimate pore size distributions in the micropore regime.
+Similar aspects are also relevant for other branches/regions of the isotherm. 
 
-Rapid advances in computer simulations, coupled with the expansion of fruitful local, national and international networks, have fueled the need for a standardization of adsorption data beyond the current IUPAC recommendations.
+Rapid advances in computer simulations, and the quest for developing a digital data space for data mining through national and international networks,have fueled the need for a standardization of adsorption data beyond the current IUPAC recommendations.
 The variety and relative inflexibility of existing adsorption data formats and conventional graphical reporting inhibits the effective use of reported data.
-A general, flexible, rapidly extensible and universal file format protocol following the guidelines presented by Wilkinson et al. is essential to further accelerate the development of porous materials.
-As with other standard formats, this must be machine-independent and portable so that accessibility to data items is independent of their point of origin.
+In particular, a comparison of experimental and computational data is obscured due to the poor documentation of explicit numbers.
+A general, flexible, rapidly extensible and universal file format protocol following the guidelines presented by Wilkinson et al. will boost the development of porous materials and reveal their application potential.
+Moreover, it enables to validate and advance theoretical methods as a wider and more precise database is openly accessible to validate, for example force field parameters, interactions potentials, isotherm models and more. 
+As with other standard formats, such a format must be machine-independent and portable so that accessibility to data items is independent of their point of origin.
 It must also allow new data items to be incorporated without the need to modify existing files to enable an evolving format.
 
 In this submission we outline our proposal for a new standard adsorption information file (AIF) and the clear advantages of this format compared to the currently accepted graphical deposition method.
@@ -171,7 +176,7 @@ This is crucial to identify identical or related data, understand the evolution 
 As a result the STAR data structure was adopted,\cite{10.1021/ci00019a005} which is famously used in the crystallographic information file (CIF) and biological nuclear magnetic resonance experiments (NMR-STAR).\cite{10.1107/S010876739101067X,10.1007/s10858-018-0220-3}
 An important property of the STAR format is that its syntax is defined by a few simple rules using an object/relational model.
 The data stored in a STAR file is self-descriptive as the underpinning data structure consists of tag-value pairs or data item.
-This data item is the combination a data value with the data name, an identifying unique tag.
+This data item is the combination of a data value with a data name, an identifying unique tag.
 This approach is flexible and able to represent. nested and repetitive data, which are particularly important for the collection of pressure and adsorbed amount that comprise an adsorption isotherm experiment.
 
 The data structure of an AIF is comprised of comment lines and data blocks, which contains the required metadata and quantities related to the adsorption experiment, separated for adsorption and desorption (Figure~\ref{fgr:datastructure}).
@@ -243,34 +248,37 @@ Additionally, data is included relative to the date, time and person responsible
 Details of the sample are recorded for comparison and to uniquely identify the sample that was used in the experiment.
 Simply, this includes the sample identity code (\texttt{\_sample\_id}), a laboratory code used to record and represent the sample and a string relating to the general designation given to the material (\texttt{\_sample\_material\_name}).
 
-For each data point measured during an adsorption experiments data can be stored that relates to the equilibrated pressure, the saturation pressure and the amount adsorbed. Importantly, these should be stored in units of pascal and mol$\,$kg$^{-1}$ to follow the IUPAC recommendations.\cite{10.1515/pac-2014-1117}
+For each data point measured during an adsorption experiment data can be stored that relates to the equilibrated pressure, the saturation pressure and the amount adsorbed. Importantly, these should be stored in units of pascal and mol$\,$kg$^{-1}$ to follow the IUPAC recommendations.\cite{10.1515/pac-2014-1117}
 The saturation pressure can be recorded at each data point as we have discovered that some instruments will calculate and report this value for every point.
 
 The above features serve as an example of the data that can be archived in a AIF and can be extended in future versions.
 For example, the intention of this initial version is to provide digital archive of the presented primary data of an adsorption experiment, the isotherm.
 As a result, it describes only basic information that usually exported from adsorption instruments and a few convenient metadata items.
-The flexibility of this approach can be extended in future versions to include more detailed parameters not commonly presented, such as dead volume measurements, or combined with CIF data names to archive in situ measurements.
+The flexibility of this approach can be extended in future versions to include more detailed parameters not commonly presented, such as dead volume measurements, or combined with CIF data names for crystalline materials to archive parallelized adsorption-diffraction measurements.
 
 \section{Creating and using the AIF}
-A simple python 3.7 routine was produced during the development of the AIF to convert the plain text data output from Quantachrome and Belsorb instruments, used in our lab and many others.
+A simple python 3.8 routine was prepared during the development of the AIF to convert the plain text data output from Quantachrome (now Anton Paar) and Belsorb (Microtrac) instruments, used in many laboratories around the world.
 Specifically, this has been written to parse raw analysis text files exported by Quantachrome software and the raw data files (\textit{.DAT}) and CSV files exported by Belsorb software.
-At this moment we are unable to read binary data files that are saved by Quatachrome instruments (\textit{.qps}).
+Instrument manufacturers are encouraged to provide readable raw data files in future.
+For example, it is currently not possible to read binary data files e.g. the files saved by Quatachrome instruments (\textit{.qps}).
+Our routine is easily transferable and will be adapted for other instruments in future.
+The source code is provided on GitHub (\ref{www.github.com/jackevansadl/jubilant-waddle}{www.github.com/jackevansadl/jubilant-waddle}) and can be adapted individually by instrument manufacturers.
 
 This simple program will parse the output data to find data items detailed in the AIF dictionary.
 These data items are converted to the appropriate units and the isotherm is split into the adsorption and desorption parts.
 Subsequently an AIF is produced using \textit{gemmi} CIF routines.\cite{gemmi}
 As a consequence routines and methods developed for treating CIF files can be used in this application to adsorption data.
-For example produced AIF files can also be read using existing CIF methods, such as the \texttt{gemmi} python library that is considered the fastest open-source CIF parser.\cite{gemmi}
+For example, produced AIF files can also be read using existing CIF methods, such as the \texttt{gemmi} python library that is considered the fastest open-source CIF parser.\cite{gemmi}
 We have used \texttt{gemmi} library to demonstrate how an isotherm can be displayed from an AIF using a few lines.
 This is a very simple implementation and it is hoped that future versions, following the cooperation of several manufactures, could result in to routines to parse the information directly from binary data used by the instruments.
 
 To illustrate the importance of a universal data format for adsorption data we can compare data contained within an AIF to data digitized from a figure in a manuscript, for the same experiment.
-The porous material DUT-6 (also referred to as MOF-206) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylic acid and benzene-1,3,5-tribenzoic acid.\cite{10.1002/anie.200904599}
+The porous material DUT-6 (also referred to as MOF-205) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylic acid and benzene-1,3,5-tribenzoic acid.\cite{10.1002/anie.200904599}
 DUT-6 has mesopores with dodecahedral geometry and smaller cages that produce an extremely porous material with large adsorption capacities for\textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
 The nitrogen adsorption isotherm at 77~K was reported in the original manuscript using relative pressure and a linear axis (Figure~\ref{fgr:example}a).
 From this plot the isotherm can be classified  as  type  Ib, clearly exhibiting characteristics of a hierarchal pore system with micropores and mesopores.
 There is evidently a distinct step $p/p_0$ = 0.17, however, from this plot it is not possible to correctly identify low pressure features.
-The low pressure regions is important for understanding the process of initial pore filling or for independent application of analysis methods, such as the Brunauer–Emmett–Teller (BET) method.\cite{10.1016/S0167-2991(07)80008-5}
+The low pressure regions is important for understanding the process of sequential pore filling or for independent application of analysis methods, such as the Brunauer–Emmett–Teller (BET) method.\cite{10.1016/S0167-2991(07)80008-5}
 The reported isotherm was digitized using WebPlotDigitizer, which uses a time-consuming but powerful point-picking methodology.\cite{webplotdigitizer}
 In this methodology, each point in the graph is identified by clicking on the image area and the point's location in on-screen pixels is then converted to data values, based on an axes calibration.
 The digitized isotherm and the data from the experiment, when plotted on semi-log axes, clearly shows important low pressure information, such as the point of initial pore-filling, is lost when this information is simply included as a figure in a manuscript (Figure~\ref{fgr:example}).
@@ -286,8 +294,8 @@ To prevent this information loss and to allow further analysis of reported adsor
 
 
 \section{Summary and perspective}
-There is a current need to a universal format for archiving adsorption data.
-This is pertinent for the development of detailed databases of information that can play an important role in further materials design.\cite{10.1021/acs.chemmater.9b03376}
+There is a current need to develop a universal format for archiving adsorption data.
+This is pertinent for the development of detailed databases of information that can play an important role in further materials design, application data mining, and for developing machine learning computational methods for adsorption processes. \cite{10.1021/acs.chemmater.9b03376}
 This report details the specification of a new standard file, named AIF, based on the self-defining text archive and retrieval (STAR) procedure, inspired by similar universal and evolving formats currently used in the larger scientific community.
 The AIF is importantly an easily extended free-format archive file that can be both human and machine readable.
 This format represents the first steps to an open adsorption data format and the community is encouraged to take up this format.
@@ -316,6 +324,7 @@ This format represents the first steps to an open adsorption data format and the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgement}
   J. D. E. acknowledges the support of the Alexander von Humboldt foundation and HPC platforms provided by a GENCI grant (A0070807069) and the Center for Information Services and High Performance Computing (ZIH) at TU Dresden.
+  We thank 
 \end{acknowledgement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
