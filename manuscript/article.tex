@@ -147,9 +147,9 @@ This led to the foundational principles as discussed by Wilkinson et al.--- Find
 
 Porous solids are of important scientific and industrial interest owing to their impressive ability to interact with all manner of atoms, ions and molecules throughout the entirety of the solid, not only the surface.\cite{10.1038/nature00785}
 This has led to many exciting applications for porous materials, including ion exchange, gas storage, separations and catalysis.\cite{10.1039/C6CS00135A}
-Measuring the interaction of gas with a material is crucial to understanding and comparing different porous materials.
+Measuring the interaction of fluid with a material is crucial to understanding and comparing different porous materials and is usually quantified in the form of an isotherm, which represents the adsorbed amount at equilibrium pressure at a constant temperature.
 The quantity of gas adsorbed is measured in any convenient units, but for the presentation of the data, the International Union of Pure and Applied Chemistry (IUPAC) has recommended that the amount adsorbed should be expressed in moles per gram of outgassed adsorbent.\cite{10.1515/pac-2014-1117}
-To facilitate the comparison of adsorption data, the IUPAC also recommended that adsorption isotherms are displayed in a graphical form with the amount adsorbed (preferably presented using mol$\,$g$^-1$ plotted against the equilibrium relative pressure ($p/p_0$), where $p_0$ is the saturation pressure of the pure adsorptive at the experiment temperature, or when the temperature is above the critical temperature of the adsorbing gas, against absolute pressure.
+To facilitate the comparison of adsorption data, the IUPAC also recommended that adsorption isotherms are displayed in a graphical form with the amount adsorbed (preferably presented using mol$\,$g$^-1$ plotted against the equilibrium relative pressure ($p/p_0$), where $p_0$ is the saturation vapor pressure of the pure adsorptive at the experiment temperature, or when the temperature is above the critical temperature of the adsorbing gas, against absolute pressure.
 However, in particular for microporous materials, this documentation leads to severe loss of information, as the pore filling occurs at a characteristic $p/p_0$ \textless\textless 0.01 that is not retractable from the isotherm plot.
 Only a logarithmic plot can reveal the characteristic$ p/p_0$ of pore filling, which is an important information to estimate pore size distributions in the micropore regime.
 Similar aspects are also relevant for other branches/regions of the isotherm. 
@@ -177,13 +177,13 @@ As a result the STAR data structure was adopted,\cite{10.1021/ci00019a005} which
 An important property of the STAR format is that its syntax is defined by a few simple rules using an object/relational model.
 The data stored in a STAR file is self-descriptive as the underpinning data structure consists of tag-value pairs or data item.
 This data item is the combination of a data value with a data name, an identifying unique tag.
-This approach is flexible and able to represent. nested and repetitive data, which are particularly important for the collection of pressure and adsorbed amount that comprise an adsorption isotherm experiment.
+This approach is flexible and able to represent nested and repetitive data, which are particularly important for the collection of pressure and adsorbed amount that comprise an adsorption isotherm experiment.
 
 The data structure of an AIF is comprised of comment lines and data blocks, which contains the required metadata and quantities related to the adsorption experiment, separated for adsorption and desorption (Figure~\ref{fgr:datastructure}).
 Files can contain any number of data blocks to represent multiple experiments.
 Fundamentally, a data block is a data cell containing a sequence of data items, data loops.
 It starts with a data block code statement (\texttt{data\_example}) where a block code is a unique identifying code with in a file.
-A data block is closed by another either another data block code statement or the end of file.
+A data block is closed by either another data block code statement or the end of file.
 Comment lines can be placed anywhere in the file and are identified by a hash (\texttt{\#}) symbol.
 As these comment lines do not necessarily represent structured data, which is able to be easily parsed, it is not recommended to solely include important experimental conditions in this way.
 Single values or strings can be included within a data block using the data name and data value pairs.
@@ -249,20 +249,21 @@ Details of the sample are recorded for comparison and to uniquely identify the s
 Simply, this includes the sample identity code (\texttt{\_sample\_id}), a laboratory code used to record and represent the sample and a string relating to the general designation given to the material (\texttt{\_sample\_material\_name}).
 
 For each data point measured during an adsorption experiment data can be stored that relates to the equilibrated pressure, the saturation pressure and the amount adsorbed. Importantly, these should be stored in units of pascal and mol$\,$kg$^{-1}$ to follow the IUPAC recommendations.\cite{10.1515/pac-2014-1117}
-The saturation pressure can be recorded at each data point as we have discovered that some instruments will calculate and report this value for every point.
+The saturation pressure can be recorded at each data point as we have discovered that some instruments will meausure and report this value for every point.
 
 The above features serve as an example of the data that can be archived in a AIF and can be extended in future versions.
 For example, the intention of this initial version is to provide digital archive of the presented primary data of an adsorption experiment, the isotherm.
 As a result, it describes only basic information that usually exported from adsorption instruments and a few convenient metadata items.
-The flexibility of this approach can be extended in future versions to include more detailed parameters not commonly presented, such as dead volume measurements, or combined with CIF data names for crystalline materials to archive parallelized adsorption-diffraction measurements.
+The flexibility of this approach can be extended in future versions to include more detailed parameters not commonly presented, such as dead volume measurements and leak checks, or combined with CIF data names for crystalline materials to archive parallelized adsorption-diffraction measurements.
 
 \section{Creating and using the AIF}
-A simple python 3.8 routine was prepared during the development of the AIF to convert the plain text data output from Quantachrome (now Anton Paar) and Belsorb (Microtrac) instruments, used in many laboratories around the world.
+A simple python 3.8 routine was prepared during the development of the AIF to convert the plain text data output from 3P instruments (formerly Quantachrome) and Microtrac Retsch (formerly BEL Japan and BEL Europe) instruments, used in many laboratories around the world.
 Specifically, this has been written to parse raw analysis text files exported by Quantachrome software and the raw data files (\textit{.DAT}) and CSV files exported by Belsorb software.
 Instrument manufacturers are encouraged to provide readable raw data files in future.
-For example, it is currently not possible to read binary data files e.g. the files saved by Quatachrome instruments (\textit{.qps}).
+For example, it is currently not possible to read binary data files e.g. the files saved by 3P instruments (\textit{.qps}).
 Our routine is easily transferable and will be adapted for other instruments in future.
 The source code is provided on GitHub (\ref{www.github.com/jackevansadl/jubilant-waddle}{www.github.com/jackevansadl/jubilant-waddle}) and can be adapted individually by instrument manufacturers.
+In future, we also plan to include as routine for the transformation of files produced by Micromeritics instruments.
 
 This simple program will parse the output data to find data items detailed in the AIF dictionary.
 These data items are converted to the appropriate units and the isotherm is split into the adsorption and desorption parts.
@@ -274,7 +275,7 @@ This is a very simple implementation and it is hoped that future versions, follo
 
 To illustrate the importance of a universal data format for adsorption data we can compare data contained within an AIF to data digitized from a figure in a manuscript, for the same experiment.
 The porous material DUT-6 (also referred to as MOF-205) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylic acid and benzene-1,3,5-tribenzoic acid.\cite{10.1002/anie.200904599}
-DUT-6 has mesopores with dodecahedral geometry and smaller cages that produce an extremely porous material with large adsorption capacities for\textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
+DUT-6 has mesopores of 2.4~nm, with dodecahedral geometry, and smaller cages of 0.9~nm that produce an extremely porous material with large adsorption capacities for\textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
 The nitrogen adsorption isotherm at 77~K was reported in the original manuscript using relative pressure and a linear axis (Figure~\ref{fgr:example}a).
 From this plot the isotherm can be classified  as  type  Ib, clearly exhibiting characteristics of a hierarchal pore system with micropores and mesopores.
 There is evidently a distinct step $p/p_0$ = 0.17, however, from this plot it is not possible to correctly identify low pressure features.
