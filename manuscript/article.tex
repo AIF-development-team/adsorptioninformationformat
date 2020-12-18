@@ -15,6 +15,7 @@
 \usepackage[version=3]{mhchem} % Formula subscripts using \ce{}
 \usepackage{lineno}
 \usepackage{booktabs}
+\usepackage{hyperref}
 
 % \linenumbers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,8 +76,8 @@ Bergstraße 66, 01062 Dresden, Germany}
 
 \author{Stefan Kaskel}
 \affiliation[TU Dresden]
-{Department of inorganic chemistry
-Technische Universität Dresden
+{Department of Inorganic Chemistry,
+Technische Universität Dresden,
 Bergstraße 66, 01062 Dresden, Germany}
 
 
@@ -147,7 +148,7 @@ This led to the foundational principles as discussed by Wilkinson et al.--- Find
 
 Porous solids are of important scientific and industrial interest owing to their impressive ability to interact with all manner of atoms, ions and molecules throughout the entirety of the solid, not only the surface.\cite{10.1038/nature00785}
 This has led to many exciting applications for porous materials, including ion exchange, gas storage, separations and catalysis.\cite{10.1039/C6CS00135A}
-Measuring the interaction of fluid with a material is crucial to understanding and comparing different porous materials and is usually quantified in the form of an isotherm, which represents the adsorbed amount at equilibrium pressure at a constant temperature.
+Measuring the interaction of fluid with a material is crucial to understanding and comparing different porous materials and this is usually quantified in the form of an isotherm, which represents the adsorbed amount at equilibrium pressure at a constant temperature.
 The quantity of gas adsorbed is measured in any convenient units, but for the presentation of the data, the International Union of Pure and Applied Chemistry (IUPAC) has recommended that the amount adsorbed should be expressed in moles per gram of outgassed adsorbent.\cite{10.1515/pac-2014-1117}
 To facilitate the comparison of adsorption data, the IUPAC also recommended that adsorption isotherms are displayed in a graphical form with the amount adsorbed (preferably presented using mol$\,$g$^-1$ plotted against the equilibrium relative pressure ($p/p_0$), where $p_0$ is the saturation vapor pressure of the pure adsorptive at the experiment temperature, or when the temperature is above the critical temperature of the adsorbing gas, against absolute pressure.
 However, in particular for microporous materials, this documentation leads to severe loss of information, as the pore filling occurs at a characteristic $p/p_0$ \textless\textless 0.01 that is not retractable from the isotherm plot.
@@ -213,13 +214,14 @@ This leads us to the general data structure for the AIF (Figure~\ref{fgr:datastr
 \section{AIF dictionary}
 Each data item within a data block is identified using a unique data name.
 The currently accepted AIF data names are listed and defined in Table~\ref{tbl:example}.
-These data items form a first version of a core dictionary, which are intended for primarily reporting primary physisorption data for gas on porous materials.
+These data items form a first version of a core dictionary, which are intended for primarily reporting primary physisorption data.
 As a result the dictionary contains information about crucial experimental parameters, basic sample characterization, adsorption and desorption measures, each distinguished by a data name prefix (\texttt{\_exptl\_}, \texttt{\_sample\_}, \texttt{\_adsorp\_} and \texttt{\_desorp\_}).
 
 \begin{table}
+  \renewcommand{\arraystretch}{1.5}
   \caption{Core dictionary of data items}
   \label{tbl:example}
-  \begin{tabular}{@{}ll@{}}
+  \begin{tabular}{lp{7cm}}
     \toprule
     data name & description  \\
     \midrule
@@ -231,11 +233,11 @@ As a result the dictionary contains information about crucial experimental param
     \texttt{\_exptl\_sample\_mass}  & mass of the sample (float, gram) \\
     \texttt{\_sample\_id}  & unique identifying code used by the operator (string)\\
     \texttt{\_sample\_material\_name}  & designated name for the material (string) \\
-    \texttt{\_adsorp\_pressure} & pressure of the adsorption measurement (float, pascal)\\
-    \texttt{\_adsorp\_p0} & saturation pressure of the adsorption measurement (float, pascal) \\
+    \texttt{\_adsorp\_pressure} & equilibrium pressure of the adsorption measurement (float, pascal)\\
+    \texttt{\_adsorp\_p0} & saturation pressure of the adsorption measurement at the temperature of the experiment (float, pascal) \\
     \texttt{\_adsorp\_amount} & amount adsorbed during the adsorption measurement (float, mol$\,$kg$^{-1}$) \\
-    \texttt{\_desorp\_pressure} & pressure of the desorption measurement (float, pascal) \\
-    \texttt{\_desorp\_p0} & saturation pressure of the desorption measurement (float, pascal) \\
+    \texttt{\_desorp\_pressure} & equilibrium  pressure of the desorption measurement (float, pascal) \\
+    \texttt{\_desorp\_p0} & saturation pressure of the desorption measurement at the temperature of the experiment (float, pascal) \\
     \texttt{\_desorp\_amount} & amount adsorbed during the desorption measurement (float, mol$\,$kg$^{-1}$) \\
     \bottomrule
   \end{tabular}
@@ -248,13 +250,13 @@ Additionally, data is included relative to the date, time and person responsible
 Details of the sample are recorded for comparison and to uniquely identify the sample that was used in the experiment.
 Simply, this includes the sample identity code (\texttt{\_sample\_id}), a laboratory code used to record and represent the sample and a string relating to the general designation given to the material (\texttt{\_sample\_material\_name}).
 
-For each data point measured during an adsorption experiment data can be stored that relates to the equilibrated pressure, the saturation pressure and the amount adsorbed. Importantly, these should be stored in units of pascal and mol$\,$kg$^{-1}$ to follow the IUPAC recommendations.\cite{10.1515/pac-2014-1117}
+For each data point measured during an adsorption experiment data can be stored that relates to the equilibrium pressure, the saturation pressure and the amount adsorbed. Importantly, these should be stored in units of pascal and mol$\,$kg$^{-1}$ to follow the IUPAC recommendations.\cite{10.1515/pac-2014-1117}
 The saturation pressure can be recorded at each data point as we have discovered that some instruments will meausure and report this value for every point.
 
 The above features serve as an example of the data that can be archived in a AIF and can be extended in future versions.
 For example, the intention of this initial version is to provide digital archive of the presented primary data of an adsorption experiment, the isotherm.
 As a result, it describes only basic information that usually exported from adsorption instruments and a few convenient metadata items.
-The flexibility of this approach can be extended in future versions to include more detailed parameters not commonly presented, such as dead volume measurements and leak checks, or combined with CIF data names for crystalline materials to archive parallelized adsorption-diffraction measurements.
+The flexibility of this approach can be extended in future versions to include more detailed parameters not commonly presented, such as dead volume measurements and leak checks, or combined with CIF data names for structural data to archive parallelized adsorption-diffraction measurements.
 
 \section{Creating and using the AIF}
 A simple python 3.8 routine was prepared during the development of the AIF to convert the plain text data output from 3P instruments (formerly Quantachrome) and Microtrac Retsch (formerly BEL Japan and BEL Europe) instruments, used in many laboratories around the world.
@@ -262,19 +264,19 @@ Specifically, this has been written to parse raw analysis text files exported by
 Instrument manufacturers are encouraged to provide readable raw data files in future.
 For example, it is currently not possible to read binary data files e.g. the files saved by 3P instruments (\textit{.qps}).
 Our routine is easily transferable and will be adapted for other instruments in future.
-The source code is provided on GitHub (\ref{www.github.com/jackevansadl/jubilant-waddle}{www.github.com/jackevansadl/jubilant-waddle}) and can be adapted individually by instrument manufacturers.
+The source code is provided on GitHub (\url{www.github.com/jackevansadl/jubilant-waddle}) and can be adapted individually by instrument manufacturers.
 In future, we also plan to include as routine for the transformation of files produced by Micromeritics instruments.
 
 This simple program will parse the output data to find data items detailed in the AIF dictionary.
 These data items are converted to the appropriate units and the isotherm is split into the adsorption and desorption parts.
 Subsequently an AIF is produced using \textit{gemmi} CIF routines.\cite{gemmi}
-As a consequence routines and methods developed for treating CIF files can be used in this application to adsorption data.
+As a consequence routines and methods developed for treating CIF files can be used in this application to physisorption data.
 For example, produced AIF files can also be read using existing CIF methods, such as the \texttt{gemmi} python library that is considered the fastest open-source CIF parser.\cite{gemmi}
 We have used \texttt{gemmi} library to demonstrate how an isotherm can be displayed from an AIF using a few lines.
 This is a very simple implementation and it is hoped that future versions, following the cooperation of several manufactures, could result in to routines to parse the information directly from binary data used by the instruments.
 
 To illustrate the importance of a universal data format for adsorption data we can compare data contained within an AIF to data digitized from a figure in a manuscript, for the same experiment.
-The porous material DUT-6 (also referred to as MOF-205) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylic acid and benzene-1,3,5-tribenzoic acid.\cite{10.1002/anie.200904599}
+The porous material DUT-6 (also referred to as MOF-205) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylate and benzene-1,3,5-tribenzoate.\cite{10.1002/anie.200904599}
 DUT-6 has mesopores of 2.4~nm, with dodecahedral geometry, and smaller cages of 0.9~nm that produce an extremely porous material with large adsorption capacities for\textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
 The nitrogen adsorption isotherm at 77~K was reported in the original manuscript using relative pressure and a linear axis (Figure~\ref{fgr:example}a).
 From this plot the isotherm can be classified  as  type  Ib, clearly exhibiting characteristics of a hierarchal pore system with micropores and mesopores.
@@ -296,7 +298,7 @@ To prevent this information loss and to allow further analysis of reported adsor
 
 \section{Summary and perspective}
 There is a current need to develop a universal format for archiving adsorption data.
-This is pertinent for the development of detailed databases of information that can play an important role in further materials design, application data mining, and for developing machine learning computational methods for adsorption processes. \cite{10.1021/acs.chemmater.9b03376}
+This is pertinent for the development of detailed databases of information that can play an important role in future materials design, application data mining, and for developing machine learning computational methods for adsorption processes. \cite{10.1021/acs.chemmater.9b03376}
 This report details the specification of a new standard file, named AIF, based on the self-defining text archive and retrieval (STAR) procedure, inspired by similar universal and evolving formats currently used in the larger scientific community.
 The AIF is importantly an easily extended free-format archive file that can be both human and machine readable.
 This format represents the first steps to an open adsorption data format and the community is encouraged to take up this format.
