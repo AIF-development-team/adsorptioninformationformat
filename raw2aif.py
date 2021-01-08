@@ -98,7 +98,7 @@ if filetype == "BELSORP-max":
             operator = line.split()[1][1:-1]
         if "Date of measurement" in line:
             date = line.split()[-1]
-            date = parse(date.split(':')[-1])
+            date = parse(date.split(':')[-1], yearfirst=True)
         if "Instrument S/N" in line:
             instrument = line.split()[-1]
             instrument = "BELSORP-max-"+str(instrument)
@@ -175,7 +175,7 @@ if filetype == "BELSORP-max-csv":
             operator = line.split(',')[-1]
         if "Date of measurement" in line:
             date = line.split(',')[-1]
-            date = parse(date.split(':')[-1])
+            date = parse(date.split(':')[-1], yearfirst=True)
         if "Serial number" in line:
             instrument = line.split(',')[-1]
             instrument = "BELSORP-max-"+str(instrument)
@@ -248,7 +248,7 @@ block.set_pair('_exptl_operator', operator)
 block.set_pair('_exptl_date', str(date))
 block.set_pair('_exptl_instrument', instrument)
 block.set_pair('_exptl_adsorptive', adsorptive)
-block.set_pair('_exptl_temperature', temperature)
+block.set_pair('_exptl_temperature', str(temperature))
 block.set_pair('_exptl_sample_mass', str(sample_mass))
 block.set_pair('_sample_id', sample_id)
 block.set_pair('_sample_material_id', material_id)
@@ -261,4 +261,5 @@ loop_ads.set_all_values([list(ads_press.astype(str)), list(ads_p0.astype(str)), 
 loop_des = block.init_loop('_desorp_', ['pressure', 'p0', 'amount'])
 loop_des.set_all_values([list(des_press.astype(str)), list(des_p0.astype(str)), list(des_vol.astype(str))])
 
-d.write_file(str(sample_id)+'.aif')
+outputfilename = filename+".aif"
+d.write_file(outputfilename)

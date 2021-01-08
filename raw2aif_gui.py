@@ -118,7 +118,7 @@ def convertAIF():
                 operator = line.split()[1][1:-1]
             if "Date of measurement" in line:
                 date = line.split()[-1]
-                date = parse(date.split(':')[-1])
+                date = parse(date.split(':')[-1], yearfirst=True)
             if "Instrument S/N" in line:
                 instrument = line.split()[-1]
                 instrument = "BELSORP-max-"+str(instrument)
@@ -195,7 +195,7 @@ def convertAIF():
                 operator = line.split(',')[-1]
             if "Date of measurement" in line:
                 date = line.split(',')[-1]
-                date = parse(date.split(':')[-1])
+                date = parse(date.split(':')[-1], yearfirst=True)
             if "Serial number" in line:
                 instrument = line.split(',')[-1]
                 instrument = "BELSORP-max-"+str(instrument)
