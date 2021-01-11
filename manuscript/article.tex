@@ -17,7 +17,7 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 
-% \linenumbers
+%\linenumbers
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
 %% un-comment the next line.  This provides information on the
@@ -57,21 +57,21 @@
 
 \author{Jack D. Evans}
 \affiliation[TU Dresden]
-{Department of inorganic chemistry
-Technische Universität Dresden
+{Department of Inorganic Chemistry,
+Technische Universität Dresden,
 Bergstraße 66, 01062 Dresden, Germany}
 \email{jack.evans@tu-dresden.de}
 
 \author{Volodymyr Bon}
 \affiliation[TU Dresden]
-{Department of inorganic chemistry
-Technische Universität Dresden
+{Department of Inorganic Chemistry,
+Technische Universität Dresden,
 Bergstraße 66, 01062 Dresden, Germany}
 
 \author{Irena Senkovska}
 \affiliation[TU Dresden]
-{Department of inorganic chemistry
-Technische Universität Dresden
+{Department of Inorganic Chemistry,
+Technische Universität Dresden,
 Bergstraße 66, 01062 Dresden, Germany}
 
 \author{Stefan Kaskel}
@@ -111,16 +111,16 @@ Bergstraße 66, 01062 Dresden, Germany}
 %% require that it is printed as part of the abstract page. It will
 %% be automatically moved as appropriate.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{tocentry}
+% \begin{tocentry}
 
 
-The surrounding frame is 9\,cm by 3.5\,cm, which is the maximum
-permitted for  \emph{Journal of the American Chemical Society}
-graphical table of content entries. The box will not resize if the
-content is too big: instead it will overflow the edge of the box.
+% The surrounding frame is 9\,cm by 3.5\,cm, which is the maximum
+% permitted for  \emph{Journal of the American Chemical Society}
+% graphical table of content entries. The box will not resize if the
+% content is too big: instead it will overflow the edge of the box.
 
 
-\end{tocentry}
+% \end{tocentry}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The abstract environment will automatically gobble the contents
@@ -141,7 +141,7 @@ content is too big: instead it will overflow the edge of the box.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 It is important in many branches of science for there to exist a uniform and flexible method of archiving and exchanging data.
-The data presented in research contributions must be readily accessible and easily verifiable.
+The data presented in research contributions must be readily accessible and easily verifiable.\cite{10.1021/acs.langmuir.9b02963}
 Key to scientific discovery and innovation the use of good data management practices can  provide significant knowledge through the reuse of original data by the community after the data publication process.\cite{10.1002/adts.201900131}
 Unfortunately, the existing ecosystem surrounding scholarly data publication often prevents the research community extracting maximum benefit from published reports.
 This led to the foundational principles as discussed by Wilkinson et al.--- Findability, Accessibility, Interoperability, and Reusability--- that serve as a guideline to maximize the added-value gained by digital publishing.\cite{10.1038/sdata.2016.18}
@@ -157,7 +157,8 @@ Similar aspects are also relevant for other branches/regions of the isotherm.
 
 Rapid advances in computer simulations, and the quest for developing a digital data space for data mining through national and international networks,have fueled the need for a standardization of adsorption data beyond the current IUPAC recommendations.
 The variety and relative inflexibility of existing adsorption data formats and conventional graphical reporting inhibits the effective use of reported data.
-In particular, a comparison of experimental and computational data is obscured due to the poor documentation of explicit numbers.
+The largest adsorption database, NIST/ARPA-E Adsorption Database, contains thousands of isotherms laboriously digitized from journal articles.\cite{NIST}
+In particular, a understanding the comparison between experimental and computational data is difficult due to poor experimental documentation.\cite{10.1021/acs.chemmater.7b04287}
 A general, flexible, rapidly extensible and universal file format protocol following the guidelines presented by Wilkinson et al. will boost the development of porous materials and reveal their application potential.
 Moreover, it enables to validate and advance theoretical methods as a wider and more precise database is openly accessible to validate, for example force field parameters, interactions potentials, isotherm models and more. 
 As with other standard formats, such a format must be machine-independent and portable so that accessibility to data items is independent of their point of origin.
@@ -264,7 +265,7 @@ Specifically, this has been written to parse raw analysis text files exported by
 Instrument manufacturers are encouraged to provide readable raw data files in future.
 For example, it is currently not possible to read binary data files e.g. the files saved by 3P instruments (\textit{.qps}).
 Our routine is easily transferable and will be adapted for other instruments in future.
-The source code is provided on GitHub (\url{www.github.com/jackevansadl/jubilant-waddle}) and can be adapted individually by instrument manufacturers.
+The source code and a stand-alone program is provided on GitHub (\url{www.github.com/jackevansadl/adsorptioninformationfile}) and can be adapted individually by instrument manufacturers.
 In future, we also plan to include as routine for the transformation of files produced by Micromeritics instruments.
 
 This simple program will parse the output data to find data items detailed in the AIF dictionary.
@@ -277,7 +278,7 @@ This is a very simple implementation and it is hoped that future versions, follo
 
 To illustrate the importance of a universal data format for adsorption data we can compare data contained within an AIF to data digitized from a figure in a manuscript, for the same experiment.
 The porous material DUT-6 (also referred to as MOF-205) is a metal-organic framework produced from zinc nitrate and two different different ligands; 2,6-naphthalenedicarboxylate and benzene-1,3,5-tribenzoate.\cite{10.1002/anie.200904599}
-DUT-6 has mesopores of 2.4~nm, with dodecahedral geometry, and smaller cages of 0.9~nm that produce an extremely porous material with large adsorption capacities for\textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
+DUT-6 has mesopores of 2.4~nm, with dodecahedral geometry, and smaller cages of 0.9~nm that produce an extremely porous material with large adsorption capacities for \textit{n}-butane (up to 1.1~g$\,$g$^{-1}$ at 293~K),  methane (230~mg$\,$g$^{-1}$ at 100~bar and 298~K) and hydrogen (60~mg$\,$g$^{-1}$ at 50~bar and 77~K).
 The nitrogen adsorption isotherm at 77~K was reported in the original manuscript using relative pressure and a linear axis (Figure~\ref{fgr:example}a).
 From this plot the isotherm can be classified  as  type  Ib, clearly exhibiting characteristics of a hierarchal pore system with micropores and mesopores.
 There is evidently a distinct step $p/p_0$ = 0.17, however, from this plot it is not possible to correctly identify low pressure features.
@@ -304,21 +305,6 @@ The AIF is importantly an easily extended free-format archive file that can be b
 This format represents the first steps to an open adsorption data format and the community is encouraged to take up this format.
 
 
-% \begin{equation}
-%   \Omega\left(N_{\mathrm{host}}, p, \sigma_{a}=\mathbf{0}, T ; V\right)=F_{\mathrm{host}}\left(N_{\mathrm{host}}, T ; V\right)+p V-\int_{-\infty}^{\mu(p, T)} N_{\mathrm{guest}}\left(N_{\mathrm{host}}, \mu^{\prime}, \sigma_{a}=\mathbf{0}, T ; V\right) \mathrm{d} \mu^{\prime}
-%   \label{eqn:osmoticequation}
-% \end{equation}
-
-
-  
-  % \begin{figure}[htb]
-  %   \includegraphics{../figures/figure2-01.png}
-  %     \caption{}
-  %     \label{fgr:figure2}
-  %   \end{figure}
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
@@ -327,7 +313,7 @@ This format represents the first steps to an open adsorption data format and the
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgement}
   J. D. E. acknowledges the support of the Alexander von Humboldt foundation and HPC platforms provided by a GENCI grant (A0070807069) and the Center for Information Services and High Performance Computing (ZIH) at TU Dresden.
-  We thank 
+  We thank Ren Koh for assistance with the development of the raw2aif file converter and Andrew Tarzia (University College London) for testing the program.
 \end{acknowledgement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

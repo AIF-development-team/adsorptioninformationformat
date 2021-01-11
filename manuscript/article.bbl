@@ -8,7 +8,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{14}
+\begin{mcitethebibliography}{17}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -26,6 +26,13 @@
   {\relax}
   {\relax}
 
+\bibitem[Sholl(2019)]{10.1021/acs.langmuir.9b02963}
+Sholl,~D.~S. Five Easy Ways To Make Your Research More Reproducible.
+  \emph{Langmuir} \textbf{2019}, \emph{35}, 13257--13258\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[Coudert(2019)]{10.1002/adts.201900131}
 Coudert,~F.-X. Materials Databases: The Need for Open, Interoperable Databases
   with Standardized Data and Rich Metadata. \emph{Advanced Theory and
@@ -74,6 +81,25 @@ Thommes,~M.; Kaneko,~K.; Neimark,~A.~V.; Olivier,~J.~P.; Rodriguez-Reinoso,~F.;
   the evaluation of surface area and pore size distribution ({IUPAC} Technical
   Report). \emph{Pure and Applied Chemistry} \textbf{2015}, \emph{87},
   1051--1069\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Siderius \latin{et~al.}()Siderius, Shen, {Johnson III}, and van
+  Zee]{NIST}
+Siderius,~D.~W., Shen,~V.~K., {Johnson III},~R.~D., van Zee,~R.~D., Eds.
+  \emph{NIST/ARPA-E Database of Novel and Emerging Adsorbent Materials, NIST
+  Standard Reference Database Number 205}; National Institute of Standards and
+  Technology, Gaithersburg MD, 20899, (retrieved 10/01/2021)\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Park \latin{et~al.}(2017)Park, Howe, and
+  Sholl]{10.1021/acs.chemmater.7b04287}
+Park,~J.; Howe,~J.~D.; Sholl,~D.~S. How Reproducible Are Isotherm Measurements
+  in Metal{\textendash}Organic Frameworks? \emph{Chemistry of Materials}
+  \textbf{2017}, \emph{29}, 10487--10495\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
