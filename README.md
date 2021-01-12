@@ -29,4 +29,5 @@ of this repository.
 
 ## Citation
 Jack D. Evans, Volodymyr Bon, Irena Senkovska, and Stefan Kaskel, *preprint*, **2021**, preprint.
-  DOI: [XXX](https://dx.doi.org/XXX)
+  DOI: [10.26434/chemrxiv.13562798](https://dx.doi.org/10.26434/chemrxiv.13562798)
+  
