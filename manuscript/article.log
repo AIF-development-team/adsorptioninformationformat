@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.24)  11 JAN 2021 17:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.24)  14 JAN 2021 12:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -640,12 +640,17 @@ File: ./figures/structure-01.png Graphic file (type png)
 Package pdftex.def Info: ./figures/structure-01.png  used on input line 201.
 (pdftex.def)             Requested size: 239.09265pt x 200.06694pt.
  [5 <./figures/structure-01.png>]
+Underfull \hbox (badness 3724) in paragraph at lines 230--231
+[]\OT1/cmr/m/n/12 date and time of the ex-per-i-ment
+ []
+
+
 Underfull \hbox (badness 5091) in paragraph at lines 236--237
 []\OT1/cmr/m/n/12 designated name for the ma-te-rial
  []
 
 [6] [7] [8] [9]
-<./figures/example-01.png, id=103, 239.09325pt x 325.215pt>
+<./figures/example-01.png, id=102, 239.09325pt x 325.215pt>
 File: ./figures/example-01.png Graphic file (type png)
 <use ./figures/example-01.png>
 Package pdftex.def Info: ./figures/example-01.png  used on input line 294.
@@ -670,7 +675,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  60i,11n,94p,663b,536s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf (13 pages, 553848 bytes).
+Output written on /Users/jevans/Documents/GitHub/jubilant-waddle/manuscript/article.pdf (13 pages, 553806 bytes).
 PDF statistics:
  183 PDF objects out of 1000 (max. 8388607)
  149 compressed objects within 2 object streams
