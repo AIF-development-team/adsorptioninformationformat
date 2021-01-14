@@ -266,7 +266,7 @@ def convertAIF():
 
     # write metadata
     block.set_pair('_exptl_operator', operator)
-    block.set_pair('_exptl_date', str(date))
+    block.set_pair('_exptl_date', str(date.date()))
     block.set_pair('_exptl_instrument', instrument)
     block.set_pair('_exptl_adsorptive', adsorptive)
     block.set_pair('_exptl_temperature', str(temperature))

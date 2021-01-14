@@ -7,7 +7,7 @@ The current dictionary of data items used by adsorption information files can be
 | data name | description |
 | --- | --- |
 | _exptl_operator | name of the person who ran the experiment (string) |
-| _exptl_date | date and time of the experiment (date-time string representation)|
+| _exptl_date | date of the experiment (YYYY-MM-DD)|
 | _exptl_instrument | instrument id used for the experiment (string)    | 
 | _exptl_adsorptive |  name of the adsorptive (string)    | 
 | _exptl_temperature | temperature of the experiment (float)    | 
@@ -22,9 +22,9 @@ The current dictionary of data items used by adsorption information files can be
 | _desorp_amount |  amount adsorbed during the desorption measurement (float, mol.kg<sup>-1</sup>)   | 
 
 ## raw2aif converter
-A simple program was produced for windows and mac computers to facilitate the production of adsorption information files from raw analysis text files exported by Quantachrome software (*.txt*) and the raw data files (*.DAT*) and CSV files exported by Belsorb software.
+A simple program was produced for windows computers to facilitate the production of adsorption information files from raw analysis text files exported by Quantachrome software (*.txt*) and the raw data files (*.DAT*) and CSV files exported by Belsorb software.
 
-The current versions of these programs can be found on the [release page](https://github.com/jackevansadl/jubilant-waddle/releases),
+The current versions of this program can be found on the [release page](https://github.com/jackevansadl/jubilant-waddle/releases/tag/0.0.1),
 of this repository.
 
 ## Citation
