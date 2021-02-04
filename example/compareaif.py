@@ -3,7 +3,7 @@ from gemmi import cif
 
 
 
-aif = cif.read_file('example/nk_DUT-6_LP_N2_114pkt.aif')
+aif = cif.read_file('database/DUT-6/NK_DUT-6_LP_N2_114PKT (Raw Analysis Data).aif')
 block = aif.sole_block()
 ads_press = np.array(block.find_loop('_adsorp_pressure'),dtype=float)
 ads_p0 = np.array(block.find_loop('_adsorp_p0'),dtype=float)

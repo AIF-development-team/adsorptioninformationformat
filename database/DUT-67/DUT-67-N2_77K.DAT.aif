@@ -1,12 +1,12 @@
 data_data_raw2aif
 _exptl_operator Simon
-_exptl_date 2005-03-16 00:00:00
+_exptl_date 2016-03-05
 _exptl_instrument BELSORP-max-00218
 _exptl_adsorptive N2
 _exptl_temperature 77.0
 _exptl_sample_mass 0.0387
 _sample_id DUT67Zr
-_sample_material_id material-ID
+_sample_material_id DUT-67
 
 loop_
 _adsorp_pressure
