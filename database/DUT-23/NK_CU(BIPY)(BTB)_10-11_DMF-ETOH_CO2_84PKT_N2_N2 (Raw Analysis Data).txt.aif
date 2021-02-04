@@ -1,17 +1,21 @@
 data_data_raw2aif
-_exptl_operator  
-_exptl_date 2010-06-10
-_exptl_instrument Autosorb
+_exptl_operator 
+_exptl_date 2010-06-10T09:47:00
+_exptl_instrument 'Autosorb Station 1'
 _exptl_adsorptive Nitrogen
 _exptl_temperature 77.35
 _exptl_sample_mass 0.0279
-_sample_id nk_Cubipybtb_10-11_DMF-EtOH_CO2_84Pkt_N2
+_sample_id 'nk_Cu(bipy)(btb)_10-11_DMF-EtOH_CO2_84Pkt_N2'
 _sample_material_id DUT-23
+_units_temperature K
+_units_pressure Pa
+_units_mass g
+_units_loading mmol/g
 
 loop_
 _adsorp_pressure
 _adsorp_p0
-_adsorp_amount
+_adsorp_loading
 101.96443823039999 101031.71471999999 5.89726786861642
 201.98876889599998 100966.38674399999 9.807474399161045
 303.71376009599993 100938.38904 16.342992235075812
@@ -61,7 +65,7 @@ _adsorp_amount
 loop_
 _desorp_pressure
 _desorp_p0
-_desorp_amount
+_desorp_loading
 94813.02469439998 100765.06991999998 58.627272445249105
 89683.31203199999 100683.743256 58.501103221137065
 84555.46588319998 100713.07418399998 58.386607448685574
