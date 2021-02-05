@@ -1,17 +1,21 @@
 data_data_raw2aif
 _exptl_operator Uli
-_exptl_date 2012-11-30
-_exptl_instrument Autosorb
+_exptl_date 2012-11-30T18:59:00
+_exptl_instrument 'Autosorb Station 1'
 _exptl_adsorptive Nitrogen
 _exptl_temperature 77.3
 _exptl_sample_mass 0.0539
-_sample_id US_540_DUT75_N2
+_sample_id 'US_540_DUT75_N2'
 _sample_material_id DUT-75
+_units_temperature K
+_units_pressure Pa
+_units_mass g
+_units_loading mmol/g
 
 loop_
 _adsorp_pressure
 _adsorp_p0
-_adsorp_amount
+_adsorp_loading
 50.03443017359999 100561.08664799998 11.035625262702725
 75.21649840799999 100561.08664799998 12.377137069612434
 100.45696185359999 100561.08664799998 13.829565506451125
@@ -116,7 +120,7 @@ _adsorp_amount
 loop_
 _desorp_pressure
 _desorp_p0
-_desorp_amount
+_desorp_loading
 98096.08879439998 100561.08664799998 52.2879203678194
 95170.3287264 100561.08664799998 52.226005711709796
 89609.31809999999 100561.08664799998 52.12725680163123

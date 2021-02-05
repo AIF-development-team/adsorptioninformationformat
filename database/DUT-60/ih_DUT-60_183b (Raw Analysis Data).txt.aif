@@ -1,17 +1,21 @@
 data_data_raw2aif
 _exptl_operator QC
-_exptl_date 2016-10-07
-_exptl_instrument Autosorb
+_exptl_date 2016-10-07T00:00:00
+_exptl_instrument 'Autosorb iQ Station 1'
 _exptl_adsorptive Nitrogen
 _exptl_temperature 77.35
 _exptl_sample_mass 0.0081
-_sample_id ih_DUT-60_183b
+_sample_id 'ih_DUT-60_183b'
 _sample_material_id DUT-60
+_units_temperature K
+_units_pressure Pa
+_units_mass g
+_units_loading mmol/g
 
 loop_
 _adsorp_pressure
 _adsorp_p0
-_adsorp_amount
+_adsorp_loading
 1.212529897728 102274.27948799999 0.28751761189820735
 1.2885383311919998 102276.94593599999 0.30748418922476806
 1.3671812152799998 102290.27817599999 0.32740284676574494
@@ -111,7 +115,7 @@ _adsorp_amount
 loop_
 _desorp_pressure
 _desorp_p0
-_desorp_amount
+_desorp_loading
 100545.75457199999 101378.35295999999 146.4891321231109
 98737.23621599999 101389.01875199999 144.0881856247253
 96441.02452079998 101382.35263199998 142.97060809657106
