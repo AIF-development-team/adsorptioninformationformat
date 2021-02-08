@@ -2,3 +2,4 @@ gemmi
 pandas
 numpy
 matplotlib
+xlrd
