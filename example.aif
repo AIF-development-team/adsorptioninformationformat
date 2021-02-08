@@ -1,13 +1,18 @@
 # comment goes here
 data_data_raw2aif
-_exptl_operator Nicole
-_exptl_date 2009-09-17
-_exptl_instrument Autosorb
+_exptl_operator 'Nicole'
+_exptl_date 2009-09-17T19:56:00
+_exptl_instrument 'Autosorb Station 1'
 _exptl_adsorptive Nitrogen
 _exptl_temperature 77.3
 _exptl_sample_mass 0.0339
-_sample_id nk_DUT-6_LP_N2_114pkt
-_sample_material_id DUT-6
+_sample_id 'nk_DUT-6_LP_N2_114pkt'
+_sample_material_id 'DUT-6'
+_units_temperature K
+_units_pressure Pa
+_units_mass g
+_units_loading mmol/g
+
 loop_
 _adsorp_pressure
 _adsorp_p0

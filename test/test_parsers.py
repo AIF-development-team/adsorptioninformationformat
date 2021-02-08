@@ -41,7 +41,7 @@ mic_data = [
 def test_bel_parser():
     for id, file in bel_data:
         p = subprocess.run(
-            "python raw2aif_update.py ./test/database/"+file+" BELSORP-max "+id,
+            "python raw2aif.py ./test/database/"+file+" BELSORP-max "+id,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True
@@ -56,7 +56,7 @@ def test_bel_output():
     for id, file in bel_data:
         outfile = os.path.splitext(file)[0]+'.aif'
         p = subprocess.run(
-            "python readaif.py ./test/database/"+outfile,
+            "python plotaif.py ./test/database/"+outfile,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True
@@ -70,7 +70,7 @@ def test_bel_output():
 def test_qnt_parser():
     for id, file in qnt_data:
         p = subprocess.run(
-            "python raw2aif_update.py ./test/database/"+file+" quantachrome "+id,
+            "python raw2aif.py ./test/database/"+file+" quantachrome "+id,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True
@@ -85,7 +85,7 @@ def test_qnt_output():
     for id, file in qnt_data:
         outfile = os.path.splitext(file)[0]+'.aif'
         p = subprocess.run(
-            "python readaif.py ./test/database/"+outfile,
+            "python plotaif.py ./test/database/"+outfile,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True
@@ -100,7 +100,7 @@ def test_qnt_output():
 def test_mic_parser():
     for id, file in mic_data:
         p = subprocess.run(
-            "python raw2aif_update.py ./test/database/"+file+" micromeritics "+id,
+            "python raw2aif.py ./test/database/"+file+" micromeritics "+id,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True
@@ -115,7 +115,7 @@ def test_mic_output():
     for id, file in mic_data:
         outfile = os.path.splitext(file)[0]+'.aif'
         p = subprocess.run(
-            "python readaif.py ./test/database/"+outfile,
+            "python plotaif.py ./test/database/"+outfile,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True
