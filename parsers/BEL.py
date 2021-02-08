@@ -1,14 +1,14 @@
 from datetime import datetime
 import numpy as np
+import pandas as pd
 
 # from PyGAPS https://github.com/pauliacomi/pyGAPS/blob/develop/src/pygaps/parsing/bel.py
 # Adapted from the work of https://github.com/pauliacomi
 
 _FIELDS = {
     'material': {
-        # TODO Are we sure that comment1 is always the material?
         'text': ['comment1'],
-        'name': 'material',
+        'name': 'sample_id',
     },
     'adsorbate': {
         'text': ['adsorptive'],
@@ -77,7 +77,7 @@ def parse(path):
     data_ads = []
     data_des = []
 
-    with open(path) as file:
+    with open(path, encoding="ISO-8859-1") as file:
         line = file.readline().rstrip()
         while line:
             values = line.split('\t')
@@ -98,37 +98,20 @@ def parse(path):
 
                         if txt == 'loading':
                             material_info['loading_basis'] = 'molar'
-                            for (u, c) in (
-                                ('/mmol', 'mmol'),
-                                ('/mol', 'mol'),
-                                ('/ml(STP)', 'cm3(STP)'),
-                                ('/cm3(STP)', 'cm3(STP)'),
-                            ):
-                                if u in h:
-                                    material_info['loading_unit'] = c
-                            material_info['adsorbent_basis'] = 'mass'
-                            for (u, c) in (
-                                ('g-1', 'g'),
-                                ('kg-1', 'kg'),
-                            ):
-                                if u in h:
-                                    material_info['adsorbent_unit'] = c
+                            material_info['loading_unit'] = h.split("/")[-1]
+                        
 
+           
                         if txt == 'pressure':
                             material_info['pressure_mode'] = 'absolute'
-                            for (u, c) in (
-                                ('/kPa', 'kPa'),
-                                ('/Pa', 'Pa'),
-                            ):
-                                if u in h:
-                                    material_info['pressure_unit'] = c
+                            material_info['pressure_unit'] = h.split("/")[-1]
 
                     # read adsorption section
                     line = file.readline()  # firstline
                     while not line.startswith('0'):
                         data_ads.append(list(map(float, line.split())))
                         line = file.readline()
-                    data_ads = np.array(data_ads).T
+                    data_ads = np.array(data_ads)
 
                 elif values[0].strip().lower().startswith('desorption data'):
                     file.readline()  # header - discard
@@ -136,7 +119,7 @@ def parse(path):
                     while not line.startswith('0'):
                         data_des.append(list(map(float, line.split())))
                         line = file.readline()
-                    data_des = np.array(data_des).T
+                    data_des = np.array(data_des)
 
                 else:
                     continue
@@ -156,10 +139,19 @@ def parse(path):
                 if 'Meas. Temp./K:' in values:
                     material_info["temperature_unit"] = "K"
 
+                if 'Sample weight/g:' in values:
+                    material_info["adsorbent_unit"] = "g"
+
         material_info['date'] = datetime.strptime(
             material_info['date'], r'%y/%m/%d'
         ).isoformat()
         material_info['apparatus'] = 'BEL ' + material_info["serialnumber"]
+
+        # create pandas dataframe of adsorption and desorption data
+        data_ads = pd.DataFrame(data_ads, columns=columns)
+        # exception if desorption is empty
+        if len(data_des) > 0:
+            data_des = pd.DataFrame(data_des, columns=columns)
 
         # TODO deal with units
         # pressure from Torr to Pa
@@ -180,5 +172,4 @@ def parse(path):
         #              ] = data_des[columns.index('loading')] / 22.414
 
         #alternatively lets define the units in the AIF file so that we dont alter information from the raw data file
-        
-    return material_info, columns, data_ads, data_des
+    return material_info, data_ads, data_des

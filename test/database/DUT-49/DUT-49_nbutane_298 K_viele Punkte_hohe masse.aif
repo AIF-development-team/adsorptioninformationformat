@@ -10,7 +10,7 @@ _sample_material_id 'DUT-49'
 _units_temperature K
 _units_pressure kPa
 _units_mass g
-_units_loading cm3(STP)/g
+_units_loading 'ml(STP) g-1'
 
 loop_
 _adsorp_pressure

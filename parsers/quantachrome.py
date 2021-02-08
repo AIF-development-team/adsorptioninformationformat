@@ -1,13 +1,14 @@
-"""Parse Quantachrome xls output files."""
+"""Parse Quantachrome output files."""
 
 import numpy as np
+import pandas as pd
 import re
 import dateutil.parser
 
 _FIELDS = {
     'material': {
         'text': ['Sample ID'],
-        'name': 'material',
+        'name': 'sample_id',
     },
     'adsorbate': {
         'text': ['Analysis gas'],
@@ -109,50 +110,45 @@ def parse(path):
     # get the adsorption data
 
     for index, line in enumerate(lines):
-        if index == ads_start - 4:
-            file_headers = re.split(r"\s{2,}", line.strip())
-            print(file_headers)
-            for h in file_headers:
-                txt = next((
-                    _FIELDS['isotherm_data'][a]
-                    for a in _FIELDS['isotherm_data']
-                    if h.lower().startswith(a)
-                ), h)
-                print(txt)
-                columns.append(txt)
 
+        #get column names
+
+        if index == ads_start - 4:
+            for col in re.split(r'\s{2,}', line):
+                if col != '':
+                    columns.append(col.strip("\n"))
+        
+        # get units
         elif index == ads_start - 2:
-            units = re.split(r"\s{2,}", line)
-            # TODO handle units
+            material_info['pressure_unit'] = line.split()[0]
+            material_info['loading_unit'] = line.split()[2]
 
         elif index >= ads_start:
             raw_data.append(list(map(float, line.split())))
 
-    data = np.array(raw_data).T
+    data = np.array(raw_data,dtype=float)
+    df = pd.DataFrame(data, columns=columns)
 
     # change units to standard units
-    material_info['mass'] = material_info['mass'].split()[0]
-    material_info['temperature'] = material_info['temperature'].split()[0]
-    material_info['temperature_unit'] = "K"
-    material_info['pressure_unit'] = "Pa"
-    material_info['loading_unit'] = "mmol"
-    material_info['adsorbent_unit'] = "g"
+    material_info['adsorbent_unit'] = material_info['mass'].split()[-1]
+    material_info['mass'] = float(material_info['mass'].split()[0])
+    material_info['temperature_unit'] = material_info['temperature'].split()[-1]
+    material_info['temperature'] = float(material_info['temperature'].split()[0])
+   
     material_info['date'] = dateutil.parser.parse(material_info['date']
                                                   ).isoformat()
 
-    # pressure from Torr to Pa
-    data[0] = data[0] * 133.3224
-    data[1] = data[1] * 133.3224
-
-    # amount adsorbed from cc to mmol/g
-    data[2] = data[2] / float(material_info['mass']) / 22.414
 
     # split ads / desorption branches
-    turning_point = np.argmax(data[0]) + 1
+    turning_point = df["Press"].argmax()+1
+
+    # santize vital column names for use with raw2aif
+    df.columns = df.columns.str.replace('Press','pressure')
+    df.columns = df.columns.str.replace('P0','pressure_saturation')
+    df.columns = df.columns.str.replace('Volume @ STP','loading')
 
     return (
         material_info,
-        columns,
-        data[:, :turning_point],
-        data[:, turning_point:],
+        df[:turning_point],
+        df[turning_point:]
     )

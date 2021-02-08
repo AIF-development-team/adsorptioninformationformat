@@ -12,13 +12,14 @@ import dateutil.parser
 
 import numpy as np
 import xlrd
+import pandas as pd
 
 _NUMBER_REGEX = re.compile(r'^(-)?\d+(.|,)?\d+')
 
 _FIELDS = {
     'material': {
         'text': ['sample:', 'echantillon:'],
-        'name': 'material',
+        'name': 'sample_id',
         'row': 0,
         'column': 1,
         'type': 'string'
@@ -56,7 +57,7 @@ _FIELDS = {
         'name': 'mass',
         'row': 0,
         'column': 1,
-        'type': 'number'
+        'type': 'string'
     },
     'apparatus': {
         'text': ['micromeritics instrument'],
@@ -142,22 +143,30 @@ def parse(path):
         data['errors'] = errors
     _check(data, path)
 
+    # get units of mass
+    data["adsorbent_unit"]  = data["mass"].split()[-1]
+    data["mass"] = float(data["mass"].split()[0])
+
     # convert to expected format
     data["temperature_unit"] = "K"
     data['date'] = dateutil.parser.parse(data['date']).isoformat()
     columns = [
         c for c in _FIELDS['isotherm_data']['labels'].values() if c in data
     ]
-    data_arr = np.array([data.pop(c) for c in columns])
+    data_arr = np.array([data.pop(c) for c in columns]).T
+
+
+    # create pandas dataframe of adsorption and desorption data
+    data_arr = pd.DataFrame(data_arr, columns=columns)
+
 
     # split ads / desorption branches
-    turning_point = np.argmax(data_arr[columns.index('pressure')]) + 1
+    turning_point = data_arr["pressure"].argmax()+1
 
     return (
         data,
-        columns,
-        data_arr[:,:turning_point],
-        data_arr[:,turning_point:],
+        data_arr[:turning_point],
+        data_arr[turning_point:]
     )
 
 
@@ -256,19 +265,8 @@ def _assign_data(item, field, data, points):
         data['time'] = _convert_time(points)[1:]
     elif field['labels'][name] == 'loading':
         data['loading'] = points
-        for (u, c) in (
-            ('(mmol/', 'mmol'),
-            ('(mol/', 'mol'),
-            ('(cm³/', 'cm3(STP)'),
-        ):
-            if u in item:
-                data['loading_unit'] = c
-        for (u, c) in (
-            ('/g', 'g'),
-            ('/kg', 'kg'),
-        ):
-            if u in item:
-                data['adsorbent_unit'] = c
+        data["loading_unit"] = re.split(r'\(|\)', item)[1]
+        
     elif field['labels'][name] == 'pressure':
         data['pressure'] = points
         for (u, c) in (
@@ -321,3 +319,6 @@ def _check(data, path):
     if 'errors' in data:
         print('Report file contains warnings:')
         print('\n'.join(data['errors']))
+
+
+parse("test/database/micromeritics/Sample_A.xls")
