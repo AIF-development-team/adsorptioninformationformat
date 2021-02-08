@@ -1,5 +1,5 @@
 import sys
-
+import os
 from gemmi import cif
 
 filename = sys.argv[1]
@@ -29,7 +29,10 @@ d.add_new_block('data_raw2aif')
 block = d.sole_block()
 
 # write metadata
-block.set_pair('_exptl_operator', data_meta["user"])
+if data_meta["user"] == '':
+    block.set_pair('_exptl_operator', 'unknown')
+else:
+    block.set_pair('_exptl_operator', "'"+data_meta["user"]+"'")
 block.set_pair('_exptl_date', data_meta["date"])
 block.set_pair('_exptl_instrument', "'" + data_meta["apparatus"] + "'")
 block.set_pair('_exptl_adsorptive', data_meta["adsorbate"])
@@ -37,7 +40,7 @@ block.set_pair('_exptl_temperature', str(data_meta["temperature"]))
 block.set_pair('_exptl_sample_mass', str(data_meta["mass"]))
 
 block.set_pair('_sample_id', "'" + data_meta["material"] + "'")
-block.set_pair('_sample_material_id', material_id)
+block.set_pair('_sample_material_id', "'" + material_id + "'")
 
 block.set_pair('_units_temperature', data_meta["temperature_unit"])
 block.set_pair('_units_pressure', data_meta["pressure_unit"])
@@ -68,5 +71,5 @@ if len(data_des > 0):
         list(data_des[l_index].astype(str))
     ])
 
-outputfilename = filename + ".aif"
+outputfilename = os.path.splitext(filename)[0]+'.aif'
 d.write_file(outputfilename)

@@ -156,8 +156,8 @@ def parse(path):
     return (
         data,
         columns,
-        data_arr[:][:turning_point],
-        data_arr[:][turning_point:],
+        data_arr[:,:turning_point],
+        data_arr[:,turning_point:],
     )
 
 

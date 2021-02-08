@@ -164,19 +164,21 @@ def parse(path):
         # TODO deal with units
         # pressure from Torr to Pa
         # amount adsorbed from mL/g to mmol/g
-        data_ads[columns.index('pressure')
-                 ] = data_ads[columns.index('pressure')] * 1e3
-        data_ads[columns.index('pressure_saturation')
-                 ] = data_ads[columns.index('pressure_saturation')] * 1e3
-        data_ads[columns.index('loading')
-                 ] = data_ads[columns.index('loading')] / 22.414
+        # data_ads[columns.index('pressure')
+        #          ] = data_ads[columns.index('pressure')] * 1e3
+        # data_ads[columns.index('pressure_saturation')
+        #          ] = data_ads[columns.index('pressure_saturation')] * 1e3
+        # data_ads[columns.index('loading')
+        #          ] = data_ads[columns.index('loading')] / 22.414
 
-        if len(data_des) > 0:
-            data_des[columns.index('pressure')
-                     ] = data_des[columns.index('pressure')] * 1e3
-            data_des[columns.index('pressure_saturation')
-                     ] = data_des[columns.index('pressure_saturation')] * 1e3
-            data_des[columns.index('loading')
-                     ] = data_des[columns.index('loading')] / 22.414
+        # if len(data_des) > 0:
+        #     data_des[columns.index('pressure')
+        #              ] = data_des[columns.index('pressure')] * 1e3
+        #     data_des[columns.index('pressure_saturation')
+        #              ] = data_des[columns.index('pressure_saturation')] * 1e3
+        #     data_des[columns.index('loading')
+        #              ] = data_des[columns.index('loading')] / 22.414
 
+        #alternatively lets define the units in the AIF file so that we dont alter information from the raw data file
+        
     return material_info, columns, data_ads, data_des
