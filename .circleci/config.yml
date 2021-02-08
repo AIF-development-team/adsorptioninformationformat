@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/test
+    working_directory: ~/adsorptioninformationformat/test
     docker:
       - image: circleci/python:3.8.0
     steps:
@@ -24,7 +24,7 @@ jobs:
             source activate myenv
             conda install pytest
             pip install -r requirements.txt
-            python -m pytest ~/test/test_parsers.py
+            python -m pytest ~/adsorptioninformationformat/test/test_parsers.py
       - store_artifacts:
           path: /tmp/test-reports
-          destination: ~/test
+          destination: ~/adsorptioninformationformat/test
