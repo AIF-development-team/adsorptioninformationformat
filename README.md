@@ -13,7 +13,7 @@ The current dictionary of data items used by adsorption information files can be
 | _exptl_temperature | temperature of the experiment (float)    | 
 | _exptl_sample_mass | mass of the sample (float)   | 
 | _sample_id | unique identifying code used by the operator (string)  | 
-| _sample_material_name | designated name for the material (string)   | 
+| _sample_material_id | designated name for the material (string)   | 
 | _units_temperature | units of temperature (string)  | 
 | _units_pressure | units of pressure (string)   | 
 | _units_mass | units of mass (string)  | 

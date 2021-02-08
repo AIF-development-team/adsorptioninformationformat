@@ -14,6 +14,9 @@ if filetype == "BELSORP-max":
 elif filetype == "BEL-csv":
     from parsers import BEL_csv
     data_meta, data_ads, data_des = BEL_csv.parse(filename)
+elif filetype == "BEL-csv_JIS":
+    from parsers import BEL_csv_JIS
+    data_meta, data_ads, data_des = BEL_csv_JIS.parse(filename)
 elif filetype == "quantachrome":
     from parsers import quantachrome
     data_meta, data_ads, data_des = quantachrome.parse(filename)

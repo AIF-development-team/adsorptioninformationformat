@@ -6,8 +6,8 @@ bel_data = [
     ("Sample_E", "bel/Sample_E.DAT"),
     ('DUT-13', "DUT-13/BF010_DUT-13_CH4_111K_run2.DAT"),
     ('DUT-13', "DUT-13/BF010_DUT-13_CH4_111K.DAT"),
-    ("DUT-49", r"DUT-49/DUT-49_nbutane_273\ K_viele\ Punkte.DAT"),
-    ("DUT-49", r"DUT-49/DUT-49_nbutane_298\ K_viele\ Punkte_hohe\ masse.DAT"),
+    ("DUT-49", "DUT-49/DUT-49_nbutane_273K_viele_Punkte.DAT"),
+    ("DUT-49", "DUT-49/DUT-49_nbutane_298K_viele_Punkte_hohe_masse.DAT"),
     ("DUT-49", "DUT-49/DUT-49-SKDM017_SCD5dEtOH+act150C22h_N277K_run1.DAT"),
     ("DUT-49", "DUT-49/DUT-49-SKDM019_SCDEtOH_Act.150C_Ar_87K.DAT"),
     ("DUT-67", "DUT-67/DUT-67_H2O_298K.DAT"),
@@ -39,9 +39,14 @@ mic_data = [
 ]
 
 BELcsv_data = [
-    ("DUT-32", r"DUT-32/RGE-343-DUT32-7dCO2_Nitrogen\ \(BelMax\).csv")
+    ("DUT-32", "DUT-32/RGE-343-DUT32-7dCO2_Nitrogen\(BelMax\).csv")
 ]
 
+BELcsv_JIS_data = [
+    ("DMOF", "DMOF/ASch082C_Zntmbdcdabco_C2H6_Exp190819a.csv"),
+    ("DMOF", "DMOF/ASch082B_Zndmbdcdabco_C2H4_Exp191004a_weight\ correction.csv"),
+    ("DMOF", "DMOF/Asch065B_C2H6_298K_Exp190327a.csv")
+]
 
 def test_bel_parser():
     for id, file in bel_data:
@@ -160,6 +165,34 @@ def test_BELcsv_output():
                 print(line)
             raise Exception(file)
 
+def test_BELcsv_JIS_parser():
+    for id, file in BELcsv_JIS_data:
+        p = subprocess.run(
+            "python raw2aif.py ./test/database/"+file+" BEL-csv_JIS "+id,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True
+        )
+
+        if p.stderr:
+            for line in p.stderr.decode(encoding='utf-8').split('\n'):
+                print(line)
+            raise Exception(file)
+
+def test_BELcsv_JIS_output():
+    for id, file in BELcsv_JIS_data:
+        outfile = os.path.splitext(file)[0]+'.aif'
+        p = subprocess.run(
+            "python plotaif.py ./test/database/"+outfile,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True
+        )
+
+        if p.stderr:
+            for line in p.stderr.decode(encoding='utf-8').split('\n'):
+                print(line)
+            raise Exception(file)
 
 
 # subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
@@ -170,5 +203,5 @@ def test_BELcsv_output():
 # test_qnt_output()
 # test_mic_parser()
 # test_mic_output()
-# test_BELcsv_parser()
-# test_BELcsv_output()
+# test_BELcsv_JIS_parser()
+# test_BELcsv_JIS_output()

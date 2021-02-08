@@ -5,7 +5,7 @@ _exptl_instrument 'BEL 00218'
 _exptl_adsorptive Ar
 _exptl_temperature 87.00
 _exptl_sample_mass 0.01040
-_sample_id 'SKDM019_SCDEtOH_Act.150ï¿½C_Ar_87K'
+_sample_id 'SKDM019_SCDEtOH_Act.150�C_Ar_87K'
 _sample_material_id 'DUT-49'
 _units_temperature K
 _units_pressure kPa

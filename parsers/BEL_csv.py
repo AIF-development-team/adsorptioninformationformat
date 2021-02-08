@@ -25,7 +25,7 @@ def parse(path):
             data_meta["date"] = date.isoformat()
         if "Serial number" in line:
             instrument = line.split(',')[-1]
-            data_meta["apparatus"] = instrument.strip("\n")
+            data_meta["apparatus"] = 'BEL ' + instrument.strip("\n")
         if "Adsorptive," in line:
             adsorptive = line.split(',')[-1]
             data_meta["adsorbate"] = adsorptive.strip("\n")

@@ -6,7 +6,7 @@ import pandas as pd
 # for parsing csv files exported by BEL software (JIS text encoding)
 
 def parse(path):
-    with open(path, "r", encoding="UTF-8") as fp:
+    with open(path, "r", encoding="shift_jis") as fp:
         lines = fp.readlines()
 
 
@@ -16,28 +16,28 @@ def parse(path):
     data = []
 
     for index, line in enumerate(lines):
-        if "COMMENT2" in line:
+        if "コメント２" in line:
             operator = line.split(',')[-1]
             data_meta["user"] = operator.strip("\n")
-        if "Date of measurement" in line:
+        if "測定日" in line:
             date = line.split(',')[-1]
             date = dateutil.parser.parse(date.split(':')[-1], yearfirst=True)
             data_meta["date"] = date.isoformat()
-        if "Serial number" in line:
+        if "シリアルナンバー" in line:
             instrument = line.split(',')[-1]
-            data_meta["apparatus"] = "BEL "+instrument.strip("\n")
-        if "Adsorptive," in line:
+            data_meta["apparatus"] = 'BEL ' + instrument.strip("\n")
+        if "吸着質名称," in line:
             adsorptive = line.split(',')[-1]
             data_meta["adsorbate"] = adsorptive.strip("\n")
-        if "Adsorption temperature" in line:
+        if "吸着温度" in line:
             temperature = float(line.split(',')[1])
             data_meta["temperature"] = temperature
             data_meta["temperature_unit"] = line.split(',')[-1].strip("[]\n")
-        if "Sample weight" in line:
+        if "サンプル質量" in line:
             sample_mass = float(line.split(',')[1])
             data_meta["mass"] = sample_mass
             data_meta["adsorbent_unit"] = line.split(',')[-1].strip("[]\n")
-        if "COMMENT1" in line:
+        if "コメント１" in line:
             sample_id = line.split(',')[-1]
             data_meta["sample_id"] = sample_id.strip("\n")
 
@@ -70,7 +70,8 @@ def parse(path):
     # santize vital column names for use with raw2aif
     df.columns = df.columns.str.replace('pe','pressure')
     df.columns = df.columns.str.replace('Va','loading')
-    print(data_meta)
+    df.columns = df.columns.str.replace('p0','pressure_saturation')
+    #if two or more loadings are present save the last column
+    if isinstance(df["loading"], pd.DataFrame):
+        df = df.loc[:, ~df.columns.duplicated(keep='last')]
     return data_meta, df[:turning_point], df[turning_point:]
-
-parse("test/database/DUT-32/RGE-343-DUT32-7dCO2_Nitrogen (BelMax).csv")
