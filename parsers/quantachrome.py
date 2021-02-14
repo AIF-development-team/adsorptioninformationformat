@@ -7,51 +7,51 @@ import dateutil.parser
 
 _FIELDS = {
     'material': {
-        'text': ['Sample ID'],
+        'text': ['sample id'],
         'name': 'sample_id',
     },
     'adsorbate': {
-        'text': ['Analysis gas'],
+        'text': ['analysis gas'],
         'name': 'adsorbate',
     },
     'temperature': {
-        'text': ['Bath temp.'],
+        'text': ['bath temp'],
         'name': 'temperature',
     },
     'user': {
-        'text': ['Operator'],
+        'text': ['operator'],
         'name': 'user',
     },
     'apparatus': {
-        'text': ['Instrument:'],
+        'text': ['instrument:'],
         'name': 'apparatus',
     },
     'mass': {
-        'text': ['Sample Weight'],
+        'text': ['sample weight'],
         'name': 'mass',
     },
     'date': {
-        'text': ['Date'],
+        'text': ['date'],
         'name': 'date',
     },
     'sample_description': {
-        'text': ['Sample Desc'],
+        'text': ['sample desc'],
         'name': 'sample_description',
     },
     'analysis_time': {
-        'text': ['Analysis Time'],
+        'text': ['analysis time'],
         'name': 'analysis_time',
     },
     'comment': {
-        'text': ['Comment'],
+        'text': ['comment'],
         'name': 'comment',
     },
     'time_outgas': {
-        'text': ['Outgas Time'],
+        'text': ['outgas time'],
         'name': 'time_outgas',
     },
     'nonideality': {
-        'text': ['Non-ideality'],
+        'text': ['non-ideality'],
         'name': 'nonideality',
     },
     'isotherm_data': {
@@ -78,6 +78,8 @@ def parse(path):
     raw_data = []
 
     for index, line in enumerate(lines):
+        #set to lower case as different versions of outfiles will have differents cases in metadata
+        line = line.lower()
 
         if any(
             v for k, v in _FIELDS.items()
@@ -87,7 +89,7 @@ def parse(path):
 
             # TODO Are quantachrome files always saved with these mistakes?
             for i, d in enumerate(data):
-                for mistake in ["Operator:", "Filename:", "Comment:"]:
+                for mistake in ["operator:", "filename:", "comment:"]:
                     if re.search(r"\w+" + mistake, d):
                         data[i] = d.split(mistake)[0]
                         data.insert(i + 1, mistake)
@@ -104,7 +106,7 @@ def parse(path):
                     else:
                         material_info[name] = ' '
 
-        if "Press" in line:
+        if "press" in line:
             ads_start = (index + 4)
 
     # get the adsorption data
@@ -129,7 +131,7 @@ def parse(path):
     data = np.array(raw_data,dtype=float)
     df = pd.DataFrame(data, columns=columns)
 
-    # change units to standard units
+    # get units
     material_info['adsorbent_unit'] = material_info['mass'].split()[-1]
     material_info['mass'] = float(material_info['mass'].split()[0])
     material_info['temperature_unit'] = material_info['temperature'].split()[-1]
@@ -152,3 +154,4 @@ def parse(path):
         df[:turning_point],
         df[turning_point:]
     )
+

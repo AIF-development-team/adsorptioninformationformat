@@ -25,6 +25,7 @@ bel_data = [
 
 qnt_data = [
     ("DUT-6", r"DUT-6/NK_DUT-6_LP_N2_114PKT\ \(Raw\ Analysis\ Data\).txt"),
+    ("DUT-13", r"DUT-13/BF001\ \(Raw\ Analysis\ Data\).txt"),
     ("DUT-60", r"DUT-60/ih_DUT-60_183b\ \(Raw\ Analysis\ Data\).txt"),
     ("DUT-75", r"DUT-75/US_540_DUT75_N2\ \(Raw\ Analysis\ Data\).txt"),
     (
@@ -193,7 +194,6 @@ def test_BELcsv_JIS_output():
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
             raise Exception(file)
-
 
 # subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
 # subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
