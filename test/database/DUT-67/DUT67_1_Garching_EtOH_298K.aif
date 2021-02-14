@@ -1,0 +1,52 @@
+data_data_raw2aifv003
+_exptl_operator 'Volodymyr'
+_exptl_date 2017-05-18T00:00:00
+_exptl_instrument 'BEL 00348'
+_exptl_adsorptive EtOH
+_exptl_temperature 298.00
+_exptl_sample_mass 0.08570
+_sample_id 'DUT-67Zr_EtOH'
+_sample_material_id 'DUT-67'
+_units_temperature K
+_units_pressure kPa
+_units_mass g
+_units_loading 'ml(STP) g-1'
+
+loop_
+_adsorp_pressure
+_adsorp_p0
+_adsorp_loading
+0.016554 7.89 33.308
+0.13067 7.89 66.04
+0.32689 7.89 87.983
+0.46654 7.89 110.57
+0.66388 7.89 144.75
+0.95883 7.89 155.71
+1.7863 7.89 165.59
+3.1838 7.89 173.5
+5.372 7.89 179.28
+6.9906 7.89 182.74
+7.6721 7.89 187.04
+
+loop_
+_desorp_pressure
+_desorp_p0
+_desorp_loading
+5.6712 7.89 180.31
+3.7131 7.89 176.16
+2.7508 7.89 172.45
+2.1779 7.89 169.31
+1.7924 7.89 166.66
+1.5103 7.89 164.43
+1.3184 7.89 162.48
+1.1758 7.89 160.71
+1.0644 7.89 159.13
+0.85677 7.89 155.02
+0.67418 7.89 148.44
+0.49079 7.89 125.9
+0.48033 7.89 123.08
+0.32065 7.89 92.68
+0.28304 7.89 86.39
+0.28065 7.89 86.002
+0.091149 7.89 63.978
+0.082325 7.89 62.696
