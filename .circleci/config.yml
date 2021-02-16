@@ -15,7 +15,7 @@ jobs:
           shell: powershell.exe
           command: |
             docker info
-            docker run -v ${PWD}:C:\src -w C:\src python:3.9-windowsservercore-1809 ./build.ps1
+            docker run -v ${PWD}:C:\src -w C:\src python:3.9-windowsservercore-1809 powershell build.ps1
   test:
     working_directory: ~/adsorptioninformationformat
     docker:
