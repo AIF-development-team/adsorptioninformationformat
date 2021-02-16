@@ -16,7 +16,7 @@ jobs:
           command: |
             docker info
             docker run hello-world:nanoserver-1809
-  build:
+  test:
     working_directory: ~/adsorptioninformationformat
     docker:
       - image: circleci/python:3.8.0
@@ -44,3 +44,10 @@ jobs:
       - store_artifacts:
           path: /tmp/test-reports
           destination: ~/adsorptioninformationformat
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - build_win
