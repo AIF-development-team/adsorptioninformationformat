@@ -9,13 +9,14 @@ jobs:
       shell: powershell.exe
     steps:
       - checkout
-      - run: systeminfo
       - run:
           name: "Check docker"
           shell: powershell.exe
           command: |
             docker info
             docker run -v ${PWD}:C:\src -w C:\src python:3.9-windowsservercore-1809 powershell .\build.ps1
+      - store_artifacts:
+          path: ~/project/dist
   test:
     working_directory: ~/adsorptioninformationformat
     docker:
