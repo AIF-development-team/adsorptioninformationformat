@@ -15,7 +15,7 @@ jobs:
           shell: powershell.exe
           command: |
             docker info
-            docker run -v ${PWD}:C:\src -w C:\src python:3.9-windowsservercore-1809 pip install -r requirements.txt && pip install pyinstaller && pyinstaller raw2aif_gui.py
+            docker run -v ${PWD}:C:\src -w C:\src python:3.9-windowsservercore-1809 ./build.ps1
   test:
     working_directory: ~/adsorptioninformationformat
     docker:
