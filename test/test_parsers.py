@@ -40,7 +40,8 @@ mic_data = [
 ]
 
 BELcsv_data = [
-    ("DUT-32", "DUT-32/RGE-343-DUT32-7dCO2_Nitrogen\(BelMax\).csv")
+    ("DUT-32", "DUT-32/RGE-343-DUT32-7dCO2_Nitrogen\(BelMax\).csv"),
+    ("DUT-13", "DUT-13/BF-010-DUT-13-CH4-190K-run1-export.csv")
 ]
 
 BELcsv_JIS_data = [
@@ -203,5 +204,7 @@ def test_BELcsv_JIS_output():
 # test_qnt_output()
 # test_mic_parser()
 # test_mic_output()
+# test_BELcsv_parser()
+# test_BELcsv_output()
 # test_BELcsv_JIS_parser()
 # test_BELcsv_JIS_output()
