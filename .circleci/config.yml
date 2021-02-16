@@ -15,7 +15,7 @@ jobs:
           shell: powershell.exe
           command: |
             docker info
-            docker run -v ${PWD}:/src -w /src python:3.9-windowsservercore-1809 pip install -r requirements.txt
+            docker run -v ${PWD}:C:\src -w C:\src python:3.9-windowsservercore-1809 pip install -r requirements.txt
   test:
     working_directory: ~/adsorptioninformationformat
     docker:
