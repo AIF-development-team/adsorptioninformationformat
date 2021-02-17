@@ -1,5 +1,5 @@
 Install-PackageProvider -Name NuGet -Force
-Install-Module -Name VcRedist
+Install-Module -Name VcRedist -Force
 Import-Module -Name VcRedist
 $VcList = Get-VcList -Release 2019 -Architecture x64
 Save-VcRedist -Path C:\Temp\VcRedist -VcList $VcList
