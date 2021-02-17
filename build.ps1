@@ -1,3 +1,4 @@
+Install-PackageProvider -Name NuGet -Force
 Install-Module -Name VcRedist
 Import-Module -Name VcRedist
 $VcList = Get-VcList -Release 2019 -Architecture x64
