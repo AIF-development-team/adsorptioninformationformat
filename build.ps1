@@ -7,5 +7,5 @@ Save-VcRedist -Path C:\VcRedist -VcList $VcList
 Install-VcRedist -Path C:\VcRedist -VcList $VcList
 
 pip install -r requirements.txt
-pip install pyinstaller
+pip install pyinstaller gooey
 pyinstaller raw2aif_gui.spec
