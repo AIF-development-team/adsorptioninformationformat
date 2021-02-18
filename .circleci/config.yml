@@ -14,7 +14,7 @@ jobs:
           shell: powershell.exe
           command: |
             docker info
-            docker run -v ${PWD}:C:\src -w C:\src python:3.9-windowsservercore-1809 powershell .\build.ps1
+            docker run -v ${PWD}:C:\src -w C:\src python:3.8-windowsservercore-1809 powershell .\build.ps1
       - store_artifacts:
           path: ~/project/dist
   test:

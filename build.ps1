@@ -12,4 +12,4 @@ Install-VcRedist -Path C:\tmp -VcList $VcList
 pip install -r requirements.txt
 pip install pyinstaller
 pip install gooey
-pyinstaller raw2aif_gui.specT
+pyinstaller raw2aif_gui.spec

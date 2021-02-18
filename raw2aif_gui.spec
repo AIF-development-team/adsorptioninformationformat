@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['raw2aif_gui.py'],
-             pathex=['C:\\Users\\Ren\\git-projects\\jubilant-waddle'],
+             pathex=['C:\src'],
              binaries=[('C:\\Windows\\System32\\msvcp140.dll', '.')],
              datas=[],
              hiddenimports=[],
