@@ -30,7 +30,7 @@ else:
 
 # initialize aif block
 d = cif.Document()
-d.add_new_block('data_raw2aifv003')
+d.add_new_block('data_raw2aifv004')
 
 block = d.sole_block()
 

@@ -29,7 +29,7 @@ def convert(filename, material_id, filetype):
 
     # initialize aif block
     d = cif.Document()
-    d.add_new_block('data_raw2aifv003')
+    d.add_new_block('data_raw2aifv004')
 
     block = d.sole_block()
 
@@ -83,12 +83,12 @@ def convert(filename, material_id, filetype):
                 'type': 'AboutDialog',
                 'menuTitle': 'About',
                 'name': 'RAW to AIF Converter',
-                'description': 'Towards a universal file format for gas adsorption experiments',
-                'version': '0.0.3',
+                'description': 'A universal file format for gas adsorption experiments',
+                'version': '0.0.4',
                 'copyright': '2021',
                 'website': 'https://github.com/jackevansadl/adsorptioninformationfile',
                 'developer': '@jackevansadl, GUI + Compilation by @renkoh',
-                'license': 'GNU GPLv3'
+                'license': 'MIT License'
             }]
     }])
 

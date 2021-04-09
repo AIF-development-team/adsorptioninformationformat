@@ -32,6 +32,8 @@ qnt_data = [
         "DUT-23",
         r"DUT-23/NK_CU\(BIPY\)\(BTB\)_10-11_DMF-ETOH_CO2_84PKT_N2_N2\ \(Raw\ Analysis\ Data\).txt"
     ),
+    ("TEST", r"NovaWin/test.txt"),
+    ("RE-22", r"NovaWin/RE-22\ \(Raw\ Analysis\ Data\).txt")
 ]
 
 mic_data = [

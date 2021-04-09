@@ -108,7 +108,8 @@ def parse(path):
 
         if "press" in line:
             ads_start = (index + 4)
-
+        elif "p/po" in line:
+            ads_start = (index + 4)
     # get the adsorption data
 
     for index, line in enumerate(lines):
@@ -122,8 +123,12 @@ def parse(path):
         
         # get units
         elif index == ads_start - 2:
-            material_info['pressure_unit'] = line.split()[0]
-            material_info['loading_unit'] = line.split()[2]
+            if len(line.split()) == 2:
+                material_info['pressure_unit'] = line.split()[0]
+                material_info['loading_unit'] = line.split()[1]
+            else:    
+                material_info['pressure_unit'] = line.split()[0]
+                material_info['loading_unit'] = line.split()[2]
 
         elif index >= ads_start:
             raw_data.append(list(map(float, line.split())))
@@ -140,13 +145,19 @@ def parse(path):
     material_info['date'] = dateutil.parser.parse(material_info['date']
                                                   ).isoformat()
 
+    if "Press" in df.columns:
+        df.columns = df.columns.str.replace('Press','pressure')
+    elif "P/Po" in df.columns:
+        df['pressure'] = df["P/Po"]*df["Po"]
 
     # split ads / desorption branches
-    turning_point = df["Press"].argmax()+1
+    turning_point = df["pressure"].argmax()+1
 
     # santize vital column names for use with raw2aif
-    df.columns = df.columns.str.replace('Press','pressure')
-    df.columns = df.columns.str.replace('P0','pressure_saturation')
+    if "P0" in df.columns:
+        df.columns = df.columns.str.replace('P0','pressure_saturation')
+    elif "Po" in df.columns:
+        df.columns = df.columns.str.replace('Po','pressure_saturation')
     df.columns = df.columns.str.replace('Volume @ STP','loading')
 
     return (
