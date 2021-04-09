@@ -76,7 +76,7 @@ def convert(filename, material_id, filetype):
     
     d.write_file(outputfilename)
 
-@Gooey(required_cols=1, optional_cols=1, default_size = (300, 600),  
+@Gooey(required_cols=1, optional_cols=1, default_size = (300, 675),  
     menu=[{
         'name': 'Help',
         'items': [{
