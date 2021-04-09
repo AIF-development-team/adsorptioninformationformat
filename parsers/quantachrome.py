@@ -68,7 +68,7 @@ _FIELDS = {
 def parse(path):
 
     # load datafile
-    with open(path, "r", encoding="ISO-8859-1") as fp:
+    with open(path, "r", encoding="ISO-8859-1", errors='ignore') as fp:
         lines = fp.readlines()
 
     # get experimental and material parameters
