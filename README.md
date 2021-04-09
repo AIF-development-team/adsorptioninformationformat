@@ -31,6 +31,20 @@ A simple program was produced for windows computers to facilitate the production
 The current versions of this program can be found on the [release page](https://github.com/jackevansadl/adsorptioninformationformat/releases),
 of this repository.
 
+The steps to using this program is straightforward. Once opened browse to the location of an adsorption raw file.
+
+![screenshot of home window](/screenshots/screenshot_1.png)
+
+Then once you have located a raw data file and labelled a material ID press the *start* button to convert the data to AIF format.
+
+![screenshot of home window with information filled in](/screenshots/screenshot_2.png)
+
+The conversion is successful. From here you can restart the program to convert another file.
+
+![screenshot of a successful conversion](/screenshots/screenshot_3.png)
+
+If there are any errors please contact the Jack Evans with the data file that was unable to be converted.
+
 ## Citation
 Jack D. Evans, Volodymyr Bon, Irena Senkovska, and Stefan Kaskel, *preprint*, **2021**, preprint.
   DOI: [10.26434/chemrxiv.13562798](https://dx.doi.org/10.26434/chemrxiv.13562798)
