@@ -1,11 +1,11 @@
                        Quantachrome NovaWin - Data Acquisition and Reduction
                                         for NOVA instruments
-                                ©1994-2010, Quantachrome Instruments
+                                ï¿½1994-2010, Quantachrome Instruments
                                             version 11.0
 
 Analysis                                          Report
 Operator:Geisa/Pierre         Date:2019/04/09     Operator:1                    Date:4/8/2021
-Sample ID:  FL_A_41_2              Filename:      C:\Users\lipel\Google Drive\Laboratório\Quím-Mat\Projetos\Finalizados\Dados\BET\FL_A_41_2.qps
+Sample ID:  FL_A_41_2              Filename:      C:\Use
 Sample Desc:                       Comment:       Pre-Trat 180oC , 20OC/20min hold 12h
 Sample weight: 0.0142 g            Sample Volume: 0 cc
 Outgas Time:   3.0 hrs             OutgasTemp:    300.0 C

@@ -91,7 +91,7 @@ def test_qnt_parser():
         )
 
         if p.stderr:
-            for line in p.stderr.decode(encoding="ISO-8859-1").split('\n'):
+            for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
             raise Exception(file)
 
@@ -106,7 +106,7 @@ def test_qnt_output():
         )
 
         if p.stderr:
-            for line in p.stderr.decode(encoding="ISO-8859-1").split('\n'):
+            for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
             raise Exception(file)
 
