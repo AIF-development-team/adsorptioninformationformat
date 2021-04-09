@@ -28,7 +28,7 @@ The current dictionary of data items used by adsorption information files can be
 ## raw2aif converter
 A simple program was produced for windows computers to facilitate the production of adsorption information files from raw analysis text files exported by Quantachrome software (*.txt*) and the Belsorb software raw data files (*.DAT*) and xls files exported by Micromeritics software (*.xls*).
 
-The current versions of this program can be found on the [release page](https://github.com/jackevansadl/adsorptioninformationformat/releases),
+The current versions of this program can be found on the [release page](https://github.com/jackevansadl/adsorptioninformationformat/releases/tag/v0.0.4),
 of this repository.
 
 The steps to using this program is straightforward. Once opened browse to the location of an adsorption raw file.
