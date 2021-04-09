@@ -32,7 +32,7 @@ qnt_data = [
         "DUT-23",
         r"DUT-23/NK_CU\(BIPY\)\(BTB\)_10-11_DMF-ETOH_CO2_84PKT_N2_N2\ \(Raw\ Analysis\ Data\).txt"
     ),
-    ("TEST", r"NovaWin/test.txt"),
+    ("TEST", "NovaWin/test.txt"),
     ("RE-22", r"NovaWin/RE-22\ \(Raw\ Analysis\ Data\).txt")
 ]
 
@@ -91,7 +91,7 @@ def test_qnt_parser():
         )
 
         if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
+            for line in p.stderr.decode(encoding="ISO-8859-1").split('\n'):
                 print(line)
             raise Exception(file)
 
@@ -106,7 +106,7 @@ def test_qnt_output():
         )
 
         if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
+            for line in p.stderr.decode(encoding="ISO-8859-1").split('\n'):
                 print(line)
             raise Exception(file)
 
