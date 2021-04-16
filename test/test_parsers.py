@@ -38,7 +38,7 @@ qnt_data = [
 
 mic_data = [
     ("Sample A", "micromeritics/Sample_A.xls"),
-    #("Sample B", "micromeritics/Sample_B.xls"),
+    ("Sample C", "micromeritics/Sample_C.xls"),
 ]
 
 BELcsv_data = [

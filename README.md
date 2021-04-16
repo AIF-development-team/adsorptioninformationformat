@@ -12,6 +12,7 @@ The current dictionary of data items used by adsorption information files can be
 | _exptl_adsorptive |  name of the adsorptive (string)    | 
 | _exptl_temperature | temperature of the experiment (float)    | 
 | _exptl_sample_mass | mass of the sample (float)   | 
+| _exptl_p0	| saturation pressure of the experiment at the temperature of the experiment (float) |
 | _sample_id | unique identifying code used by the operator (string)  | 
 | _sample_material_id | designated name for the material (string)   | 
 | _units_temperature | units of temperature (string)  | 
@@ -46,6 +47,6 @@ The conversion is successful. From here you can restart the program to convert a
 If there are any errors please contact the Jack Evans with the data file that was unable to be converted.
 
 ## Citation
-Jack D. Evans, Volodymyr Bon, Irena Senkovska, and Stefan Kaskel, *preprint*, **2021**, preprint.
-  DOI: [10.26434/chemrxiv.13562798](https://dx.doi.org/10.26434/chemrxiv.13562798)
+Jack D. Evans, Volodymyr Bon, Irena Senkovska, and Stefan Kaskel, *Langmuir*, **2021**.
+[10.1021/acs.langmuir.1c00122](https://dx.doi.org/10.1021/acs.langmuir.1c00122)
   
