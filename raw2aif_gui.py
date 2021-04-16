@@ -40,7 +40,7 @@ def convert(filename, material_id, filetype):
         block.set_pair('_exptl_operator', "'"+data_meta["user"]+"'")
     block.set_pair('_exptl_date', data_meta["date"])
     if "apparatus" not in data_meta:
-    block.set_pair('_exptl_instrument', 'unknown') 
+        block.set_pair('_exptl_instrument', 'unknown') 
     else:
         block.set_pair('_exptl_instrument', "'" + data_meta["apparatus"] + "'")
     block.set_pair('_exptl_adsorptive', data_meta["adsorbate"])
