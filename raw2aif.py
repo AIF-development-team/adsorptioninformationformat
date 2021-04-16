@@ -30,7 +30,7 @@ else:
 
 # initialize aif block
 d = cif.Document()
-d.add_new_block('data_raw2aifv004')
+d.add_new_block('data_raw2aifv005')
 
 block = d.sole_block()
 
@@ -54,7 +54,7 @@ block.set_pair('_units_mass', data_meta["adsorbent_unit"])
 block.set_pair('_units_loading',"'"+data_meta["loading_unit"]+"'")
 
 # write adsorption data
-loop_ads = block.init_loop('_adsorp_', ['pressure', 'p0', 'loading'])
+loop_ads = block.init_loop('_adsorp_', ['pressure', 'p0', 'amount'])
 loop_ads.set_all_values([
     list(data_ads['pressure'].astype(str)),
     list(data_ads['pressure_saturation'].astype(str)),
@@ -63,7 +63,7 @@ loop_ads.set_all_values([
 
 # write desorption data
 if len(data_des > 0):
-    loop_des = block.init_loop('_desorp_', ['pressure', 'p0', 'loading'])
+    loop_des = block.init_loop('_desorp_', ['pressure', 'p0', 'amount'])
     loop_des.set_all_values([
         list(data_des['pressure'].astype(str)),
         list(data_des['pressure_saturation'].astype(str)),

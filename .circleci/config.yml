@@ -51,4 +51,4 @@ workflows:
   build_and_test:
     jobs:
       - test
-      # - build_win
+      - build_win

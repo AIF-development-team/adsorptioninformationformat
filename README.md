@@ -20,10 +20,10 @@ The current dictionary of data items used by adsorption information files can be
 | _units_loading | units of amount adsorbed (string)   | 
 | _adsorp_pressure | equilibrium pressure of the adsorption measurement (float)  | 
 | _adsorp_p0 |  saturation pressure of the adsorption measurement at the temperature of the experiment(float)   | 
-| _adsorp_loading  | amount adsorbed during the adsorption measurement (float)   | 
+| _adsorp_amount  | amount adsorbed during the adsorption measurement (float)   | 
 | _desorp_pressure | equilibrium  pressure of the desorption measurement at the temperature of the experiment (float)   | 
 | _desorp_p0 | saturation pressure of the desorption measurement at the temperature of the experiment (float)   | 
-| _desorp_loading |  amount adsorbed during the desorption measurement (float)   | 
+| _desorp_amount |  amount adsorbed during the desorption measurement (float)   | 
 
 ## raw2aif converter
 A simple program was produced for windows computers to facilitate the production of adsorption information files from raw analysis text files exported by Quantachrome software (*.txt*) and the Belsorb software raw data files (*.DAT*) and xls files exported by Micromeritics software (*.xls*).
