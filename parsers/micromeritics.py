@@ -157,7 +157,14 @@ def parse(path):
     columns = [
         c for c in _FIELDS['isotherm_data']['labels'].values() if c in data
     ]
-    if len(data['pressure_saturation']) == 1:
+
+    #remove time for now because it can lead to uneven columns
+    if "time" in columns:
+        columns.remove("time")
+
+    # for cases where there is few press
+    if len(data['pressure_saturation']) != len(data["loading"])+1:
+        print('yes')
         columns.remove("pressure_saturation")
 
     data_arr = np.array([data.pop(c) for c in columns]).T
@@ -167,7 +174,7 @@ def parse(path):
     
     #if absolute pressure not present
     if "pressure" not in data_arr:
-        data_arr["pressure"] = data_arr["pressure_relative"]*data["pressure_saturation"]
+        data_arr["pressure"] = data_arr["pressure_relative"]*data["pressure_saturation"][0]
 
 
     # split ads / desorption branches
@@ -342,4 +349,3 @@ def _check(data, path):
     if 'errors' in data:
         print('Report file contains warnings:')
         print('\n'.join(data['errors']))
-
