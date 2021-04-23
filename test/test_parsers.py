@@ -40,6 +40,8 @@ mic_data = [
     ("Sample_A", "micromeritics/Sample_A.xls"),
     ("Sample_C", "micromeritics/Sample_C.xls"),
     ("Sample_D", "micromeritics/Sample_D.xls"),
+    ("Sample_E", "micromeritics/Sample_E.xls"),
+    ("Sample_F", "micromeritics/Sample_F.xls"),
 ]
 
 BELcsv_data = [
