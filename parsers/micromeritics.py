@@ -39,7 +39,7 @@ _FIELDS = {
         'type': 'number'
     },
     'user': {
-        'text': ['operator', 'analyste'],
+        'text': ['operator', 'analyste', 'Operator:'],
         'name': 'user',
         'row': 0,
         'column': 1,
@@ -143,6 +143,10 @@ def parse(path):
         data['errors'] = errors
     _check(data, path)
 
+    #if parser fails at instrument try getting instrument from relative position
+    if "apparatus" not in data:
+        data['apparatus'] = (str(sheet.cell(1,0).value))
+
     # get units of mass
     data["adsorbent_unit"]  = data["mass"].split()[-1]
     data["mass"] = float(data["mass"].split()[0])
@@ -153,11 +157,24 @@ def parse(path):
     columns = [
         c for c in _FIELDS['isotherm_data']['labels'].values() if c in data
     ]
-    data_arr = np.array([data.pop(c) for c in columns]).T
 
+    #remove time for now because it can lead to uneven columns
+    if "time" in columns:
+        columns.remove("time")
+
+    # for cases where there is few press
+    if len(data['pressure_saturation']) != len(data["loading"])+1:
+        print('yes')
+        columns.remove("pressure_saturation")
+
+    data_arr = np.array([data.pop(c) for c in columns]).T
 
     # create pandas dataframe of adsorption and desorption data
     data_arr = pd.DataFrame(data_arr, columns=columns)
+    
+    #if absolute pressure not present
+    if "pressure" not in data_arr:
+        data_arr["pressure"] = data_arr["pressure_relative"]*data["pressure_saturation"][0]
 
 
     # split ads / desorption branches
@@ -274,13 +291,26 @@ def _assign_data(item, field, data, points):
             ('(torr', 'torr'),
             ('(kPa', 'kPa'),
             ('(bar', 'bar'),
+            ('(mbar', 'mbar')
         ):
             if u in item:
                 data['pressure_unit'] = c
     elif field['labels'][name] == 'pressure_relative':
         data['pressure_relative'] = points
     elif field['labels'][name] == 'pressure_saturation':
-        data['pressure_saturation'] = points[1:]
+        if (len(points)) == 1:
+            data['pressure_saturation'] = points
+        else:
+            data['pressure_saturation'] = points[1:]
+        for (u, c) in (
+            ('(mmHg', 'torr'),
+            ('(torr', 'torr'),
+            ('(kPa', 'kPa'),
+            ('(bar', 'bar'),
+            ('(mbar', 'mbar'),
+        ):
+            if u in item:
+                data['pressure_unit'] = c
     else:
         raise ValueError(
             f"Label name '{field['labels'][name]}' not recognized."
@@ -319,6 +349,3 @@ def _check(data, path):
     if 'errors' in data:
         print('Report file contains warnings:')
         print('\n'.join(data['errors']))
-
-
-parse("test/database/micromeritics/Sample_A.xls")
