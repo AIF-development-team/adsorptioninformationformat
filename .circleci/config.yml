@@ -53,7 +53,5 @@ workflows:
     - test
     - build:
         filters:
-          requires:
-            - test
           branches:
             only: master
