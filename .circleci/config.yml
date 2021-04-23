@@ -47,7 +47,7 @@ jobs:
           destination: ~/adsorptioninformationformat
 
 workflows:
-  version: 2
+  version: 2.1
   main:
     jobs:
     - test
