@@ -4,9 +4,6 @@ orbs:
 
 jobs:
   build_win:
-    branches:
-      only:
-        - master 
     executor:
       name: win/default
       shell: powershell.exe
@@ -51,7 +48,13 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  build:
     jobs:
       - test
-      - build_win
+      - build_win:
+        requires:
+          - test
+        filters:
+          branches:
+            only:
+              - master
