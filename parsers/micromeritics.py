@@ -350,8 +350,3 @@ def _check(data, path):
     if 'errors' in data:
         print('Report file contains warnings:')
         print('\n'.join(data['errors']))
-
-
-test, ads, des = parse("test/database/micromeritics/Sample_H.xls")
-
-print(test)
