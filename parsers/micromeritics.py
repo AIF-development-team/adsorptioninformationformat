@@ -46,7 +46,7 @@ _FIELDS = {
         'type': 'string'
     },
     'date': {
-        'text': ['started'],
+        'text': ['started',"Started:"],
         'name': 'date',
         'row': 0,
         'column': 1,
@@ -153,6 +153,8 @@ def parse(path):
 
     # convert to expected format
     data["temperature_unit"] = "K"
+    if data["date"] == '':
+        data["date"] = str(sheet.cell(11,1).value)
     data['date'] = dateutil.parser.parse(data['date']).isoformat()
     columns = [
         c for c in _FIELDS['isotherm_data']['labels'].values() if c in data
