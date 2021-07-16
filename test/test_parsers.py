@@ -42,6 +42,9 @@ mic_data = [
     ("Sample_D", "micromeritics/Sample_D.xls"),
     ("Sample_E", "micromeritics/Sample_E.xls"),
     ("Sample_F", "micromeritics/Sample_F.xls"),
+    ("Sample_G", "micromeritics/Sample_G.xls"),
+    ("Sample_H", "micromeritics/Sample_H.xls"),
+    ("Sample_I", "micromeritics/Sample_I.xls"),
 ]
 
 BELcsv_data = [
@@ -201,8 +204,8 @@ def test_BELcsv_JIS_output():
                 print(line)
             raise Exception(file)
 
-# subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
-# subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
+subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
+subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
 # test_bel_parser()
 # test_bel_output()
 # test_qnt_parser()
