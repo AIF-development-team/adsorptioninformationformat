@@ -165,7 +165,7 @@ def parse(path):
         columns.remove("time")
 
     # for cases where there is few press
-    if len(data['pressure_saturation']) != len(data["loading"])+1:
+    if len(data['pressure_saturation']) != len(data["loading"]):
         columns.remove("pressure_saturation")
 
     data_arr = np.array([data.pop(c) for c in columns]).T
