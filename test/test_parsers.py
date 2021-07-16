@@ -204,8 +204,8 @@ def test_BELcsv_JIS_output():
                 print(line)
             raise Exception(file)
 
-subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
-subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
+# subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
+# subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
 # test_bel_parser()
 # test_bel_output()
 # test_qnt_parser()
