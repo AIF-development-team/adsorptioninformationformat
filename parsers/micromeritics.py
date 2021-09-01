@@ -149,7 +149,11 @@ def parse(path):
 
     # get units of mass
     data["adsorbent_unit"]  = data["mass"].split()[-1]
-    data["mass"] = float(data["mass"].split()[0])
+    if ',' in data["mass"].split()[0]:
+        fixed_mass = data["mass"].split()[0].replace(',','.')
+        data["mass"] = float(fixed_mass)
+    else:
+        data["mass"] = float(data["mass"].split()[0])
 
     # convert to expected format
     data["temperature_unit"] = "K"
@@ -165,7 +169,7 @@ def parse(path):
         columns.remove("time")
 
     # for cases where there is few press
-    if len(data['pressure_saturation']) != len(data["loading"]):
+    if 'pressure_saturation' in data and len(data['pressure_saturation']) != len(data["loading"]):
         columns.remove("pressure_saturation")
 
     data_arr = np.array([data.pop(c) for c in columns]).T
@@ -194,7 +198,7 @@ def _handle_numbers(field, val):
     Input is a cell of type 'number'.
     """
     if val:
-        ret = float(_NUMBER_REGEX.search(val.replace(',', '')).group())
+        ret = float(_NUMBER_REGEX.search(val.replace(',', '.')).group())
         if field['name'] == 'temperature' and '°C' in val:
             ret = ret + 273.15
         return ret
@@ -350,3 +354,7 @@ def _check(data, path):
     if 'errors' in data:
         print('Report file contains warnings:')
         print('\n'.join(data['errors']))
+
+
+## Debug
+#data_meta, data_ads, data_des = parse('')

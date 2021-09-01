@@ -73,7 +73,7 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
                 list(data_des['loading'].astype(str))
             ])
 
-    elif len(list(data_meta['pressure_saturation'])) == 1:
+    elif 'pressure_saturation' in data_ads and len(list(data_meta['pressure_saturation'])) == 1:
         block.set_pair('_exptl_p0', str(data_meta["pressure_saturation"][0]))
         # write adsorption data
         loop_ads = block.init_loop('_adsorp_', ['pressure', 'amount'])
@@ -87,6 +87,26 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
             loop_des = block.init_loop('_desorp_', ['pressure', 'amount'])
             loop_des.set_all_values([
                 list(data_des['pressure'].astype(str)),
+                list(data_des['loading'].astype(str))
+            ])
+
+    elif 'pressure_saturation' not in data_ads and 'pressure_relative' in data_ads:
+        # write adsorption data
+        data_ads['pressure_saturation'] = (1/data_ads['pressure_relative'])*data_ads['pressure']
+        loop_ads = block.init_loop('_adsorp_', ['pressure', 'p0', 'amount'])
+        loop_ads.set_all_values([
+            list(data_ads['pressure'].astype(str)),
+            list(data_ads['pressure_saturation'].astype(str)),
+            list(data_ads['loading'].astype(str))
+        ])
+
+        # write desorption data
+        if len(data_des > 0):
+            data_des['pressure_saturation'] = (1/data_des['pressure_relative'])*data_des['pressure']
+            loop_des = block.init_loop('_desorp_', ['pressure', 'p0', 'amount'])
+            loop_des.set_all_values([
+                list(data_des['pressure'].astype(str)),
+                list(data_des['pressure_saturation'].astype(str)),
                 list(data_des['loading'].astype(str))
             ])
 
