@@ -1,15 +1,12 @@
 #built from the suggestion of https://github.com/dwsideriusNIST described here https://github.com/dwsideriusNIST/adsorptioninformationformat/blob/sandbox/JSON_Sandbox/Example_AIF_and_JSON_Conversions.ipynb
-
 from gemmi import cif
 import numpy as np
-import requests
 import json
 
 
 #define some equivalency table
 
 equivalency_table = [
-    {'AIF': '_exptl_adsorption', 'JSON': 'adsorbate', 'dtype': str},
     {'AIF': '_exptl_temperature', 'JSON': 'temperature', 'dtype': float},
     {'AIF': '_sample_material_id', 'JSON': 'adsorbent', 'dtype': str},
     {'AIF': '_citation_doi', 'JSON': 'DOI', 'dtype': str},
@@ -21,6 +18,8 @@ equivalency_table = [
     {'AIF': '_measurement_type', 'JSON': 'category', 'dtype': str},
     {'AIF': '_exptl_adsorptive', 'JSON': 'adsorbate', 'dtype': str},
     {'AIF': '_exptl_sample_mass', 'JSON': 'exptl_sample_mass', 'dtype': float},
+    #allow JSON arrays to be parsed
+    {'AIF': 'adsorbates', 'JSON': 'adsorbates', 'dtype': float},
     #{'AIF': '', 'JSON': ''},
     #{'AIF': '', 'JSON': ''},
         
@@ -71,9 +70,12 @@ def crossreference_keys(table,key,informat):
     if informat == 'AIF':
         #strip leading "_"
         return key[1:], str
+    
+
     elif informat == 'JSON':
         #add leading "_"
-        return "_"+key, str
+        return "_unsupported_"+key, str
+
 
 def aif2json(infile):
 
@@ -136,6 +138,9 @@ def json2aif(json_dict):
             outkey, dtype = crossreference_keys(equivalency_table,inkey,informat='JSON')
             if json_dict[inkey] == '':
                 #Ignore blank keys
+                continue
+            if "_unsupported_" in outkey:
+                # ignore unknown datanames from JSON format?
                 continue
             elif inkey == 'adsorbates':
                 # Temporary kludge for adsorptives

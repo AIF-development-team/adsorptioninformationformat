@@ -1,5 +1,7 @@
 import subprocess
 import os
+import sys
+import json
 
 bel_data = [
     ("unknown", "Ar_test/1.DAT"),
@@ -240,6 +242,16 @@ def test_NISTjson_output():
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
             raise Exception(file)
+
+
+def test_aif2NISTjson():
+    from parsers import NISTjson
+    jsonout = NISTjson.aif2json('examples/NK_DUT-6_LP_N2_114PKT.aif')
+    try:
+        json.loads(jsonout)
+    except ValueError as e:
+        raise Exception(e)
+
 
 # subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
 # subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
