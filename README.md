@@ -15,10 +15,14 @@ The current dictionary of data items used by adsorption information files can be
 | _exptl_p0	| saturation pressure of the experiment at the temperature of the experiment (float) |
 | _sample_id | unique identifying code used by the operator (string)  | 
 | _sample_material_id | designated name for the material (string)   | 
+| _sample_digitizer | name of the person who digitized the experiment (string) | 
+| citation_doi | the digital object identifier (DOI) of the cited work (string) |
+| citation_source | source of the cited work (string) |
 | _units_temperature | units of temperature (string)  | 
 | _units_pressure | units of pressure (string)   | 
 | _units_mass | units of mass (string)  | 
-| _units_loading | units of amount adsorbed (string)   | 
+| _units_loading | units of amount adsorbed (string)   |
+| _units_composition_type |  composition definiton (string) |
 | _adsorp_pressure | equilibrium pressure of the adsorption measurement (float)  | 
 | _adsorp_p0 |  saturation pressure of the adsorption measurement at the temperature of the experiment(float)   | 
 | _adsorp_amount  | amount adsorbed during the adsorption measurement (float)   | 
