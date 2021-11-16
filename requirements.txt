@@ -4,4 +4,3 @@ pandas
 numpy
 matplotlib
 xlrd
-json
