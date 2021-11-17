@@ -6,18 +6,18 @@
 Analysis                                          Report
 Operator:      Uli            Date:11/30/2012 18:59Operator:ir                  Date:2020/05/06
 Sample ID:     US_540_DUT75_N2     Filename:      US_540_DUT75_N2.raw
-Sample Desc:   US_540_DUT75_N2     Comment:        
+Sample Desc:   US_540_DUT75_N2     Comment:
 Outgas Time:   17.5 hrs            Outgas Temp:   150.0 °C            Sample Weight: 0.0539 g
 Analysis gas:  Nitrogen            Molec. Wt:     28.0134 g           Non-ideality:  6.58e-05 1/Torr
 Analysis Time: n/a                 Instrument:    Autosorb Station 1  Bath temp.:    77.3 K
                                      Data Reduction Parameters
                Thermal Transpiration: onEff. mol. diameter (D): 4.00 ÅEff. cell stem diam. (d): 1.0000 mm
- 
+
 Adsorbate      Nitrogen                 Temperature    77.350K
                Molec. Wt.: 28.013       Cross Section: 16.200  Å²     Liquid Density: 0.808  g/cc
 
                      Relative                                        Volume @ STP
-                     Pressure                                               
+                     Pressure
                                                                          cc/g
 
                         4.88616e-04                                     247.3522

@@ -6,14 +6,14 @@
 Analysis                                          Report
 Operator:      Nicole         Date:09/17/2009 19:56Operator:ir                  Date:2020/05/06
 Sample ID:     nk_DUT-6_LP_N2_114pktFilename:     NK_DUT-6_LP_N2_114PKT.raw
-Sample Desc:   nk_DUT-6_LP_N2_114pktComment:       
+Sample Desc:   nk_DUT-6_LP_N2_114pktComment:
 Outgas Time:   24.0 hrs            Outgas Temp:   120.0 °C            Sample Weight: 0.0339 g
 Analysis gas:  Nitrogen            Molec. Wt:     28.0134 g           Non-ideality:  6.58e-05 1/Torr
 Analysis Time: 2070.6 min          Instrument:    Autosorb Station 1  Bath temp.:    77.3 K
 
       Press            P0         Volume @ STP        Time             Tol             Equ
-                                                                                         
-      Torr            Torr             cc              min                               
+
+      Torr            Torr             cc              min
 
        0.00202042    764.02            0.004927        0.0             5               2
        0.00204585    764.02            0.006244        0.0             5               2

@@ -15,7 +15,7 @@ Analysis Time: 260.8 min           End of run:    2019/04/09 15:30:29 Instrument
 Cell ID:        0                                                     F/W version:   0.00
 
               P/Po                             Po                         Volume @ STP
-                                                                                 
+
                                               mmHg                             cc
 
                0.002939                      765.23                            3.9227
