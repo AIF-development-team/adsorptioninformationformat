@@ -1,8 +1,10 @@
-from gemmi import cif
-import matplotlib.pyplot as plt
-import numpy as np
+# -*- coding: utf-8 -*-
+"""Plot AIF from command line"""
 import sys
 import os
+from gemmi import cif  # pylint: disable-msg=no-name-in-module
+import matplotlib.pyplot as plt
+import numpy as np
 
 filename = sys.argv[1]
 
@@ -15,10 +17,12 @@ des_amount = np.array(block.find_loop('_desorp_amount'), dtype=float)
 
 material_id = block.find_pair('_sample_material_id')[-1]
 
-plt.plot(ads_press, ads_amount, 'o-', color="C0")
-plt.plot(des_press, des_amount, 'o-', color="C0", markerfacecolor='white')
+plt.plot(ads_press, ads_amount, 'o-', color='C0')
+plt.plot(des_press, des_amount, 'o-', color='C0', markerfacecolor='white')
 
-plt.ylabel("quantity adsorbed / "+block.find_pair('_units_loading')[-1])
-plt.xlabel("pressure / "+block.find_pair('_units_pressure')[-1])
-plt.title(block.find_pair('_exptl_adsorptive')[-1]+" on "+material_id+" at "+block.find_pair('_exptl_temperature')[-1]+"K")
-plt.savefig(os.path.splitext(filename)[0]+'.pdf')
+plt.ylabel('quantity adsorbed / ' + block.find_pair('_units_loading')[-1])
+plt.xlabel('pressure / ' + block.find_pair('_units_pressure')[-1])
+plt.title(
+    block.find_pair('_exptl_adsorptive')[-1] + ' on ' + material_id + ' at ' +
+    block.find_pair('_exptl_temperature')[-1] + 'K')
+plt.savefig(os.path.splitext(filename)[0] + '.pdf')
