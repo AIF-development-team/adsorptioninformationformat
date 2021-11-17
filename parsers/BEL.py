@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+"""Parse BEL to AIF"""
+# pylint: disable-msg=invalid-name # to allow non-conforming variable names
+# pylint: disable-msg=use-a-generator
+# pylint: disable-msg=too-many-branches
 from datetime import datetime
 import numpy as np
 import pandas as pd
@@ -89,22 +94,18 @@ def parse(path):
                     file_headers = line.replace('"', '').split('\t')
 
                     for h in file_headers:
-                        txt = next((
-                            _FIELDS['isotherm_data'][a]
-                            for a in _FIELDS['isotherm_data']
-                            if h.lower().startswith(a)
-                        ), h)
+                        txt = next((_FIELDS['isotherm_data'][a]
+                                    for a in _FIELDS['isotherm_data']
+                                    if h.lower().startswith(a)), h)
                         columns.append(txt)
 
                         if txt == 'loading':
                             material_info['loading_basis'] = 'molar'
-                            material_info['loading_unit'] = h.split("/")[-1]
-                        
+                            material_info['loading_unit'] = h.split('/')[-1]
 
-           
                         if txt == 'pressure':
                             material_info['pressure_mode'] = 'absolute'
-                            material_info['pressure_unit'] = h.split("/")[-1]
+                            material_info['pressure_unit'] = h.split('/')[-1]
 
                     # read adsorption section
                     line = file.readline()  # firstline
@@ -128,24 +129,23 @@ def parse(path):
                 values = [v.strip('"') for v in values]
                 key = values[0].lower()
                 try:
+                    # TODO: rewrite following using a generator # pylint: disable-msg=fixme
                     field = next(
                         v for k, v in _FIELDS.items()
-                        if any([key.startswith(n) for n in v.get('text', [])])
-                    )
+                        if any([key.startswith(n) for n in v.get('text', [])]))
                 except StopIteration:
                     continue
                 material_info[field['name']] = values[1]
-                # TODO better temperature unit handling
+                # TODO better temperature unit handling # pylint: disable-msg=fixme
                 if 'Meas. Temp./K:' in values:
-                    material_info["temperature_unit"] = "K"
+                    material_info['temperature_unit'] = 'K'
 
                 if 'Sample weight/g:' in values:
-                    material_info["adsorbent_unit"] = "g"
+                    material_info['adsorbent_unit'] = 'g'
 
-        material_info['date'] = datetime.strptime(
-            material_info['date'], r'%y/%m/%d'
-        ).isoformat()
-        material_info['apparatus'] = 'BEL ' + material_info["serialnumber"]
+        material_info['date'] = datetime.strptime(material_info['date'],
+                                                  r'%y/%m/%d').isoformat()
+        material_info['apparatus'] = 'BEL ' + material_info['serialnumber']
 
         # create pandas dataframe of adsorption and desorption data
         data_ads = pd.DataFrame(data_ads, columns=columns)
@@ -153,7 +153,7 @@ def parse(path):
         if len(data_des) > 0:
             data_des = pd.DataFrame(data_des, columns=columns)
 
-        # TODO deal with units
+        # TODO deal with units # pylint: disable-msg=fixme
         # pressure from Torr to Pa
         # amount adsorbed from mL/g to mmol/g
         # data_ads[columns.index('pressure')
@@ -171,5 +171,6 @@ def parse(path):
         #     data_des[columns.index('loading')
         #              ] = data_des[columns.index('loading')] / 22.414
 
-        #alternatively lets define the units in the AIF file so that we dont alter information from the raw data file
+        #alternatively lets define the units in the AIF file so that
+        # we dont alter information from the raw data file
     return material_info, data_ads, data_des
