@@ -5,3 +5,4 @@ numpy
 matplotlib
 xlrd
 pre-commit
+pylint
