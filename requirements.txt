@@ -4,3 +4,4 @@ pandas
 numpy
 matplotlib
 xlrd
+pre-commit
