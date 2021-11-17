@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 from gemmi import cif
 
 
@@ -20,9 +21,16 @@ def parse(filetype, filename):
     elif filetype == "micromeritics":
         from parsers import micromeritics
         data_meta, data_ads, data_des = micromeritics.parse(filename)
+    elif filetype == "NIST-json":
+        from parsers import NISTjson
+        with open(filename) as json_file:
+            json_dict = json.load(json_file)
+        d = NISTjson.json2aif(json_dict)
+        return(d)
     else:
         raise Exception("This file type is unknown or currently not supported.")
-    return(data_meta, data_ads, data_des)
+    if filetype != 'NIST-json':
+        return(data_meta, data_ads, data_des)
 
 # write adsorption file
 def makeAIF(data_meta, data_ads, data_des, material_id, filename):
@@ -119,5 +127,10 @@ if __name__=="__main__":
     filetype = sys.argv[2]
     material_id = sys.argv[3]
 
-    data_meta, data_ads, data_des = parse(filetype,filename)
-    makeAIF(data_meta, data_ads, data_des, material_id, filename)
+    if filetype != 'NIST-json':
+        data_meta, data_ads, data_des = parse(filetype,filename)
+        makeAIF(data_meta, data_ads, data_des, material_id, filename)
+    if filetype == 'NIST-json':
+        cif_doc = parse(filetype,filename)
+        outputfilename = os.path.splitext(filename)[0]+'.aif'
+        cif_doc.write_file(outputfilename)

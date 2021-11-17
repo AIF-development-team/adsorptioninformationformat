@@ -1,5 +1,7 @@
 import subprocess
 import os
+import sys
+import json
 
 bel_data = [
     ("unknown", "Ar_test/1.DAT"),
@@ -58,6 +60,10 @@ BELcsv_JIS_data = [
     ("DMOF", "DMOF/ASch082C_Zntmbdcdabco_C2H6_Exp190819a.csv"),
     ("DMOF", "DMOF/ASch082B_Zndmbdcdabco_C2H4_Exp191004a_weight\ correction.csv"),
     ("DMOF", "DMOF/Asch065B_C2H6_298K_Exp190327a.csv")
+]
+
+NIST_data = [
+    ("isotherm1", "NIST/10.1021Jp400480q.Isotherm2.json"),
 ]
 
 def test_bel_parser():
@@ -206,15 +212,46 @@ def test_BELcsv_JIS_output():
                 print(line)
             raise Exception(file)
 
+
+def test_NISTjson_parser():
+    for id, file in NIST_data:
+        p = subprocess.run(
+            "python raw2aif.py ./test/database/"+file+" NIST-json "+id,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True
+        )
+
+        if p.stderr:
+            for line in p.stderr.decode(encoding='utf-8').split('\n'):
+                print(line)
+            raise Exception(file)
+
+
+def test_NISTjson_output():
+    for id, file in NIST_data:
+        outfile = os.path.splitext(file)[0]+'.aif'
+        p = subprocess.run(
+            "python plotaif.py ./test/database/"+outfile,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True
+        )
+
+        if p.stderr:
+            for line in p.stderr.decode(encoding='utf-8').split('\n'):
+                print(line)
+            raise Exception(file)
+
+
+def test_aif2NISTjson():
+    from parsers import NISTjson
+    jsonout = NISTjson.aif2json('examples/NK_DUT-6_LP_N2_114PKT.aif')
+    try:
+        json.loads(jsonout)
+    except ValueError as e:
+        raise Exception(e)
+
+
 # subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
 # subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
-# test_bel_parser()
-# test_bel_output()
-# test_qnt_parser()
-# test_qnt_output()
-# test_mic_parser()
-# test_mic_output()
-# test_BELcsv_parser()
-# test_BELcsv_output()
-# test_BELcsv_JIS_parser()
-# test_BELcsv_JIS_output()
