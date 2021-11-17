@@ -23,7 +23,7 @@ def parse(filetype, filename):
     elif filetype == 'micromeritics':
         data_meta, data_ads, data_des = micromeritics.parse(filename)
     elif filetype == 'NIST-json':
-        with open(filename) as json_file:
+        with open(filename, 'r') as json_file:
             json_dict = json.load(json_file)
         d = NISTjson.json2aif(json_dict)
         return d  # TODO make consistent with other parsers # pylint: disable-msg=fixme

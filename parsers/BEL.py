@@ -82,7 +82,7 @@ def parse(path):
     data_ads = []
     data_des = []
 
-    with open(path) as file:
+    with open(path, 'r') as file:
         line = file.readline().rstrip()
         while line:
             values = line.split('\t')

@@ -3,7 +3,7 @@
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
 import os
 
-from gooey import Gooey, GooeyParser
+from gooey import Gooey, GooeyParser  # pylint: disable-msg=import-error
 from raw2aif import parse, makeAIF
 
 
