@@ -7,7 +7,30 @@ Test all parsers for all manufacturers
 import subprocess
 import os
 import json
+import glob
+import pytest
 from parsers import NISTjson
+
+
+@pytest.fixture(scope='session', autouse=True)
+def setup(request):
+    """remove aif and pdf test files before and after testing"""
+    print('\nCleaning files')
+    aifs = glob.glob('./test/database/*/*.aif')
+    pdfs = glob.glob('./test/database/*/*.pdf')
+    for filename in aifs + pdfs:
+        os.remove(filename)
+
+    def fin():
+        print('\nCleaning files')
+        aifs = glob.glob('./test/database/*/*.aif')
+        pdfs = glob.glob('./test/database/*/*.pdf')
+        for filename in aifs + pdfs:
+            print(filename)
+            os.remove(filename)
+
+    request.addfinalizer(fin)
+
 
 bel_data = [
     ('unknown', 'Ar_test/1.DAT'), ('Sample_E', 'bel/Sample_E.DAT'),
@@ -269,7 +292,3 @@ def test_aif2NISTjson():
         json.loads(jsonout)
     except ValueError as e:
         raise ValueError('Error in AIF to JSON Conversion') from e
-
-
-# subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
-# subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)

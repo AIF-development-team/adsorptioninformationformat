@@ -35,7 +35,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: run tests
-        run: python -m pytest test/
+        run: python -m pytest -s test/
 
   # Run pre-commit checks
   pre-commit:
