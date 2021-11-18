@@ -6,7 +6,7 @@
 Analysis                                          Report
 Operator:      TU DD          Date:2020/07/01     Operator: TU DD               Date:2021/02/18
 Sample ID:     RE-22               Filename:      RE-22.qps
-Sample Desc:                       Comment:        
+Sample Desc:                       Comment:
 Sample weight: 0.032 g             Sample Volume: 1 cc
 Outgas Time:   20.0 hrs            OutgasTemp:    120.0 C
 Analysis gas:  Nitrogen            Bath Temp:     273.0 K
@@ -15,7 +15,7 @@ Analysis Time: 748.4 min           End of run:    2020/07/01 4:16:54  Instrument
 Cell ID:       0
 
               P/Po                             Po                         Volume @ STP
-                                                                                 
+
                                               Torr                             cc
 
                0.006464                      760.00                            0.8940

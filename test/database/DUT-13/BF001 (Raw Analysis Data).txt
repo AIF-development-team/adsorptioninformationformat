@@ -6,7 +6,7 @@
 Analysis                                          Report
 Operator:      service        Date:12/21/2018     Operator: service             Date:2021/02/12
 Sample ID:     BF001_80p_N2_77     Filename:      BF001.QPS
-Sample Desc:                       Comment:        
+Sample Desc:                       Comment:
 Sample weight: 0.0101 g
 Analysis Time: 1056.9 min          End of run:    12/21/2018 11:11:37 Instrument:    QuadraSorb Station 1
 Void Vol.:     He Mode.Cell: 9mm small bulbRun modeStandard           Instrument version:5.04
@@ -15,8 +15,8 @@ Analysis gas:  Nitrogen            Bath Temp:     77.3 K
 Press. Tolerance:variable/variable (ads/des)Equil time:300/300 sec (ads/des)Equil timeout:600/600 sec (ads/des)
 
       Press            P0         Volume @ STP         Tol           TimeOut      EquLibration
-                                                                                         
-      mmHg            mmHg             cc                              sec               
+
+      mmHg            mmHg             cc                              sec
 
        1.06          764.44            1.1352          0.00          600             300
        1.62          764.44            1.3858          0.00          600             300

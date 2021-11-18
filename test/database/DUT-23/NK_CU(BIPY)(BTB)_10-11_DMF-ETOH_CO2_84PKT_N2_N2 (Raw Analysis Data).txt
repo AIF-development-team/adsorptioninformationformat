@@ -6,14 +6,14 @@
 Analysis                                          Report
 Operator:                     Date:06/10/2010 09:47Operator:ir                  Date:2020/05/06
 Sample ID:     nk_Cu(bipy)(btb)_10-11_DMF-EtOH_CO2_84Pkt_N2Filename:  NK_CU(BIPY)(BTB)_10-11_DMF-ETOH_CO2_84PKT_N2_N2.drf
-Sample Desc:   nk_Cu(bipy)(btb)_10-11_DMF-EtOH_CO2_84PktComment: 
+Sample Desc:   nk_Cu(bipy)(btb)_10-11_DMF-EtOH_CO2_84PktComment:
 Outgas Time:   1.0 hrs             Outgas Temp:   100.0 °C            Sample Weight: 0.0279 g
 Analysis gas:  Nitrogen            Molec. Wt:     0 g                 Non-ideality:  0 1/Torr
 Analysis Time: n/a                 Instrument:    Autosorb Station 1  Bath temp.:    77.35 K
 
       Press            P0         Volume @ STP        Time             Tol             Equ
-                                                                                         
-      Torr            Torr             cc              min                               
+
+      Torr            Torr             cc              min
 
        0.764796      757.80            3.68786       277.8             5               2
        1.51504       757.31            6.13311       454.2             5               2

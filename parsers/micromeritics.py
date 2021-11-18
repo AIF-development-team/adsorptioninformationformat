@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Parse micromeritics xls output files.
 @author Chris Murdock,
 @modified Paul Iacomi
@@ -5,6 +6,10 @@
 adapted from
 https://github.com/Micromeritics/micromeritics/tree/master/micromeritics
 """
+# pylint: disable-msg=invalid-name # to allow non-conforming variable names
+# pylint: disable-msg=use-a-generator
+# pylint: disable-msg=too-many-branches
+# pylint: disable-msg=too-many-locals
 
 import re
 from itertools import product
@@ -46,7 +51,7 @@ _FIELDS = {
         'type': 'string'
     },
     'date': {
-        'text': ['started',"Started:"],
+        'text': ['started', 'Started:'],
         'name': 'date',
         'row': 0,
         'column': 1,
@@ -123,8 +128,7 @@ def parse(path):
         try:
             field = next(
                 v for k, v in _FIELDS.items()
-                if any([cell_value.startswith(n) for n in v.get('text', [])])
-            )
+                if any([cell_value.startswith(n) for n in v.get('text', [])]))
         except StopIteration:
             continue
         if field['type'] == 'number':
@@ -144,52 +148,49 @@ def parse(path):
     _check(data, path)
 
     #if parser fails at instrument try getting instrument from relative position
-    if "apparatus" not in data:
-        data['apparatus'] = (str(sheet.cell(1,0).value))
+    if 'apparatus' not in data:
+        data['apparatus'] = (str(sheet.cell(1, 0).value))
 
     # get units of mass
-    data["adsorbent_unit"]  = data["mass"].split()[-1]
-    if ',' in data["mass"].split()[0]:
-        fixed_mass = data["mass"].split()[0].replace(',','.')
-        data["mass"] = float(fixed_mass)
+    data['adsorbent_unit'] = data['mass'].split()[-1]
+    if ',' in data['mass'].split()[0]:
+        fixed_mass = data['mass'].split()[0].replace(',', '.')
+        data['mass'] = float(fixed_mass)
     else:
-        data["mass"] = float(data["mass"].split()[0])
+        data['mass'] = float(data['mass'].split()[0])
 
     # convert to expected format
-    data["temperature_unit"] = "K"
-    if data["date"] == '':
-        data["date"] = str(sheet.cell(11,1).value)
+    data['temperature_unit'] = 'K'
+    if data['date'] == '':
+        data['date'] = str(sheet.cell(11, 1).value)
     data['date'] = dateutil.parser.parse(data['date']).isoformat()
     columns = [
         c for c in _FIELDS['isotherm_data']['labels'].values() if c in data
     ]
 
     #remove time for now because it can lead to uneven columns
-    if "time" in columns:
-        columns.remove("time")
+    if 'time' in columns:
+        columns.remove('time')
 
     # for cases where there is few press
-    if 'pressure_saturation' in data and len(data['pressure_saturation']) != len(data["loading"]):
-        columns.remove("pressure_saturation")
+    if 'pressure_saturation' in data and len(
+            data['pressure_saturation']) != len(data['loading']):
+        columns.remove('pressure_saturation')
 
     data_arr = np.array([data.pop(c) for c in columns]).T
 
     # create pandas dataframe of adsorption and desorption data
     data_arr = pd.DataFrame(data_arr, columns=columns)
-    
-    #if absolute pressure not present
-    if "pressure" not in data_arr:
-        data_arr["pressure"] = data_arr["pressure_relative"]*data["pressure_saturation"][0]
 
+    #if absolute pressure not present
+    if 'pressure' not in data_arr:
+        data_arr['pressure'] = data_arr['pressure_relative'] * data[
+            'pressure_saturation'][0]
 
     # split ads / desorption branches
-    turning_point = data_arr["pressure"].argmax()+1
+    turning_point = data_arr['pressure'].argmax() + 1
 
-    return (
-        data,
-        data_arr[:turning_point],
-        data_arr[turning_point:]
-    )
+    return (data, data_arr[:turning_point], data_arr[turning_point:])
 
 
 def _handle_numbers(field, val):
@@ -202,8 +203,8 @@ def _handle_numbers(field, val):
         if field['name'] == 'temperature' and '°C' in val:
             ret = ret + 273.15
         return ret
-    else:
-        return None
+
+    return None
 
 
 def _handle_string(val):
@@ -230,9 +231,8 @@ def _get_data_labels(sheet, row, col):
     # Abstract this sort of thing
     header = sheet.cell(row + header_row, final_column).value
     while any(
-        header.startswith(label)
-        for label in _FIELDS['isotherm_data']['labels']
-    ):
+            header.startswith(label)
+            for label in _FIELDS['isotherm_data']['labels']):
         final_column += 1
         header = sheet.cell(row + header_row, final_column).value
 
@@ -240,9 +240,9 @@ def _get_data_labels(sheet, row, col):
         # this means no header exists, can happen in some older files
         # the units might not be standard! TODO should check
         return [
-            "Relative Pressure (P/Po)", "Absolute Pressure (kPa)",
-            "Quantity Adsorbed (cm³/g STP)", "Elapsed Time (h:min)",
-            "Saturation Pressure (kPa)"
+            'Relative Pressure (P/Po)', 'Absolute Pressure (kPa)',
+            'Quantity Adsorbed (cm³/g STP)', 'Elapsed Time (h:min)',
+            'Saturation Pressure (kPa)'
         ]
 
     return [
@@ -270,8 +270,7 @@ def _get_datapoints(sheet, row, col):
             final_row += 1
             point = sheet.cell(final_row, col).value
     return [
-        sheet.cell(i, col).value
-        for i in range(start_row, final_row)
+        sheet.cell(i, col).value for i in range(start_row, final_row)
         if sheet.cell(i, col).value
     ]
 
@@ -287,17 +286,12 @@ def _assign_data(item, field, data, points):
         data['time'] = _convert_time(points)[1:]
     elif field['labels'][name] == 'loading':
         data['loading'] = points
-        data["loading_unit"] = re.split(r'\(|\)', item)[1]
-        
+        data['loading_unit'] = re.split(r'\(|\)', item)[1]
+
     elif field['labels'][name] == 'pressure':
         data['pressure'] = points
-        for (u, c) in (
-            ('(mmHg', 'torr'),
-            ('(torr', 'torr'),
-            ('(kPa', 'kPa'),
-            ('(bar', 'bar'),
-            ('(mbar', 'mbar')
-        ):
+        for (u, c) in (('(mmHg', 'torr'), ('(torr', 'torr'), ('(kPa', 'kPa'),
+                       ('(bar', 'bar'), ('(mbar', 'mbar')):
             if u in item:
                 data['pressure_unit'] = c
     elif field['labels'][name] == 'pressure_relative':
@@ -318,8 +312,7 @@ def _assign_data(item, field, data, points):
                 data['pressure_unit'] = c
     else:
         raise ValueError(
-            f"Label name '{field['labels'][name]}' not recognized."
-        )
+            f"Label name '{field['labels'][name]}' not recognized.")
 
 
 def _get_errors(sheet, row, col):
