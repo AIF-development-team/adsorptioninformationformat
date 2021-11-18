@@ -7,9 +7,6 @@ adapted from
 https://github.com/Micromeritics/micromeritics/tree/master/micromeritics
 """
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
-# pylint: disable-msg=use-a-generator
-# pylint: disable-msg=too-many-branches
-# pylint: disable-msg=too-many-locals
 
 import re
 from itertools import product
@@ -119,6 +116,8 @@ def parse(path):
     dict
         A dictionary containing report information.
     """
+    # pylint: disable-msg=too-many-locals
+    # pylint: disable-msg=too-many-branches
     workbook = xlrd.open_workbook(path, encoding_override='latin-1')
     sheet = workbook.sheet_by_index(0)
     data = {}
@@ -126,9 +125,8 @@ def parse(path):
     for row, col in product(range(sheet.nrows), range(sheet.ncols)):
         cell_value = str(sheet.cell(row, col).value).lower()
         try:
-            field = next(
-                v for k, v in _FIELDS.items()
-                if any([cell_value.startswith(n) for n in v.get('text', [])]))
+            field = next(v for k, v in _FIELDS.items() if any(
+                cell_value.startswith(n) for n in v.get('text', [])))
         except StopIteration:
             continue
         if field['type'] == 'number':
