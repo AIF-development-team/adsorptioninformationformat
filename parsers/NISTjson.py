@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 """Parse NIST JSON to AIF"""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
-# pylint: disable-msg=too-many-locals
-# pylint: disable-msg=too-many-branches
-# pylint: disable-msg=no-else-return
-# pylint: disable-msg=no-else-continue
-# pylint: disable-msg=unidiomatic-typecheck
-# pylint: disable-msg=inconsistent-return-statements
-# pylint: disable-msg=duplicate-code
 #built from the suggestion of https://github.com/dwsideriusNIST described here https://github.com/dwsideriusNIST/adsorptioninformationformat/blob/sandbox/JSON_Sandbox/Example_AIF_and_JSON_Conversions.ipynb # pylint: disable-msg=line-too-long
 import json
 from gemmi import cif  # pylint: disable-msg=no-name-in-module
@@ -128,10 +121,8 @@ def crossreference_keys(table, key, informat):
     if informat == 'AIF':
         #strip leading "_"
         return key[1:], str
-
-    elif informat == 'JSON':  # pylint: disable-msg=no-else-return
-        #add leading "_"
-        return '_unsupported_' + key, str
+    # will be JSON, add leading "_"
+    return '_unsupported_' + key, str
 
 
 def aif2json(infile):
@@ -166,7 +157,6 @@ def aif2json(infile):
         output_p0 = False
 
     # single component only
-    adsorbate = data_dict['adsorbate']
     for p, a in zip(ads_press, ads_amount):
         isotherm_data.append({
             'pressure':
@@ -174,7 +164,7 @@ def aif2json(infile):
             'branch':
             'adsorp',
             'species_data': [{
-                'name': adsorbate,
+                'name': data_dict['adsorbate'],
                 'composition': 1.0,
                 'adsorption': a
             }]
@@ -189,6 +179,7 @@ def aif2json(infile):
 
 def json2aif(json_dict):
     """Convert NIST json_dict to AIF"""
+    # pylint: disable-msg=too-many-branches
     # initialize aif block
     d = cif.Document()
     d.add_new_block(json_dict['filename'])  #fix this
@@ -203,10 +194,12 @@ def json2aif(json_dict):
             if json_dict[inkey] == '':
                 #Ignore blank keys
                 continue
+
             if '_unsupported_' in outkey:
                 # ignore unknown datanames from JSON format?
                 continue
-            elif inkey == 'adsorbates':
+
+            if inkey == 'adsorbates':
                 # Temporary kludge for adsorptives
                 if len(json_dict[inkey]) == 1:
                     outkey = '_exptl_adsorptive'
@@ -216,9 +209,9 @@ def json2aif(json_dict):
                     raise Exception(
                         'This script is only for pure component adsorption right now'
                     )
-            elif type(json_dict[inkey]) in [str, float, int]:
+            elif isinstance(json_dict[inkey], (str, float, int)):
                 block.set_pair(outkey, str(json_dict[inkey]))
-            elif type(json_dict[inkey]) == dict:
+            elif isinstance(json_dict[inkey], dict):
                 # Temporary kludge for adsorbents
                 if 'name' in json_dict[inkey]:
                     block.set_pair(outkey, str(json_dict[inkey]['name']))
