@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 """Parse BEL (JIS text encoding) to AIF"""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
-# pylint: disable-msg=too-many-locals
-# pylint: disable-msg=too-many-statements
-# pylint: disable-msg=too-many-branches
 import dateutil.parser
 import numpy as np
 import pandas as pd
