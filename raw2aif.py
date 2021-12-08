@@ -6,7 +6,7 @@ import sys
 import os
 import json
 from gemmi import cif  # pylint: disable-msg=no-name-in-module
-from parsers import BEL, BEL_csv, BEL_csv_JIS, quantachrome, micromeritics, NISTjson
+from parsers import BEL, BEL_csv, quantachrome, micromeritics, NISTjson
 
 
 # parse input file
@@ -15,9 +15,9 @@ def parse(filetype, filename):
     if filetype == 'BELSORP-max':
         data_meta, data_ads, data_des = BEL.parse(filename)
     elif filetype == 'BEL-csv':
-        data_meta, data_ads, data_des = BEL_csv.parse(filename)
+        data_meta, data_ads, data_des = BEL_csv.parse(filename, lang='ENG')
     elif filetype == 'BEL-csv_JIS':
-        data_meta, data_ads, data_des = BEL_csv_JIS.parse(filename)
+        data_meta, data_ads, data_des = BEL_csv.parse(filename, lang='JPN')
     elif filetype == 'quantachrome':
         data_meta, data_ads, data_des = quantachrome.parse(filename)
     elif filetype == 'micromeritics':

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Parse BEL to AIF"""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
-# pylint: disable-msg=use-a-generator
 # pylint: disable-msg=too-many-branches
+# pylint: disable-msg=use-a-generator
 from datetime import datetime
 import numpy as np
 import pandas as pd

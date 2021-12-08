@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 """Parse Quantachrome output files."""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
-# TODO: Revise parser and remove these pylint suppressions: # pylint: disable-msg=fixme
-# pylint: disable-msg=too-many-locals
-# pylint: disable-msg=too-many-statements
-# pylint: disable-msg=too-many-branches
 import re
 import numpy as np
 import pandas as pd
@@ -81,6 +77,9 @@ def parse(path):
     -------
     dataDF
     """
+    # pylint: disable-msg=too-many-locals
+    # pylint: disable-msg=too-many-branches
+    # pylint: disable-msg=too-many-statements
     # load datafile
     with open(path, 'r', encoding='ISO-8859-1', errors='ignore') as fp:
         lines = fp.readlines()
@@ -99,7 +98,7 @@ def parse(path):
                if any(t in line for t in v.get('text', []))):
             data = re.split(r'\s{2,}|(?<=\D:)', line.strip())
 
-            # TODO Are quantachrome files always saved with these mistakes? # pylint: disable-msg=use-a-generator
+            # TODO Are quantachrome files always saved with these mistakes? # pylint: disable-msg=fixme
             for i, d in enumerate(data):
                 for mistake in ['operator:', 'filename:', 'comment:']:
                     if re.search(r'\w+' + mistake, d):
