@@ -161,6 +161,8 @@ def parse(path):
     data['temperature_unit'] = 'K'
     if data['date'] == '':
         data['date'] = str(sheet.cell(11, 1).value)
+    if '下午' in data['date']:
+        data['date'] = data['date'].replace('下午', '')
     data['date'] = dateutil.parser.parse(data['date']).isoformat()
     columns = [
         c for c in _FIELDS['isotherm_data']['labels'].values() if c in data

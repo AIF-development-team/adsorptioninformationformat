@@ -75,6 +75,7 @@ mic_data = [
     ('Sample_I', 'micromeritics/Sample_I.xls'),
     ('Sample_J', 'micromeritics/Sample_J.xls'),
     ('Sample_K', 'micromeritics/Sample_K.xls'),
+    ('Sample_L', 'micromeritics/Sample_L.xls'),
 ]
 
 BELcsv_data = [('DUT-32',
