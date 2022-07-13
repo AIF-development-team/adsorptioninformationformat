@@ -9,7 +9,7 @@ Feel free to initate a pull request to add new terms.
 ## raw2aif converter
 A simple program was produced to facilitate the production of adsorption information files from raw analysis text files exported by Quantachrome software (*.txt*) and the Belsorb software raw data files (*.DAT*) and xls files exported by Micromeritics software (*.xls*).
 
-[raw2aif.herokuapp.com](http://raw2aif.herokuapp.com)
+[adsorptioninformationformat.com/raw2aif](http://adsorptioninformationformat.com/raw2aif)
 
 The steps to using this program is straightforward and a short tutorial can be found [here](https://youtu.be/uNojsNWJDCA).
 
