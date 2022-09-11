@@ -129,8 +129,7 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     outputfilename = os.path.splitext(filename)[0] + '.aif'
     d.write_file(outputfilename)
 
-
-if __name__ == '__main__':
+def main():
     filename_in = sys.argv[1]
     filetype_in = sys.argv[2]
     material_id_in = sys.argv[3]
@@ -144,3 +143,7 @@ if __name__ == '__main__':
         cif_doc = parse(filetype_in, filename_in)
         filename_out = os.path.splitext(filename_in)[0] + '.aif'
         cif_doc.write_file(filename_out)
+
+
+if __name__ == '__main__':
+    main()
