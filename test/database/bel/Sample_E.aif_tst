@@ -1,0 +1,39 @@
+data_data_raw2aifv006
+_exptl_operator 'User'
+_exptl_date 2018-06-11T00:00:00
+_exptl_instrument 'BEL 00345'
+_exptl_adsorptive C3H8
+_exptl_temperature 303.00
+_exptl_sample_mass 0.0740
+_sample_id 'Sample_E'
+_sample_material_id 'Sample_E'
+_units_temperature K
+_units_pressure kPa
+_units_mass g
+_units_loading 'ml(STP) g-1'
+
+loop_
+_adsorp_pressure
+_adsorp_p0
+_adsorp_amount
+0.21973 1079.0 7.4821
+1.1963 1079.0 15.194
+2.2014 1079.0 21.402
+3.3895 1079.0 27.15
+4.7119 1079.0 31.806
+6.6203 1079.0 36.369
+8.838 1079.0 40.23
+11.263 1079.0 43.389
+13.961 1079.0 46.39
+16.113 1079.0 48.444
+19.771 1079.0 51.312
+22.429 1079.0 53.17
+26.034 1079.0 55.357
+30.843 1079.0 57.831
+44.332 1079.0 62.823
+51.111 1079.0 64.822
+60.714 1079.0 66.918
+71.021 1079.0 68.712
+81.023 1079.0 70.084
+91.016 1079.0 71.236
+100.97 1079.0 72.251
