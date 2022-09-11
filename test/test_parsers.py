@@ -4,16 +4,17 @@
 Test all parsers for all manufacturers
 """
 
+import filecmp
 import json
 import sys
-
-import filecmp
 from pathlib import Path
 
 import pytest
-from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data, mic_data, qnt_data)
 
 from parsers import NISTjson
+
+from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data,
+                       mic_data, qnt_data)
 
 
 def run_raw2aif(args):
