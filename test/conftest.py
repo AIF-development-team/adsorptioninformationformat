@@ -20,8 +20,10 @@ def setup(request):
         aifs = glob.glob('./test/database/*/*.aif')
         pdfs = glob.glob('./test/database/*/*.pdf')
         if RECREATE_FILES:
-            for filename in aifs + pdfs:
-                os.rename(filename, filename + "_tst")
+            for filename in aifs:
+                os.replace(filename, filename + "_tst")
+            for filename in pdfs:
+                os.remove(filename)
         else:
             for filename in aifs + pdfs:
                 print(filename)
