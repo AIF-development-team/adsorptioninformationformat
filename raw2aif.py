@@ -49,7 +49,7 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     """Compose AIF dictionary and output to file"""
     # initialize aif block
     d = cif.Document()
-    d.add_new_block('data_raw2aifv006')
+    d.add_new_block('raw2aifv006')
 
     block = d.sole_block()
 
