@@ -1,4 +1,4 @@
-adsorption-file-parser
+adsorption-file-parser >=0.2.0
 pytest
 gemmi
 pandas
