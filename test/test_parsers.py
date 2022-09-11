@@ -5,6 +5,7 @@ Test all parsers for all manufacturers
 """
 
 import filecmp
+import difflib
 import json
 import sys
 from pathlib import Path
@@ -33,7 +34,18 @@ def general_parser(mat_id, file, ftype):
     outfile = infile.with_suffix(".aif")
     testfile = infile.with_suffix(".aif_tst")
     run_raw2aif([infile, ftype, mat_id])
-    assert filecmp.cmp(outfile, testfile, shallow=False)
+    if not filecmp.cmp(outfile, testfile, shallow=False):
+        with open(outfile) as f, open(testfile) as g:
+            flines = f.readlines()
+            glines = g.readlines()
+        d = difflib.Differ()
+        diffs = [x for x in d.compare(flines, glines) if x[0] in ('+', '-')]
+        if diffs:
+            # all rows with changes
+            print("\n".join(diffs))
+        else:
+            print('No changes')
+        assert False  # two files are not the same, check print for difference
 
 
 @pytest.mark.parametrize("mat_id, file", bel_data)
