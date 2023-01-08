@@ -15,7 +15,7 @@ ads_amount = np.array(block.find_loop('_adsorp_amount'), dtype=float)
 des_press = np.array(block.find_loop('_desorp_pressure'), dtype=float)
 des_amount = np.array(block.find_loop('_desorp_amount'), dtype=float)
 
-material_id = block.find_pair('_sample_material_id')[-1]
+material_id = block.find_pair('_adsnt_material_id')[-1]
 
 plt.plot(ads_press, ads_amount, 'o-', color='C0')
 plt.plot(des_press, des_amount, 'o-', color='C0', markerfacecolor='white')
