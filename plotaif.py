@@ -6,9 +6,9 @@ from gemmi import cif  # pylint: disable-msg=no-name-in-module
 import matplotlib.pyplot as plt
 import numpy as np
 
-filename = sys.argv[1]
+FILENAME = sys.argv[1]
 
-aif = cif.read(filename)
+aif = cif.read(FILENAME)
 block = aif.sole_block()
 ads_press = np.array(block.find_loop('_adsorp_pressure'), dtype=float)
 ads_amount = np.array(block.find_loop('_adsorp_amount'), dtype=float)
@@ -25,4 +25,4 @@ plt.xlabel('pressure / ' + block.find_pair('_units_pressure')[-1])
 plt.title(
     block.find_pair('_exptl_adsorptive')[-1] + ' on ' + material_id + ' at ' +
     block.find_pair('_exptl_temperature')[-1] + 'K')
-plt.savefig(os.path.splitext(filename)[0] + '.pdf')
+plt.savefig(os.path.splitext(FILENAME)[0] + '.pdf')

@@ -39,7 +39,7 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     """Compose AIF dictionary and output to file"""
     # initialize aif block
     d = cif.Document()
-    d.add_new_block('data_raw2aifv006')
+    d.add_new_block('raw2aif')
 
     block = d.sole_block()
 
@@ -64,6 +64,7 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     block.set_pair('_units_pressure', data_meta['pressure_unit'])
     block.set_pair('_units_mass', data_meta['adsorbent_unit'])
     block.set_pair('_units_loading', "'" + data_meta['loading_unit'] + "'")
+    block.set_pair('_audit_aif_version', '6acf6ef')
 
     #check if saturation pressure is for every point
     if 'pressure_saturation' in data_ads:
