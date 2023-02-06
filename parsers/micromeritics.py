@@ -118,8 +118,14 @@ def parse(path):
     """
     # pylint: disable-msg=too-many-locals
     # pylint: disable-msg=too-many-branches
+    # pylint: disable-msg=too-many-statements
+    #fix this later :)
     workbook = xlrd.open_workbook(path, encoding_override='latin-1')
-    sheet = workbook.sheet_by_index(0)
+    if len(workbook.sheet_names()) > 1:
+        sheet = workbook.sheet_by_index(
+            workbook.sheet_names().index('Isotherm Tabular Report'))
+    else:
+        sheet = workbook.sheet_by_index(0)
     data = {}
     errors = []
     for row, col in product(range(sheet.nrows), range(sheet.ncols)):
@@ -234,7 +240,10 @@ def _get_data_labels(sheet, row, col):
             header.startswith(label)
             for label in _FIELDS['isotherm_data']['labels']):
         final_column += 1
-        header = sheet.cell(row + header_row, final_column).value
+        if final_column < sheet.ncols:
+            header = sheet.cell(row + header_row, final_column).value
+        else:
+            break
 
     if col == final_column:
         # this means no header exists, can happen in some older files
@@ -264,11 +273,14 @@ def _get_datapoints(sheet, row, col):
     point = sheet.cell(final_row, col).value
     while point:
         final_row += 1
-        point = sheet.cell(final_row, col).value
+        if final_row < sheet.nrows:
+            point = sheet.cell(final_row, col).value
         # sometimes 1-row gaps are left for P0 measurement
         if not point:
             final_row += 1
             point = sheet.cell(final_row, col).value
+        elif final_row >= sheet.nrows:
+            break
     return [
         sheet.cell(i, col).value for i in range(start_row, final_row)
         if sheet.cell(i, col).value
@@ -349,5 +361,5 @@ def _check(data, path):
         print('\n'.join(data['errors']))
 
 
-## Debug
-#data_meta, data_ads, data_des = parse('')
+# Debug
+#data_meta, data_ads, data_des = parse('test/database/micromeritics/Sample_F.xls')
