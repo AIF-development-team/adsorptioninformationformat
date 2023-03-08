@@ -64,7 +64,6 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     block.set_pair('_units_pressure', data_meta['pressure_unit'])
     block.set_pair('_units_mass', data_meta['adsorbent_unit'])
     block.set_pair('_units_loading', "'" + data_meta['loading_unit'] + "'")
-    block.set_pair('_units_loading', "'" + data_meta['loading_unit'] + "'")
     block.set_pair('_audit_aif_version', 'd546195')
 
     #check if saturation pressure is for every point
