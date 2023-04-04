@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Parse NIST JSON to AIF"""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
+# pylint: disable-msg=too-many-statements
 #built from the suggestion of https://github.com/dwsideriusNIST described here https://github.com/dwsideriusNIST/adsorptioninformationformat/blob/sandbox/JSON_Sandbox/Example_AIF_and_JSON_Conversions.ipynb # pylint: disable-msg=line-too-long
 import json
 from gemmi import cif  # pylint: disable-msg=no-name-in-module
@@ -63,6 +64,11 @@ equivalency_table = [
         'AIF': '_exptl_sample_mass',
         'JSON': 'exptl_sample_mass',
         'dtype': float
+    },
+    {
+        'AIF': '_exptl_isotherm_type',
+        'JSON': 'isotherm_type',
+        'dtype': str
     },
     #allow JSON arrays to be parsed
     {
@@ -209,8 +215,14 @@ def json2aif(json_dict):
                     raise Exception(
                         'This script is only for pure component adsorption right now'
                     )
-            elif isinstance(json_dict[inkey], (str, float, int)):
+            elif isinstance(json_dict[inkey], (float, int)):
                 block.set_pair(outkey, str(json_dict[inkey]))
+            elif isinstance(json_dict[inkey], (str)):
+                # Wrap strings in '' if key-value includes space
+                out_string = json_dict[inkey]
+                if ' ' in out_string:
+                    out_string = "'" + out_string + "'"
+                block.set_pair(outkey, out_string)
             elif isinstance(json_dict[inkey], dict):
                 # Temporary kludge for adsorbents
                 if 'name' in json_dict[inkey]:

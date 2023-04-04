@@ -1,9 +1,9 @@
 {
     "filename": "10.1021Jp400480q.Isotherm2",
     "DOI": "10.1021/Jp400480q",
-    "articleSource": "UNKNOWN",
+    "articleSource": "Figure X",
     "date": "1000-01-01",
-    "digitizer": "UNKNOWN",
+    "digitizer": "Unknown Student",
     "adsorbent": {
         "hashkey": "NIST-MATDB-47dadc99a0da13b9e9bb3032468ecbdf",
         "name": "MWCNT"
@@ -14,12 +14,12 @@
             "name": "Argon"
         }
     ],
-    "category": "",
+    "category": "sim",
     "temperature": 87,
     "tabular_data": 0,
-    "isotherm_type": "",
-    "adsorptionUnits": "kmol/m3",
-    "pressureUnits": "bar",
+    "isotherm_type": "absolute",
+    "adsorptionUnits": "KiloMOL-PER-M3",
+    "pressureUnits": "BAR",
     "compositionType": "molefraction",
     "concentrationUnits": "",
     "isotherm_data": [
