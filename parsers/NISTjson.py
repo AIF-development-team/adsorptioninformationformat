@@ -15,7 +15,7 @@ equivalency_table = [
         'dtype': float
     },
     {
-        'AIF': '_sample_material_id',
+        'AIF': '_adsnt_material_id',
         'JSON': 'adsorbent',
         'dtype': str
     },
@@ -30,7 +30,7 @@ equivalency_table = [
         'dtype': str
     },
     {
-        'AIF': '_sample_digitizer',
+        'AIF': '_exptl_digitizer',
         'JSON': 'digitizer',
         'dtype': str
     },
@@ -50,7 +50,7 @@ equivalency_table = [
         'dtype': str
     },
     {
-        'AIF': '_measurement_type',
+        'AIF': '_exptl_method"',
         'JSON': 'category',
         'dtype': str
     },
@@ -215,7 +215,7 @@ def json2aif(json_dict):
                 # Temporary kludge for adsorbents
                 if 'name' in json_dict[inkey]:
                     block.set_pair(outkey, str(json_dict[inkey]['name']))
-                    block.set_pair('_sample_id',
+                    block.set_pair('_adsnt_sample_id',
                                    str(json_dict[inkey]['hashkey']))
             else:
                 print(inkey, json_dict[inkey], outkey)

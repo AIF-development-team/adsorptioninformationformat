@@ -55,16 +55,16 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
         block.set_pair('_exptl_instrument', "'" + data_meta['apparatus'] + "'")
     block.set_pair('_exptl_adsorptive', data_meta['adsorbate'])
     block.set_pair('_exptl_temperature', str(data_meta['temperature']))
-    block.set_pair('_exptl_sample_mass', str(data_meta['mass']))
+    block.set_pair('_adsnt_sample_mass', str(data_meta['mass']))
 
-    block.set_pair('_sample_id', "'" + data_meta['sample_id'] + "'")
-    block.set_pair('_sample_material_id', "'" + material_id + "'")
+    block.set_pair('_adsnt_sample_id', "'" + data_meta['sample_id'] + "'")
+    block.set_pair('_adsnt_material_id', "'" + material_id + "'")
 
     block.set_pair('_units_temperature', data_meta['temperature_unit'])
     block.set_pair('_units_pressure', data_meta['pressure_unit'])
     block.set_pair('_units_mass', data_meta['adsorbent_unit'])
     block.set_pair('_units_loading', "'" + data_meta['loading_unit'] + "'")
-    block.set_pair('_audit_aif_version', '6acf6ef')
+    block.set_pair('_audit_aif_version', 'd546195')
 
     #check if saturation pressure is for every point
     if 'pressure_saturation' in data_ads:

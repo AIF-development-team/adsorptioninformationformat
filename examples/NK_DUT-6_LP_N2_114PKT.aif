@@ -5,12 +5,13 @@ _exptl_instrument 'Autosorb Station 1'
 _exptl_adsorptive Nitrogen
 _exptl_temperature 77.3
 _exptl_sample_mass 0.0339
-_sample_id 'nk_DUT-6_LP_N2_114pkt'
-_sample_material_id 'DUT-6'
+_adsnt_sample_id 'nk_DUT-6_LP_N2_114pkt'
+_adsnt_material_id 'DUT-6'
 _units_temperature K
 _units_pressure Pa
 _units_mass g
 _units_loading mmol/g
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure
