@@ -13,7 +13,6 @@ from pathlib import Path
 import pytest
 
 from parsers import NISTjson
-
 from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data, mic_data, qnt_data)
 
 

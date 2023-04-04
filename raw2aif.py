@@ -49,7 +49,8 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     """Compose AIF dictionary and output to file"""
     # initialize aif block
     d = cif.Document()
-    d.add_new_block('raw2aifv006')
+
+    d.add_new_block('raw2aif')
 
     block = d.sole_block()
 
@@ -65,15 +66,16 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
         block.set_pair('_exptl_instrument', quoted(data_meta['apparatus']))
     block.set_pair('_exptl_adsorptive', quoted(data_meta['adsorbate']))
     block.set_pair('_exptl_temperature', str(data_meta['temperature']))
-    block.set_pair('_exptl_sample_mass', str(data_meta['material_mass']))
+    block.set_pair('_adsnt_sample_mass', str(data_meta['material_mass']))
 
-    block.set_pair('_sample_id', quoted(data_meta['material']))
-    block.set_pair('_sample_material_id', quoted(material_id))
+    block.set_pair('_adsnt_sample_id', quoted(data_meta['material']))
+    block.set_pair('_adsnt_material_id', quoted(material_id))
 
     block.set_pair('_units_temperature', quoted(data_meta['temperature_unit']))
     block.set_pair('_units_pressure', quoted(data_meta['pressure_unit']))
     block.set_pair('_units_mass', quoted(data_meta['material_unit']))
     block.set_pair('_units_loading', quoted(data_meta['loading_unit']))
+    block.set_pair('_audit_aif_version', '2263286')
 
     #check if saturation pressure is for every point
     # TODO: what if none of these conditions are correct i.e. saturation_pressure is not given at all?
