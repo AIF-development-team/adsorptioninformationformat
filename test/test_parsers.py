@@ -109,7 +109,7 @@ def test_bel_parser():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_bel_output():
@@ -125,7 +125,7 @@ def test_bel_output():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_qnt_parser():
@@ -141,7 +141,7 @@ def test_qnt_parser():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_qnt_output():
@@ -157,7 +157,7 @@ def test_qnt_output():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_mic_parser():
@@ -173,7 +173,7 @@ def test_mic_parser():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_mic_output():
@@ -189,7 +189,7 @@ def test_mic_output():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_BELcsv_parser():
@@ -205,7 +205,7 @@ def test_BELcsv_parser():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_BELcsv_output():
@@ -221,7 +221,7 @@ def test_BELcsv_output():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_BELcsv_JIS_parser():
@@ -237,7 +237,7 @@ def test_BELcsv_JIS_parser():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_BELcsv_JIS_output():
@@ -253,7 +253,7 @@ def test_BELcsv_JIS_output():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_NISTjson_parser():
@@ -269,7 +269,7 @@ def test_NISTjson_parser():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_NISTjson_output():
@@ -285,7 +285,7 @@ def test_NISTjson_output():
         if p.stderr:
             for line in p.stderr.decode(encoding='utf-8').split('\n'):
                 print(line)
-            raise Exception(file)
+            raise ValueError(file)
 
 
 def test_aif2NISTjson():
