@@ -28,7 +28,7 @@ def parse(filetype, filename):
         d = NISTjson.json2aif(json_dict)
         return d  # TODO make consistent with other parsers # pylint: disable-msg=fixme
     else:
-        raise Exception(
+        raise ValueError(
             'This file type is unknown or currently not supported.')
     if filetype != 'NIST-json':
         return (data_meta, data_ads, data_des)
