@@ -115,9 +115,9 @@ def parse(path):
                         material_info[name] = ' '
 
         if 'press' in line:
-            ads_start = (index + 4)
+            ads_start = index + 4
         elif 'p/po' in line:
-            ads_start = (index + 4)
+            ads_start = index + 4
     # get the adsorption data
 
     for index, line in enumerate(lines):
