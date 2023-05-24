@@ -15,7 +15,8 @@ import pytest
 
 from parsers import NISTjson
 
-from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data, mic_data, qnt_data)
+from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data,
+                       mic_data, qnt_data)
 
 
 def run_raw2aif(args):
