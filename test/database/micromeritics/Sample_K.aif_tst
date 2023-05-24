@@ -1,16 +1,17 @@
-data_data_raw2aifv006
-_exptl_operator 'XXXX'
+data_raw2aif
+_exptl_operator 'unknown'
 _exptl_date 2021-04-14T09:20:40
 _exptl_instrument '3Flex 5.01'
-_exptl_adsorptive C2H2
+_exptl_adsorptive 'C2H2'
 _exptl_temperature 298.0
-_exptl_sample_mass 0.1025
-_sample_id 'XXXX'
-_sample_material_id 'Sample_K'
-_units_temperature K
-_units_pressure mbar
-_units_mass g
+_adsnt_sample_mass 0.1025
+_adsnt_sample_id 'XXXX'
+_adsnt_material_id 'Sample_K'
+_units_temperature 'K'
+_units_pressure 'mbar'
+_units_mass 'g'
 _units_loading 'cm³/g STP'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure

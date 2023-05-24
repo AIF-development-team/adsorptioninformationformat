@@ -1,16 +1,17 @@
-data_data_raw2aifv006
+data_raw2aif
 _exptl_operator 'User'
 _exptl_date 2018-06-11T00:00:00
 _exptl_instrument 'BEL 00345'
-_exptl_adsorptive C3H8
-_exptl_temperature 303.00
-_exptl_sample_mass 0.0740
-_sample_id 'Sample_E'
-_sample_material_id 'Sample_E'
-_units_temperature K
-_units_pressure kPa
-_units_mass g
+_exptl_adsorptive 'C3H8'
+_exptl_temperature 303.0
+_adsnt_sample_mass 0.074
+_adsnt_sample_id 'Sample_E'
+_adsnt_material_id 'Sample_E'
+_units_temperature 'K'
+_units_pressure 'kPa'
+_units_mass 'g'
 _units_loading 'ml(STP) g-1'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure

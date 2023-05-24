@@ -1,16 +1,17 @@
-data_data_raw2aifv006
-_exptl_operator unknown
+data_raw2aif
+_exptl_operator 'unknown'
 _exptl_date 2017-06-17T12:27:21
 _exptl_instrument 'TriStar II 3020 3.02'
-_exptl_adsorptive N2
+_exptl_adsorptive 'N2'
 _exptl_temperature 77.3
-_exptl_sample_mass 0.1013
-_sample_id 'Sample A'
-_sample_material_id 'Sample_A'
-_units_temperature K
-_units_pressure torr
-_units_mass g
+_adsnt_sample_mass 0.1013
+_adsnt_sample_id 'Sample A'
+_adsnt_material_id 'Sample_A'
+_units_temperature 'K'
+_units_pressure 'mmHg'
+_units_mass 'g'
 _units_loading 'cm³/g STP'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure

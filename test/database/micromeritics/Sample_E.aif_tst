@@ -1,16 +1,17 @@
-data_data_raw2aifv006
-_exptl_operator unknown
+data_raw2aif
+_exptl_operator 'unknown'
 _exptl_date 2021-04-15T10:29:18
 _exptl_instrument 'ASAP 2020 V3.01 H'
-_exptl_adsorptive N2
-_exptl_temperature 77.50999999999999
-_exptl_sample_mass 0.0898
-_sample_id 'TEST'
-_sample_material_id 'Sample_E'
-_units_temperature K
-_units_pressure kPa
-_units_mass g
+_exptl_adsorptive 'N2'
+_exptl_temperature -195.64
+_adsnt_sample_mass 0.0898
+_adsnt_sample_id 'TEST'
+_adsnt_material_id 'Sample_E'
+_units_temperature '°C'
+_units_pressure 'kPa'
+_units_mass 'g'
 _units_loading 'mmol/g'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure

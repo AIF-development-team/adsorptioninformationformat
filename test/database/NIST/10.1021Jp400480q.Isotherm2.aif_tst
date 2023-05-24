@@ -1,9 +1,9 @@
 data_10.1021Jp400480q.Isotherm2
 _citation_doi 10.1021/Jp400480q
 _citation_source UNKNOWN
-_sample_digitizer UNKNOWN
-_sample_material_id MWCNT
-_sample_id NIST-MATDB-47dadc99a0da13b9e9bb3032468ecbdf
+_exptl_digitizer UNKNOWN
+_adsnt_material_id MWCNT
+_adsnt_sample_id NIST-MATDB-47dadc99a0da13b9e9bb3032468ecbdf
 _exptl_adsorptive Argon
 _exptl_temperature 87
 _units_loading kmol/m3

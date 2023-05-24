@@ -1,16 +1,17 @@
-data_data_raw2aifv006
+data_raw2aif
 _exptl_operator 'irena'
 _exptl_date 2013-01-30T00:00:00
 _exptl_instrument 'BEL 00218'
-_exptl_adsorptive N2
+_exptl_adsorptive 'N2'
 _exptl_temperature 77.0
-_exptl_sample_mass 0.0184
-_sample_id 'RGE-343_DUT-32-7d'
-_sample_material_id 'DUT-32'
-_units_temperature K
-_units_pressure kPa
-_units_mass g
+_adsnt_sample_mass 0.0184
+_adsnt_sample_id 'RGE-343_DUT-32-7d'
+_adsnt_material_id 'DUT-32'
+_units_temperature 'K'
+_units_pressure 'kPa'
+_units_mass 'g'
 _units_loading 'cm^3(STP) g^-1'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure
@@ -309,12 +310,12 @@ _adsorp_amount
 96.12 101.33 1785.9
 97.911 101.33 1775.3
 99.442 101.33 1764.3
-100.51 101.33 1640.0
-101.4 101.33 1528.2
 
 loop_
 _desorp_pressure
 _desorp_p0
 _desorp_amount
+100.51 101.33 1640.0
+101.4 101.33 1528.2
 100.28 101.33 1416.0
 97.395 101.33 1307.5

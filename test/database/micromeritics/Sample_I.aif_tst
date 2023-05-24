@@ -1,16 +1,17 @@
-data_data_raw2aifv006
+data_raw2aif
 _exptl_operator 'shan'
 _exptl_date 2019-12-14T12:00:05
 _exptl_instrument 'MicroActive 4.03'
-_exptl_adsorptive N2
+_exptl_adsorptive 'N2'
 _exptl_temperature 77.3
-_exptl_sample_mass 0.1226
-_sample_id 'SD 687-scale up'
-_sample_material_id 'Sample_I'
-_units_temperature K
-_units_pressure mbar
-_units_mass g
+_adsnt_sample_mass 0.1226
+_adsnt_sample_id 'SD 687-scale up'
+_adsnt_material_id 'Sample_I'
+_units_temperature 'K'
+_units_pressure 'mbar'
+_units_mass 'g'
 _units_loading 'cm³/g STP'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure

@@ -1,16 +1,17 @@
-data_data_raw2aifv006
-_exptl_operator unknown
+data_raw2aif
+_exptl_operator 'unknown'
 _exptl_date 2021-12-16T06:50:16
 _exptl_instrument '3Flex 5.02'
-_exptl_adsorptive N2
-_exptl_temperature 77.29999999999998
-_exptl_sample_mass 0.0832
-_sample_id 'XXXXinXXXX'
-_sample_material_id 'Sample_L'
-_units_temperature K
-_units_pressure torr
-_units_mass g
+_exptl_adsorptive 'N2'
+_exptl_temperature -195.85
+_adsnt_sample_mass 0.0832
+_adsnt_sample_id 'XXXXinXXXX'
+_adsnt_material_id 'Sample_L'
+_units_temperature '°C'
+_units_pressure 'mmHg'
+_units_mass 'g'
 _units_loading 'cm³/g STP'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure

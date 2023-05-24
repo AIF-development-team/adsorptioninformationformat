@@ -1,16 +1,17 @@
-data_data_raw2aifv006
-_exptl_operator unknown
+data_raw2aif
+_exptl_operator 'unknown'
 _exptl_date 2019-08-23T00:00:00
 _exptl_instrument 'BEL HP-102'
-_exptl_adsorptive CH4
+_exptl_adsorptive 'CH4'
 _exptl_temperature 190.0
-_exptl_sample_mass 0.0289
-_sample_id ''
-_sample_material_id 'DUT-13'
-_units_temperature K
-_units_pressure  kPa
-_units_mass g
+_adsnt_sample_mass 0.0289
+_adsnt_sample_id 'BF-010-DUT-13-CH4-190K-run1.DAT'
+_adsnt_material_id 'DUT-13'
+_units_temperature 'K'
+_units_pressure 'kPa'
+_units_mass 'g'
 _units_loading 'cm^3(STP) g^-1'
+_audit_aif_version d546195
 
 loop_
 _adsorp_pressure
