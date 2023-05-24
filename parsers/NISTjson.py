@@ -207,7 +207,7 @@ def json2aif(json_dict):
                     outstring = json_dict[inkey][0]['name']
                     block.set_pair(outkey, outstring)
                 else:
-                    raise Exception(
+                    raise ValueError(
                         'This script is only for pure component adsorption right now'
                     )
             elif isinstance(json_dict[inkey], (str, float, int)):
@@ -220,7 +220,7 @@ def json2aif(json_dict):
                                    str(json_dict[inkey]['hashkey']))
             else:
                 print(inkey, json_dict[inkey], outkey)
-                raise Exception('Script unable to handle this key set')
+                raise ValueError('Script unable to handle this key set')
 
     # Measurements
     #   Default to adsorption branch, state as desorption ONLY if specified
@@ -237,7 +237,8 @@ def json2aif(json_dict):
                 pressure_desorp.append(point['pressure'])
                 amount_desorp.append(point['species_data'][0]['adsorption'])
             else:
-                raise Exception('ERROR: unknown branch type:', point['branch'])
+                raise ValueError('ERROR: unknown branch type:',
+                                 point['branch'])
         else:  #default=adsorp
             pressure_adsorp.append(point['pressure'])
             amount_adsorp.append(point['species_data'][0]['adsorption'])
