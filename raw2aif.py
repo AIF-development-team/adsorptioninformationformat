@@ -43,7 +43,6 @@ def parse(filetype, filename):
     data_meta, data_ads, data_des = aif_data_standardise(meta, data)
     return (data_meta, data_ads, data_des)
 
-
 # write adsorption file
 def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     """Compose AIF dictionary and output to file"""

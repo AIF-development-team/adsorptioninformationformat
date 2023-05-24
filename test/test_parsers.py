@@ -52,7 +52,6 @@ def test_bel_parser(mat_id, file):
     """Test BEL Parser"""
     general_parser(mat_id, file, "BELSORP-max")
 
-
 @pytest.mark.parametrize("mat_id, file", bel_data)
 def test_bel_output(mat_id, file):
     """Check BEL output"""
@@ -65,7 +64,6 @@ def test_BELcsv_parser(mat_id, file):
     """Test BEL CSV Parser"""
     general_parser(mat_id, file, "BEL-csv")
 
-
 @pytest.mark.parametrize("mat_id, file", BELcsv_data)
 def test_BELcsv_output(mat_id, file):
     """Check BEL CSV output"""
@@ -77,7 +75,7 @@ def test_BELcsv_output(mat_id, file):
 def test_BELcsv_JIS_parser(mat_id, file):
     """Test BEL CSV Parser (Japanese)"""
     general_parser(mat_id, file, "BEL-csv_JIS")
-
+    
 
 @pytest.mark.parametrize("mat_id, file", BELcsv_JIS_data)
 def test_BELcsv_JIS_output(mat_id, file):
@@ -91,13 +89,11 @@ def test_qnt_parser(mat_id, file):
     """Test Quantachrome Parser"""
     general_parser(mat_id, file, "quantachrome")
 
-
 @pytest.mark.parametrize("mat_id, file", qnt_data)
 def test_qnt_output(mat_id, file):
     """Check Quantachrome output"""
     outfile = Path(file).with_suffix('.aif')
     run_plotaif([f"./test/database/{outfile}"])
-
 
 @pytest.mark.parametrize("mat_id, file", mic_data)
 def test_mic_parser(mat_id, file):
