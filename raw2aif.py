@@ -2,13 +2,14 @@
 """Convert raw file (format agnostic) to AIF"""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
 # pylint: disable-msg=inconsistent-return-statements
-import sys
-import os
 import json
-from gemmi import cif  # pylint: disable-msg=no-name-in-module
-from parsers import NISTjson
+import os
+import sys
+
 from adsorption_file_parser import read as afp_read
-from parsers import aif_data_standardise
+from gemmi import cif  # pylint: disable-msg=no-name-in-module
+
+from parsers import NISTjson, aif_data_standardise
 
 
 def quoted(text):

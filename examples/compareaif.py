@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Compare AIF Files and plot"""
-import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import numpy as np
 from gemmi import cif  # pylint: disable-msg=no-name-in-module
 
 aif = cif.read_file(

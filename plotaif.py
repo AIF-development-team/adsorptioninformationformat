@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """Plot AIF from command line"""
-import sys
 import os
-from gemmi import cif  # pylint: disable-msg=no-name-in-module
+import sys
+
 import matplotlib.pyplot as plt
 import numpy as np
+from gemmi import cif  # pylint: disable-msg=no-name-in-module
+
 
 def main():
     filename = sys.argv[1]

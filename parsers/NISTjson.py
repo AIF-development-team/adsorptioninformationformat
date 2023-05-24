@@ -3,8 +3,9 @@
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
 #built from the suggestion of https://github.com/dwsideriusNIST described here https://github.com/dwsideriusNIST/adsorptioninformationformat/blob/sandbox/JSON_Sandbox/Example_AIF_and_JSON_Conversions.ipynb # pylint: disable-msg=line-too-long
 import json
-from gemmi import cif  # pylint: disable-msg=no-name-in-module
+
 import numpy as np
+from gemmi import cif  # pylint: disable-msg=no-name-in-module
 
 #define some equivalency table
 

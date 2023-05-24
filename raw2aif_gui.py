@@ -4,7 +4,8 @@
 import os
 
 from gooey import Gooey, GooeyParser  # pylint: disable-msg=import-error
-from raw2aif import parse, makeAIF
+
+from raw2aif import makeAIF, parse
 
 
 def convert(filename, material_id, filetype):
