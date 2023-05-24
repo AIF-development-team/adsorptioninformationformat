@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
+# pylint: disable-msg=import-outside-toplevel # to allow non-conforming variable names
 """
 Test all parsers for all manufacturers
 """
@@ -14,8 +15,7 @@ import pytest
 
 from parsers import NISTjson
 
-from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data,
-                       mic_data, qnt_data)
+from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data, mic_data, qnt_data)
 
 
 def run_raw2aif(args):
