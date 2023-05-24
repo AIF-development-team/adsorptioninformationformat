@@ -26,12 +26,10 @@ def main():
     plt.ylabel('quantity adsorbed / ' + block.find_pair('_units_loading')[-1])
     plt.xlabel('pressure / ' + block.find_pair('_units_pressure')[-1])
     plt.title(
-        block.find_pair('_exptl_adsorptive')[-1] + ' on ' + material_id + ' at ' +
-        block.find_pair('_exptl_temperature')[-1] + 'K'
-    )
+        block.find_pair('_exptl_adsorptive')[-1] + ' on ' + material_id +
+        ' at ' + block.find_pair('_exptl_temperature')[-1] + 'K')
     plt.savefig(os.path.splitext(filename)[0] + '.pdf')
 
 
 if __name__ == '__main__':
     main()
-

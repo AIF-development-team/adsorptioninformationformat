@@ -13,6 +13,7 @@ from parsers import NISTjson, aif_data_standardise
 
 
 def quoted(text):
+    """Add a single quote around an argument."""
     return "'" + text + "'"
 
 
@@ -22,9 +23,15 @@ def parse(filetype, filename):
     if filetype == 'BELSORP-max':
         meta, data = afp_read(path=filename, manufacturer='bel', fmt='dat')
     elif filetype == 'BEL-csv':
-        meta, data = afp_read(path=filename, manufacturer='bel', fmt='csv', lang='ENG')
+        meta, data = afp_read(path=filename,
+                              manufacturer='bel',
+                              fmt='csv',
+                              lang='ENG')
     elif filetype == 'BEL-csv_JIS':
-        meta, data = afp_read(path=filename, manufacturer='bel', fmt='csv', lang='JPN')
+        meta, data = afp_read(path=filename,
+                              manufacturer='bel',
+                              fmt='csv',
+                              lang='JPN')
     elif filetype == 'BELSORP-max_xl':
         meta, data = afp_read(path=filename, manufacturer='bel', fmt='xl')
     elif filetype == 'quantachrome':
@@ -39,10 +46,12 @@ def parse(filetype, filename):
         d = NISTjson.json2aif(json_dict)
         return d  # TODO make consistent with other parsers # pylint: disable-msg=fixme
     else:
-        raise Exception('This file type is unknown or currently not supported.')
+        raise Exception(
+            'This file type is unknown or currently not supported.')
 
     data_meta, data_ads, data_des = aif_data_standardise(meta, data)
     return (data_meta, data_ads, data_des)
+
 
 # write adsorption file
 def makeAIF(data_meta, data_ads, data_des, material_id, filename):
@@ -78,7 +87,8 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     block.set_pair('_audit_aif_version', 'd546195')
 
     #check if saturation pressure is for every point
-    # TODO: what if none of these conditions are correct i.e. saturation_pressure is not given at all?
+    # TODO: what if none of these conditions are correct
+    # i.e. saturation_pressure is not given at all?
     if 'pressure_saturation' in data_ads:
         # write adsorption data
         loop_ads = block.init_loop('_adsorp_', ['pressure', 'p0', 'amount'])
@@ -90,7 +100,8 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
 
         # write desorption data
         if len(data_des > 0):
-            loop_des = block.init_loop('_desorp_', ['pressure', 'p0', 'amount'])
+            loop_des = block.init_loop('_desorp_',
+                                       ['pressure', 'p0', 'amount'])
             loop_des.set_all_values([
                 list(data_des['pressure'].astype(str)),
                 list(data_des['pressure_saturation'].astype(str)),
@@ -98,7 +109,8 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
             ])
 
     # TODO: this branch can never be reached
-    elif 'pressure_saturation' in data_ads and len(list(data_meta['pressure_saturation'])) == 1:
+    elif 'pressure_saturation' in data_ads and len(
+            list(data_meta['pressure_saturation'])) == 1:
         block.set_pair('_exptl_p0', str(data_meta['pressure_saturation'][0]))
         # write adsorption data
         loop_ads = block.init_loop('_adsorp_', ['pressure', 'amount'])
@@ -117,7 +129,8 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
 
     elif 'pressure_saturation' not in data_ads and 'pressure_relative' in data_ads:
         # write adsorption data
-        data_ads['pressure_saturation'] = (1 / data_ads['pressure_relative']) * data_ads['pressure']
+        data_ads['pressure_saturation'] = (
+            1 / data_ads['pressure_relative']) * data_ads['pressure']
         loop_ads = block.init_loop('_adsorp_', ['pressure', 'p0', 'amount'])
         loop_ads.set_all_values([
             list(data_ads['pressure'].astype(str)),
@@ -127,9 +140,10 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
 
         # write desorption data
         if len(data_des > 0):
-            data_des['pressure_saturation'] = (1 /
-                                               data_des['pressure_relative']) * data_des['pressure']
-            loop_des = block.init_loop('_desorp_', ['pressure', 'p0', 'amount'])
+            data_des['pressure_saturation'] = (
+                1 / data_des['pressure_relative']) * data_des['pressure']
+            loop_des = block.init_loop('_desorp_',
+                                       ['pressure', 'p0', 'amount'])
             loop_des.set_all_values([
                 list(data_des['pressure'].astype(str)),
                 list(data_des['pressure_saturation'].astype(str)),
@@ -157,13 +171,16 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
 
 
 def main():
+    """Main function."""
     filename_in = sys.argv[1]
     filetype_in = sys.argv[2]
     material_id_in = sys.argv[3]
 
     if filetype_in != 'NIST-json':
-        data_meta_out, data_ads_out, data_des_out = parse(filetype_in, filename_in)
-        makeAIF(data_meta_out, data_ads_out, data_des_out, material_id_in, filename_in)
+        data_meta_out, data_ads_out, data_des_out = parse(
+            filetype_in, filename_in)
+        makeAIF(data_meta_out, data_ads_out, data_des_out, material_id_in,
+                filename_in)
     if filetype_in == 'NIST-json':
         cif_doc = parse(filetype_in, filename_in)
         filename_out = os.path.splitext(filename_in)[0] + '.aif'
