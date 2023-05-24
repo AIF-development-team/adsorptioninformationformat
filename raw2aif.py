@@ -2,6 +2,7 @@
 """Convert raw file (format agnostic) to AIF"""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
 # pylint: disable-msg=inconsistent-return-statements
+# pylint: disable-msg=too-many-statements
 import json
 import os
 import sys
@@ -87,7 +88,7 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
     block.set_pair('_audit_aif_version', 'd546195')
 
     #check if saturation pressure is for every point
-    # TODO: what if none of these conditions are correct
+    # warning: what if none of these conditions are correct
     # i.e. saturation_pressure is not given at all?
     if 'pressure_saturation' in data_ads:
         # write adsorption data
@@ -108,7 +109,7 @@ def makeAIF(data_meta, data_ads, data_des, material_id, filename):
                 list(data_des['loading'].astype(str))
             ])
 
-    # TODO: this branch can never be reached
+    # warning: this branch can never be reached
     elif 'pressure_saturation' in data_ads and len(
             list(data_meta['pressure_saturation'])) == 1:
         block.set_pair('_exptl_p0', str(data_meta['pressure_saturation'][0]))

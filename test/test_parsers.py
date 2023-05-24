@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
-# pylint: disable-msg=import-outside-toplevel # to allow non-conforming variable names
+# pylint: disable-msg=import-outside-toplevel # to allow on-the-fly import
 """
 Test all parsers for all manufacturers
 """
@@ -40,7 +40,8 @@ def general_parser(mat_id, file, ftype):
     testfile = infile.with_suffix('.aif_tst')
     run_raw2aif([infile, ftype, mat_id])
     if not filecmp.cmp(outfile, testfile, shallow=False):
-        with open(outfile) as f, open(testfile) as g:
+        with open(outfile, encoding='utf8') as f, open(testfile,
+                                                       encoding='utf8') as g:
             flines = f.readlines()
             glines = g.readlines()
         d = difflib.Differ()
@@ -59,10 +60,10 @@ def test_bel_parser(mat_id, file):
     general_parser(mat_id, file, 'BELSORP-max')
 
 
-@pytest.mark.parametrize('mat_id, file', bel_data)
-def test_bel_output(mat_id, file):
+@pytest.mark.parametrize('data', bel_data)
+def test_bel_output(data):
     """Check BEL output"""
-    outfile = Path(file).with_suffix('.aif')
+    outfile = Path(data[1]).with_suffix('.aif')
     run_plotaif([f'./test/database/{outfile}'])
 
 
@@ -72,10 +73,10 @@ def test_BELcsv_parser(mat_id, file):
     general_parser(mat_id, file, 'BEL-csv')
 
 
-@pytest.mark.parametrize('mat_id, file', BELcsv_data)
-def test_BELcsv_output(mat_id, file):
+@pytest.mark.parametrize('data', BELcsv_data)
+def test_BELcsv_output(data):
     """Check BEL CSV output"""
-    outfile = Path(file).with_suffix('.aif')
+    outfile = Path(data[1]).with_suffix('.aif')
     run_plotaif([f'./test/database/{outfile}'])
 
 
@@ -85,10 +86,10 @@ def test_BELcsv_JIS_parser(mat_id, file):
     general_parser(mat_id, file, 'BEL-csv_JIS')
 
 
-@pytest.mark.parametrize('mat_id, file', BELcsv_JIS_data)
-def test_BELcsv_JIS_output(mat_id, file):
+@pytest.mark.parametrize('data', BELcsv_JIS_data)
+def test_BELcsv_JIS_output(data):
     """Check BEL CSV output (Japanese)"""
-    outfile = Path(file).with_suffix('.aif')
+    outfile = Path(data[1]).with_suffix('.aif')
     run_plotaif([f'./test/database/{outfile}'])
 
 
@@ -98,10 +99,10 @@ def test_qnt_parser(mat_id, file):
     general_parser(mat_id, file, 'quantachrome')
 
 
-@pytest.mark.parametrize('mat_id, file', qnt_data)
-def test_qnt_output(mat_id, file):
+@pytest.mark.parametrize('data', qnt_data)
+def test_qnt_output(data):
     """Check Quantachrome output"""
-    outfile = Path(file).with_suffix('.aif')
+    outfile = Path(data[1]).with_suffix('.aif')
     run_plotaif([f'./test/database/{outfile}'])
 
 
@@ -111,10 +112,10 @@ def test_mic_parser(mat_id, file):
     general_parser(mat_id, file, 'micromeritics')
 
 
-@pytest.mark.parametrize('mat_id, file', mic_data)
-def test_mic_output(mat_id, file):
+@pytest.mark.parametrize('data', mic_data)
+def test_mic_output(data):
     """Check Micromeritics output"""
-    outfile = Path(file).with_suffix('.aif')
+    outfile = Path(data[1]).with_suffix('.aif')
     run_plotaif([f'./test/database/{outfile}'])
 
 
@@ -124,10 +125,10 @@ def test_NISTjson_parser(mat_id, file):
     general_parser(mat_id, file, 'NIST-json')
 
 
-@pytest.mark.parametrize('mat_id, file', NIST_data)
-def test_NISTjson_output(mat_id, file):
+@pytest.mark.parametrize('data', NIST_data)
+def test_NISTjson_output(data):
     """Check NIST JSON Parser"""
-    outfile = Path(file).with_suffix('.aif')
+    outfile = Path(data[1]).with_suffix('.aif')
     run_plotaif([f'./test/database/{outfile}'])
 
 
