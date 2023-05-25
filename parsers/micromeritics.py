@@ -10,11 +10,11 @@ https://github.com/Micromeritics/micromeritics/tree/master/micromeritics
 
 import re
 from itertools import product
-import dateutil.parser
 
+import dateutil.parser
 import numpy as np
-import xlrd
 import pandas as pd
+import xlrd
 
 _NUMBER_REGEX = re.compile(r'^(-)?\d+(.|,)?\d+')
 

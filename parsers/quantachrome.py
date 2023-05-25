@@ -2,9 +2,10 @@
 """Parse Quantachrome output files."""
 # pylint: disable-msg=invalid-name # to allow non-conforming variable names
 import re
+
+import dateutil.parser
 import numpy as np
 import pandas as pd
-import dateutil.parser
 
 _FIELDS = {
     'material': {
