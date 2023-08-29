@@ -54,3 +54,5 @@ jobs:
       run: |
         pre-commit install
         pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
+
+workflow_dispatch:
