@@ -6,21 +6,21 @@
 Analysis                                          Report
 Operator:      QC             Date:2016/10/07     Operator: ir                  Date:2020/05/06
 Sample ID:     ih_DUT-60_183b      Filename:      ih_DUT-60_183b.qps
-Sample Desc:                       Comment:       ih_DUT-60_183b                     
-Sample Weight: 0.0081 g            Instrument:    Autosorb iQ Station 1              
+Sample Desc:                       Comment:       ih_DUT-60_183b
+Sample Weight: 0.0081 g            Instrument:    Autosorb iQ Station 1
 Approx. Outgas Time:12.0 hrs       Final Outgas Temp.:30 °C           Extended info: Available
 Analysis gas:  Nitrogen            Non-ideality:  6.58e-05 1/Torr     CellType:      9mm w/o rod
-Analysis Time: 19:41 hr:min        Bath temp.:    77.35 K                            
+Analysis Time: 19:41 hr:min        Bath temp.:    77.35 K
 Analysis Mode: Standard                                               VoidVol Remeasure:off
 VoidVol. Mode: He Measure          Cold Zone V:   8.08555 cc          Warm Zone V:   14.5904 cc
                                      Data Reduction Parameters
                Thermal Transpiration: onEff. mol. diameter (D): 3.54 ÅEff. cell stem diam. (d): 4.0000 mm
- 
+
 Adsorbate      Nitrogen                 Temperature    77.350K
                Molec. Wt.: 28.013       Cross Section: 16.200  Å²     Liquid Density: 0.808  g/cc
 
                      Relative                                        Volume @ STP
-                     Pressure                                               
+                     Pressure
                                                                          cc/g
 
                         8.34717e-06                                       6.4444

@@ -1,212 +1,141 @@
-import subprocess
-import os
+# -*- coding: utf-8 -*-
+# pylint: disable-msg=invalid-name # to allow non-conforming variable names
+# pylint: disable-msg=import-outside-toplevel # to allow on-the-fly import
+"""
+Test all parsers for all manufacturers
+"""
 
-bel_data = [
-    ("unknown", "Ar_test/1.DAT"),
-    ("Sample_E", "bel/Sample_E.DAT"),
-    ('DUT-13', "DUT-13/BF010_DUT-13_CH4_111K_run2.DAT"),
-    ('DUT-13', "DUT-13/BF010_DUT-13_CH4_111K.DAT"),
-    ("DUT-49", "DUT-49/DUT-49_nbutane_273K_viele_Punkte.DAT"),
-    ("DUT-49", "DUT-49/DUT-49_nbutane_298K_viele_Punkte_hohe_masse.DAT"),
-    ("DUT-49", "DUT-49/DUT-49-SKDM017_SCD5dEtOH+act150C22h_N277K_run1.DAT"),
-    ("DUT-49", "DUT-49/DUT-49-SKDM019_SCDEtOH_Act.150C_Ar_87K.DAT"),
-    ("DUT-67", "DUT-67/DUT-67_H2O_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT-67-N2_77K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_acetone_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_DCM_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_EtOH_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_hexane_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_isopropanol_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_MeOH_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_toluol_298K.DAT"),
-    ("DUT-67", "DUT-67/DUT67_1_Garching_wasser_298K.DAT"),
-    ("DUT-8",  "DUT-8/la-133_dut-8_zn_isp_cp_etoh_298k.DAT")
-]
+import difflib
+import filecmp
+import json
+import sys
+from pathlib import Path
 
-qnt_data = [
-    ("DUT-6", r"DUT-6/NK_DUT-6_LP_N2_114PKT\ \(Raw\ Analysis\ Data\).txt"),
-    ("DUT-13", r"DUT-13/BF001\ \(Raw\ Analysis\ Data\).txt"),
-    ("DUT-60", r"DUT-60/ih_DUT-60_183b\ \(Raw\ Analysis\ Data\).txt"),
-    ("DUT-75", r"DUT-75/US_540_DUT75_N2\ \(Raw\ Analysis\ Data\).txt"),
-    (
-        "DUT-23",
-        r"DUT-23/NK_CU\(BIPY\)\(BTB\)_10-11_DMF-ETOH_CO2_84PKT_N2_N2\ \(Raw\ Analysis\ Data\).txt"
-    ),
-    ("TEST", "NovaWin/test.txt"),
-    ("RE-22", r"NovaWin/RE-22\ \(Raw\ Analysis\ Data\).txt")
-]
+import pytest
 
-mic_data = [
-    ("Sample A", "micromeritics/Sample_A.xls"),
-    #("Sample B", "micromeritics/Sample_B.xls"),
-]
+from parsers import NISTjson
 
-BELcsv_data = [
-    ("DUT-32", "DUT-32/RGE-343-DUT32-7dCO2_Nitrogen\(BelMax\).csv"),
-    ("DUT-13", "DUT-13/BF-010-DUT-13-CH4-190K-run1-export.csv")
-]
-
-BELcsv_JIS_data = [
-    ("DMOF", "DMOF/ASch082C_Zntmbdcdabco_C2H6_Exp190819a.csv"),
-    ("DMOF", "DMOF/ASch082B_Zndmbdcdabco_C2H4_Exp191004a_weight\ correction.csv"),
-    ("DMOF", "DMOF/Asch065B_C2H6_298K_Exp190327a.csv")
-]
-
-def test_bel_parser():
-    for id, file in bel_data:
-        p = subprocess.run(
-            "python raw2aif.py ./test/database/"+file+" BELSORP-max "+id,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
-
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
-
-def test_bel_output():
-    for id, file in bel_data:
-        outfile = os.path.splitext(file)[0]+'.aif'
-        p = subprocess.run(
-            "python plotaif.py ./test/database/"+outfile,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
-
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
-
-def test_qnt_parser():
-    for id, file in qnt_data:
-        p = subprocess.run(
-            "python raw2aif.py ./test/database/"+file+" quantachrome "+id,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
-
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
-
-def test_qnt_output():
-    for id, file in qnt_data:
-        outfile = os.path.splitext(file)[0]+'.aif'
-        p = subprocess.run(
-            "python plotaif.py ./test/database/"+outfile,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
-
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
+from .conftest import (BELcsv_data, BELcsv_JIS_data, NIST_data, bel_data,
+                       mic_data, qnt_data)
 
 
-def test_mic_parser():
-    for id, file in mic_data:
-        p = subprocess.run(
-            "python raw2aif.py ./test/database/"+file+" micromeritics "+id,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
+def run_raw2aif(args):
+    """Run the raw2aif script."""
+    from raw2aif import main as raw2aif_main
+    sys.argv = ['raw2aif.py'] + args
+    raw2aif_main()
 
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
 
-def test_mic_output():
-    for id, file in mic_data:
-        outfile = os.path.splitext(file)[0]+'.aif'
-        p = subprocess.run(
-            "python plotaif.py ./test/database/"+outfile,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
+def run_plotaif(args):
+    """Run the plotaif script."""
+    from plotaif import main as plotaif_main
+    sys.argv = ['plotaif.py'] + args
+    plotaif_main()
 
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
 
-def test_BELcsv_parser():
-    for id, file in BELcsv_data:
-        p = subprocess.run(
-            "python raw2aif.py ./test/database/"+file+" BEL-csv "+id,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
+def general_parser(mat_id, file, ftype):
+    """Run parser and compare files to test method."""
+    infile = Path(f'./test/database/{file}')
+    outfile = infile.with_suffix('.aif')
+    testfile = infile.with_suffix('.aif_tst')
+    run_raw2aif([infile, ftype, mat_id])
+    if not filecmp.cmp(outfile, testfile, shallow=False):
+        with open(outfile, encoding='utf8') as f, open(testfile,
+                                                       encoding='utf8') as g:
+            flines = f.readlines()
+            glines = g.readlines()
+        d = difflib.Differ()
+        diffs = [x for x in d.compare(flines, glines) if x[0] in ('+', '-')]
+        if diffs:
+            # all rows with changes
+            print('\n'.join(diffs))
+        else:
+            print('No changes')
+        assert False  # two files are not the same, check print for difference
 
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
 
-def test_BELcsv_output():
-    for id, file in BELcsv_data:
-        outfile = os.path.splitext(file)[0]+'.aif'
-        p = subprocess.run(
-            "python plotaif.py ./test/database/"+outfile,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
+@pytest.mark.parametrize('mat_id, file', bel_data)
+def test_bel_parser(mat_id, file):
+    """Test BEL Parser"""
+    general_parser(mat_id, file, 'BELSORP-max')
 
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
 
-def test_BELcsv_JIS_parser():
-    for id, file in BELcsv_JIS_data:
-        p = subprocess.run(
-            "python raw2aif.py ./test/database/"+file+" BEL-csv_JIS "+id,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
+@pytest.mark.parametrize('data', bel_data)
+def test_bel_output(data):
+    """Check BEL output"""
+    outfile = Path(data[1]).with_suffix('.aif')
+    run_plotaif([f'./test/database/{outfile}'])
 
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
 
-def test_BELcsv_JIS_output():
-    for id, file in BELcsv_JIS_data:
-        outfile = os.path.splitext(file)[0]+'.aif'
-        p = subprocess.run(
-            "python plotaif.py ./test/database/"+outfile,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True
-        )
+@pytest.mark.parametrize('mat_id, file', BELcsv_data)
+def test_BELcsv_parser(mat_id, file):
+    """Test BEL CSV Parser"""
+    general_parser(mat_id, file, 'BEL-csv')
 
-        if p.stderr:
-            for line in p.stderr.decode(encoding='utf-8').split('\n'):
-                print(line)
-            raise Exception(file)
 
-# subprocess.call("find ./test/database -name '*.aif' -delete", shell=True)
-# subprocess.call("find ./test/database -name '*.pdf' -delete", shell=True)
-# test_bel_parser()
-# test_bel_output()
-# test_qnt_parser()
-# test_qnt_output()
-# test_mic_parser()
-# test_mic_output()
-# test_BELcsv_parser()
-# test_BELcsv_output()
-# test_BELcsv_JIS_parser()
-# test_BELcsv_JIS_output()
+@pytest.mark.parametrize('data', BELcsv_data)
+def test_BELcsv_output(data):
+    """Check BEL CSV output"""
+    outfile = Path(data[1]).with_suffix('.aif')
+    run_plotaif([f'./test/database/{outfile}'])
+
+
+@pytest.mark.parametrize('mat_id, file', BELcsv_JIS_data)
+def test_BELcsv_JIS_parser(mat_id, file):
+    """Test BEL CSV Parser (Japanese)"""
+    general_parser(mat_id, file, 'BEL-csv_JIS')
+
+
+@pytest.mark.parametrize('data', BELcsv_JIS_data)
+def test_BELcsv_JIS_output(data):
+    """Check BEL CSV output (Japanese)"""
+    outfile = Path(data[1]).with_suffix('.aif')
+    run_plotaif([f'./test/database/{outfile}'])
+
+
+@pytest.mark.parametrize('mat_id, file', qnt_data)
+def test_qnt_parser(mat_id, file):
+    """Test Quantachrome Parser"""
+    general_parser(mat_id, file, 'quantachrome')
+
+
+@pytest.mark.parametrize('data', qnt_data)
+def test_qnt_output(data):
+    """Check Quantachrome output"""
+    outfile = Path(data[1]).with_suffix('.aif')
+    run_plotaif([f'./test/database/{outfile}'])
+
+
+@pytest.mark.parametrize('mat_id, file', mic_data)
+def test_mic_parser(mat_id, file):
+    """Test Micromeritics Parser"""
+    general_parser(mat_id, file, 'micromeritics')
+
+
+@pytest.mark.parametrize('data', mic_data)
+def test_mic_output(data):
+    """Check Micromeritics output"""
+    outfile = Path(data[1]).with_suffix('.aif')
+    run_plotaif([f'./test/database/{outfile}'])
+
+
+@pytest.mark.parametrize('mat_id, file', NIST_data)
+def test_NISTjson_parser(mat_id, file):
+    """Test NIST JSON Parser"""
+    general_parser(mat_id, file, 'NIST-json')
+
+
+@pytest.mark.parametrize('data', NIST_data)
+def test_NISTjson_output(data):
+    """Check NIST JSON Parser"""
+    outfile = Path(data[1]).with_suffix('.aif')
+    run_plotaif([f'./test/database/{outfile}'])
+
+
+def test_aif2NISTjson():
+    """Test AIF to NIST JSON Parser"""
+    jsonout = NISTjson.aif2json('examples/NK_DUT-6_LP_N2_114PKT.aif')
+    try:
+        json.loads(jsonout)
+    except ValueError as e:
+        raise ValueError('Error in AIF to JSON Conversion') from e

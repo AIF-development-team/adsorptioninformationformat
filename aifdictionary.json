@@ -1,0 +1,59 @@
+ [
+    {"data name": "_exptl_operator" , "description": "name of the person who ran the experiment (string)"},
+    {"data name": "_exptl_date", "description":"date of the experiment (string in ISO 8601 format)"},
+    {"data name": "_exptl_instrument", "description":"instrument id used for the experiment (string)"},
+    {"data name": "_exptl_adsorptive", "description": "name of the adsorptive (string)"},
+    {"data name": "_exptl_adsorptive_name", "description": "secondary identifier (string)"},
+    {"data name": "_exptl_temperature", "description":"temperature of the experiment (float)"},
+    {"data name": "_exptl_method", "description":"description of method used to determine amount adsorbed, eg. volumetric (string)"},
+    {"data name": "_exptl_isotherm_type", "description":"description of isotherm type, eg. absolute, excess, net (string)"},
+    {"data name": "_exptl_p0", "description": "saturation pressure of the experiment at the temperature of the experiment (float)"},
+    {"data name": "_exptl_digitizer", "description":"name of the person who digitized the experiment (string)"},
+
+    {"data name": "_adsnt_sample_mass", "description":"mass of the sample (float)"},
+    {"data name": "_adsnt_sample_density", "description":"density of the sample (float)"},
+    {"data name": "_adsnt_sample_id", "description":"unique identifying code used by the operator (string)"},
+    {"data name": "_adsnt_material_id", "description":"designated name for the material (string)"},
+    {"data name": "_adsnt_info", "description":"secondary identifier (string)"},
+    {"data name": "_adsnt_hashkey", "description":"secondary identifier (string)"},
+    {"data name": "_adsnt_degas_summary", "description":"summary of degas conditions (string)"},
+    {"data name": "_adsnt_degas_temperature", "description":"degas temperature (float)"},
+    {"data name": "_adsnt_degas_time", "description":"degas time (float)"},
+
+    {"data name": "_simltn_code", "description":"secondary identifier (string)"},
+    {"data name": "_simltn_date", "description":"date of the simulation (string in ISO 8601 format)"},
+    {"data name": "_simltn_size", "description":"num of unit cells, sample mass, etc (string)"},
+    {"data name": "_simltn_forcefield_adsorptive", "description":"adsorptive model details (string)"},
+    {"data name": "_simltn_forcefield_adsorbent", "description":"adsorbent model details (string)"},
+
+    {"data name": "_citation_doi", "description":"the digital object identifier (DOI) of the cited work (string)"},
+    {"data name": "_citation_source", "description":"source of the cited work (string)"},
+
+    {"data name": "_units_temperature", "description":"units of temperature (string)"},
+    {"data name": "_units_pressure", "description":"units of pressure (string)"},
+    {"data name": "_units_mass", "description":"units of mass (string)"},
+    {"data name": "_units_loading", "description":"units of amount adsorbed (string)"},
+    {"data name": "_units_density", "description":"units of density (string)"},
+    {"data name": "_units_time", "description": "units of time (string)"},
+    {"data name": "_units_composition_type", "description": "composition definiton (string)"},
+
+    {"data name": "_adsorp_pressure", "description":"equilibrium pressure of the adsorption measurement (float)"},
+    {"data name": "_adsorp_fugacity", "description":"fugacity of the adsorption measurement (float)"},
+    {"data name": "_adsorp_p0", "description": "saturation pressure of the adsorption measurement at the temperature of the experiment(float)"},
+    {"data name": "_adsorp_amount" , "description":"amount adsorbed during the adsorption measurement (float)"},
+    {"data name": "_desorp_pressure", "description":"equilibrium  pressure of the desorption measurement at the temperature of the experiment (float)"},
+    {"data name": "_desorp_fugacity", "description":"fugacity of the desorption measurement  (float)"},
+    {"data name": "_desorp_p0", "description":"saturation pressure of the desorption measurement at the temperature of the experiment (float)"},
+    {"data name": "_desorp_amount", "description": "amount adsorbed during the desorption measurement (float)"},
+    {"data name": "_adsorp_amount_excess", "description": "excess amount adsorbed during the adsorption measurement (float)"},
+    {"data name": "_adsorp_amount_absolute", "description": "absolute amount adsorbed during the adsorption measurement (float)"},
+    {"data name": "_adsorp_amount_net", "description": "net amount adsorbed during the adsorption measurement (float)"},
+    {"data name": "_desorp_amount_excess", "description": "excess amount adsorbed during the desorption measurement (float)"},
+    {"data name": "_desorp_amount_absolute", "description": "absolute amount adsorbed during the desorption measurement (float)"},
+    {"data name": "_desorp_amount_net", "description": "net amount adsorbed during the desorption measurement (float)"},
+
+    {"data name": "_audit_aif_version", "description": "version of AIF data names (Github commit hash)"},
+
+    {"data name": "*_uncertainty", "description": "uncertainty associated with value (float)"}
+
+    ]

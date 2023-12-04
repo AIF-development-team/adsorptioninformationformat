@@ -1,0 +1,43 @@
+data_raw2aif
+_exptl_operator 'Volodymyr'
+_exptl_date 2017-05-16T00:00:00
+_exptl_instrument 'BEL 00348'
+_exptl_adsorptive 'Toluene'
+_exptl_temperature 298.0
+_adsnt_sample_mass 0.0857
+_adsnt_sample_id 'DUT-67Zr_toluol'
+_adsnt_material_id 'DUT-67'
+_units_temperature 'K'
+_units_pressure 'kPa'
+_units_mass 'g'
+_units_loading 'ml(STP) g-1'
+_audit_aif_version d546195
+
+loop_
+_adsorp_pressure
+_adsorp_p0
+_adsorp_amount
+0.043789 3.77 32.921
+0.077712 3.77 65.779
+0.1243 3.77 76.696
+0.38996 3.77 86.911
+1.5119 3.77 93.993
+3.1195 3.77 97.431
+3.8192 3.77 101.56
+
+loop_
+_desorp_pressure
+_desorp_p0
+_desorp_amount
+2.815 3.77 97.416
+1.7481 3.77 95.584
+1.1799 3.77 94.264
+0.86457 3.77 93.233
+0.68076 3.77 92.395
+0.57957 3.77 91.662
+0.51286 3.77 91.005
+0.40266 3.77 89.938
+0.30668 3.77 88.683
+0.22481 3.77 87.124
+0.13455 3.77 84.494
+0.042601 3.77 76.625

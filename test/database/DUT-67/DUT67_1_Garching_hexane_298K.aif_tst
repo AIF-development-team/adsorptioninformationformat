@@ -1,0 +1,46 @@
+data_raw2aif
+_exptl_operator 'Volodymyr'
+_exptl_date 2017-05-19T00:00:00
+_exptl_instrument 'BEL 00348'
+_exptl_adsorptive 'Hexane'
+_exptl_temperature 298.0
+_adsnt_sample_mass 0.0352
+_adsnt_sample_id 'DUT-67Zr_hexane'
+_adsnt_material_id 'DUT-67'
+_units_temperature 'K'
+_units_pressure 'kPa'
+_units_mass 'g'
+_units_loading 'ml(STP) g-1'
+_audit_aif_version d546195
+
+loop_
+_adsorp_pressure
+_adsorp_p0
+_adsorp_amount
+0.030979 20.0 20.774
+0.3577 20.0 58.572
+1.2512 20.0 63.999
+2.7739 20.0 66.947
+4.5422 20.0 68.443
+7.1447 20.0 69.709
+10.209 20.0 70.702
+13.357 20.0 71.502
+16.977 20.0 72.596
+19.478 20.0 87.797
+
+loop_
+_desorp_pressure
+_desorp_p0
+_desorp_amount
+17.747 20.0 72.942
+14.416 20.0 71.558
+11.488 20.0 70.708
+8.6279 20.0 69.832
+6.1112 20.0 68.882
+3.9819 20.0 67.56
+2.2336 20.0 65.701
+1.2264 20.0 63.441
+0.76302 20.0 61.638
+0.54017 20.0 60.174
+0.21631 20.0 54.863
+0.20099 20.0 54.245

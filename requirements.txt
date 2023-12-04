@@ -1,5 +1,9 @@
+adsorption-file-parser >=0.2.0
+pytest
 gemmi
 pandas
 numpy
 matplotlib
 xlrd
+pre-commit
+pylint

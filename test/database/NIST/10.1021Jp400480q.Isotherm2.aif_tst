@@ -1,0 +1,34 @@
+data_10.1021Jp400480q.Isotherm2
+_citation_doi 10.1021/Jp400480q
+_citation_source UNKNOWN
+_exptl_digitizer UNKNOWN
+_adsnt_material_id MWCNT
+_adsnt_sample_id NIST-MATDB-47dadc99a0da13b9e9bb3032468ecbdf
+_exptl_adsorptive Argon
+_exptl_temperature 87
+_units_loading kmol/m3
+_units_pressure bar
+_units_composition molefraction
+
+loop_
+_adsorp_pressure
+_adsorp_amount
+0.00374842 12.7703
+0.0173326 15.3716
+0.0332298 17.6577
+0.042291 19.3131
+0.0628041 21.1261
+0.0810402 22.7027
+0.0901066 24.2793
+0.103815 24.9887
+0.131262 25.9347
+0.151837 26.8018
+0.186192 27.2748
+0.232015 27.6689
+0.270965 27.9842
+0.316798 28.2207
+0.383263 28.4572
+0.477242 28.6149
+0.743142 28.9302
+0.912776 29.009
+0.988426 29.009
