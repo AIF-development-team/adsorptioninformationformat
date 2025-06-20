@@ -25,6 +25,9 @@
     {"data name": "_simltn_size", "description":"num of unit cells, sample mass, etc (string)"},
     {"data name": "_simltn_forcefield_adsorptive", "description":"adsorptive model details (string)"},
     {"data name": "_simltn_forcefield_adsorbent", "description":"adsorbent model details (string)"},
+    {"data name": "_simltn_input_files", "description":"repository link to input files and other codes used in the simulation (string)"},
+    {"data name": "_simltn_sampling", "description":"phase space sampling algorithm (string)"},
+    {"data name": "_simltn_lot", "description":"level of theory used in calculation, e.g. DFT, MLP, classical etc. (string)"},
 
     {"data name": "_citation_doi", "description":"the digital object identifier (DOI) of the cited work (string)"},
     {"data name": "_citation_source", "description":"source of the cited work (string)"},
