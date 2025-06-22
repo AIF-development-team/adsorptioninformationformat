@@ -75,6 +75,7 @@ def parse(path, lang='ENG'):
     data_meta = {}
     columns = []
     data = []
+    ads_start = 0
 
     for index, line in enumerate(lines):
         if _BEL_DICT['operator'][lang] in line:
