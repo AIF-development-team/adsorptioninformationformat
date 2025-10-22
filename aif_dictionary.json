@@ -1,13 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "https://github.com/AIF-development-team/adsorptioninformationformat/blob/master/aif_dictionary.json",
+  "$id": "https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/aif_dictionary.json",
   "title": "Adsorption Information Format (AIF)",
   "description": "Dictionary for STAR format adsorption experiment and simulation data files",
   "type": "object",
+  "version": "__AIF_VERSION__",
   "properties": {
     "_audit_aif_version": {
       "type": "string",
-      "description": "version of AIF data names (version tag)"
+      "description": "version of AIF data names (version tag)",
+      "const": "__AIF_VERSION__"
     },
     "_exptl_operator": {
       "type": "string",

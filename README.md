@@ -10,7 +10,7 @@ request to add new terms.
 
 ## Developer specification
 
-Development philosophy and steps can be found in [DEVELOPMENT.md](/DEVELOPMENT.md)
+Development philosophy and release steps can be found in [DEVELOPMENT.md](/dev/DEVELOPMENT.md)
 
 ## Relevant Citations
 

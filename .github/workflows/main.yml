@@ -1,54 +1,31 @@
-# name: CI
+name: Update AIF Version
 
-# # Controls when the workflow will run
-# on:
-#   # Triggers the workflow on push or pull request events but only for the master branch
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
+on:
+  push:
+    tags:
+      - '*'
 
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-# jobs:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-#   # Run parser tests and checks
-#   build:
-#     # The type of runner that the job will run on
-#     runs-on: ubuntu-latest
+      - name: Update version in aif_dictionary.json
+        run: python dev/update_version.py
 
-#     # Steps represent a sequence of tasks that will be executed as part of the job
-#     steps:
-#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#       - uses: actions/checkout@v2
-
-#       - name: set up python 3.9.12
-#         uses: actions/setup-python@v4
-#         with:
-#           python-version: 3.9.12
-
-#       - name: install python depedencies
-#         run: pip install -r requirements.txt
-
-#       - name: run tests
-#         run: python -m pytest -s test/
-
-#   # Run pre-commit checks
-#   pre-commit:
-#     runs-on: ubuntu-latest
-#     timeout-minutes: 5
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Set up Python 3.9.12
-#       uses: actions/setup-python@v4
-#       with:
-#         python-version: 3.9.12
-#     - name: Install python dependencies
-#       run: |
-#         pip install -r requirements.txt
-#     - name: Run pre-commit
-#       run: |
-#         pre-commit install
-#         pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add aif_dictionary.json
+          git commit -m "Update version in aif_dictionary.json to match tag"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
