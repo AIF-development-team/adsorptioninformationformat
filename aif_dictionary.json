@@ -109,6 +109,18 @@
       "type": "string",
       "description": "adsorbent model details (string)"
     },
+    "_simltn_input_files": {
+      "type": "string",
+      "description": "repository link to input files and other codes used in the simulation (string)"
+    },
+    "_simltn_sampling": {
+      "type": "string",
+      "description": "phase space sampling algorithm (string)"
+    },
+    "_simltn_lot": {
+      "type": "string",
+      "description": "level of theory used in calculation, e.g. DFT, MLP, classical etc. (string)"
+    },
     "_citation_doi": {
       "type": "string",
       "description": "the digital object identifier (DOI) of the cited work (string)"
