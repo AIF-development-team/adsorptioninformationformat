@@ -208,5 +208,11 @@
       "description": "uncertainty associated with value (float)"
     }
   },
+  "required": [
+    "_audit_aif_version",
+    "_exptl_adsorptive",
+    "_adsnt_sample_id",
+    "_adsnt_material_id"
+  ],
   "additionalProperties": true
 }
