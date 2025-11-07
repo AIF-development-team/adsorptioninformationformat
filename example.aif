@@ -1,0 +1,52 @@
+# comments as needed
+
+data_example_isotherm_aif
+
+    _audit_aif_version                "v1.0.0"
+
+    _exptl_operator                   "John Doe"
+    _exptl_digitizer                  "Jane Smith"
+    _exptl_date                       2023-10-01T12:00:00Z
+    _exptl_adsorptive                 "Nitrogen"
+    _exptl_adsorptive_name            "N2"
+    _exptl_temperature                77.0
+    _exptl_method                     "volumetric"
+    _exptl_instrument                 "Instrument-123"
+    _exptl_isotherm_type              "absolute"
+    _exptl_p0                         101.325
+
+    _adsnt_material_id                "Material-XYZ"
+    _adsnt_sample_id                  "Sample-001"
+    _adsnt_sample_mass                0.5
+    _adsnt_sample_density             2.1
+    _adsnt_info                       "Additional sample info"
+    _adsnt_hashkey                    "abc123hash"
+    _adsnt_degas_summary              "Degassed at 200C for 12 hours"
+    _adsnt_degas_temperature          200.0
+    _adsnt_degas_time                 12.0
+
+    _units_temperature                "K"
+    _units_pressure                   "kPa"
+    _units_mass                       "g"
+    _units_loading                    "mmol/g"
+    _units_density                    "g/cm3"
+    _units_time                       "hours"
+
+    _citation_doi                     "10.1234/example.doi"
+    _citation_source                  "Journal of Adsorption Studies"
+
+    loop_
+        _adsorp_pressure
+        _adsorp_p0
+        _adsorp_amount
+        0.269367243408  101860.98004799998  0.006484305926579284
+        0.27275763204   101860.98004799998  0.008217577878132952
+        0.273485572344  101860.98004799998  0.009928476539499517
+
+    loop_
+        _desorp_pressure
+        _desorp_p0
+        _desorp_amount
+        97113.50270639999   101860.98004799998  57.919842028778376
+        90734.559156        101860.98004799998  57.83008565285129
+        85586.58132479999   101860.98004799998  57.74993663094573

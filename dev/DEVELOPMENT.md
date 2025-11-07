@@ -1,10 +1,63 @@
 # Development Workflow
 
-This document outlines the development workflow for this project, which involves:
+The AIF format is an evolving format, with new mandatory or optional properties
+that may be added over time. However, any changes to the AIF dictionary will
+have wide-reaching consequences, given that the file format is designed to be
+used in various databases and programs.
+
+To identify the specific language and capabilities of each AIF file, it is
+therefore imperative that AIF definitions are labelled with an unique format
+version number, and that a record of how the file has evolved over time is
+maintained.
+
+Development paradigms detailed herein are designed to make this process easy by
+relying on established programming protocols and processes.
+
+The workflow for this project involves:
 
 - Git for version control
+- [Semantic versioning](https://semver.org/) for defining versions
 - The [Git Flow model](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) as a development philosophy
-- GitHub Actions for continuous integration and deployment
+- GitHub Actions for automatically generating releases
+
+The [dictionary](../aif_dictionary.json) is structured with a version under the
+keyword "_audit_aif_version". This follows semantic versioning conventions, and
+is a required part of the file structure. This version is similarly found as the
+git tag, as well as in the github release.
+
+## Release process
+
+To successfully make a new release the following steps should be followed.
+
+- Create a release branch from `develop`:
+
+  ```bash
+  git flow release start <release-version>
+  ```
+
+- Check if both the dictionary and the examples are correctly updated
+
+- Prepare the release by running [text](update_version.py):
+
+  ```bash
+  python update_version.py
+  git commit -m "Prepare release <release-version>"
+  ```
+
+- Finish the release branch, which tags it and merges it into `master` and `develop`:
+  ```bash
+  git flow release finish <release-version>
+  ```
+
+- Push everything to GitHub to run the GH release workflow:
+  ```bash
+  git push --all
+  git push --tags
+  ```
+
+- Go to [GitHub](https://github.com/AIF-development-team/adsorptioninformationformat) to check
+  that the release has successfully completed.
+
 
 ## Git Flow
 
