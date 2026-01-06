@@ -54,7 +54,12 @@
     {"data name": "_desorp_amount_excess", "description": "excess amount adsorbed during the desorption measurement (float)"},
     {"data name": "_desorp_amount_absolute", "description": "absolute amount adsorbed during the desorption measurement (float)"},
     {"data name": "_desorp_amount_net", "description": "net amount adsorbed during the desorption measurement (float)"},
-
+  
+    {"data name": "_adsorp_henry", "description":"Henry coefficient describing the infinite-dilution and low-pressure adsorption affinity (float)"},
+    {"data name": "_adsorp_enthalpy", "description":"enthalpy of adsorption at infinite dilution and low loading (float)"},
+    {"data name": "_adsorp_molefraction", "description":"mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (float)"},
+    {"data name": "_adsorp_selectivity", "description":"adsorption selectivity for a specified component pair under the given conditions (float)"},
+  
     {"data name": "_audit_aif_version", "description": "version of AIF data names (Github commit hash)"},
 
     {"data name": "*_uncertainty", "description": "uncertainty associated with value (float)"}
