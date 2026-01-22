@@ -92,11 +92,10 @@ def parse(path):
     raw_data = []
 
     for index, line in enumerate(lines):
-        #set to lower case as different versions of outfiles will have differents cases in metadata
+        # set to lower case as different versions of outfiles will have different cases in metadata
         line = line.lower()
 
-        if any(v for k, v in _FIELDS.items()
-               if any(t in line for t in v.get('text', []))):
+        if any(v for k, v in _FIELDS.items() if any(t in line for t in v.get('text', []))):
             data = re.split(r'\s{2,}|(?<=\D:)', line.strip())
 
             # TODO Are quantachrome files always saved with these mistakes? # pylint: disable-msg=fixme
@@ -107,14 +106,18 @@ def parse(path):
                         data.insert(i + 1, mistake)
 
             for i, d in enumerate(data):
-                name = next((v.get('name', None) for k, v in _FIELDS.items()
-                             if any(t in d for t in v.get('text', []))), None)
+                name = next((
+                    v.get('name', None)
+                    for k, v in _FIELDS.items()
+                    if any(t in d for t in v.get('text', []))
+                ), None)
                 if name not in material_info:
                     if not data[i + 1].endswith(':'):
                         material_info[name] = data[i + 1]
                     else:
                         material_info[name] = ' '
 
+        ads_start = 0
         if 'press' in line:
             ads_start = index + 4
         elif 'p/po' in line:
