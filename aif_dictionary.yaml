@@ -1,0 +1,392 @@
+id: https://github.com/AIF-development-team/adsorptioninformationformat
+name: aif
+title: Adsorption Information Format (AIF)
+description: >-
+  Schema for STAR format adsorption experiment and simulation data files.
+  Reference: Evans et al., Langmuir 2021, 37, 4222-4226.
+version: "__AIF_VERSION__"
+license: MIT
+
+prefixes:
+  aif: https://github.com/AIF-development-team/adsorptioninformationformat/
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+  qudt: http://qudt.org/schema/qudt/
+
+imports:
+  - linkml:types
+
+default_range: string
+
+# ──────────────────────────────────────────────
+#  Enumerations
+# ──────────────────────────────────────────────
+
+enums:
+
+  ExperimentalMethod:
+    description: Method used to determine amount adsorbed.
+    permissible_values:
+      volumetric:
+        description: Volumetric (manometric) method.
+      gravimetric:
+        description: Gravimetric method.
+
+  IsothermType:
+    description: Type of adsorption isotherm.
+    permissible_values:
+      absolute:
+        description: Absolute adsorption.
+      excess:
+        description: Excess adsorption.
+      net:
+        description: Net adsorption.
+
+# ──────────────────────────────────────────────
+#  Slots (data items / fields)
+# ──────────────────────────────────────────────
+
+slots:
+
+  # ── Audit ──────────────────────────────────
+
+  audit_aif_version:
+    aliases: ["_audit_aif_version"]
+    description: Version of AIF data names (version tag).
+    required: true
+    range: string
+
+  # ── Experiment ─────────────────────────────
+
+  exptl_operator:
+    aliases: ["_exptl_operator"]
+    description: Name of the person who ran the experiment.
+
+  exptl_date:
+    aliases: ["_exptl_date"]
+    description: Date of the experiment (ISO 8601 format).
+    range: datetime
+
+  exptl_instrument:
+    aliases: ["_exptl_instrument"]
+    description: Instrument id used for the experiment.
+
+  exptl_adsorptive:
+    aliases: ["_exptl_adsorptive"]
+    description: Name of the adsorptive.
+    required: true
+
+  exptl_adsorptive_name:
+    aliases: ["_exptl_adsorptive_name"]
+    description: Secondary identifier for the adsorptive.
+
+  exptl_temperature:
+    aliases: ["_exptl_temperature"]
+    description: Temperature of the experiment.
+    range: float
+
+  exptl_method:
+    aliases: ["_exptl_method"]
+    description: Method used to determine amount adsorbed.
+    range: ExperimentalMethod
+
+  exptl_isotherm_type:
+    aliases: ["_exptl_isotherm_type"]
+    description: Description of the isotherm type.
+    range: IsothermType
+
+  exptl_p0:
+    aliases: ["_exptl_p0"]
+    description: Saturation pressure at the temperature of the experiment.
+    range: float
+
+  exptl_digitizer:
+    aliases: ["_exptl_digitizer"]
+    description: Name of the person who digitized the experiment.
+
+  # ── Adsorbent ──────────────────────────────
+
+  adsnt_sample_mass:
+    aliases: ["_adsnt_sample_mass"]
+    description: Mass of the sample.
+    range: float
+
+  adsnt_sample_density:
+    aliases: ["_adsnt_sample_density"]
+    description: Density of the sample.
+    range: float
+
+  adsnt_sample_id:
+    aliases: ["_adsnt_sample_id"]
+    description: Unique identifying code used by the operator.
+    required: true
+
+  adsnt_material_id:
+    aliases: ["_adsnt_material_id"]
+    description: Designated name for the material.
+    required: true
+
+  adsnt_info:
+    aliases: ["_adsnt_info"]
+    description: Secondary identifier or additional info about the adsorbent.
+
+  adsnt_hashkey:
+    aliases: ["_adsnt_hashkey"]
+    description: Hash key identifier for the adsorbent.
+
+  adsnt_degas_summary:
+    aliases: ["_adsnt_degas_summary"]
+    description: Summary of degas conditions.
+
+  adsnt_degas_temperature:
+    aliases: ["_adsnt_degas_temperature"]
+    description: Degas temperature.
+    range: float
+
+  adsnt_degas_time:
+    aliases: ["_adsnt_degas_time"]
+    description: Degas time.
+    range: float
+
+  # ── Simulation ─────────────────────────────
+
+  simltn_code:
+    aliases: ["_simltn_code"]
+    description: Simulation code or software used.
+
+  simltn_date:
+    aliases: ["_simltn_date"]
+    description: Date of the simulation (ISO 8601 format).
+    range: datetime
+
+  simltn_size:
+    aliases: ["_simltn_size"]
+    description: Number of unit cells, sample mass, etc.
+
+  simltn_forcefield_adsorptive:
+    aliases: ["_simltn_forcefield_adsorptive"]
+    description: Adsorptive model details.
+
+  simltn_forcefield_adsorbent:
+    aliases: ["_simltn_forcefield_adsorbent"]
+    description: Adsorbent model details.
+
+  simltn_input_files:
+    aliases: ["_simltn_input_files"]
+    description: Repository link to input files and other codes used in the simulation.
+
+  simltn_sampling:
+    aliases: ["_simltn_sampling"]
+    description: Phase space sampling algorithm.
+
+  simltn_lot:
+    aliases: ["_simltn_lot"]
+    description: Level of theory used in calculation, e.g. DFT, MLP, classical.
+
+  # ── Citation ───────────────────────────────
+
+  citation_doi:
+    aliases: ["_citation_doi"]
+    description: The digital object identifier (DOI) of the cited work.
+
+  citation_source:
+    aliases: ["_citation_source"]
+    description: Source of the cited work.
+
+  # ── Units ──────────────────────────────────
+
+  units_temperature:
+    aliases: ["_units_temperature"]
+    description: Units of temperature.
+
+  units_pressure:
+    aliases: ["_units_pressure"]
+    description: Units of pressure.
+
+  units_mass:
+    aliases: ["_units_mass"]
+    description: Units of mass.
+
+  units_loading:
+    aliases: ["_units_loading"]
+    description: Units of amount adsorbed.
+
+  units_density:
+    aliases: ["_units_density"]
+    description: Units of density.
+
+  units_time:
+    aliases: ["_units_time"]
+    description: Units of time.
+
+  units_composition_type:
+    aliases: ["_units_composition_type"]
+    description: Composition definition.
+
+  # ── Adsorption loop data ───────────────────
+
+  adsorp_pressure:
+    aliases: ["_adsorp_pressure"]
+    description: Equilibrium pressure of the adsorption measurement.
+    range: float
+
+  adsorp_fugacity:
+    aliases: ["_adsorp_fugacity"]
+    description: Fugacity of the adsorption measurement.
+    range: float
+
+  adsorp_p0:
+    aliases: ["_adsorp_p0"]
+    description: Saturation pressure of the adsorption measurement at the temperature of the experiment.
+    range: float
+
+  adsorp_amount:
+    aliases: ["_adsorp_amount"]
+    description: Amount adsorbed during the adsorption measurement.
+    range: float
+
+  adsorp_amount_excess:
+    aliases: ["_adsorp_amount_excess"]
+    description: Excess amount adsorbed during the adsorption measurement.
+    range: float
+
+  adsorp_amount_absolute:
+    aliases: ["_adsorp_amount_absolute"]
+    description: Absolute amount adsorbed during the adsorption measurement.
+    range: float
+
+  adsorp_amount_net:
+    aliases: ["_adsorp_amount_net"]
+    description: Net amount adsorbed during the adsorption measurement.
+    range: float
+
+  # ── Desorption loop data ───────────────────
+
+  desorp_pressure:
+    aliases: ["_desorp_pressure"]
+    description: Equilibrium pressure of the desorption measurement at the temperature of the experiment.
+    range: float
+
+  desorp_fugacity:
+    aliases: ["_desorp_fugacity"]
+    description: Fugacity of the desorption measurement.
+    range: float
+
+  desorp_p0:
+    aliases: ["_desorp_p0"]
+    description: Saturation pressure of the desorption measurement at the temperature of the experiment.
+    range: float
+
+  desorp_amount:
+    aliases: ["_desorp_amount"]
+    description: Amount adsorbed during the desorption measurement.
+    range: float
+
+  desorp_amount_excess:
+    aliases: ["_desorp_amount_excess"]
+    description: Excess amount adsorbed during the desorption measurement.
+    range: float
+
+  desorp_amount_absolute:
+    aliases: ["_desorp_amount_absolute"]
+    description: Absolute amount adsorbed during the desorption measurement.
+    range: float
+
+  desorp_amount_net:
+    aliases: ["_desorp_amount_net"]
+    description: Net amount adsorbed during the desorption measurement.
+    range: float
+
+# ──────────────────────────────────────────────
+#  Classes
+# ──────────────────────────────────────────────
+
+classes:
+
+  AdsorptionDataPoint:
+    description: >-
+      A single data point in the adsorption branch of an isotherm.
+      Corresponds to a row in an AIF loop_ block for adsorption.
+    slots:
+      - adsorp_pressure
+      - adsorp_fugacity
+      - adsorp_p0
+      - adsorp_amount
+      - adsorp_amount_excess
+      - adsorp_amount_absolute
+      - adsorp_amount_net
+
+  DesorptionDataPoint:
+    description: >-
+      A single data point in the desorption branch of an isotherm.
+      Corresponds to a row in an AIF loop_ block for desorption.
+    slots:
+      - desorp_pressure
+      - desorp_fugacity
+      - desorp_p0
+      - desorp_amount
+      - desorp_amount_excess
+      - desorp_amount_absolute
+      - desorp_amount_net
+
+  AdsorptionInformationFile:
+    description: >-
+      Root class representing a complete AIF data block. Contains
+      metadata about the experiment or simulation, units, citation
+      information, and the adsorption/desorption data points.
+    tree_root: true
+    slots:
+      # Audit
+      - audit_aif_version
+      # Experiment
+      - exptl_operator
+      - exptl_date
+      - exptl_instrument
+      - exptl_adsorptive
+      - exptl_adsorptive_name
+      - exptl_temperature
+      - exptl_method
+      - exptl_isotherm_type
+      - exptl_p0
+      - exptl_digitizer
+      # Adsorbent
+      - adsnt_sample_mass
+      - adsnt_sample_density
+      - adsnt_sample_id
+      - adsnt_material_id
+      - adsnt_info
+      - adsnt_hashkey
+      - adsnt_degas_summary
+      - adsnt_degas_temperature
+      - adsnt_degas_time
+      # Simulation
+      - simltn_code
+      - simltn_date
+      - simltn_size
+      - simltn_forcefield_adsorptive
+      - simltn_forcefield_adsorbent
+      - simltn_input_files
+      - simltn_sampling
+      - simltn_lot
+      # Citation
+      - citation_doi
+      - citation_source
+      # Units
+      - units_temperature
+      - units_pressure
+      - units_mass
+      - units_loading
+      - units_density
+      - units_time
+      - units_composition_type
+    attributes:
+      adsorption_data:
+        description: Adsorption branch data points (loop_ block).
+        range: AdsorptionDataPoint
+        multivalued: true
+        inlined_as_list: true
+      desorption_data:
+        description: Desorption branch data points (loop_ block).
+        range: DesorptionDataPoint
+        multivalued: true
+        inlined_as_list: true

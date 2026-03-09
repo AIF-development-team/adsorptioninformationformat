@@ -38,11 +38,13 @@
     },
     "_exptl_method": {
       "type": "string",
-      "description": "description of method used to determine amount adsorbed, eg. volumetric (string)"
+      "description": "description of method used to determine amount adsorbed (string)",
+      "examples": ["volumetric", "gravimetric"]
     },
     "_exptl_isotherm_type": {
       "type": "string",
-      "description": "description of isotherm type, eg. absolute, excess, net (string)"
+      "description": "description of isotherm type (string)",
+      "examples": ["absolute", "excess", "net"]
     },
     "_exptl_p0": {
       "type": "number",
@@ -90,7 +92,7 @@
     },
     "_simltn_code": {
       "type": "string",
-      "description": "secondary identifier (string)"
+      "description": "simulation code or software used (string)"
     },
     "_simltn_date": {
       "type": "string",
@@ -167,7 +169,7 @@
     },
     "_adsorp_p0": {
       "type": "number",
-      "description": "saturation pressure of the adsorption measurement at the temperature of the experiment(float)"
+      "description": "saturation pressure of the adsorption measurement at the temperature of the experiment (float)"
     },
     "_adsorp_amount": {
       "type": "number",
@@ -175,11 +177,11 @@
     },
     "_desorp_pressure": {
       "type": "number",
-      "description": "equilibrium  pressure of the desorption measurement at the temperature of the experiment (float)"
+      "description": "equilibrium pressure of the desorption measurement at the temperature of the experiment (float)"
     },
     "_desorp_fugacity": {
       "type": "number",
-      "description": "fugacity of the desorption measurement  (float)"
+      "description": "fugacity of the desorption measurement (float)"
     },
     "_desorp_p0": {
       "type": "number",
