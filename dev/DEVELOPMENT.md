@@ -25,6 +25,34 @@ keyword "_audit_aif_version". This follows semantic versioning conventions, and
 is a required part of the file structure. This version is similarly found as the
 git tag, as well as in the github release.
 
+The version placeholder (`__AIF_VERSION__`) must be consistent across **all
+three** dictionary representations and the example AIF files:
+
+- `aif_dictionary.json` – JSON Schema (`version`, `$id` URL, `_audit_aif_version.const`)
+- `aif_dictionary.dic`  – DDLm CIF dictionary (`_dictionary.version`, `_enumeration.default`)
+- `aif_dictionary.yaml` – LinkML schema (`version`)
+- all aif files in the `./examples` dictionary
+
+### Automated version checks
+
+A validation script (`dev/check_aif_format.py`) verifies cross-file consistency.
+It runs:
+
+- **In CI** – on every push and PR via `.github/workflows/validate.yml`
+- **Locally** – as a pre-commit hook (see below)
+
+#### Setting up pre-commit
+
+Install [pre-commit](https://pre-commit.com/) and activate the hooks:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+The hooks will automatically validate JSON/YAML syntax and version consistency
+whenever a dictionary file is committed.
+
 ## Release process
 
 To successfully make a new release the following steps should be followed.
@@ -37,7 +65,9 @@ To successfully make a new release the following steps should be followed.
 
 - Check if both the dictionary and the examples are correctly updated
 
-- Prepare the release by running [text](update_version.py):
+- Prepare the release by running [update_version.py](update_version.py),
+  which stamps all three dictionary files (`.json`, `.dic`, `.yaml`) and the 
+  example AIF file:
 
   ```bash
   python update_version.py
