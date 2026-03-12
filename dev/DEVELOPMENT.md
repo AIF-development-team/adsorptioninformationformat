@@ -15,23 +15,33 @@ relying on established programming protocols and processes.
 
 The workflow for this project involves:
 
-- Git for version control
+- Git for source control
 - [Semantic versioning](https://semver.org/) for defining versions
 - The [Git Flow model](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) as a development philosophy
+- Scripts for propagating version strings when ready for release.
+- Local pre-commit and CI hooks for checking file version consistency
 - GitHub Actions for automatically generating releases
+
+### Version strings
 
 The [dictionary](../aif_dictionary.json) is structured with a version under the
 keyword "_audit_aif_version". This follows semantic versioning conventions, and
 is a required part of the file structure. This version is similarly found as the
 git tag, as well as in the github release.
 
-The version placeholder (`__AIF_VERSION__`) must be consistent across **all
-three** dictionary representations and the example AIF files:
+The version in these files is as follows:
+
+- In the 'main' branch all files contain and conform to the latest released version
+- In the 'develop' branch, the file version is replaced by a placeholder (`__AIF_VERSION__`)
+- Each tag has file version strings corresponding to its version.
+
+The version must be consistent across **all** dictionary representations
+and the example AIF files:
 
 - `aif_dictionary.json` – JSON Schema (`version`, `$id` URL, `_audit_aif_version.const`)
 - `aif_dictionary.dic`  – DDLm CIF dictionary (`_dictionary.version`, `_enumeration.default`)
 - `aif_dictionary.yaml` – LinkML schema (`version`)
-- all aif files in the `./examples` dictionary
+- All aif files in the `./examples` dictionary
 
 ### Automated version checks
 
@@ -57,7 +67,7 @@ whenever a dictionary file is committed.
 
 To successfully make a new release the following steps should be followed.
 
-- Create a release branch from `develop`:
+- Create a release branch from `develop` as a semantic version name (e.g 1.0.1):
 
   ```bash
   git flow release start <release-version>
@@ -89,7 +99,7 @@ To successfully make a new release the following steps should be followed.
   that the release has successfully completed.
 
 
-## Git Flow
+## Appendix: Git Flow
 
 The Git Flow model is a branching strategy for Git, designed to facilitate
 parallel development and collaboration. It defines a strict branching model that

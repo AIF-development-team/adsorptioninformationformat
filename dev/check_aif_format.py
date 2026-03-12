@@ -14,7 +14,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
 PLACEHOLDER = "__AIF_VERSION__"
-SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
+# Accept optional leading 'v' in version strings (e.g. 'v1.2.3').
+SEMVER_RE = re.compile(r"^v?\d+\.\d+\.\d+$")
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -23,6 +24,8 @@ def _fail(msg: str) -> None:
 
 
 def _is_valid_version(v: str) -> bool:
+    # Versions may be the placeholder or a semver string, optionally
+    # prefixed with 'v'.
     return v == PLACEHOLDER or bool(SEMVER_RE.match(v))
 
 

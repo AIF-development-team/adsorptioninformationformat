@@ -11,6 +11,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate version bump
+        run: |
+          # Get the previous tag (the one before the current tag)
+          current_tag="${{ github.ref_name }}"
+          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          if [ -n "$previous_tag" ]; then
+            python dev/update_version.py --version "$current_tag" --previous "$previous_tag"
+          else
+            echo "No previous tag found — skipping version comparison."
+          fi
 
       - name: Generate Changelog
         id: changelog

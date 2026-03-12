@@ -5,7 +5,8 @@ from pathlib import Path
 
 PLACEHOLDER = "__AIF_VERSION__"
 REPO_ROOT = Path(__file__).parent.parent
-AIF_FILES = [
+MAIN_FILES = [
+    REPO_ROOT / "example.aif",
     REPO_ROOT / "aif_dictionary.json",
     REPO_ROOT / "aif_dictionary.dic",
     REPO_ROOT / "aif_dictionary.yaml",
@@ -28,16 +29,31 @@ def get_old_version():
     return PLACEHOLDER
 
 
+def parse_version_string(ref_string):
+    """Extract a version from a branch or tag string.
+
+    Accepts values like *release/1.2.3*, *release/v1.2.3*, *v1.2.3* or
+    *1.2.3*.  Returns the bare X.Y.Z portion or raises ValueError.
+    """
+    # strip any leading branch prefix
+    if ref_string.startswith("release/"):
+        ref_string = ref_string.split("/", 1)[1]
+    # accept optional leading 'v'
+    match = re.match(r"v?(\d+\.\d+\.\d+)$", ref_string)
+    if match:
+        return match.group(1)
+    raise ValueError(f"Could not parse version from '{ref_string}'")
+
+
 def get_release_version_from_branch():
     try:
         branch_name = subprocess.check_output(
             ["git", "rev-parse", "--abbrev-ref", "HEAD"],
             encoding="utf-8",
         ).strip()
-        match = re.match(r"release/v(\d+\.\d+\.\d+)", branch_name)
-        if match:
-            return match.group(1)
-        else:
+        try:
+            return parse_version_string(branch_name)
+        except ValueError:
             print(
                 f"Branch name '{branch_name}' does not conform to "
                 "'release/vX.Y.Z' format.",
@@ -54,7 +70,7 @@ def replace_version_placeholder(tag):
     any example AIF files under the examples directory.
     """
     # update the canonical dictionary files first
-    for path in AIF_FILES:
+    for path in MAIN_FILES:
         if not path.exists():
             print(f"Skipping {path.name} (not found)", file=sys.stderr)
             continue
@@ -71,17 +87,24 @@ def replace_version_placeholder(tag):
         for path in examples_dir.rglob("*.aif"):
             text = path.read_text(encoding="utf-8")
             if PLACEHOLDER not in text:
-                print(f"Skipping {path.relative_to(REPO_ROOT)} (no placeholder)")
+                print(f"Skipping {path.relative_to(REPO_ROOT)} (no placeholder found)")
                 continue
             path.write_text(text.replace(PLACEHOLDER, tag), encoding="utf-8")
             print(f"  Updated {path.relative_to(REPO_ROOT)}")
 
 
 def is_newer_version(old_version, new_version):
-
+    """Compare two version strings in the format X.Y.Z."""
     def parse_version(version):
+        # Accept versions optionally prefixed with a leading 'v' (e.g. 'v1.2.3').
+        # Versions may also be empty or match the placeholder.
+        if not version or version == PLACEHOLDER:
+            return (0, 0, 0)
+        # strip a leading 'v' or 'V' so int conversion works
+        version = version.lstrip("vV")
         return tuple(map(int, version.split(".")))
 
+    print(f"Comparing old version '{old_version}' with new version '{new_version}'")
     try:
         return parse_version(new_version) > parse_version(old_version)
     except ValueError:
@@ -94,8 +117,51 @@ def is_newer_version(old_version, new_version):
 
 
 if __name__ == "__main__":
-    old_version = get_old_version()
-    new_version = get_release_version_from_branch()
+    # allow callers (e.g. CI) to supply an explicit version string
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Update AIF version numbers in dictionary files."
+    )
+    parser.add_argument(
+        "--version",
+        dest="version",
+        help=(
+            "explicit version to use (e.g. from tag); "
+            "overrides branch lookup"
+        ),
+    )
+    parser.add_argument(
+        "--previous",
+        dest="previous",
+        help="previous version/tag to compare against",
+    )
+    args = parser.parse_args()
+
+    if args.previous:
+        try:
+            old_version = parse_version_string(args.previous)
+        except ValueError as exc:
+            print(
+                f"Invalid previous version: {exc}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+    else:
+        old_version = get_old_version()
+
+    if args.version:
+        try:
+            new_version = parse_version_string(args.version)
+        except ValueError as exc:
+            print(
+                f"Invalid version argument: {exc}",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+    else:
+        new_version = get_release_version_from_branch()
+
     if not is_newer_version(old_version, new_version):
         print(
             f"New version {new_version} is not greater than "
