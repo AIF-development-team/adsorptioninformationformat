@@ -3,230 +3,303 @@
   "$id": "https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/aif_dictionary.json",
   "title": "Adsorption Information Format (AIF)",
   "description": "Dictionary for STAR format adsorption experiment and simulation data files",
+  "$comment": "Properties are organized into logical sections via 'definitions'. Each section groups related CIF-style data names by prefix. The schema is composed using 'allOf' references so that all section properties are validated together.",
   "type": "object",
   "version": "__AIF_VERSION__",
-  "properties": {
-    "_audit_aif_version": {
-      "type": "string",
-      "description": "version of AIF data names (version tag)",
-      "const": "__AIF_VERSION__"
+
+  "definitions": {
+
+    "audit": {
+      "$comment": "Section 1 — Audit: Version and format tracking. Required for every AIF file.",
+      "type": "object",
+      "properties": {
+        "_audit_aif_version": {
+          "type": "string",
+          "description": "Version of the AIF data-name dictionary used by this file",
+          "const": "__AIF_VERSION__"
+        }
+      }
     },
-    "_exptl_operator": {
-      "type": "string",
-      "description": "name of the person who ran the experiment (string)"
+
+    "experimental": {
+      "$comment": "Section 2 — Experimental: Conditions, methods, and operator details for the adsorption experiment. These are scalar (single-value) metadata fields that describe the overall experiment.",
+      "type": "object",
+      "properties": {
+        "_exptl_operator": {
+          "type": "string",
+          "description": "Name of the person who performed the experiment"
+        },
+        "_exptl_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the experiment in ISO 8601 format"
+        },
+        "_exptl_instrument": {
+          "type": "string",
+          "description": "Identifier or model name of the instrument used for the measurement"
+        },
+        "_exptl_adsorptive": {
+          "type": "string",
+          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water"
+        },
+        "_exptl_adsorptive_name": {
+          "type": "string",
+          "description": "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation"
+        },
+        "_exptl_temperature": {
+          "type": "number",
+          "description": "Temperature at which the experiment was conducted (see _units_temperature)"
+        },
+        "_exptl_method": {
+          "type": "string",
+          "description": "Experimental technique used to measure the amount adsorbed",
+          "examples": ["volumetric", "gravimetric"]
+        },
+        "_exptl_isotherm_type": {
+          "type": "string",
+          "description": "Classification of the reported adsorbed amount",
+          "examples": ["absolute", "excess", "net"]
+        },
+        "_exptl_p0": {
+          "type": "number",
+          "description": "Saturation pressure of the adsorptive at the experimental temperature (see _units_pressure)"
+        },
+        "_exptl_digitizer": {
+          "type": "string",
+          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
+        }
+      }
     },
-    "_exptl_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "date of the experiment (string in ISO 8601 format)"
+
+    "adsorbent": {
+      "$comment": "Section 3 — Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
+      "type": "object",
+      "properties": {
+        "_adsnt_sample_mass": {
+          "type": "number",
+          "description": "Mass of the adsorbent sample used in the measurement (see _units_mass)"
+        },
+        "_adsnt_sample_density": {
+          "type": "number",
+          "description": "Bulk or skeletal density of the adsorbent sample (see _units_density)"
+        },
+        "_adsnt_sample_id": {
+          "type": "string",
+          "description": "Unique sample identifier assigned by the operator or laboratory"
+        },
+        "_adsnt_material_id": {
+          "type": "string",
+          "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X"
+        },
+        "_adsnt_info": {
+          "type": "string",
+          "description": "Free-text field for additional information about the adsorbent sample"
+        },
+        "_adsnt_hashkey": {
+          "type": "string",
+          "description": "Machine-readable hash key for programmatic identification of the adsorbent"
+        },
+        "_adsnt_degas_summary": {
+          "type": "string",
+          "description": "Human-readable summary of the degassing procedure and conditions"
+        },
+        "_adsnt_degas_temperature": {
+          "type": "number",
+          "description": "Temperature at which the sample was degassed prior to measurement (see _units_temperature)"
+        },
+        "_adsnt_degas_time": {
+          "type": "number",
+          "description": "Duration of the degassing step (see _units_time)"
+        }
+      }
     },
-    "_exptl_instrument": {
-      "type": "string",
-      "description": "instrument id used for the experiment (string)"
+
+    "simulation": {
+      "$comment": "Section 4 — Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment.",
+      "type": "object",
+      "properties": {
+        "_simltn_code": {
+          "type": "string",
+          "description": "Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS"
+        },
+        "_simltn_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the simulation was performed in ISO 8601 format"
+        },
+        "_simltn_size": {
+          "type": "string",
+          "description": "Description of the simulated system size, e.g. number of unit cells or particle count"
+        },
+        "_simltn_forcefield_adsorptive": {
+          "type": "string",
+          "description": "Force field or interaction model used for the adsorptive, e.g. TraPPE, OPLS-AA"
+        },
+        "_simltn_forcefield_adsorbent": {
+          "type": "string",
+          "description": "Force field or interaction model used for the adsorbent framework, e.g. UFF, DREIDING"
+        },
+        "_simltn_input_files": {
+          "type": "string",
+          "description": "URL or repository link to the simulation input files and scripts"
+        },
+        "_simltn_sampling": {
+          "type": "string",
+          "description": "Phase-space sampling method used, e.g. GCMC, MD, Widom insertion"
+        },
+        "_simltn_lot": {
+          "type": "string",
+          "description": "Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field"
+        }
+      }
     },
-    "_exptl_adsorptive": {
-      "type": "string",
-      "description": "name of the adsorptive (string)"
+
+    "citation": {
+      "$comment": "Section 5 — Citation: Bibliographic reference for the source publication or dataset.",
+      "type": "object",
+      "properties": {
+        "_citation_doi": {
+          "type": "string",
+          "description": "Digital Object Identifier (DOI) of the publication associated with this data"
+        },
+        "_citation_source": {
+          "type": "string",
+          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
+        }
+      }
     },
-    "_exptl_adsorptive_name": {
-      "type": "string",
-      "description": "secondary identifier (string)"
+
+    "units": {
+      "$comment": "Section 6 — Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly.",
+      "type": "object",
+      "properties": {
+        "_units_temperature": {
+          "type": "string",
+          "description": "Unit of temperature for all temperature values in this file, e.g. K, °C"
+        },
+        "_units_pressure": {
+          "type": "string",
+          "description": "Unit of pressure for all pressure values in this file, e.g. kPa, bar, mmHg"
+        },
+        "_units_mass": {
+          "type": "string",
+          "description": "Unit of mass for all mass values in this file, e.g. g, mg, kg"
+        },
+        "_units_loading": {
+          "type": "string",
+          "description": "Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%"
+        },
+        "_units_density": {
+          "type": "string",
+          "description": "Unit of density for all density values in this file, e.g. g/cm3, kg/m3"
+        },
+        "_units_time": {
+          "type": "string",
+          "description": "Unit of time for all time values in this file, e.g. s, min, hours"
+        },
+        "_units_composition_type": {
+          "type": "string",
+          "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction"
+        }
+      }
     },
-    "_exptl_temperature": {
-      "type": "number",
-      "description": "temperature of the experiment (float)"
+
+    "adsorption_data": {
+      "$comment": "Section 7 — Adsorption Data: Loop columns for the adsorption branch of the isotherm. These fields appear inside a CIF loop_ construct, with one row per equilibrium point.",
+      "type": "object",
+      "properties": {
+        "_adsorp_pressure": {
+          "type": "number",
+          "description": "Equilibrium pressure at each adsorption data point (see _units_pressure)"
+        },
+        "_adsorp_fugacity": {
+          "type": "number",
+          "description": "Fugacity of the adsorptive at each adsorption data point (see _units_pressure)"
+        },
+        "_adsorp_p0": {
+          "type": "number",
+          "description": "Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)"
+        },
+        "_adsorp_amount": {
+          "type": "number",
+          "description": "Amount adsorbed at each adsorption data point (see _units_loading)"
+        },
+        "_adsorp_amount_excess": {
+          "type": "number",
+          "description": "Excess amount adsorbed at each adsorption data point (see _units_loading)"
+        },
+        "_adsorp_amount_absolute": {
+          "type": "number",
+          "description": "Absolute amount adsorbed at each adsorption data point (see _units_loading)"
+        },
+        "_adsorp_amount_net": {
+          "type": "number",
+          "description": "Net amount adsorbed at each adsorption data point (see _units_loading)"
+        }
+      }
     },
-    "_exptl_method": {
-      "type": "string",
-      "description": "description of method used to determine amount adsorbed (string)",
-      "examples": ["volumetric", "gravimetric"]
-    },
-    "_exptl_isotherm_type": {
-      "type": "string",
-      "description": "description of isotherm type (string)",
-      "examples": ["absolute", "excess", "net"]
-    },
-    "_exptl_p0": {
-      "type": "number",
-      "description": "saturation pressure of the experiment at the temperature of the experiment (float)"
-    },
-    "_exptl_digitizer": {
-      "type": "string",
-      "description": "name of the person who digitized the experiment (string)"
-    },
-    "_adsnt_sample_mass": {
-      "type": "number",
-      "description": "mass of the sample (float)"
-    },
-    "_adsnt_sample_density": {
-      "type": "number",
-      "description": "density of the sample (float)"
-    },
-    "_adsnt_sample_id": {
-      "type": "string",
-      "description": "unique identifying code used by the operator (string)"
-    },
-    "_adsnt_material_id": {
-      "type": "string",
-      "description": "designated name for the material (string)"
-    },
-    "_adsnt_info": {
-      "type": "string",
-      "description": "secondary identifier (string)"
-    },
-    "_adsnt_hashkey": {
-      "type": "string",
-      "description": "secondary identifier (string)"
-    },
-    "_adsnt_degas_summary": {
-      "type": "string",
-      "description": "summary of degas conditions (string)"
-    },
-    "_adsnt_degas_temperature": {
-      "type": "number",
-      "description": "degas temperature (float)"
-    },
-    "_adsnt_degas_time": {
-      "type": "number",
-      "description": "degas time (float)"
-    },
-    "_simltn_code": {
-      "type": "string",
-      "description": "simulation code or software used (string)"
-    },
-    "_simltn_date": {
-      "type": "string",
-      "format": "date-time",
-      "description": "date of the simulation (string in ISO 8601 format)"
-    },
-    "_simltn_size": {
-      "type": "string",
-      "description": "num of unit cells, sample mass, etc (string)"
-    },
-    "_simltn_forcefield_adsorptive": {
-      "type": "string",
-      "description": "adsorptive model details (string)"
-    },
-    "_simltn_forcefield_adsorbent": {
-      "type": "string",
-      "description": "adsorbent model details (string)"
-    },
-    "_simltn_input_files": {
-      "type": "string",
-      "description": "repository link to input files and other codes used in the simulation (string)"
-    },
-    "_simltn_sampling": {
-      "type": "string",
-      "description": "phase space sampling algorithm (string)"
-    },
-    "_simltn_lot": {
-      "type": "string",
-      "description": "level of theory used in calculation, e.g. DFT, MLP, classical etc. (string)"
-    },
-    "_citation_doi": {
-      "type": "string",
-      "description": "the digital object identifier (DOI) of the cited work (string)"
-    },
-    "_citation_source": {
-      "type": "string",
-      "description": "source of the cited work (string)"
-    },
-    "_units_temperature": {
-      "type": "string",
-      "description": "units of temperature (string)"
-    },
-    "_units_pressure": {
-      "type": "string",
-      "description": "units of pressure (string)"
-    },
-    "_units_mass": {
-      "type": "string",
-      "description": "units of mass (string)"
-    },
-    "_units_loading": {
-      "type": "string",
-      "description": "units of amount adsorbed (string)"
-    },
-    "_units_density": {
-      "type": "string",
-      "description": "units of density (string)"
-    },
-    "_units_time": {
-      "type": "string",
-      "description": "units of time (string)"
-    },
-    "_units_composition_type": {
-      "type": "string",
-      "description": "composition definition (string)"
-    },
-    "_adsorp_pressure": {
-      "type": "number",
-      "description": "equilibrium pressure of the adsorption measurement (float)"
-    },
-    "_adsorp_fugacity": {
-      "type": "number",
-      "description": "fugacity of the adsorption measurement (float)"
-    },
-    "_adsorp_p0": {
-      "type": "number",
-      "description": "saturation pressure of the adsorption measurement at the temperature of the experiment (float)"
-    },
-    "_adsorp_amount": {
-      "type": "number",
-      "description": "amount adsorbed during the adsorption measurement (float)"
-    },
-    "_desorp_pressure": {
-      "type": "number",
-      "description": "equilibrium pressure of the desorption measurement at the temperature of the experiment (float)"
-    },
-    "_desorp_fugacity": {
-      "type": "number",
-      "description": "fugacity of the desorption measurement (float)"
-    },
-    "_desorp_p0": {
-      "type": "number",
-      "description": "saturation pressure of the desorption measurement at the temperature of the experiment (float)"
-    },
-    "_desorp_amount": {
-      "type": "number",
-      "description": "amount adsorbed during the desorption measurement (float)"
-    },
-    "_adsorp_amount_excess": {
-      "type": "number",
-      "description": "excess amount adsorbed during the adsorption measurement (float)"
-    },
-    "_adsorp_amount_absolute": {
-      "type": "number",
-      "description": "absolute amount adsorbed during the adsorption measurement (float)"
-    },
-    "_adsorp_amount_net": {
-      "type": "number",
-      "description": "net amount adsorbed during the adsorption measurement (float)"
-    },
-    "_desorp_amount_excess": {
-      "type": "number",
-      "description": "excess amount adsorbed during the desorption measurement (float)"
-    },
-    "_desorp_amount_absolute": {
-      "type": "number",
-      "description": "absolute amount adsorbed during the desorption measurement (float)"
-    },
-    "_desorp_amount_net": {
-      "type": "number",
-      "description": "net amount adsorbed during the desorption measurement (float)"
+
+    "desorption_data": {
+      "$comment": "Section 8 — Desorption Data: Loop columns for the desorption branch of the isotherm. Mirrors the adsorption data section for the reverse process.",
+      "type": "object",
+      "properties": {
+        "_desorp_pressure": {
+          "type": "number",
+          "description": "Equilibrium pressure at each desorption data point (see _units_pressure)"
+        },
+        "_desorp_fugacity": {
+          "type": "number",
+          "description": "Fugacity of the adsorptive at each desorption data point (see _units_pressure)"
+        },
+        "_desorp_p0": {
+          "type": "number",
+          "description": "Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)"
+        },
+        "_desorp_amount": {
+          "type": "number",
+          "description": "Amount remaining adsorbed at each desorption data point (see _units_loading)"
+        },
+        "_desorp_amount_excess": {
+          "type": "number",
+          "description": "Excess amount remaining adsorbed at each desorption data point (see _units_loading)"
+        },
+        "_desorp_amount_absolute": {
+          "type": "number",
+          "description": "Absolute amount remaining adsorbed at each desorption data point (see _units_loading)"
+        },
+        "_desorp_amount_net": {
+          "type": "number",
+          "description": "Net amount remaining adsorbed at each desorption data point (see _units_loading)"
+        }
+      }
     }
   },
+
+  "allOf": [
+    { "$ref": "#/definitions/audit" },
+    { "$ref": "#/definitions/experimental" },
+    { "$ref": "#/definitions/adsorbent" },
+    { "$ref": "#/definitions/simulation" },
+    { "$ref": "#/definitions/citation" },
+    { "$ref": "#/definitions/units" },
+    { "$ref": "#/definitions/adsorption_data" },
+    { "$ref": "#/definitions/desorption_data" }
+  ],
+
   "patternProperties": {
     ".*_uncertainty$": {
+      "$comment": "Any data name ending in '_uncertainty' is treated as the uncertainty (error bar) for the corresponding base field.",
       "type": "number",
-      "description": "uncertainty associated with value (float)"
+      "description": "Uncertainty (standard or expanded) associated with the corresponding data name, in the same units"
     }
   },
+
   "required": [
     "_audit_aif_version",
     "_exptl_adsorptive",
     "_adsnt_sample_id",
     "_adsnt_material_id"
   ],
+
   "additionalProperties": true
 }
