@@ -1,8 +1,0 @@
-pytest
-gemmi
-pandas
-numpy
-matplotlib
-xlrd
-pre-commit
-pylint
