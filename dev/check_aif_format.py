@@ -57,9 +57,11 @@ def check_json(path: Path) -> tuple[list[str], list[str]]:
     else:
         errors.append(f'{path.name}: could not extract version from "$id"')
 
-    # _audit_aif_version.const
+    # _audit_aif_version.const (nested inside definitions.audit)
     const_version = (
-        schema.get("properties", {})
+        schema.get("definitions", {})
+        .get("audit", {})
+        .get("properties", {})
         .get("_audit_aif_version", {})
         .get("const")
     )

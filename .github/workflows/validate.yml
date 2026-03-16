@@ -23,3 +23,6 @@ jobs:
 
       - name: Check version consistency across all dictionaries
         run: python dev/check_aif_format.py
+
+      - name: Check YAML/DIC are in sync with JSON schema
+        run: python dev/sync_dictionaries.py --check

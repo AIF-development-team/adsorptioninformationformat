@@ -63,6 +63,15 @@ pre-commit install
 The hooks will automatically validate JSON/YAML syntax and version consistency
 whenever a dictionary file is committed.
 
+#### Setting up the pre-push hook
+
+A pre-push hook prevents accidentally pushing a tag while `__AIF_VERSION__`
+placeholders are still present. Install it alongside the commit hooks:
+
+```bash
+pre-commit install --hook-type pre-push
+```
+
 ## Release process
 
 To successfully make a new release the following steps should be followed.

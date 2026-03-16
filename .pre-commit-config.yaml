@@ -28,3 +28,23 @@ repos:
         files: aif_dictionary\.(json|dic|yaml)$
         # our script handles filenames itself, so don't pass them
         pass_filenames: false
+
+      - id: sync-dictionaries
+        name: Check YAML/DIC are in sync with JSON schema
+        # verifies that the YAML and DIC files match what the JSON
+        # schema would generate; fails if they have drifted
+        entry: python dev/sync_dictionaries.py --check
+        language: python
+        files: aif_dictionary\.(json|dic|yaml)$
+        pass_filenames: false
+
+      - id: check-no-placeholder-on-tag
+        name: Block push if version placeholders remain
+        # prevents pushing a tag while __AIF_VERSION__ is still
+        # present in dictionary files — the version must be stamped
+        # before tagging a release
+        entry: python dev/check_placeholder_on_tag_push.py
+        language: python
+        always_run: true
+        pass_filenames: false
+        stages: [pre-push]
