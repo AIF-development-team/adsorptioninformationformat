@@ -335,6 +335,58 @@ slots:
     description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
     range: float
 
+  # ── Adsorption Transient Data ───────────────
+
+  adsorp_transient_step:
+    aliases: ["_adsorp_transient_step"]
+    description: 1-based index of the corresponding equilibrium point in the adsorption data loop
+
+  adsorp_transient_elapsed_time:
+    aliases: ["_adsorp_transient_elapsed_time"]
+    description: Time elapsed since the beginning of this dosing step (see _units_time)
+    range: float
+
+  adsorp_transient_pressure:
+    aliases: ["_adsorp_transient_pressure"]
+    description: Instantaneous pressure recorded during the adsorption dosing step (see _units_pressure)
+    range: float
+
+  adsorp_transient_temperature:
+    aliases: ["_adsorp_transient_temperature"]
+    description: Instantaneous temperature recorded during the adsorption dosing step (see _units_temperature)
+    range: float
+
+  adsorp_transient_amount:
+    aliases: ["_adsorp_transient_amount"]
+    description: Instantaneous amount adsorbed recorded during the adsorption dosing step (see _units_loading)
+    range: float
+
+  # ── Desorption Transient Data ───────────────
+
+  desorp_transient_step:
+    aliases: ["_desorp_transient_step"]
+    description: 1-based index of the corresponding equilibrium point in the desorption data loop
+
+  desorp_transient_elapsed_time:
+    aliases: ["_desorp_transient_elapsed_time"]
+    description: Time elapsed since the beginning of this desorption step (see _units_time)
+    range: float
+
+  desorp_transient_pressure:
+    aliases: ["_desorp_transient_pressure"]
+    description: Instantaneous pressure recorded during the desorption step (see _units_pressure)
+    range: float
+
+  desorp_transient_temperature:
+    aliases: ["_desorp_transient_temperature"]
+    description: Instantaneous temperature recorded during the desorption step (see _units_temperature)
+    range: float
+
+  desorp_transient_amount:
+    aliases: ["_desorp_transient_amount"]
+    description: Instantaneous amount adsorbed recorded during the desorption step (see _units_loading)
+    range: float
+
 # ──────────────────────────────────────────────
 #  Classes
 # ──────────────────────────────────────────────
@@ -374,6 +426,28 @@ classes:
       - desorp_enthalpy_integral
       - desorp_molefraction
       - desorp_selectivity
+
+  Adsorption_TransientDataPoint:
+    description: >-
+      A single data point in the adsorption_transient branch of an isotherm.
+      Corresponds to a row in an AIF loop_ block for adsorption_transient.
+    slots:
+      - adsorp_transient_step
+      - adsorp_transient_elapsed_time
+      - adsorp_transient_pressure
+      - adsorp_transient_temperature
+      - adsorp_transient_amount
+
+  Desorption_TransientDataPoint:
+    description: >-
+      A single data point in the desorption_transient branch of an isotherm.
+      Corresponds to a row in an AIF loop_ block for desorption_transient.
+    slots:
+      - desorp_transient_step
+      - desorp_transient_elapsed_time
+      - desorp_transient_pressure
+      - desorp_transient_temperature
+      - desorp_transient_amount
 
   AdsorptionInformationFile:
     description: >-
@@ -434,5 +508,15 @@ classes:
       desorption_data:
         description: Desorption branch data points (loop_ block).
         range: DesorptionDataPoint
+        multivalued: true
+        inlined_as_list: true
+      adsorption_transient_data:
+        description: Adsorption_Transient branch data points (loop_ block).
+        range: Adsorption_TransientDataPoint
+        multivalued: true
+        inlined_as_list: true
+      desorption_transient_data:
+        description: Desorption_Transient branch data points (loop_ block).
+        range: Desorption_TransientDataPoint
         multivalued: true
         inlined_as_list: true
