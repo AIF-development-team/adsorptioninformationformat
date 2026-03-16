@@ -44,7 +44,7 @@ repos:
         # present in dictionary files — the version must be stamped
         # before tagging a release
         entry: python dev/check_placeholder_on_tag_push.py
-        language: python
+        language: system
         always_run: true
         pass_filenames: false
         stages: [pre-push]
