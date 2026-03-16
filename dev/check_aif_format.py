@@ -199,7 +199,7 @@ def check_example_file(path: Path) -> tuple[list[str], list[str]]:
     except FileNotFoundError:
         return [], [f"{path.name}: file not found"]
 
-    m = re.search(r"_audit_aif_version\s+'([^']+)'", text)
+    m = re.search(r"_audit_aif_version\s+[\"']([^\"']+)[\"']", text)
     if m:
         versions.append(m.group(1))
     else:
