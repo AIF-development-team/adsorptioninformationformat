@@ -1,0 +1,51 @@
+# Binary CO2/N2 mixture adsorption
+
+data_multicomponent_co2_n2
+
+    _audit_aif_version                "v1.0.0"
+
+    _exptl_operator                   "Clara Jensen"
+    _exptl_date                       2024-08-10T10:00:00Z
+    _exptl_adsorptive                 "mixture"  # what is the naming scheme here??
+    _exptl_temperature                298.15
+    _exptl_method                     "gravimetric"
+    _exptl_instrument                 "DVS Carbon"
+    _exptl_isotherm_type              "excess"
+
+    _adsnt_material_id                "HKUST-1"
+    _adsnt_sample_id                  "HKUST1-B2-05"
+    _adsnt_sample_mass                0.0834
+
+    _units_temperature                "K"
+    _units_pressure                   "Pa"
+    _units_mass                       "g"
+    _units_loading                    "mmol/g"
+    _units_composition_type           "mole_fraction"
+
+    loop_
+        _adsorptive_mixture_component_id
+        _adsorptive_mixture_component_name
+        _adsorptive_mixture_component_mole_fraction
+        _adsorptive_mixture_component_cas
+        1  "CO2"  0.15  "124-38-9"
+        2  "N2"   0.85  "7727-37-9"
+
+    loop_
+        _adsorp_pressure
+        _adsorp_component_id
+        _adsorp_amount
+        _adsorp_composition
+        10000.0    1   0.82   0.942
+        10000.0    2   0.05   0.058
+        25000.0    1   1.65   0.932
+        25000.0    2   0.12   0.068
+        50000.0    1   2.78   0.924
+        50000.0    2   0.23   0.076
+        75000.0    1   3.56   0.913
+        75000.0    2   0.34   0.087
+        100000.0   1   4.12   0.902
+        100000.0   2   0.45   0.098
+        125000.0   1   4.58   0.891
+        125000.0   2   0.56   0.109
+        150000.0   1   4.92   0.880
+        150000.0   2   0.67   0.120
