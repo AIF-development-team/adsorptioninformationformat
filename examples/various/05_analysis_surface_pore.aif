@@ -2,7 +2,7 @@
 
 data_bet_pore_analysis
 
-    _audit_aif_version                "v1.0.0"
+    _audit_aif_version                "__AIF_VERSION__"
 
     _exptl_operator                   "Elena Rossi"
     _exptl_date                       2024-01-10T08:45:00Z
