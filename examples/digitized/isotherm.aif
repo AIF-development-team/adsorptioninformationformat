@@ -6,7 +6,7 @@ _exptl_date 2009-09-17T19:56:00
 _exptl_instrument 'Autosorb Station 1'
 _exptl_adsorptive Nitrogen
 _exptl_temperature 77.3
-_exptl_sample_mass 0.0339
+_adsnt_sample_mass 0.0339
 _adsnt_sample_id 'nk_DUT-6_LP_N2_114pkt'
 _adsnt_material_id 'DUT-6'
 _units_temperature K
