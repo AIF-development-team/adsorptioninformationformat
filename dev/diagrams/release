@@ -1,0 +1,20 @@
+flowchart TD
+    A([Start Release]) --> B["Create release branch from develop<br><code>git flow release start &lt;version&gt;</code>"]
+    B --> C{"Dictionary & examples
+    correctly updated?"}
+    C -- No --> D["Fix dictionary/example files"]
+    D --> C
+    C -- Yes --> E["Run update_version.py<br>Stamps .json, .dic, .yaml & example AIF"]
+    E --> F["Commit version changes<br><code>git commit -m 'Prepare release &lt;version&gt;'</code>"]
+    F --> G["Finish release branch<br><code>git flow release finish &lt;version&gt;</code><br>Tags & merges into master + develop"]
+    G --> H["Push branches & tags<br><code>git push --all</code><br><code>git push --tags</code>"]
+    H --> I["GitHub Actions triggers<br>automatic release workflow"]
+    I --> J{"Release successful<br>on GitHub?"}
+    J -- Yes --> K([Release Complete ✓])
+    J -- No --> L["Debug & fix release issues"]
+    L --> H
+
+    style A fill:#4CAF50,color:#fff
+    style K fill:#4CAF50,color:#fff
+    style C fill:#FFC107,color:#000
+    style J fill:#FFC107,color:#000

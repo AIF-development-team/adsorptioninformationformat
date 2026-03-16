@@ -136,6 +136,11 @@ if __name__ == "__main__":
         dest="previous",
         help="previous version/tag to compare against",
     )
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="only validate the version bump without modifying files",
+    )
     args = parser.parse_args()
 
     if args.previous:
@@ -169,5 +174,9 @@ if __name__ == "__main__":
             file=sys.stderr,
         )
         sys.exit(1)
-    print(f"Updating AIF version from {old_version} to {new_version}")
-    replace_version_placeholder(new_version)
+
+    if args.check:
+        print(f"Version bump OK: {old_version} → {new_version}")
+    else:
+        print(f"Updating AIF version from {old_version} to {new_version}")
+        replace_version_placeholder(new_version)

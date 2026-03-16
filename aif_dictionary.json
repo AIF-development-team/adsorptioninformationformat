@@ -6,23 +6,38 @@
   "$comment": "Properties are organized into logical sections via 'definitions'. Each section groups related CIF-style data names by prefix. The schema is composed using 'allOf' references so that all section properties are validated together.",
   "type": "object",
   "version": "__AIF_VERSION__",
+  "x-dic-date": "2026-03-09",
+  "x-linkml-id": "https://github.com/AIF-development-team/adsorptioninformationformat",
+  "x-linkml-name": "aif",
+  "x-linkml-license": "MIT",
+  "x-linkml-prefixes": {
+    "aif": "https://github.com/AIF-development-team/adsorptioninformationformat/",
+    "linkml": "https://w3id.org/linkml/",
+    "schema": "http://schema.org/",
+    "qudt": "http://qudt.org/schema/qudt/"
+  },
+  "x-linkml-imports": ["linkml:types"],
+  "x-linkml-default-range": "string",
 
   "definitions": {
 
     "audit": {
-      "$comment": "Section 1 — Audit: Version and format tracking. Required for every AIF file.",
+      "$comment": "Audit: Version and format tracking. Required for every AIF file.",
+      "x-dic-id": "AUDIT",
+      "x-dic-prefix": "audit",
       "type": "object",
       "properties": {
         "_audit_aif_version": {
           "type": "string",
           "description": "Version of the AIF data-name dictionary used by this file",
-          "const": "__AIF_VERSION__"
+          "const": "__AIF_VERSION__",
+          "x-dic-source": "Assigned"
         }
       }
     },
 
     "experimental": {
-      "$comment": "Section 2 — Experimental: Conditions, methods, and operator details for the adsorption experiment. These are scalar (single-value) metadata fields that describe the overall experiment.",
+      "$comment": "Experimental: Conditions, methods, and operator details for the adsorption experiment. These are scalar (single-value) metadata fields that describe the overall experiment.",
       "type": "object",
       "properties": {
         "_exptl_operator": {
@@ -40,7 +55,8 @@
         },
         "_exptl_adsorptive": {
           "type": "string",
-          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water"
+          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
+          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
         },
         "_exptl_adsorptive_name": {
           "type": "string",
@@ -53,12 +69,25 @@
         "_exptl_method": {
           "type": "string",
           "description": "Experimental technique used to measure the amount adsorbed",
-          "examples": ["volumetric", "gravimetric"]
+          "enum": ["volumetric", "gravimetric"],
+          "x-enum-name": "ExperimentalMethod",
+          "x-enum-description": "Method used to determine amount adsorbed.",
+          "x-enum-descriptions": {
+            "volumetric": "Volumetric (manometric) method.",
+            "gravimetric": "Gravimetric method."
+          }
         },
         "_exptl_isotherm_type": {
           "type": "string",
           "description": "Classification of the reported adsorbed amount",
-          "examples": ["absolute", "excess", "net"]
+          "enum": ["absolute", "excess", "net"],
+          "x-enum-name": "IsothermType",
+          "x-enum-description": "Type of adsorption isotherm.",
+          "x-enum-descriptions": {
+            "absolute": "Absolute adsorption.",
+            "excess": "Excess adsorption.",
+            "net": "Net adsorption."
+          }
         },
         "_exptl_p0": {
           "type": "number",
@@ -72,7 +101,7 @@
     },
 
     "adsorbent": {
-      "$comment": "Section 3 — Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
+      "$comment": "Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
       "type": "object",
       "properties": {
         "_adsnt_sample_mass": {
@@ -85,11 +114,17 @@
         },
         "_adsnt_sample_id": {
           "type": "string",
-          "description": "Unique sample identifier assigned by the operator or laboratory"
+          "description": "Unique sample identifier assigned by the operator or laboratory",
+          "x-dic-purpose": "Key",
+          "x-dic-source": "Assigned",
+          "x-dic-common": "Required field. A unique identifier for the specific sample\nused in the experiment."
         },
         "_adsnt_material_id": {
           "type": "string",
-          "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X"
+          "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned",
+          "x-dic-common": "Required field. The name of the material, e.g. the common name,\nCSD refcode, or other standard identifier."
         },
         "_adsnt_info": {
           "type": "string",
@@ -97,7 +132,9 @@
         },
         "_adsnt_hashkey": {
           "type": "string",
-          "description": "Machine-readable hash key for programmatic identification of the adsorbent"
+          "description": "Machine-readable hash key for programmatic identification of the adsorbent",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
         },
         "_adsnt_degas_summary": {
           "type": "string",
@@ -115,7 +152,7 @@
     },
 
     "simulation": {
-      "$comment": "Section 4 — Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment.",
+      "$comment": "Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment.",
       "type": "object",
       "properties": {
         "_simltn_code": {
@@ -155,12 +192,14 @@
     },
 
     "citation": {
-      "$comment": "Section 5 — Citation: Bibliographic reference for the source publication or dataset.",
+      "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
       "type": "object",
       "properties": {
         "_citation_doi": {
           "type": "string",
-          "description": "Digital Object Identifier (DOI) of the publication associated with this data"
+          "description": "Digital Object Identifier (DOI) of the publication associated with this data",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
         },
         "_citation_source": {
           "type": "string",
@@ -170,42 +209,49 @@
     },
 
     "units": {
-      "$comment": "Section 6 — Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly.",
+      "$comment": "Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly.",
       "type": "object",
       "properties": {
         "_units_temperature": {
           "type": "string",
-          "description": "Unit of temperature for all temperature values in this file, e.g. K, °C"
+          "description": "Unit of temperature for all temperature values in this file, e.g. K, °C",
+          "x-dic-source": "Assigned"
         },
         "_units_pressure": {
           "type": "string",
-          "description": "Unit of pressure for all pressure values in this file, e.g. kPa, bar, mmHg"
+          "description": "Unit of pressure for all pressure values in this file, e.g. kPa, bar, mmHg",
+          "x-dic-source": "Assigned"
         },
         "_units_mass": {
           "type": "string",
-          "description": "Unit of mass for all mass values in this file, e.g. g, mg, kg"
+          "description": "Unit of mass for all mass values in this file, e.g. g, mg, kg",
+          "x-dic-source": "Assigned"
         },
         "_units_loading": {
           "type": "string",
-          "description": "Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%"
+          "description": "Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%",
+          "x-dic-source": "Assigned"
         },
         "_units_density": {
           "type": "string",
-          "description": "Unit of density for all density values in this file, e.g. g/cm3, kg/m3"
+          "description": "Unit of density for all density values in this file, e.g. g/cm3, kg/m3",
+          "x-dic-source": "Assigned"
         },
         "_units_time": {
           "type": "string",
-          "description": "Unit of time for all time values in this file, e.g. s, min, hours"
+          "description": "Unit of time for all time values in this file, e.g. s, min, hours",
+          "x-dic-source": "Assigned"
         },
         "_units_composition_type": {
           "type": "string",
-          "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction"
+          "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction",
+          "x-dic-source": "Assigned"
         }
       }
     },
 
     "adsorption_data": {
-      "$comment": "Section 7 — Adsorption Data: Loop columns for the adsorption branch of the isotherm. These fields appear inside a CIF loop_ construct, with one row per equilibrium point.",
+      "$comment": "Adsorption Data: Loop columns for the adsorption branch of the isotherm. These fields appear inside a CIF loop_ construct, with one row per equilibrium point.",
       "type": "object",
       "properties": {
         "_adsorp_pressure": {
@@ -235,12 +281,28 @@
         "_adsorp_amount_net": {
           "type": "number",
           "description": "Net amount adsorbed at each adsorption data point (see _units_loading)"
+        },
+        "_adsorp_enthalpy_differential": {
+          "type": "number",
+          "description": "Differential enthalpy of adsorption (see _units_enthalpy)"
+        },
+        "_adsorp_enthalpy_integral": {
+          "type": "number",
+          "description": "Integral enthalpy of adsorption (see _units_enthalpy)"
+        },
+        "_adsorp_molefraction": {
+          "type": "number",
+          "description": "Mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_selectivity": {
+          "type": "number",
+          "description": "Adsorption selectivity for a specified component pair under the given conditions (unitless ratio)"
         }
       }
     },
 
     "desorption_data": {
-      "$comment": "Section 8 — Desorption Data: Loop columns for the desorption branch of the isotherm. Mirrors the adsorption data section for the reverse process.",
+      "$comment": "Desorption Data: Loop columns for the desorption branch of the isotherm. Mirrors the adsorption data section for the reverse process.",
       "type": "object",
       "properties": {
         "_desorp_pressure": {
@@ -270,6 +332,22 @@
         "_desorp_amount_net": {
           "type": "number",
           "description": "Net amount remaining adsorbed at each desorption data point (see _units_loading)"
+        },
+        "_desorp_enthalpy_differential": {
+          "type": "number",
+          "description": "Differential enthalpy of desorption (see _units_enthalpy)"
+        },
+        "_desorp_enthalpy_integral": {
+          "type": "number",
+          "description": "Integral enthalpy of desorption (see _units_enthalpy)"
+        },
+        "_desorp_molefraction": {
+          "type": "number",
+          "description": "Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_selectivity": {
+          "type": "number",
+          "description": "Desorption selectivity for a specified component pair under the given conditions (unitless ratio)"
         }
       }
     }
@@ -279,6 +357,7 @@
     { "$ref": "#/definitions/audit" },
     { "$ref": "#/definitions/experimental" },
     { "$ref": "#/definitions/adsorbent" },
+    { "$ref": "#/definitions/adsorptive" },
     { "$ref": "#/definitions/simulation" },
     { "$ref": "#/definitions/citation" },
     { "$ref": "#/definitions/units" },

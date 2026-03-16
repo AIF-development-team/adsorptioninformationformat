@@ -10,9 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Validate JSON syntax
+        run: python -m json.tool aif_dictionary.json > /dev/null
+
+      - name: Check version consistency across all dictionaries
+        run: python dev/check_aif_format.py
+
+      - name: Check YAML/DIC are in sync with JSON schema
+        run: python dev/sync_dictionaries.py --check
 
       - name: Validate version bump
         run: |
@@ -20,7 +29,7 @@ jobs:
           current_tag="${{ github.ref_name }}"
           previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
-            python dev/update_version.py --version "$current_tag" --previous "$previous_tag"
+            python dev/update_version.py --check --version "$current_tag" --previous "$previous_tag"
           else
             echo "No previous tag found — skipping version comparison."
           fi
@@ -28,19 +37,24 @@ jobs:
       - name: Generate Changelog
         id: changelog
         run: |
-          previous_tag=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          current_tag="${{ github.ref_name }}"
+          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
             changelog=$(git log "$previous_tag"..HEAD --pretty=format:"- %s")
           else
             changelog=$(git log --pretty=format:"- %s")
           fi
-          echo "changelog=$changelog" >> $GITHUB_ENV
+          {
+            echo 'changelog<<EOF'
+            echo "$changelog"
+            echo 'EOF'
+          } >> $GITHUB_ENV
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: Release ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
           body: ${{ env.changelog }}
           draft: false
           prerelease: false
