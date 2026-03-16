@@ -199,7 +199,7 @@ def check_example_file(path: Path) -> tuple[list[str], list[str]]:
     except FileNotFoundError:
         return [], [f"{path.name}: file not found"]
 
-    m = re.search(r"_audit_aif_version\s+'([^']+)'", text)
+    m = re.search(r"_audit_aif_version\s+[\"']([^\"']+)[\"']", text)
     if m:
         versions.append(m.group(1))
     else:
@@ -212,6 +212,7 @@ def main() -> int:
     json_path = REPO_ROOT / "aif_dictionary.json"
     dic_path = REPO_ROOT / "aif_dictionary.dic"
     yaml_path = REPO_ROOT / "aif_dictionary.yaml"
+    aif_path = REPO_ROOT / "example.aif"
 
     all_errors: list[str] = []
     all_versions: list[str] = []
@@ -220,6 +221,7 @@ def main() -> int:
         (check_json, json_path),
         (check_dic, dic_path),
         (check_yaml, yaml_path),
+        (check_example_file, aif_path),
     ]:
         if not path.exists():
             all_errors.append(f"{path.name}: file not found")
