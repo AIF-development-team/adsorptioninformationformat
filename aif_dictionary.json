@@ -272,6 +272,60 @@
           "description": "Net amount remaining adsorbed at each desorption data point (see _units_loading)"
         }
       }
+    },
+
+    "adsorption_transient_data": {
+      "$comment": "Section 9 — Adsorption Transient Data: Optional loop columns for time-resolved (raw instrument) traces during the adsorption branch. Each row records an instantaneous reading; the _step column links rows to the corresponding equilibrium point in the adsorption data loop (1-based index).",
+      "type": "object",
+      "properties": {
+        "_adsorp_transient_step": {
+          "type": "integer",
+          "description": "1-based index of the corresponding equilibrium point in the adsorption data loop"
+        },
+        "_adsorp_transient_elapsed_time": {
+          "type": "number",
+          "description": "Time elapsed since the beginning of this dosing step (see _units_time)"
+        },
+        "_adsorp_transient_pressure": {
+          "type": "number",
+          "description": "Instantaneous pressure recorded during the adsorption dosing step (see _units_pressure)"
+        },
+        "_adsorp_transient_temperature": {
+          "type": "number",
+          "description": "Instantaneous temperature recorded during the adsorption dosing step (see _units_temperature)"
+        },
+        "_adsorp_transient_amount": {
+          "type": "number",
+          "description": "Instantaneous amount adsorbed recorded during the adsorption dosing step (see _units_loading)"
+        }
+      }
+    },
+
+    "desorption_transient_data": {
+      "$comment": "Section 10 — Desorption Transient Data: Optional loop columns for time-resolved (raw instrument) traces during the desorption branch. Mirrors the adsorption transient data section.",
+      "type": "object",
+      "properties": {
+        "_desorp_transient_step": {
+          "type": "integer",
+          "description": "1-based index of the corresponding equilibrium point in the desorption data loop"
+        },
+        "_desorp_transient_elapsed_time": {
+          "type": "number",
+          "description": "Time elapsed since the beginning of this desorption step (see _units_time)"
+        },
+        "_desorp_transient_pressure": {
+          "type": "number",
+          "description": "Instantaneous pressure recorded during the desorption step (see _units_pressure)"
+        },
+        "_desorp_transient_temperature": {
+          "type": "number",
+          "description": "Instantaneous temperature recorded during the desorption step (see _units_temperature)"
+        },
+        "_desorp_transient_amount": {
+          "type": "number",
+          "description": "Instantaneous amount adsorbed recorded during the desorption step (see _units_loading)"
+        }
+      }
     }
   },
 
@@ -283,7 +337,9 @@
     { "$ref": "#/definitions/citation" },
     { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
-    { "$ref": "#/definitions/desorption_data" }
+    { "$ref": "#/definitions/desorption_data" },
+    { "$ref": "#/definitions/adsorption_transient_data" },
+    { "$ref": "#/definitions/desorption_transient_data" }
   ],
 
   "patternProperties": {

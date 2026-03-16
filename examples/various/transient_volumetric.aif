@@ -1,0 +1,65 @@
+# volumetric adsorption with transient pressure data (adsorption only)
+
+data_transient_volumetric_N2
+
+    _audit_aif_version                "__AIF_VERSION__"
+
+    _exptl_operator                   "Alice Martin"
+    _exptl_date                       2026-02-15T09:30:00Z
+    _exptl_adsorptive                 "Nitrogen"
+    _exptl_adsorptive_name            "N2"
+    _exptl_temperature                77.35
+    _exptl_method                     "volumetric"
+    _exptl_instrument                 "Micromeritics ASAP 2020"
+    _exptl_isotherm_type              "excess"
+
+    _adsnt_material_id                "UiO-66"
+    _adsnt_sample_id                  "UiO66-batch3-01"
+    _adsnt_sample_mass                0.1023
+    _adsnt_degas_temperature          150.0
+    _adsnt_degas_time                 8.0
+
+    _units_temperature                "K"
+    _units_pressure                   "kPa"
+    _units_mass                       "g"
+    _units_loading                    "mmol/g"
+    _units_time                       "s"
+
+    # equilibrium adsorption data (3 points for brevity)
+    loop_
+        _adsorp_pressure
+        _adsorp_p0
+        _adsorp_amount
+        0.050   101.325   0.120
+        0.100   101.325   0.450
+        0.200   101.325   1.210
+
+    # time-resolved pressure trace during each adsorption dosing step
+    # _adsorp_transient_step links to the row index (1-based) in the
+    # adsorption loop above
+    loop_
+        _adsorp_transient_step
+        _adsorp_transient_elapsed_time
+        _adsorp_transient_pressure
+        _adsorp_transient_temperature
+        1    0.0    0.080   77.36
+        1    5.0    0.072   77.35
+        1   10.0    0.062   77.35
+        1   15.0    0.055   77.35
+        1   20.0    0.052   77.35
+        1   25.0    0.051   77.35
+        1   30.0    0.050   77.35
+        2    0.0    0.160   77.36
+        2    5.0    0.140   77.35
+        2   10.0    0.122   77.35
+        2   15.0    0.110   77.35
+        2   20.0    0.104   77.35
+        2   25.0    0.101   77.35
+        2   30.0    0.100   77.35
+        3    0.0    0.320   77.37
+        3    5.0    0.280   77.36
+        3   10.0    0.248   77.35
+        3   15.0    0.225   77.35
+        3   20.0    0.212   77.35
+        3   25.0    0.204   77.35
+        3   30.0    0.201   77.35
