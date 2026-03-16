@@ -121,7 +121,7 @@ distributions alongside the source isotherm for the first time in AIF.
 
 ---
 
-### 2.4 Isotherm Model Fitting (`_fit_*`)
+### 2.4 Isotherm Model Fitting (`_analysis_fit_*`) in analysis
 
 Loop fields for recording one or more fitted isotherm models and their
 parameters — essential for archiving the parametric description of an
