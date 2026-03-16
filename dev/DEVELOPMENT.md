@@ -6,194 +6,171 @@ have wide-reaching consequences, given that the file format is designed to be
 used in various databases and programs.
 
 To identify the specific language and capabilities of each AIF file, it is
-therefore imperative that AIF definitions are labelled with an unique format
+therefore imperative that AIF definitions are labelled with a unique format
 version number, and that a record of how the file has evolved over time is
 maintained.
 
 Development paradigms detailed herein are designed to make this process easy by
 relying on established programming protocols and processes.
 
+**Contents:**
+[Version strings](#version-strings) · [Dev scripts](#dev-scripts) ·
+[Automated checks](#automated-checks) · [Release process](#release-process) ·
+[Git Flow](#appendix-git-flow)
+
 The workflow for this project involves:
 
 - Git for source control
 - [Semantic versioning](https://semver.org/) for defining versions
 - The [Git Flow model](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) as a development philosophy
-- Scripts for propagating version strings when ready for release.
-- Local pre-commit and CI hooks for checking file version consistency
+- Scripts for propagating version strings when ready for release
+- Local pre-commit / pre-push hooks and CI for checking file consistency
 - GitHub Actions for automatically generating releases
 
-### Version strings
+## Version strings
 
-The [dictionary](../aif_dictionary.json) is structured with a version under the
-keyword "_audit_aif_version". This follows semantic versioning conventions, and
-is a required part of the file structure. This version is similarly found as the
-git tag, as well as in the github release.
+The [JSON schema](../aif_dictionary.json) is the **single source of truth**.
+It contains the version under the keyword `_audit_aif_version`, which follows
+semantic versioning conventions and is a required part of every AIF file.
+This version is also reflected in the git tag and GitHub release.
 
-The version in these files is as follows:
+The version across branches:
 
-- In the 'main' branch all files contain and conform to the latest released version
-- In the 'develop' branch, the file version is replaced by a placeholder (`__AIF_VERSION__`)
+- On the `master` branch, all files contain the latest released version.
+- On the `develop` branch, the version is replaced by a placeholder (`__AIF_VERSION__`).
 - Each tag has file version strings corresponding to its version.
 
 The version must be consistent across **all** dictionary representations
-and the example AIF files:
+and every example AIF file:
 
 - `aif_dictionary.json` – JSON Schema (`version`, `$id` URL, `_audit_aif_version.const`)
 - `aif_dictionary.dic`  – DDLm CIF dictionary (`_dictionary.version`, `_enumeration.default`)
 - `aif_dictionary.yaml` – LinkML schema (`version`)
-- All aif files in the `./examples` dictionary
+- `example.aif` at the repository root
+- All `.aif` files under the `./examples` directory
 
-### Automated version checks
+## Dev scripts
 
-A validation script (`dev/check_aif_format.py`) verifies cross-file consistency.
-It runs:
+The `dev/` directory contains helper scripts used during development and CI:
 
-- **In CI** – on every push and PR via `.github/workflows/validate.yml`
-- **Locally** – as a pre-commit hook (see below)
+| Script | Purpose |
+|---|---|
+| [check_aif_format.py](check_aif_format.py) | Validates version consistency across all three dictionary formats. |
+| [sync_dictionaries.py](sync_dictionaries.py) | Regenerates `aif_dictionary.yaml` and `aif_dictionary.dic` from the JSON schema. Pass `--check` to verify they are in sync without modifying files. |
+| [update_version.py](update_version.py) | Stamps the version in all dictionary files, `example.aif`, and any `.aif` files under `examples/`. Auto-detects the version from the current `release/*` branch name, or accepts `--version <ver>` explicitly. |
+| [check_placeholder_on_tag_push.py](check_placeholder_on_tag_push.py) | Pre-push hook that blocks tag pushes when `__AIF_VERSION__` placeholders are still present. |
 
-#### Setting up pre-commit
+## Automated checks
+
+### CI (GitHub Actions)
+
+Two workflows run automatically:
+
+- **`.github/workflows/validate.yml`** — on every push and PR to `develop`,
+  `master`, `feature/**`, and `release/**` branches.  Validates JSON syntax,
+  version consistency (`check_aif_format.py`), and dictionary sync
+  (`sync_dictionaries.py --check`).
+- **`.github/workflows/main.yml`** — on tag pushes. Runs the same validations,
+  verifies the version bump, generates a changelog, and creates a GitHub release.
+
+### Local hooks (pre-commit)
 
 Install [pre-commit](https://pre-commit.com/) and activate the hooks:
 
 ```bash
 pip install pre-commit
 pre-commit install
-```
-
-The hooks will automatically validate JSON/YAML syntax and version consistency
-whenever a dictionary file is committed.
-
-#### Setting up the pre-push hook
-
-A pre-push hook prevents accidentally pushing a tag while `__AIF_VERSION__`
-placeholders are still present. Install it alongside the commit hooks:
-
-```bash
 pre-commit install --hook-type pre-push
 ```
 
+The following hooks are configured in `.pre-commit-config.yaml`:
+
+| Hook | Trigger | What it does |
+|---|---|---|
+| `check-json` | commit | Validates `aif_dictionary.json` syntax |
+| `check-yaml` | commit | Validates `aif_dictionary.yaml` syntax |
+| `check-aif-version` | commit | Runs `check_aif_format.py` for cross-file version consistency |
+| `sync-dictionaries` | commit | Runs `sync_dictionaries.py --check` to verify YAML/DIC match the JSON schema |
+| `check-no-placeholder-on-tag` | push | Blocks tag pushes if `__AIF_VERSION__` placeholders remain |
+
 ## Release process
 
-To successfully make a new release the following steps should be followed.
+1. **Create a release branch** from `develop`:
 
-- Create a release branch from `develop` as a semantic version name (e.g 1.0.1):
+   ```bash
+   git flow release start <release-version>
+   ```
 
-  ```bash
-  git flow release start <release-version>
-  ```
+2. **Verify dictionary and examples** are correctly updated. If the JSON schema
+   was changed, regenerate the derived files:
 
-- Check if both the dictionary and the examples are correctly updated
+   ```bash
+   python dev/sync_dictionaries.py
+   ```
 
-- Prepare the release by running [update_version.py](update_version.py),
-  which stamps all three dictionary files (`.json`, `.dic`, `.yaml`) and the 
-  example AIF file:
+3. **Stamp the version** by running [update_version.py](update_version.py),
+   which replaces the `__AIF_VERSION__` placeholder in all three dictionary
+   files, `example.aif`, and any `.aif` files under `examples/`:
 
-  ```bash
-  python update_version.py
-  git commit -m "Prepare release <release-version>"
-  ```
+   ```bash
+   python dev/update_version.py
+   git add -A
+   git commit -m "Prepare release <release-version>"
+   ```
 
-- Finish the release branch, which tags it and merges it into `master` and `develop`:
-  ```bash
-  git flow release finish <release-version>
-  ```
+4. **Finish the release branch** (tags and merges into `master` and `develop`):
 
-- Push everything to GitHub to run the GH release workflow:
-  ```bash
-  git push --all
-  git push --tags
-  ```
+   ```bash
+   git flow release finish <release-version>
+   ```
 
-- Go to [GitHub](https://github.com/AIF-development-team/adsorptioninformationformat) to check
-  that the release has successfully completed.
+5. **Push everything** to trigger the GitHub release workflow:
 
+   ```bash
+   git push --all
+   git push --tags
+   ```
+
+6. **Verify** on [GitHub](https://github.com/AIF-development-team/adsorptioninformationformat)
+   that the release was created successfully.
 
 ## Appendix: Git Flow
 
-The Git Flow model is a branching strategy for Git, designed to facilitate
-parallel development and collaboration. It defines a strict branching model that
-includes two main branches with infinite lifetimes: `master` and `develop`. The
-`master` branch contains production-ready code, while the `develop` branch
-serves as an integration branch for features.
+The [Git Flow model](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+is a branching strategy with two long-lived branches — `master` (production)
+and `develop` (integration) — plus short-lived feature, release, and hotfix
+branches.
 
-Feature (`feature/xyz`) branches are created from `develop` and are merged back
-into `develop` when complete. Release (`release/1.0.2`) branches are created
-from `develop` when preparing for a new production release, allowing for final
-bug fixes and preparation. Once a release branch is ready, it is tagged
-(`v1.0.2`) with the appropriate semantic versioning, then merged into both
-`master` and `develop`.
+- **Feature** branches (`feature/xyz`) are created from `develop` and merged
+  back into `develop` when complete.
+- **Release** branches (`release/1.0.2`) are created from `develop`, stamped
+  with a version, tagged (e.g. `v1.0.2`), and merged into both `master` and
+  `develop`.
+- **Hotfix** branches are created from `master` for urgent fixes and merged
+  back into both `master` and `develop`.
 
-Hotfix branches are created from `master` to address critical issues in
-production and are merged back into both `master` and `develop` after the fix.
+### Initialize Git Flow
 
-This model provides a robust framework for managing larger projects with
-multiple developers, ensuring a clean and organized workflow.
-
-![Git Flow Diagram](https://wac-cdn.atlassian.com/dam/jcr:cc0b526e-adb7-4d45-874e-9bcea9898b4a/04%20Hotfix%20branches.svg?cdnVersion=2493)
-
-### 1. Initialize Git Flow
-
-Initialize Git Flow in your repository if you haven't already:
-
-```
+```bash
 git flow init
 ```
 
-Select the following settings:
+Use the default settings for all prompts, except set the version tag prefix
+to `v`:
 
 ```
-Branch name for production releases: [master]               // Enter - (default)
-Branch name for "next release" development: [develop]       // Enter - (default)
-Feature branches? [feature/]                                // Enter - (default)
-Bugfix branches? [bugfix/]                                  // Enter - (default)
-Release branches? [release/]                                // Enter - (default)
-Hotfix branches? [hotfix/]                                  // Enter - (default)
-Support branches? [support/]                                // Enter - (default)
-Version tag prefix? []                                      // Use 'v' then Enter
-Hooks and filters directory? [C:/Users/username/.git/hooks] // Enter - (default)
+Version tag prefix? [] → v
 ```
 
-Git Flow should now be initialized on your PC.
+### Feature workflow
 
-### 2. Feature Branches
+```bash
+git flow feature start <feature-name>
+# ... work and commit ...
+git flow feature finish <feature-name>   # merges into develop
+```
 
-Feature branches should have a descriptive name that reflects the feature being
-added, e.g., `feature/new-feature`. Branches are created from `develop` and
-merged back into `develop` when a feature is complete.
+### Release workflow
 
-- Create a new feature branch from `develop`:
-  ```
-  git flow feature start <feature-name>
-  ```
-- Work on your feature and commit changes:
-  ```
-  git add .
-  git commit -m "Add new feature"
-  ```
-- When the feature is complete, finish the feature branch:
-  ```
-  git flow feature finish <feature-name>
-  ```
-  This will automatically merge it into `develop` and remove the feature branch.
-
-### 3. Release Branches
-
-A release branch is created when a new production release is being prepared. The
-branch name contains the release version, e.g., `release/1.0.0`. A release
-branch is created from the `develop` branch and upon completion will get tagged
-and merged to both the `master` and `develop` branches. The only way to push to
-`master` is through a release branch, except if a hotfix is needed.
-
-- Create a release branch from `develop`:
-  ```
-  git flow release start <release-version>
-  ```
-- Prepare the release (update version number, changelog, etc.):
-  ```
-  git add .
-  git commit -m "Prepare release <release-version>"
-  ```
-- Finish the release branch, which tags it and merges it into `master` and `develop`:
-  ```
-  git flow release finish <release-version>
-  ```
+See the [Release process](#release-process) section above for the full
+step-by-step procedure.

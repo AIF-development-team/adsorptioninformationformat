@@ -5,7 +5,7 @@ This repository contains the details of an universal file format for gas adsorpt
 ## Core dictionary
 
 The current dictionary of data items used by Adsorption Information Files can be
-found in: [aifdictionary.json](/aifdictionary.json). Feel free to initiate a pull
+found in: [aif_dictionary.json](/aif_dictionary.json). Feel free to initiate a pull
 request to add new terms.
 
 ## Developer specification
