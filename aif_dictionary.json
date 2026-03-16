@@ -32,6 +32,15 @@
           "description": "Version of the AIF data-name dictionary used by this file",
           "const": "__AIF_VERSION__",
           "x-dic-source": "Assigned"
+        },
+        "_audit_creation_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the AIF file was created in ISO 8601 format"
+        },
+        "_audit_creation_software": {
+          "type": "string",
+          "description": "Name and version of the software used to generate this AIF file"
         }
       }
     },
@@ -43,6 +52,10 @@
         "_exptl_operator": {
           "type": "string",
           "description": "Name of the person who performed the experiment"
+        },
+        "_exptl_digitizer": {
+          "type": "string",
+          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         },
         "_exptl_date": {
           "type": "string",
@@ -69,12 +82,15 @@
         "_exptl_method": {
           "type": "string",
           "description": "Experimental technique used to measure the amount adsorbed",
-          "enum": ["volumetric", "gravimetric"],
+          "enum": ["volumetric", "gravimetric", "chromatographic", "simulation", "other"],
           "x-enum-name": "ExperimentalMethod",
           "x-enum-description": "Method used to determine amount adsorbed.",
           "x-enum-descriptions": {
             "volumetric": "Volumetric (manometric) method.",
-            "gravimetric": "Gravimetric method."
+            "gravimetric": "Gravimetric method.",
+            "chromatographic": "Chromatographic method.",
+            "simulation": "Data originates from molecular simulation rather than experiment.",
+            "other": "Other method not specified here."
           }
         },
         "_exptl_isotherm_type": {
@@ -92,10 +108,6 @@
         "_exptl_p0": {
           "type": "number",
           "description": "Saturation pressure of the adsorptive at the experimental temperature (see _units_pressure)"
-        },
-        "_exptl_digitizer": {
-          "type": "string",
-          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         }
       }
     },
@@ -104,21 +116,6 @@
       "$comment": "Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
       "type": "object",
       "properties": {
-        "_adsnt_sample_mass": {
-          "type": "number",
-          "description": "Mass of the adsorbent sample used in the measurement (see _units_mass)"
-        },
-        "_adsnt_sample_density": {
-          "type": "number",
-          "description": "Bulk or skeletal density of the adsorbent sample (see _units_density)"
-        },
-        "_adsnt_sample_id": {
-          "type": "string",
-          "description": "Unique sample identifier assigned by the operator or laboratory",
-          "x-dic-purpose": "Key",
-          "x-dic-source": "Assigned",
-          "x-dic-common": "Required field. A unique identifier for the specific sample\nused in the experiment."
-        },
         "_adsnt_material_id": {
           "type": "string",
           "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X",
@@ -136,6 +133,47 @@
           "x-dic-purpose": "Encode",
           "x-dic-source": "Assigned"
         },
+        "_adsnt_structure_csd_refcode": {
+          "type": "string",
+          "description": "Cambridge Structural Database (CSD) reference code for the adsorbent structure",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
+        },
+        "_adsnt_structure_topology": {
+          "type": "string",
+          "description": "Network topology descriptor (e.g. RCSR symbol) for the adsorbent"
+        },
+        "_adsnt_structure_smiles": {
+          "type": "string",
+          "description": "SMILES of the organic linker or building block of the adsorbent"
+        },
+        "_adsnt_composition": {
+          "type": "string",
+          "description": "Chemical composition or formula of the adsorbent, e.g. Cu3(BTC)2"
+        },
+        "_adsnt_molar_mass": {
+          "type": "number",
+          "description": "Molar mass of the adsorbent formula unit (see _units_molecular_weight)"
+        },
+        "_adsnt_synthesis": {
+          "type": "string",
+          "description": "Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc"
+        },
+        "_adsnt_sample_id": {
+          "type": "string",
+          "description": "Unique sample identifier assigned by the operator or laboratory",
+          "x-dic-purpose": "Key",
+          "x-dic-source": "Assigned",
+          "x-dic-common": "Required field. A unique identifier for the specific sample\nused in the experiment."
+        },
+        "_adsnt_sample_mass": {
+          "type": "number",
+          "description": "Mass of the adsorbent sample used in the measurement (see _units_mass)"
+        },
+        "_adsnt_sample_density": {
+          "type": "number",
+          "description": "Bulk or skeletal density of the adsorbent sample (see _units_density)"
+        },
         "_adsnt_degas_summary": {
           "type": "string",
           "description": "Human-readable summary of the degassing procedure and conditions"
@@ -147,6 +185,60 @@
         "_adsnt_degas_time": {
           "type": "number",
           "description": "Duration of the degassing step (see _units_time)"
+        },
+        "_adsnt_cycle_number": {
+          "type": "integer",
+          "description": "Adsorption-desorption cycle index (1-based) for multi-cycle studies"
+        }
+      }
+    },
+
+    "adsorptive": {
+      "$comment": "Adsorptive: Physical and chemical identifiers and properties of the adsorptive molecule.",
+      "type": "object",
+      "properties": {
+        "_adsorptive_id": {
+          "type": "string",
+          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
+          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
+        },
+        "_adsorptive_info": {
+          "type": "string",
+          "description": "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation"
+        },
+        "_adsorptive_inchi": {
+          "type": "string",
+          "description": "IUPAC InChI identifier of the adsorptive"
+        },
+        "_adsorptive_cas": {
+          "type": "string",
+          "description": "CAS Registry Number of the adsorptive",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
+        },
+        "_adsorptive_smiles": {
+          "type": "string",
+          "description": "Canonical SMILES string of the adsorptive"
+        },
+        "_adsorptive_molecular_weight": {
+          "type": "number",
+          "description": "Molecular weight of the adsorptive (see _units_molecular_weight)"
+        },
+        "_adsorptive_critical_temperature": {
+          "type": "number",
+          "description": "Critical temperature of the adsorptive (see _units_temperature)"
+        },
+        "_adsorptive_critical_pressure": {
+          "type": "number",
+          "description": "Critical pressure of the adsorptive (see _units_pressure)"
+        },
+        "_adsorptive_kinetic_diameter": {
+          "type": "number",
+          "description": "Kinetic diameter of the adsorptive molecule (see _units_kinetic_diameter)"
+        },
+        "_adsorptive_quadrupole_moment": {
+          "type": "number",
+          "description": "Quadrupole moment of the adsorptive (see _units_quadrupole_moment)"
         }
       }
     },
@@ -191,19 +283,54 @@
       }
     },
 
-    "citation": {
-      "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
+    "instrument": {
+      "$comment": "Instrument: Detailed instrument provenance for traceability, calibration records, and quality management.",
       "type": "object",
       "properties": {
-        "_citation_doi": {
+        "_instrument_manufacturer": {
           "type": "string",
-          "description": "Digital Object Identifier (DOI) of the publication associated with this data",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
+          "description": "Manufacturer of the adsorption instrument"
         },
-        "_citation_source": {
+        "_instrument_model": {
           "type": "string",
-          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
+          "description": "Model name or number of the instrument"
+        },
+        "_instrument_firmware_version": {
+          "type": "string",
+          "description": "Firmware or software version of the instrument"
+        },
+        "_instrument_last_calibration_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of last instrument calibration in ISO 8601 format"
+        },
+        "_instrument_equilibration_criterion": {
+          "type": "string",
+          "description": "Criterion used to determine equilibrium at each data point"
+        },
+        "_instrument_leak_rate": {
+          "type": "number",
+          "description": "Measured leak rate of the instrument manifold (see _units_leak_rate)"
+        },
+        "_instrument_dead_volume": {
+          "type": "number",
+          "description": "Total dead (free-space) volume of the measurement cell (see _units_dead_volume)"
+        },
+        "_instrument_cold_dead_volume": {
+          "type": "number",
+          "description": "Cold zone dead volume (see _units_dead_volume)"
+        },
+        "_instrument_warm_dead_volume": {
+          "type": "number",
+          "description": "Warm zone dead volume (see _units_dead_volume)"
+        },
+        "_instrument_reference_material": {
+          "type": "string",
+          "description": "Certified reference material used for instrument validation"
+        },
+        "_instrument_reference_agreement": {
+          "type": "number",
+          "description": "Deviation from reference value (%)"
         }
       }
     },
@@ -245,6 +372,51 @@
         "_units_composition_type": {
           "type": "string",
           "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction",
+          "x-dic-source": "Assigned"
+        },
+        "_units_enthalpy": {
+          "type": "string",
+          "description": "Unit of enthalpy values in this file, e.g. kJ/mol",
+          "x-dic-source": "Assigned"
+        },
+        "_units_surface_area": {
+          "type": "string",
+          "description": "Unit of surface area values in this file, e.g. m2/g",
+          "x-dic-source": "Assigned"
+        },
+        "_units_pore_volume": {
+          "type": "string",
+          "description": "Unit of pore volume values in this file, e.g. cm3/g",
+          "x-dic-source": "Assigned"
+        },
+        "_units_pore_diameter": {
+          "type": "string",
+          "description": "Unit of pore diameter values in this file, e.g. nm",
+          "x-dic-source": "Assigned"
+        },
+        "_units_molecular_weight": {
+          "type": "string",
+          "description": "Unit of molecular weight values in this file, e.g. g/mol",
+          "x-dic-source": "Assigned"
+        },
+        "_units_kinetic_diameter": {
+          "type": "string",
+          "description": "Unit of kinetic diameter values in this file, e.g. angstrom",
+          "x-dic-source": "Assigned"
+        },
+        "_units_dead_volume": {
+          "type": "string",
+          "description": "Unit of dead volume values in this file, e.g. cm3",
+          "x-dic-source": "Assigned"
+        },
+        "_units_leak_rate": {
+          "type": "string",
+          "description": "Unit of leak rate values in this file, e.g. Pa/min",
+          "x-dic-source": "Assigned"
+        },
+        "_units_quadrupole_moment": {
+          "type": "string",
+          "description": "Unit of quadrupole moment values in this file, e.g. Debye·Å",
           "x-dic-source": "Assigned"
         }
       }
@@ -350,6 +522,189 @@
           "description": "Desorption selectivity for a specified component pair under the given conditions (unitless ratio)"
         }
       }
+    },
+
+    "analysis": {
+      "$comment": "Analysis: Derived scalar quantities from standard analysis methods (BET, Langmuir, pore characterization). These are single-value metadata fields summarising the analysis results.",
+      "type": "object",
+      "properties": {
+        "_analysis_method": {
+          "type": "string",
+          "description": "Analysis method(s) or description used for derived quantities, e.g. BET and HK"
+        },
+        "_analysis_bet_area": {
+          "type": "number",
+          "description": "BET surface area (see _units_surface_area)"
+        },
+        "_analysis_bet_c_constant": {
+          "type": "number",
+          "description": "BET C constant (dimensionless)"
+        },
+        "_analysis_bet_pressure_range_min": {
+          "type": "number",
+          "description": "Lower bound of the relative pressure range used for BET fitting"
+        },
+        "_analysis_bet_pressure_range_max": {
+          "type": "number",
+          "description": "Upper bound of the relative pressure range used for BET fitting"
+        },
+        "_analysis_langmuir_area": {
+          "type": "number",
+          "description": "Langmuir surface area (see _units_surface_area)"
+        },
+        "_analysis_micropore_volume": {
+          "type": "number",
+          "description": "Micropore volume from t-plot or DR analysis (see _units_pore_volume)"
+        },
+        "_analysis_total_pore_volume": {
+          "type": "number",
+          "description": "Total pore volume (see _units_pore_volume)"
+        },
+        "_analysis_total_pore_volume_pp0": {
+          "type": "number",
+          "description": "Relative pressure p/p0 at which total pore volume was evaluated"
+        },
+        "_analysis_psd_method": {
+          "type": "string",
+          "description": "Method for determining pore size distribution, e.g. NLDFT-Carbon-N2"
+        }
+      }
+    },
+
+    "analysis_psd": {
+      "$comment": "Analysis PSD: Loop columns for pore size distribution data. One row per diameter bin.",
+      "x-dic-id": "ANALYSIS_PSD",
+      "x-dic-prefix": "analysis_psd",
+      "type": "object",
+      "properties": {
+        "_analysis_psd_diameter": {
+          "type": "number",
+          "description": "Pore diameter in a pore-size distribution loop (see _units_pore_diameter)"
+        },
+        "_analysis_psd_dv_dd": {
+          "type": "number",
+          "description": "Differential pore volume dV/dD at each diameter in a PSD loop"
+        }
+      }
+    },
+
+    "analysis_fit_summary": {
+      "$comment": "Analysis Fit Summary: Loop columns for recording fitted isotherm models. One row per model, linked to fit parameters via _fit_id.",
+      "x-dic-id": "ANALYSIS_FIT",
+      "x-dic-prefix": "analysis_fit",
+      "type": "object",
+      "properties": {
+        "_fit_id": {
+          "type": "integer",
+          "description": "Unique integer key identifying this fit within the file",
+          "x-dic-purpose": "Key"
+        },
+        "_fit_model": {
+          "type": "string",
+          "description": "Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth"
+        },
+        "_fit_r_squared": {
+          "type": "number",
+          "description": "Coefficient of determination (R-squared) for the fit"
+        },
+        "_fit_rmse": {
+          "type": "number",
+          "description": "Root-mean-square error of the fit (see _units_loading)"
+        }
+      }
+    },
+
+    "analysis_fit_parameters": {
+      "$comment": "Analysis Fit Parameters: Loop columns for the parameters of each fitted model. Linked to the fit summary via _fit_param_id referencing _fit_id.",
+      "x-dic-id": "ANALYSIS_FIT_PARAM",
+      "x-dic-prefix": "analysis_fit_param",
+      "type": "object",
+      "properties": {
+        "_fit_param_id": {
+          "type": "integer",
+          "description": "Foreign key referencing _analysis_fit_id in the fit summary loop",
+          "x-dic-purpose": "Key"
+        },
+        "_fit_param_name": {
+          "type": "string",
+          "description": "Name of the fitted parameter, e.g. q_max, K_L, n"
+        },
+        "_fit_param_value": {
+          "type": "number",
+          "description": "Fitted value of the parameter"
+        },
+        "_fit_param_uncertainty": {
+          "type": "number",
+          "description": "Uncertainty of the fitted parameter value"
+        },
+        "_fit_param_unit": {
+          "type": "string",
+          "description": "Unit of the fitted parameter, e.g. mmol/g, 1/Pa"
+        }
+      }
+    },
+ 
+    "citation": {
+      "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
+      "type": "object",
+      "properties": {
+        "_citation_doi": {
+          "type": "string",
+          "description": "Digital Object Identifier (DOI) of the publication associated with this data",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
+        },
+        "_citation_source": {
+          "type": "string",
+          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
+        }
+      }
+    },
+    
+    "data": {
+      "$comment": "Data Provenance: Authorship, licensing, and cross-references to related AIF files, databases, and datasets for FAIR data practices.",
+      "type": "object",
+      "properties": {
+        "_data_license": {
+          "type": "string",
+          "description": "License under which the data is distributed (SPDX identifier preferred), e.g. CC-BY-4.0"
+        },
+        "_data_orcid": {
+          "type": "string",
+          "description": "ORCID iD of the data author or contact person"
+        },
+        "_data_contact_email": {
+          "type": "string",
+          "description": "Contact email for inquiries about the data"
+        },
+        "_data_related_dataset_url": {
+          "type": "string",
+          "description": "URL to the dataset in an external repository"
+        },
+        "_data_related_nist_isodb_id": {
+          "type": "string",
+          "description": "NIST/ARPA-E ISODB identifier for this dataset",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
+        }
+      }
+    },
+
+    "data_related": {
+      "$comment": "Data Related: Loop columns for cross-references to related AIF files in the same collection. One row per related file.",
+      "x-dic-id": "DATA_RELATED",
+      "x-dic-prefix": "data_related",
+      "type": "object",
+      "properties": {
+        "_data_related_aif_file": {
+          "type": "string",
+          "description": "Filename or path of a related AIF file in the same collection"
+        },
+        "_data_related_aif_relationship": {
+          "type": "string",
+          "description": "Description of the relationship to the related AIF file, e.g. cycle 1 of same sample, same sample different gas"
+        }
+      }
     }
   },
 
@@ -359,10 +714,17 @@
     { "$ref": "#/definitions/adsorbent" },
     { "$ref": "#/definitions/adsorptive" },
     { "$ref": "#/definitions/simulation" },
-    { "$ref": "#/definitions/citation" },
+    { "$ref": "#/definitions/instrument" },
     { "$ref": "#/definitions/units" },
+    { "$ref": "#/definitions/citation" },
+    { "$ref": "#/definitions/data" },
     { "$ref": "#/definitions/adsorption_data" },
-    { "$ref": "#/definitions/desorption_data" }
+    { "$ref": "#/definitions/desorption_data" },
+    { "$ref": "#/definitions/analysis" },
+    { "$ref": "#/definitions/analysis_psd" },
+    { "$ref": "#/definitions/analysis_fit_summary" },
+    { "$ref": "#/definitions/analysis_fit_parameters" },
+    { "$ref": "#/definitions/data_related" }
   ],
 
   "patternProperties": {

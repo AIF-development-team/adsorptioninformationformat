@@ -23,10 +23,12 @@ data_linked_datasets
     _data_license                     "CC-BY-4.0"
     _data_contact_email               "marcos.silva@example.org"
     _data_orcid                       "0000-0002-3456-7890"
-    _data_related_aif_file                 "14b_linked_n2_isotherm.aif"
-    _data_related_aif_relationship         "same sample different gas"
-    _data_related_dataset_url              "https://adsorption.nist.gov/isodb/index.php#/doi/10.1021/jacs.6b12345"
-    _data_related_nist_isodb_id            "ISODB-12345"
+    loop_
+        _data_related_aif_file
+        _data_related_aif_relationship
+        _data_related_dataset_url
+        _data_related_nist_isodb_id
+        "14b_linked_n2_isotherm.aif"   "same sample different gas"   "https://adsorption.nist.gov/isodb/index.php#/doi/10.1021/jacs.6b12345"   "ISODB-12345"
 
     _units_temperature                "K"
     _units_pressure                   "Pa"

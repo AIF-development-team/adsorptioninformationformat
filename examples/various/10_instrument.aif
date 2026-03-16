@@ -21,9 +21,6 @@ data_instrument
     _instrument_model                    "ASAP 2020"
     _instrument_firmware_version         "V4.05"
     _instrument_last_calibration_date    2024-11-15T10:00:00Z
-    _instrument_lab_temperature          22.3
-    _instrument_lab_humidity             45.0
-    _instrument_bath_type                "liquid N2"
     _instrument_equilibration_criterion  "pressure stability < 0.01% over 30s"
     _instrument_leak_rate                0.00005
     _instrument_dead_volume              12.34

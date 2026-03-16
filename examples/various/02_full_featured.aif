@@ -23,10 +23,7 @@ data_full_featured
     _adsnt_structure_topology         "fcu"
     _adsnt_composition                "Zr6O4(OH)4(BDC-NH2)6"
     _adsnt_molar_mass                 1746.23
-    _adsnt_synthesis_method           "solvothermal"
-    _adsnt_synthesis_reference        "10.1021/ja500330a"
-    _adsnt_activation_method          "methanol exchange, vacuum at 120C for 16h"
-    _adsnt_batch_id                   "UiO66NH2-batch3"
+    _adsnt_synthesis                  "solvothermal"
     _adsnt_cycle_number               1
     _adsnt_degas_summary              "Degassed at 120C under vacuum for 16 hours"
     _adsnt_degas_temperature          120.0
@@ -45,9 +42,6 @@ data_full_featured
     _instrument_model                    "ASAP 2020 HD"
     _instrument_firmware_version         "V5.03"
     _instrument_last_calibration_date    2025-01-05T09:00:00Z
-    _instrument_lab_temperature          21.5
-    _instrument_lab_humidity             42.0
-    _instrument_bath_type                "water bath"
     _instrument_equilibration_criterion  "pressure stability < 0.05% over 60s"
     _instrument_leak_rate                0.00003
     _instrument_dead_volume              15.23

@@ -16,14 +16,13 @@ data_cycling_stability_c3
     _adsnt_material_id                "UiO-66"
     _adsnt_sample_id                  "UiO66-A1-cyc3"
     _adsnt_sample_mass                0.0345
-    _adsnt_synthesis_method           "solvothermal"
-    _adsnt_synthesis_reference        "10.1021/ja8057953"
-    _adsnt_activation_method          "solvent exchange with methanol then vacuum at 150C"
-    _adsnt_batch_id                   "UiO66-A1"
+    _adsnt_synthesis                  "solvothermal"
     _adsnt_cycle_number               3
 
-    _data_related_aif_file                 "07b_cycling_stability_c1.aif"
-    _data_related_aif_relationship         "cycle 1 of same sample"
+    loop_
+        _data_related_aif_file
+        _data_related_aif_relationship
+        "07b_cycling_stability_c1.aif"   "cycle 1 of same sample"
 
     _units_temperature                "K"
     _units_pressure                   "Pa"

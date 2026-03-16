@@ -17,9 +17,20 @@ All new fields are **optional**. No existing required fields change. The schema'
 
 ---
 
-## 2. Proposed New Sections
+## 2. Proposed New Keys
 
-### 2.1 Adsorptive Information and Properties (`_adsorptive_*`)
+
+### 2.1 Audit (`_audit_*`)
+
+Addition of audit information to highlight the creation of the file, 
+and the software that was used for its creation.
+
+| Key name | Type | Description | Example value |
+|---|---|---|---|
+| `_audit_creation_date` | datetime | time file was created | `"2022"` |
+| `_audit_creation_software` | string | software it was created by | `"pyGAPS"` |
+
+### 2.2 Adsorptive Information and Properties (`_adsorptive_*`)
 
 Physical and chemical identifiers for the adsorptive molecule. Enables
 machine-readable gas identification and thermodynamic calculations (e.g.
@@ -50,13 +61,13 @@ constants enable equation-of-state calculations without external databases.
 
 ---
 
-### 2.2 Adsorbent Extra Information (`_adsnt_*`)
+### 2.3 Adsorbent Extra Information (`_adsnt_*`)
 
 Links the adsorbent to crystallographic databases and provides structural
 metadata essential for computational screening and structure-property analysis.
 Records the provenance and condition of the adsorbent sample, which is critical
-for reproducibility and for interpreting multi-cycle degradation studies. 
-Link to MPIF?
+for reproducibility and for interpreting multi-cycle degradation studies.
+This can also be linked to MPIF?
 
 | Data name | Type | Description | Example value |
 |---|---|---|---|
@@ -65,12 +76,8 @@ Link to MPIF?
 | `_adsnt_structure_smiles` | string | SMILES of the organic linker or building block | `"OC(=O)c1cc(C(O)=O)cc(C(O)=O)c1"` |
 | `_adsnt_composition` | string | Chemical composition or formula of the adsorbent | `"Cu3(BTC)2"` |
 | `_adsnt_molar_mass` | number | Molar mass of the adsorbent formula unit (see `_units_molecular_weight`) | `604.87` |
-| `_adsnt_synthesis_method` | string | Synthesis route used, e.g. solvothermal, mechanochemical | `"solvothermal"` |
-| `_adsnt_synthesis_reference` | string | DOI or citation for the synthesis protocol | `"10.1021/ja8057953"` |
-| `_adsnt_activation_method` | string | Post-synthesis activation procedure | `"methanol exchange, vacuum at 120C for 16h"` |
-| `_adsnt_batch_id` | string | Batch or lot identifier for the sample | `"UiO66-A1"` |
+| `_adsnt_synthesis` | string | Synthesis route used, e.g. solvothermal, mechanochemical, reference etc | `"solvothermal"` |
 | `_adsnt_cycle_number` | integer | Adsorption-desorption cycle index (1-based) | `3` |
-| `_adsnt_surface_area_reported` | number | Pre-reported or literature surface area (see `_units_surface_area`) | `1187.0` |
 
 **Used in:** [06_mof_structure_link.aif](../examples/aif/06_mof_structure_link.aif),
 [12_simulation_gcmc.aif](../examples/aif/12_simulation_gcmc.aif),
@@ -90,7 +97,7 @@ to per-gram loading).
 
 ---
 
-### 2.3 Analysis Fields e.g. Surface & Pore Characterization (`_analysis_*`)
+### 2.4 Analysis Fields e.g. Surface & Pore Characterization (`_analysis_*`)
 
 Derived quantities from standard analysis methods (BET, Langmuir, BJH/DFT
 pore size distribution).
@@ -121,7 +128,7 @@ distributions alongside the source isotherm for the first time in AIF.
 
 ---
 
-### 2.4 Isotherm Model Fitting (`_analysis_fit_*`) in analysis
+### 2.5 Isotherm Model Fitting (`_analysis_fit_*`) in analysis
 
 Loop fields for recording one or more fitted isotherm models and their
 parameters — essential for archiving the parametric description of an
@@ -162,7 +169,7 @@ enabling multi-model comparison in a single file.
 
 ---
 
-### 2.5 Instrument Info and Metadata (`_instrument_*`)
+### 2.6 Instrument Info and Metadata (`_instrument_*`)
 
 Detailed instrument provenance for traceability and quality management.
 
@@ -172,9 +179,6 @@ Detailed instrument provenance for traceability and quality management.
 | `_instrument_model` | string | Model name or number | `"ASAP 2020"` |
 | `_instrument_firmware_version` | string | Firmware or software version of the instrument | `"V4.05"` |
 | `_instrument_last_calibration_date` | string | Date of last instrument calibration (ISO 8601) | `"2024-11-15T10:00:00Z"` |
-| `_instrument_lab_temperature` | number | Ambient laboratory temperature during measurement (see `_units_temperature`) | `22.3` |
-| `_instrument_lab_humidity` | number | Ambient laboratory relative humidity (%) | `45.0` |
-| `_instrument_bath_type` | string | Type of temperature bath used | `"liquid N2"` |
 | `_instrument_equilibration_criterion` | string | Criterion used to determine equilibrium at each point | `"pressure stability < 0.01% over 30s"` |
 | `_instrument_leak_rate` | number | Measured leak rate of the manifold (see `_units_leak_rate`) | `0.00005` |
 | `_instrument_dead_volume` | number | Total dead (free-space) volume (see `_units_dead_volume`) | `12.34` |
@@ -194,7 +198,7 @@ calibration and equilibrium readings.
 
 ---
 
-### 2.6 Data Provenance, Related Data & Linkage (`_data_*`)
+### 2.7 Data Provenance, Related Data & Linkage (`_data_*`)
 
 Cross-references to other AIF files, databases, and datasets. 
 Authorship, access control, and licensing metadata for FAIR data practices.
@@ -227,7 +231,7 @@ respect to its terms of use.
 
 ---
 
-### 2.7 Additional Units (`_units_*`)
+### 2.8 Additional Units (`_units_*`)
 
 New unit fields, some required by the sections above.
 
@@ -245,7 +249,7 @@ New unit fields, some required by the sections above.
 
 ---
 
-### 2.8 Other Data in Loops: e.g. (`_adsorp_enthalpy_*`)
+### 2.9 Other Data in Loops: e.g. (`_adsorp_enthalpy_*`)
 
 Per-point enthalpy columns for the adsorption loop, enabling storage of
 simultaneous calorimetry data.
