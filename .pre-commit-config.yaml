@@ -1,28 +1,50 @@
-# Install pre-commit hooks via
-# pre-commit install
+# pre-commit configuration for the AIF repository
+# This file defines hooks that run automatically when `git commit`
+# is executed. The goal is to catch common mistakes in the core
+# dictionary files before they are ever pushed to the remote.
 
 repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v2.5.0
-  hooks:
-    - id: double-quote-string-fixer
-    - id: end-of-file-fixer
-    - id: fix-encoding-pragma
-    - id: mixed-line-ending
-    - id: trailing-whitespace
+  # use the standard set of community-maintained hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      # ensure the JSON dictionary is syntactically valid
+      - id: check-json
+        files: aif_dictionary\.json$
+      # ensure the YAML dictionary (if present) is valid
+      - id: check-yaml
+        files: aif_dictionary\.yaml$
 
-- repo: https://github.com/pre-commit/mirrors-yapf
-  rev: v0.30.0
-  hooks:
-  - id: yapf
-    name: yapf
-    types: [python]
-    args: ['-i']
+  # local hooks allow us to run custom project-specific scripts
+  - repo: local
+    hooks:
+      - id: check-aif-version
+        name: Check AIF version consistency
+        # this script inspects all three dictionary formats and
+        # verifies version fields are identical and semver-compliant
+        entry: python dev/check_aif_format.py
+        language: python
+        # trigger on any of the dictionary files (json, dic, yaml)
+        files: aif_dictionary\.(json|dic|yaml)$
+        # our script handles filenames itself, so don't pass them
+        pass_filenames: false
 
-- repo: local
-  hooks:
-    - id: pylint
-      name: pylint
-      entry: pylint
-      types: [python]
-      language: system
+      - id: sync-dictionaries
+        name: Check YAML/DIC are in sync with JSON schema
+        # verifies that the YAML and DIC files match what the JSON
+        # schema would generate; fails if they have drifted
+        entry: python dev/sync_dictionaries.py --check
+        language: python
+        files: aif_dictionary\.(json|dic|yaml)$
+        pass_filenames: false
+
+      - id: check-no-placeholder-on-tag
+        name: Block push if version placeholders remain
+        # prevents pushing a tag while __AIF_VERSION__ is still
+        # present in dictionary files — the version must be stamped
+        # before tagging a release
+        entry: python dev/check_placeholder_on_tag_push.py
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [pre-push]

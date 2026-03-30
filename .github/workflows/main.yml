@@ -1,56 +1,62 @@
-# This is a basic workflow to help you get started with Actions
+name: Update AIF Version
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    tags:
+      - '*'
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
-  # Run parser tests and checks
-  build:
-    # The type of runner that the job will run on
+  new_release:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      - name: set up python 3.9.12
-        uses: actions/setup-python@v4
+      - name: Checkout repository
+        uses: actions/checkout@v6
         with:
-          python-version: 3.9.12
+          fetch-depth: 0
 
-      - name: install python depedencies
-        run: pip install -r requirements.txt
+      - name: Validate JSON syntax
+        run: python -m json.tool aif_dictionary.json > /dev/null
 
-      - name: run tests
-        run: python -m pytest -s test/
+      - name: Check version consistency across all dictionaries
+        run: python dev/check_aif_format.py
 
-  # Run pre-commit checks
-  pre-commit:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.9.12
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9.12
-    - name: Install python dependencies
-      run: |
-        pip install -r requirements.txt
-    - name: Run pre-commit
-      run: |
-        pre-commit install
-        pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
+      - name: Check YAML/DIC are in sync with JSON schema
+        run: python dev/sync_dictionaries.py --check
+
+      - name: Validate version bump
+        run: |
+          # Get the previous tag (the one before the current tag)
+          current_tag="${{ github.ref_name }}"
+          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          if [ -n "$previous_tag" ]; then
+            python dev/update_version.py --check --version "$current_tag" --previous "$previous_tag"
+          else
+            echo "No previous tag found — skipping version comparison."
+          fi
+
+      - name: Generate Changelog
+        id: changelog
+        run: |
+          current_tag="${{ github.ref_name }}"
+          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          if [ -n "$previous_tag" ]; then
+            changelog=$(git log "$previous_tag"..HEAD --pretty=format:"- %s")
+          else
+            changelog=$(git log --pretty=format:"- %s")
+          fi
+          {
+            echo 'changelog<<EOF'
+            echo "$changelog"
+            echo 'EOF'
+          } >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: ${{ env.changelog }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

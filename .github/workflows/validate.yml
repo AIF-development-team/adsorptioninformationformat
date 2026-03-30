@@ -1,0 +1,28 @@
+name: Validate AIF Dictionaries
+
+on:
+  push:
+    branches: [develop, master, 'feature/**', 'release/**']
+  pull_request:
+    branches: [develop, master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Validate JSON syntax
+        run: python -m json.tool aif_dictionary.json > /dev/null
+
+      - name: Check version consistency across all dictionaries
+        run: python dev/check_aif_format.py
+
+      - name: Check YAML/DIC are in sync with JSON schema
+        run: python dev/sync_dictionaries.py --check
