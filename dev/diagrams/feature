@@ -1,0 +1,11 @@
+flowchart TD
+    A([Start Feature]) --> B["Create feature branch from develop<br><code>git flow feature start &lt;name&gt;</code>"]
+    B --> C["Work on feature<br>& commit changes"]
+    C --> D{"Feature<br>complete?"}
+    D -- No --> C
+    D -- Yes --> E["Finish feature branch<br><code>git flow feature finish &lt;name&gt;</code><br>Merges into develop & deletes branch"]
+    E --> F([Feature Merged into develop ✓])
+
+    style A fill:#2196F3,color:#fff
+    style F fill:#2196F3,color:#fff
+    style D fill:#FFC107,color:#000

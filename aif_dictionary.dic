@@ -1,7 +1,8 @@
 #\#CIF_2.0
+
 ##############################################################################
 #                                                                            #
-#          ADSORPTION INFORMATION FORMAT (AIF) DDLm DICTIONARY               #
+#            ADSORPTION INFORMATION FORMAT (AIF) DDLm DICTIONARY             #
 #                                                                            #
 ##############################################################################
 
@@ -28,7 +29,7 @@ data_AIF_DIC
 
 ##############################################################################
 #                                                                            #
-#                            AUDIT CATEGORY                                  #
+#                               AUDIT CATEGORY                               #
 #                                                                            #
 ##############################################################################
 
@@ -39,7 +40,8 @@ save_AUDIT
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the AUDIT category record details about the AIF version.
+    Data items in the AUDIT category record version and format
+    tracking. Required for every AIF file.
 ;
 save_
 
@@ -48,11 +50,7 @@ save_audit.aif_version
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text
-;
-    Version of AIF data names (version tag). This is a required field
-    that must match the dictionary version.
-;
+    _description.text            'Version of the AIF data-name dictionary used by this file'
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -62,7 +60,7 @@ save_
 
 ##############################################################################
 #                                                                            #
-#                          EXPERIMENT CATEGORY                               #
+#                               EXPTL CATEGORY                               #
 #                                                                            #
 ##############################################################################
 
@@ -73,8 +71,10 @@ save_EXPTL
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the EXPTL category record details about the
-    adsorption experiment conditions and setup.
+    Data items in the EXPTL category record conditions, methods, and
+    operator details for the adsorption experiment. These are scalar
+    (single-value) metadata fields that describe the overall
+    experiment.
 ;
 save_
 
@@ -83,7 +83,7 @@ save_exptl.operator
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Name of the person who ran the experiment.'
+    _description.text            'Name of the person who performed the experiment'
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -95,7 +95,7 @@ save_exptl.date
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Date of the experiment (ISO 8601 format).'
+    _description.text            'Date and time of the experiment in ISO 8601 format'
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -107,7 +107,11 @@ save_exptl.instrument
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Instrument id used for the experiment.'
+    _description.text
+;
+    Identifier or model name of the instrument used for the
+    measurement
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -119,7 +123,11 @@ save_exptl.adsorptive
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Name of the adsorptive.'
+    _description.text
+;
+    Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2,
+    Water
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -136,7 +144,11 @@ save_exptl.adsorptive_name
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Secondary identifier for the adsorptive.'
+    _description.text
+;
+    Alternative or secondary name for the adsorptive, e.g. chemical
+    formula or abbreviation
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -148,7 +160,11 @@ save_exptl.temperature
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Temperature of the experiment.'
+    _description.text
+;
+    Temperature at which the experiment was conducted (see
+    _units_temperature)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -161,10 +177,7 @@ save_exptl.method
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text
-;
-    Description of method used to determine amount adsorbed.
-;
+    _description.text            'Experimental technique used to measure the amount adsorbed'
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -172,8 +185,8 @@ save_exptl.method
     loop_
         _enumeration_set.state
         _enumeration_set.detail
-        volumetric       'Volumetric (manometric) method'
-        gravimetric      'Gravimetric method'
+        volumetric       'Volumetric (manometric) method.'
+        gravimetric      'Gravimetric method.'
 save_
 
 save_exptl.isotherm_type
@@ -181,7 +194,7 @@ save_exptl.isotherm_type
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Description of the isotherm type.'
+    _description.text            'Classification of the reported adsorbed amount'
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -189,9 +202,9 @@ save_exptl.isotherm_type
     loop_
         _enumeration_set.state
         _enumeration_set.detail
-        absolute         'Absolute adsorption'
-        excess           'Excess adsorption'
-        net              'Net adsorption'
+        absolute         'Absolute adsorption.'
+        excess           'Excess adsorption.'
+        net              'Net adsorption.'
 save_
 
 save_exptl.p0
@@ -201,8 +214,8 @@ save_exptl.p0
     _definition.update           2026-03-09
     _description.text
 ;
-    Saturation pressure of the experiment at the temperature of the
-    experiment.
+    Saturation pressure of the adsorptive at the experimental
+    temperature (see _units_pressure)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -216,7 +229,11 @@ save_exptl.digitizer
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Name of the person who digitized the experiment.'
+    _description.text
+;
+    Name of the person who digitized the data, if extracted from a
+    published figure or table
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -225,7 +242,7 @@ save_
 
 ##############################################################################
 #                                                                            #
-#                          ADSORBENT CATEGORY                                #
+#                               ADSNT CATEGORY                               #
 #                                                                            #
 ##############################################################################
 
@@ -236,8 +253,8 @@ save_ADSNT
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the ADSNT category record details about the
-    adsorbent (sample) used in the experiment.
+    Data items in the ADSNT category record identification, physical
+    properties, and degassing conditions for the adsorbent material.
 ;
 save_
 
@@ -246,7 +263,11 @@ save_adsnt.sample_mass
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Mass of the sample.'
+    _description.text
+;
+    Mass of the adsorbent sample used in the measurement (see
+    _units_mass)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -259,7 +280,11 @@ save_adsnt.sample_density
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Density of the sample.'
+    _description.text
+;
+    Bulk or skeletal density of the adsorbent sample (see
+    _units_density)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -272,7 +297,10 @@ save_adsnt.sample_id
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Unique identifying code used by the operator.'
+    _description.text
+;
+    Unique sample identifier assigned by the operator or laboratory
+;
     _type.purpose                Key
     _type.source                 Assigned
     _type.container              Single
@@ -289,7 +317,11 @@ save_adsnt.material_id
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Designated name for the material.'
+    _description.text
+;
+    Name or designation of the adsorbent material, e.g. UiO-66,
+    Zeolite-13X
+;
     _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
@@ -306,7 +338,11 @@ save_adsnt.info
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Secondary identifier or additional info about the adsorbent.'
+    _description.text
+;
+    Free-text field for additional information about the adsorbent
+    sample
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -318,7 +354,11 @@ save_adsnt.hashkey
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Hash key identifier for the adsorbent.'
+    _description.text
+;
+    Machine-readable hash key for programmatic identification of the
+    adsorbent
+;
     _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
@@ -330,7 +370,10 @@ save_adsnt.degas_summary
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Summary of degas conditions.'
+    _description.text
+;
+    Human-readable summary of the degassing procedure and conditions
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -342,7 +385,11 @@ save_adsnt.degas_temperature
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Degas temperature.'
+    _description.text
+;
+    Temperature at which the sample was degassed prior to
+    measurement (see _units_temperature)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -355,7 +402,7 @@ save_adsnt.degas_time
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Degas time.'
+    _description.text            'Duration of the degassing step (see _units_time)'
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -365,7 +412,7 @@ save_
 
 ##############################################################################
 #                                                                            #
-#                          SIMULATION CATEGORY                               #
+#                              SIMLTN CATEGORY                               #
 #                                                                            #
 ##############################################################################
 
@@ -376,8 +423,10 @@ save_SIMLTN
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the SIMLTN category record details about
-    molecular simulations of adsorption.
+    Data items in the SIMLTN category record computational method
+    details for simulated isotherms (e.g. GCMC, MD). Only relevant
+    when the data originates from molecular simulation rather than
+    experiment.
 ;
 save_
 
@@ -386,7 +435,11 @@ save_simltn.code
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Simulation code or software used.'
+    _description.text
+;
+    Name and version of the simulation software, e.g. RASPA 2.0,
+    LAMMPS
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -398,7 +451,10 @@ save_simltn.date
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Date of the simulation (ISO 8601 format).'
+    _description.text
+;
+    Date and time the simulation was performed in ISO 8601 format
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -410,7 +466,11 @@ save_simltn.size
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Number of unit cells, sample mass, etc.'
+    _description.text
+;
+    Description of the simulated system size, e.g. number of unit
+    cells or particle count
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -422,7 +482,11 @@ save_simltn.forcefield_adsorptive
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Adsorptive model details.'
+    _description.text
+;
+    Force field or interaction model used for the adsorptive, e.g.
+    TraPPE, OPLS-AA
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -434,7 +498,11 @@ save_simltn.forcefield_adsorbent
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Adsorbent model details.'
+    _description.text
+;
+    Force field or interaction model used for the adsorbent
+    framework, e.g. UFF, DREIDING
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -448,8 +516,7 @@ save_simltn.input_files
     _definition.update           2026-03-09
     _description.text
 ;
-    Repository link to input files and other codes used in the
-    simulation.
+    URL or repository link to the simulation input files and scripts
 ;
     _type.purpose                Describe
     _type.source                 Recorded
@@ -462,7 +529,10 @@ save_simltn.sampling
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Phase space sampling algorithm.'
+    _description.text
+;
+    Phase-space sampling method used, e.g. GCMC, MD, Widom insertion
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -476,7 +546,8 @@ save_simltn.lot
     _definition.update           2026-03-09
     _description.text
 ;
-    Level of theory used in calculation, e.g. DFT, MLP, classical.
+    Level of theory for the calculation, e.g. DFT, machine-learned
+    potential, classical force field
 ;
     _type.purpose                Describe
     _type.source                 Recorded
@@ -486,7 +557,7 @@ save_
 
 ##############################################################################
 #                                                                            #
-#                          CITATION CATEGORY                                 #
+#                             CITATION CATEGORY                              #
 #                                                                            #
 ##############################################################################
 
@@ -498,7 +569,7 @@ save_CITATION
     _description.text
 ;
     Data items in the CITATION category record bibliographic
-    references for the data.
+    reference for the source publication or dataset.
 ;
 save_
 
@@ -507,7 +578,11 @@ save_citation.doi
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'The digital object identifier (DOI) of the cited work.'
+    _description.text
+;
+    Digital Object Identifier (DOI) of the publication associated
+    with this data
+;
     _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
@@ -519,7 +594,11 @@ save_citation.source
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Source of the cited work.'
+    _description.text
+;
+    Bibliographic source of the data, e.g. journal name, book title,
+    or database
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -528,7 +607,7 @@ save_
 
 ##############################################################################
 #                                                                            #
-#                            UNITS CATEGORY                                  #
+#                               UNITS CATEGORY                               #
 #                                                                            #
 ##############################################################################
 
@@ -539,8 +618,10 @@ save_UNITS
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the UNITS category record the units used for
-    various measured quantities in the data file.
+    Data items in the UNITS category record measurement unit
+    definitions for all numerical quantities. These scalar fields
+    declare the units used throughout the file so that data columns
+    can be interpreted correctly.
 ;
 save_
 
@@ -549,7 +630,11 @@ save_units.temperature
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Units of temperature.'
+    _description.text
+;
+    Unit of temperature for all temperature values in this file,
+    e.g. K, °C
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -561,7 +646,11 @@ save_units.pressure
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Units of pressure.'
+    _description.text
+;
+    Unit of pressure for all pressure values in this file, e.g. kPa,
+    bar, mmHg
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -573,7 +662,10 @@ save_units.mass
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Units of mass.'
+    _description.text
+;
+    Unit of mass for all mass values in this file, e.g. g, mg, kg
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -585,7 +677,11 @@ save_units.loading
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Units of amount adsorbed.'
+    _description.text
+;
+    Unit of amount adsorbed for all loading values in this file,
+    e.g. mmol/g, cm3(STP)/g, wt%
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -597,7 +693,11 @@ save_units.density
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Units of density.'
+    _description.text
+;
+    Unit of density for all density values in this file, e.g. g/cm3,
+    kg/m3
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -609,7 +709,11 @@ save_units.time
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Units of time.'
+    _description.text
+;
+    Unit of time for all time values in this file, e.g. s, min,
+    hours
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -621,7 +725,11 @@ save_units.composition_type
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Composition definition.'
+    _description.text
+;
+    Definition of how mixture compositions are expressed, e.g.
+    mole_fraction, mass_fraction
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -630,7 +738,7 @@ save_
 
 ##############################################################################
 #                                                                            #
-#                     ADSORPTION DATA CATEGORY                               #
+#                              ADSORP CATEGORY                               #
 #                                                                            #
 ##############################################################################
 
@@ -641,9 +749,9 @@ save_ADSORP
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the ADSORP category record adsorption branch
-    measurement data points. Items in this category appear inside
-    a loop_ construct in the AIF file.
+    Data items in the ADSORP category record loop columns for the
+    adsorption branch of the isotherm. These fields appear inside a
+    CIF loop_ construct, with one row per equilibrium point.
 ;
 save_
 
@@ -652,7 +760,11 @@ save_adsorp.pressure
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Equilibrium pressure of the adsorption measurement.'
+    _description.text
+;
+    Equilibrium pressure at each adsorption data point (see
+    _units_pressure)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -665,7 +777,11 @@ save_adsorp.fugacity
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Fugacity of the adsorption measurement.'
+    _description.text
+;
+    Fugacity of the adsorptive at each adsorption data point (see
+    _units_pressure)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -680,8 +796,8 @@ save_adsorp.p0
     _definition.update           2026-03-09
     _description.text
 ;
-    Saturation pressure of the adsorption measurement at the
-    temperature of the experiment.
+    Saturation pressure at each adsorption data point, for use in
+    relative pressure calculations (see _units_pressure)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -695,7 +811,11 @@ save_adsorp.amount
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Amount adsorbed during the adsorption measurement.'
+    _description.text
+;
+    Amount adsorbed at each adsorption data point (see
+    _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -708,7 +828,11 @@ save_adsorp.amount_excess
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Excess amount adsorbed during the adsorption measurement.'
+    _description.text
+;
+    Excess amount adsorbed at each adsorption data point (see
+    _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -721,7 +845,11 @@ save_adsorp.amount_absolute
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Absolute amount adsorbed during the adsorption measurement.'
+    _description.text
+;
+    Absolute amount adsorbed at each adsorption data point (see
+    _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -734,7 +862,11 @@ save_adsorp.amount_net
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Net amount adsorbed during the adsorption measurement.'
+    _description.text
+;
+    Net amount adsorbed at each adsorption data point (see
+    _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -742,9 +874,69 @@ save_adsorp.amount_net
     _units.code                  'see _units_loading'
 save_
 
+save_adsorp.enthalpy_differential
+    _definition.id               '_adsorp_enthalpy_differential'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Differential enthalpy of adsorption (see _units_enthalpy)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_enthalpy'
+save_
+
+save_adsorp.enthalpy_integral
+    _definition.id               '_adsorp_enthalpy_integral'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Integral enthalpy of adsorption (see _units_enthalpy)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_enthalpy'
+save_
+
+save_adsorp.molefraction
+    _definition.id               '_adsorp_molefraction'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the adsorptive in the gas phase for a
+    multicomponent adsorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.selectivity
+    _definition.id               '_adsorp_selectivity'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Adsorption selectivity for a specified component pair under the
+    given conditions (unitless ratio)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
 ##############################################################################
 #                                                                            #
-#                     DESORPTION DATA CATEGORY                               #
+#                              DESORP CATEGORY                               #
 #                                                                            #
 ##############################################################################
 
@@ -755,9 +947,9 @@ save_DESORP
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the DESORP category record desorption branch
-    measurement data points. Items in this category appear inside
-    a loop_ construct in the AIF file.
+    Data items in the DESORP category record loop columns for the
+    desorption branch of the isotherm. Mirrors the adsorption data
+    section for the reverse process.
 ;
 save_
 
@@ -768,8 +960,8 @@ save_desorp.pressure
     _definition.update           2026-03-09
     _description.text
 ;
-    Equilibrium pressure of the desorption measurement at the
-    temperature of the experiment.
+    Equilibrium pressure at each desorption data point (see
+    _units_pressure)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -783,7 +975,11 @@ save_desorp.fugacity
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Fugacity of the desorption measurement.'
+    _description.text
+;
+    Fugacity of the adsorptive at each desorption data point (see
+    _units_pressure)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -798,8 +994,8 @@ save_desorp.p0
     _definition.update           2026-03-09
     _description.text
 ;
-    Saturation pressure of the desorption measurement at the
-    temperature of the experiment.
+    Saturation pressure at each desorption data point, for use in
+    relative pressure calculations (see _units_pressure)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -813,7 +1009,11 @@ save_desorp.amount
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Amount adsorbed during the desorption measurement.'
+    _description.text
+;
+    Amount remaining adsorbed at each desorption data point (see
+    _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -826,7 +1026,11 @@ save_desorp.amount_excess
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Excess amount adsorbed during the desorption measurement.'
+    _description.text
+;
+    Excess amount remaining adsorbed at each desorption data point
+    (see _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -839,7 +1043,11 @@ save_desorp.amount_absolute
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Absolute amount adsorbed during the desorption measurement.'
+    _description.text
+;
+    Absolute amount remaining adsorbed at each desorption data point
+    (see _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -852,7 +1060,11 @@ save_desorp.amount_net
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Net amount adsorbed during the desorption measurement.'
+    _description.text
+;
+    Net amount remaining adsorbed at each desorption data point (see
+    _units_loading)
+;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
@@ -860,9 +1072,69 @@ save_desorp.amount_net
     _units.code                  'see _units_loading'
 save_
 
+save_desorp.enthalpy_differential
+    _definition.id               '_desorp_enthalpy_differential'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Differential enthalpy of desorption (see _units_enthalpy)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_enthalpy'
+save_
+
+save_desorp.enthalpy_integral
+    _definition.id               '_desorp_enthalpy_integral'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Integral enthalpy of desorption (see _units_enthalpy)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_enthalpy'
+save_
+
+save_desorp.molefraction
+    _definition.id               '_desorp_molefraction'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the adsorptive in the gas phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.selectivity
+    _definition.id               '_desorp_selectivity'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Desorption selectivity for a specified component pair under the
+    given conditions (unitless ratio)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
 ##############################################################################
 #                                                                            #
-#                   UNCERTAINTY (PATTERN PROPERTY)                           #
+#                       UNCERTAINTY (PATTERN PROPERTY)                       #
 #                                                                            #
 ##############################################################################
 
@@ -873,9 +1145,7 @@ save_UNCERTAINTY
     _definition.update           2026-03-09
     _description.text
 ;
-    Any data name may have an associated uncertainty by appending
-    '_uncertainty' to the original data name. The uncertainty value
-    is a floating point number representing the standard uncertainty
-    of the associated measurement.
+    Any data name ending in '_uncertainty' is treated as the
+    uncertainty (error bar) for the corresponding base field.
 ;
 save_
