@@ -1134,6 +1134,215 @@ save_
 
 ##############################################################################
 #                                                                            #
+#                         ADSORP_TRANSIENT CATEGORY                          #
+#                                                                            #
+##############################################################################
+
+save_ADSORP_TRANSIENT
+    _definition.id               ADSORP_TRANSIENT
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ADSORP_TRANSIENT category record optional loop
+    columns for time-resolved (raw instrument) traces during the
+    adsorption branch. Each row records an instantaneous reading;
+    the _step column links rows to the corresponding equilibrium
+    point in the adsorption data loop (1-based index).
+;
+save_
+
+save_adsorp_transient.step
+    _definition.id               '_adsorp_transient_step'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    1-based index of the corresponding equilibrium point in the
+    adsorption data loop
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsorp_transient.elapsed_time
+    _definition.id               '_adsorp_transient_elapsed_time'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Time elapsed since the beginning of this dosing step (see
+    _units_time)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_time'
+save_
+
+save_adsorp_transient.pressure
+    _definition.id               '_adsorp_transient_pressure'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous pressure recorded during the adsorption dosing
+    step (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp_transient.temperature
+    _definition.id               '_adsorp_transient_temperature'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous temperature recorded during the adsorption dosing
+    step (see _units_temperature)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_temperature'
+save_
+
+save_adsorp_transient.amount
+    _definition.id               '_adsorp_transient_amount'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous amount adsorbed recorded during the adsorption
+    dosing step (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+##############################################################################
+#                                                                            #
+#                         DESORP_TRANSIENT CATEGORY                          #
+#                                                                            #
+##############################################################################
+
+save_DESORP_TRANSIENT
+    _definition.id               DESORP_TRANSIENT
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the DESORP_TRANSIENT category record optional loop
+    columns for time-resolved (raw instrument) traces during the
+    desorption branch. Mirrors the adsorption transient data
+    section.
+;
+save_
+
+save_desorp_transient.step
+    _definition.id               '_desorp_transient_step'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    1-based index of the corresponding equilibrium point in the
+    desorption data loop
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_desorp_transient.elapsed_time
+    _definition.id               '_desorp_transient_elapsed_time'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Time elapsed since the beginning of this desorption step (see
+    _units_time)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_time'
+save_
+
+save_desorp_transient.pressure
+    _definition.id               '_desorp_transient_pressure'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous pressure recorded during the desorption step (see
+    _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp_transient.temperature
+    _definition.id               '_desorp_transient_temperature'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous temperature recorded during the desorption step
+    (see _units_temperature)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_temperature'
+save_
+
+save_desorp_transient.amount
+    _definition.id               '_desorp_transient_amount'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous amount adsorbed recorded during the desorption
+    step (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+##############################################################################
+#                                                                            #
 #                       UNCERTAINTY (PATTERN PROPERTY)                       #
 #                                                                            #
 ##############################################################################

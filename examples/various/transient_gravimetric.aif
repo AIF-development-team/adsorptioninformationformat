@@ -1,0 +1,109 @@
+# gravimetric adsorption with full transient data (adsorption + desorption)
+
+data_transient_gravimetric_CO2
+
+    _audit_aif_version                "__AIF_VERSION__"
+
+    _exptl_operator                   "Bob Zhang"
+    _exptl_date                       2026-03-01T14:00:00Z
+    _exptl_adsorptive                 "Carbon dioxide"
+    _exptl_adsorptive_name            "CO2"
+    _exptl_temperature                298.15
+    _exptl_method                     "gravimetric"
+    _exptl_instrument                 "TA Instruments VTI-SA+"
+    _exptl_isotherm_type              "excess"
+
+    _adsnt_material_id                "Zeolite-13X"
+    _adsnt_sample_id                  "13X-pellet-007"
+    _adsnt_sample_mass                0.0521
+    _adsnt_sample_density             1.45
+    _adsnt_degas_temperature          350.0
+    _adsnt_degas_time                 6.0
+    _adsnt_degas_summary              "Degassed under vacuum at 350 C for 6 h"
+
+    _units_temperature                "K"
+    _units_pressure                   "kPa"
+    _units_mass                       "g"
+    _units_loading                    "mmol/g"
+    _units_density                    "g/cm3"
+    _units_time                       "s"
+
+    _citation_doi                     "10.1234/transient.example"
+
+    # -------------------------------------------------------
+    # Equilibrium adsorption data
+    # -------------------------------------------------------
+    loop_
+        _adsorp_pressure
+        _adsorp_p0
+        _adsorp_amount
+        10.0    6430.0    1.82
+        50.0    6430.0    3.45
+       100.0    6430.0    4.21
+
+    # -------------------------------------------------------
+    # Equilibrium desorption data
+    # -------------------------------------------------------
+    loop_
+        _desorp_pressure
+        _desorp_p0
+        _desorp_amount
+       100.0    6430.0    4.21
+        50.0    6430.0    3.50
+        10.0    6430.0    1.95
+
+    # -------------------------------------------------------
+    # Adsorption transient traces
+    # -------------------------------------------------------
+    loop_
+        _adsorp_transient_step
+        _adsorp_transient_elapsed_time
+        _adsorp_transient_pressure
+        _adsorp_transient_temperature
+        _adsorp_transient_amount
+        1    0.0    15.0    298.20    0.00
+        1   10.0    13.5    298.18    0.45
+        1   20.0    12.0    298.17    0.92
+        1   30.0    11.2    298.16    1.30
+        1   40.0    10.5    298.16    1.60
+        1   50.0    10.1    298.15    1.75
+        1   60.0    10.0    298.15    1.82
+        2    0.0    65.0    298.22    1.82
+        2   10.0    60.0    298.20    2.20
+        2   20.0    56.0    298.18    2.70
+        2   30.0    53.5    298.17    3.05
+        2   40.0    51.5    298.16    3.28
+        2   50.0    50.5    298.15    3.40
+        2   60.0    50.0    298.15    3.45
+        3    0.0   130.0    298.25    3.45
+        3   10.0   120.0    298.22    3.60
+        3   20.0   114.0    298.19    3.80
+        3   30.0   108.0    298.17    3.98
+        3   40.0   104.0    298.16    4.10
+        3   50.0   101.5    298.15    4.18
+        3   60.0   100.0    298.15    4.21
+
+    # -------------------------------------------------------
+    # Desorption transient traces
+    # -------------------------------------------------------
+    loop_
+        _desorp_transient_step
+        _desorp_transient_elapsed_time
+        _desorp_transient_pressure
+        _desorp_transient_temperature
+        _desorp_transient_amount
+        1    0.0   100.0    298.15    4.21
+        1   10.0   100.2    298.15    4.21
+        1   20.0   100.0    298.15    4.21
+        2    0.0   100.0    298.14    4.21
+        2   10.0    70.0    298.14    3.95
+        2   20.0    58.0    298.15    3.72
+        2   30.0    53.0    298.15    3.58
+        2   40.0    51.0    298.15    3.52
+        2   50.0    50.0    298.15    3.50
+        3    0.0    50.0    298.15    3.50
+        3   10.0    25.0    298.14    2.80
+        3   20.0    15.0    298.14    2.30
+        3   30.0    12.0    298.15    2.10
+        3   40.0    10.5    298.15    1.98
+        3   50.0    10.0    298.15    1.95
