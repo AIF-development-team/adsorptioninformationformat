@@ -58,6 +58,33 @@ save_audit.aif_version
     _enumeration.default         __AIF_VERSION__
 save_
 
+save_audit.creation_date
+    _definition.id               '_audit_creation_date'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Date and time the AIF file was created in ISO 8601 format'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               DateTime
+save_
+
+save_audit.creation_software
+    _definition.id               '_audit_creation_software'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name and version of the software used to generate this AIF file
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 ##############################################################################
 #                                                                            #
 #                               EXPTL CATEGORY                               #
@@ -84,6 +111,22 @@ save_exptl.operator
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text            'Name of the person who performed the experiment'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_exptl.digitizer
+    _definition.id               '_exptl_digitizer'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who digitized the data, if extracted from a
+    published figure or table
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -187,6 +230,9 @@ save_exptl.method
         _enumeration_set.detail
         volumetric       'Volumetric (manometric) method.'
         gravimetric      'Gravimetric method.'
+        chromatographic  'Chromatographic method.'
+        simulation       'Data originates from molecular simulation rather than experiment.'
+        other            'Other method not specified here.'
 save_
 
 save_exptl.isotherm_type
@@ -224,22 +270,6 @@ save_exptl.p0
     _units.code                  'see _units_pressure'
 save_
 
-save_exptl.digitizer
-    _definition.id               '_exptl_digitizer'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Name of the person who digitized the data, if extracted from a
-    published figure or table
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
 ##############################################################################
 #                                                                            #
 #                               ADSNT CATEGORY                               #
@@ -255,60 +285,6 @@ save_ADSNT
 ;
     Data items in the ADSNT category record identification, physical
     properties, and degassing conditions for the adsorbent material.
-;
-save_
-
-save_adsnt.sample_mass
-    _definition.id               '_adsnt_sample_mass'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Mass of the adsorbent sample used in the measurement (see
-    _units_mass)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_mass'
-save_
-
-save_adsnt.sample_density
-    _definition.id               '_adsnt_sample_density'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Bulk or skeletal density of the adsorbent sample (see
-    _units_density)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_density'
-save_
-
-save_adsnt.sample_id
-    _definition.id               '_adsnt_sample_id'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Unique sample identifier assigned by the operator or laboratory
-;
-    _type.purpose                Key
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-    _description.common
-;
-    Required field. A unique identifier for the specific sample
-    used in the experiment.
 ;
 save_
 
@@ -365,6 +341,154 @@ save_adsnt.hashkey
     _type.contents               Text
 save_
 
+save_adsnt.structure_csd_refcode
+    _definition.id               '_adsnt_structure_csd_refcode'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Cambridge Structural Database (CSD) reference code for the
+    adsorbent structure
+;
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsnt.structure_topology
+    _definition.id               '_adsnt_structure_topology'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Network topology descriptor (e.g. RCSR symbol) for the adsorbent
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsnt.structure_smiles
+    _definition.id               '_adsnt_structure_smiles'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    SMILES of the organic linker or building block of the adsorbent
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsnt.composition
+    _definition.id               '_adsnt_composition'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Chemical composition or formula of the adsorbent, e.g. Cu3(BTC)2
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsnt.molar_mass
+    _definition.id               '_adsnt_molar_mass'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Molar mass of the adsorbent formula unit (see
+    _units_molecular_weight)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_molecular_weight'
+save_
+
+save_adsnt.synthesis
+    _definition.id               '_adsnt_synthesis'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Synthesis route or details used, e.g. solvothermal,
+    mechanochemical, reference to MPIF, etc
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsnt.sample_id
+    _definition.id               '_adsnt_sample_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Unique sample identifier assigned by the operator or laboratory
+;
+    _type.purpose                Key
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+    _description.common
+;
+    Required field. A unique identifier for the specific sample
+    used in the experiment.
+;
+save_
+
+save_adsnt.sample_mass
+    _definition.id               '_adsnt_sample_mass'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mass of the adsorbent sample used in the measurement (see
+    _units_mass)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_mass'
+save_
+
+save_adsnt.sample_density
+    _definition.id               '_adsnt_sample_density'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Bulk or skeletal density of the adsorbent sample (see
+    _units_density)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_density'
+save_
+
 save_adsnt.degas_summary
     _definition.id               '_adsnt_degas_summary'
     _definition.scope            Item
@@ -408,6 +532,192 @@ save_adsnt.degas_time
     _type.container              Single
     _type.contents               Real
     _units.code                  'see _units_time'
+save_
+
+save_adsnt.cycle_number
+    _definition.id               '_adsnt_cycle_number'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Adsorption-desorption cycle index (1-based) for multi-cycle
+    studies
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+##############################################################################
+#                                                                            #
+#                            ADSORPTIVE CATEGORY                             #
+#                                                                            #
+##############################################################################
+
+save_ADSORPTIVE
+    _definition.id               ADSORPTIVE
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ADSORPTIVE category record physical and
+    chemical identifiers and properties of the adsorptive molecule.
+;
+save_
+
+save_adsorptive.id
+    _definition.id               '_adsorptive_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2,
+    Water
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+    _description.common
+;
+    Required field. The common or IUPAC name of the gas/vapour
+    used as adsorptive in the experiment or simulation.
+;
+save_
+
+save_adsorptive.info
+    _definition.id               '_adsorptive_info'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Alternative or secondary name for the adsorptive, e.g. chemical
+    formula or abbreviation
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsorptive.inchi
+    _definition.id               '_adsorptive_inchi'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'IUPAC InChI identifier of the adsorptive'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsorptive.cas
+    _definition.id               '_adsorptive_cas'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'CAS Registry Number of the adsorptive'
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsorptive.smiles
+    _definition.id               '_adsorptive_smiles'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Canonical SMILES string of the adsorptive'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsorptive.molecular_weight
+    _definition.id               '_adsorptive_molecular_weight'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Molecular weight of the adsorptive (see _units_molecular_weight)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_molecular_weight'
+save_
+
+save_adsorptive.critical_temperature
+    _definition.id               '_adsorptive_critical_temperature'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Critical temperature of the adsorptive (see _units_temperature)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_temperature'
+save_
+
+save_adsorptive.critical_pressure
+    _definition.id               '_adsorptive_critical_pressure'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Critical pressure of the adsorptive (see _units_pressure)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorptive.kinetic_diameter
+    _definition.id               '_adsorptive_kinetic_diameter'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Kinetic diameter of the adsorptive molecule (see
+    _units_kinetic_diameter)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_kinetic_diameter'
+save_
+
+save_adsorptive.quadrupole_moment
+    _definition.id               '_adsorptive_quadrupole_moment'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Quadrupole moment of the adsorptive (see
+    _units_quadrupole_moment)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_quadrupole_moment'
 save_
 
 ##############################################################################
@@ -557,52 +867,165 @@ save_
 
 ##############################################################################
 #                                                                            #
-#                             CITATION CATEGORY                              #
+#                            INSTRUMENT CATEGORY                             #
 #                                                                            #
 ##############################################################################
 
-save_CITATION
-    _definition.id               CITATION
+save_INSTRUMENT
+    _definition.id               INSTRUMENT
     _definition.scope            Category
     _definition.class            Set
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the CITATION category record bibliographic
-    reference for the source publication or dataset.
+    Data items in the INSTRUMENT category record detailed instrument
+    provenance for traceability, calibration records, and quality
+    management.
 ;
 save_
 
-save_citation.doi
-    _definition.id               '_citation_doi'
+save_instrument.manufacturer
+    _definition.id               '_instrument_manufacturer'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text
-;
-    Digital Object Identifier (DOI) of the publication associated
-    with this data
-;
-    _type.purpose                Encode
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_citation.source
-    _definition.id               '_citation_source'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Bibliographic source of the data, e.g. journal name, book title,
-    or database
-;
+    _description.text            'Manufacturer of the adsorption instrument'
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
+save_
+
+save_instrument.model
+    _definition.id               '_instrument_model'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Model name or number of the instrument'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_instrument.firmware_version
+    _definition.id               '_instrument_firmware_version'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Firmware or software version of the instrument'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_instrument.last_calibration_date
+    _definition.id               '_instrument_last_calibration_date'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Date of last instrument calibration in ISO 8601 format'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               DateTime
+save_
+
+save_instrument.equilibration_criterion
+    _definition.id               '_instrument_equilibration_criterion'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Criterion used to determine equilibrium at each data point'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_instrument.leak_rate
+    _definition.id               '_instrument_leak_rate'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Measured leak rate of the instrument manifold (see
+    _units_leak_rate)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_leak_rate'
+save_
+
+save_instrument.dead_volume
+    _definition.id               '_instrument_dead_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Total dead (free-space) volume of the measurement cell (see
+    _units_dead_volume)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_dead_volume'
+save_
+
+save_instrument.cold_dead_volume
+    _definition.id               '_instrument_cold_dead_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Cold zone dead volume (see _units_dead_volume)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_dead_volume'
+save_
+
+save_instrument.warm_dead_volume
+    _definition.id               '_instrument_warm_dead_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Warm zone dead volume (see _units_dead_volume)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_dead_volume'
+save_
+
+save_instrument.reference_material
+    _definition.id               '_instrument_reference_material'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Certified reference material used for instrument validation'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_instrument.reference_agreement
+    _definition.id               '_instrument_reference_agreement'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Deviation from reference value (%)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
 save_
 
 ##############################################################################
@@ -730,6 +1153,114 @@ save_units.composition_type
     Definition of how mixture compositions are expressed, e.g.
     mole_fraction, mass_fraction
 ;
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.enthalpy
+    _definition.id               '_units_enthalpy'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of enthalpy values in this file, e.g. kJ/mol'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.surface_area
+    _definition.id               '_units_surface_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of surface area values in this file, e.g. m2/g'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.pore_volume
+    _definition.id               '_units_pore_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of pore volume values in this file, e.g. cm3/g'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.pore_diameter
+    _definition.id               '_units_pore_diameter'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of pore diameter values in this file, e.g. nm'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.molecular_weight
+    _definition.id               '_units_molecular_weight'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of molecular weight values in this file, e.g. g/mol'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.kinetic_diameter
+    _definition.id               '_units_kinetic_diameter'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of kinetic diameter values in this file, e.g. angstrom'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.dead_volume
+    _definition.id               '_units_dead_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of dead volume values in this file, e.g. cm3'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.leak_rate
+    _definition.id               '_units_leak_rate'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of leak rate values in this file, e.g. Pa/min'
+    _type.purpose                Describe
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.quadrupole_moment
+    _definition.id               '_units_quadrupole_moment'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of quadrupole moment values in this file, e.g. Debye·Å'
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -1130,6 +1661,554 @@ save_desorp.selectivity
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
+save_
+
+##############################################################################
+#                                                                            #
+#                             ANALYSIS CATEGORY                              #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS
+    _definition.id               ANALYSIS
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS category record derived scalar
+    quantities from standard analysis methods (BET, Langmuir, pore
+    characterization). These are single-value metadata fields
+    summarising the analysis results.
+;
+save_
+
+save_analysis.method
+    _definition.id               '_analysis_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Analysis method(s) or description used for derived quantities,
+    e.g. BET and HK
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis.bet_area
+    _definition.id               '_analysis_bet_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'BET surface area (see _units_surface_area)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_surface_area'
+save_
+
+save_analysis.bet_c_constant
+    _definition.id               '_analysis_bet_c_constant'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'BET C constant (dimensionless)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.bet_pressure_range_min
+    _definition.id               '_analysis_bet_pressure_range_min'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Lower bound of the relative pressure range used for BET fitting
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.bet_pressure_range_max
+    _definition.id               '_analysis_bet_pressure_range_max'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Upper bound of the relative pressure range used for BET fitting
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.langmuir_area
+    _definition.id               '_analysis_langmuir_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Langmuir surface area (see _units_surface_area)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_surface_area'
+save_
+
+save_analysis.micropore_volume
+    _definition.id               '_analysis_micropore_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Micropore volume from t-plot or DR analysis (see
+    _units_pore_volume)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_volume'
+save_
+
+save_analysis.total_pore_volume
+    _definition.id               '_analysis_total_pore_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Total pore volume (see _units_pore_volume)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_volume'
+save_
+
+save_analysis.total_pore_volume_pp0
+    _definition.id               '_analysis_total_pore_volume_pp0'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Relative pressure p/p0 at which total pore volume was evaluated
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.psd_method
+    _definition.id               '_analysis_psd_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Method for determining pore size distribution, e.g. NLDFT-
+    Carbon-N2
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                           ANALYSIS_PSD CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_PSD
+    _definition.id               ANALYSIS_PSD
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS_PSD category record loop columns for
+    pore size distribution data. One row per diameter bin.
+;
+save_
+
+save_analysis_psd.diameter
+    _definition.id               '_analysis_psd_diameter'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Pore diameter in a pore-size distribution loop (see
+    _units_pore_diameter)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_diameter'
+save_
+
+save_analysis_psd.dv_dd
+    _definition.id               '_analysis_psd_dv_dd'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Differential pore volume dV/dD at each diameter in a PSD loop
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+##############################################################################
+#                                                                            #
+#                           ANALYSIS_FIT CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_FIT
+    _definition.id               ANALYSIS_FIT
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS_FIT category record loop columns for
+    recording fitted isotherm models. One row per model, linked to
+    fit parameters via _fit_id.
+;
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unique integer key identifying this fit within the file'
+    _type.purpose                Key
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_model'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_r_squared'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Coefficient of determination (R-squared) for the fit'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_rmse'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Root-mean-square error of the fit (see _units_loading)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+##############################################################################
+#                                                                            #
+#                        ANALYSIS_FIT_PARAM CATEGORY                         #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_FIT_PARAM
+    _definition.id               ANALYSIS_FIT_PARAM
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS_FIT_PARAM category record loop
+    columns for the parameters of each fitted model. Linked to the
+    fit summary via _fit_param_id referencing _fit_id.
+;
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Foreign key referencing _analysis_fit_id in the fit summary loop
+;
+    _type.purpose                Key
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_name'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Name of the fitted parameter, e.g. q_max, K_L, n'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_value'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Fitted value of the parameter'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit_param.ty
+    _definition.id               '_fit_param_uncertainty'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Uncertainty of the fitted parameter value'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_unit'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of the fitted parameter, e.g. mmol/g, 1/Pa'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                             CITATION CATEGORY                              #
+#                                                                            #
+##############################################################################
+
+save_CITATION
+    _definition.id               CITATION
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the CITATION category record bibliographic
+    reference for the source publication or dataset.
+;
+save_
+
+save_citation.doi
+    _definition.id               '_citation_doi'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Digital Object Identifier (DOI) of the publication associated
+    with this data
+;
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_citation.source
+    _definition.id               '_citation_source'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Bibliographic source of the data, e.g. journal name, book title,
+    or database
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                               DATA CATEGORY                                #
+#                                                                            #
+##############################################################################
+
+save_DATA
+    _definition.id               DATA
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the DATA category record authorship, licensing,
+    and cross-references to related AIF files, databases, and
+    datasets for FAIR data practices.
+;
+save_
+
+save_data.license
+    _definition.id               '_data_license'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    License under which the data is distributed (SPDX identifier
+    preferred), e.g. CC-BY-4.0
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_data.orcid
+    _definition.id               '_data_orcid'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'ORCID iD of the data author or contact person'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_data.contact_email
+    _definition.id               '_data_contact_email'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Contact email for inquiries about the data'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_data.related_dataset_url
+    _definition.id               '_data_related_dataset_url'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'URL to the dataset in an external repository'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_data.related_nist_isodb_id
+    _definition.id               '_data_related_nist_isodb_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'NIST/ARPA-E ISODB identifier for this dataset'
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                           DATA_RELATED CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_DATA_RELATED
+    _definition.id               DATA_RELATED
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the DATA_RELATED category record loop columns for
+    cross-references to related AIF files in the same collection.
+    One row per related file.
+;
+save_
+
+save_data_related.aif_file
+    _definition.id               '_data_related_aif_file'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Filename or path of a related AIF file in the same collection
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_data_related.aif_relationship
+    _definition.id               '_data_related_aif_relationship'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Description of the relationship to the related AIF file, e.g.
+    cycle 1 of same sample, same sample different gas
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
 save_
 
 ##############################################################################
