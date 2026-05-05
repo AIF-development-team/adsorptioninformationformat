@@ -5,8 +5,8 @@ data_multicomponent_co2_n2
     _audit_aif_version                "__AIF_VERSION__"
 
     _exptl_operator                   "Clara Jensen"
-    _exptl_date                       2024-08-10T10:00:00Z
-    _exptl_adsorptive                 "mixture"  # what is the naming scheme here??
+    _exptl_date                       2024-08-10T10:00:00
+    _exptl_adsorptive                 "mixture"
     _exptl_temperature                298.15
     _exptl_method                     "gravimetric"
     _exptl_instrument                 "DVS Carbon"
@@ -25,21 +25,20 @@ data_multicomponent_co2_n2
     loop_
         _adsorptive_mixture_component_id
         _adsorptive_mixture_component_name
-        _adsorptive_mixture_component_mole_fraction
         _adsorptive_mixture_component_cas
-        1  "CO2"  0.15  "124-38-9"
-        2  "N2"   0.85  "7727-37-9"
+        1  "CO2"  "124-38-9"
+        2  "N2"   "7727-37-9"
 
     loop_
         _adsorp_pressure
-        _adsorp_amount_component_1
-        _adsorp_amount_component_2
         _adsorp_composition_component_1
         _adsorp_composition_component_2
-        10000.0    0.82   0.05   0.942   0.058
-        25000.0    1.65   0.12   0.932   0.068
-        50000.0    2.78   0.23   0.924   0.076
-        75000.0    3.56   0.34   0.913   0.087
-        100000.0   4.12   0.45   0.902   0.098
-        125000.0   4.58   0.56   0.891   0.109
-        150000.0   4.92   0.67   0.880   0.120
+        _adsorp_amount_component_1
+        _adsorp_amount_component_2
+	10000.0    0.15	  0.85	0.82   0.05
+        25000.0    0.15	  0.85	1.65   0.12
+        50000.0    0.15	  0.85	2.78   0.23
+        75000.0    0.15	  0.85	3.56   0.34
+        100000.0   0.15	  0.85	4.12   0.45
+        125000.0   0.15	  0.85	4.58   0.56
+        150000.0   0.15	  0.85	4.92   0.67
