@@ -283,58 +283,6 @@
       }
     },
 
-    "instrument": {
-      "$comment": "Instrument: Detailed instrument provenance for traceability, calibration records, and quality management.",
-      "type": "object",
-      "properties": {
-        "_instrument_manufacturer": {
-          "type": "string",
-          "description": "Manufacturer of the adsorption instrument"
-        },
-        "_instrument_model": {
-          "type": "string",
-          "description": "Model name or number of the instrument"
-        },
-        "_instrument_firmware_version": {
-          "type": "string",
-          "description": "Firmware or software version of the instrument"
-        },
-        "_instrument_last_calibration_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date of last instrument calibration in ISO 8601 format"
-        },
-        "_instrument_equilibration_criterion": {
-          "type": "string",
-          "description": "Criterion used to determine equilibrium at each data point"
-        },
-        "_instrument_leak_rate": {
-          "type": "number",
-          "description": "Measured leak rate of the instrument manifold (see _units_leak_rate)"
-        },
-        "_instrument_dead_volume": {
-          "type": "number",
-          "description": "Total dead (free-space) volume of the measurement cell (see _units_dead_volume)"
-        },
-        "_instrument_cold_dead_volume": {
-          "type": "number",
-          "description": "Cold zone dead volume (see _units_dead_volume)"
-        },
-        "_instrument_warm_dead_volume": {
-          "type": "number",
-          "description": "Warm zone dead volume (see _units_dead_volume)"
-        },
-        "_instrument_reference_material": {
-          "type": "string",
-          "description": "Certified reference material used for instrument validation"
-        },
-        "_instrument_reference_agreement": {
-          "type": "number",
-          "description": "Deviation from reference value (%)"
-        }
-      }
-    },
-
     "units": {
       "$comment": "Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly.",
       "type": "object",
@@ -434,6 +382,10 @@
           "type": "number",
           "description": "Fugacity of the adsorptive at each adsorption data point (see _units_pressure)"
         },
+        "_adsorp_henry": {
+          "type": "number",
+          "description": "Henry coefficient describing the infinite-dilution and low-pressure adsorption affinity (see _units_henry)"
+        },
         "_adsorp_p0": {
           "type": "number",
           "description": "Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)"
@@ -523,126 +475,6 @@
         }
       }
     },
-
-    "analysis": {
-      "$comment": "Analysis: Derived scalar quantities from standard analysis methods (BET, Langmuir, pore characterization). These are single-value metadata fields summarising the analysis results.",
-      "type": "object",
-      "properties": {
-        "_analysis_method": {
-          "type": "string",
-          "description": "Analysis method(s) or description used for derived quantities, e.g. BET and HK"
-        },
-        "_analysis_bet_area": {
-          "type": "number",
-          "description": "BET surface area (see _units_surface_area)"
-        },
-        "_analysis_bet_c_constant": {
-          "type": "number",
-          "description": "BET C constant (dimensionless)"
-        },
-        "_analysis_bet_pressure_range_min": {
-          "type": "number",
-          "description": "Lower bound of the relative pressure range used for BET fitting"
-        },
-        "_analysis_bet_pressure_range_max": {
-          "type": "number",
-          "description": "Upper bound of the relative pressure range used for BET fitting"
-        },
-        "_analysis_langmuir_area": {
-          "type": "number",
-          "description": "Langmuir surface area (see _units_surface_area)"
-        },
-        "_analysis_micropore_volume": {
-          "type": "number",
-          "description": "Micropore volume from t-plot or DR analysis (see _units_pore_volume)"
-        },
-        "_analysis_total_pore_volume": {
-          "type": "number",
-          "description": "Total pore volume (see _units_pore_volume)"
-        },
-        "_analysis_total_pore_volume_pp0": {
-          "type": "number",
-          "description": "Relative pressure p/p0 at which total pore volume was evaluated"
-        },
-        "_analysis_psd_method": {
-          "type": "string",
-          "description": "Method for determining pore size distribution, e.g. NLDFT-Carbon-N2"
-        }
-      }
-    },
-
-    "analysis_psd": {
-      "$comment": "Analysis PSD: Loop columns for pore size distribution data. One row per diameter bin.",
-      "x-dic-id": "ANALYSIS_PSD",
-      "x-dic-prefix": "analysis_psd",
-      "type": "object",
-      "properties": {
-        "_analysis_psd_diameter": {
-          "type": "number",
-          "description": "Pore diameter in a pore-size distribution loop (see _units_pore_diameter)"
-        },
-        "_analysis_psd_dv_dd": {
-          "type": "number",
-          "description": "Differential pore volume dV/dD at each diameter in a PSD loop"
-        }
-      }
-    },
-
-    "analysis_fit_summary": {
-      "$comment": "Analysis Fit Summary: Loop columns for recording fitted isotherm models. One row per model, linked to fit parameters via _fit_id.",
-      "x-dic-id": "ANALYSIS_FIT",
-      "x-dic-prefix": "analysis_fit",
-      "type": "object",
-      "properties": {
-        "_fit_id": {
-          "type": "integer",
-          "description": "Unique integer key identifying this fit within the file",
-          "x-dic-purpose": "Key"
-        },
-        "_fit_model": {
-          "type": "string",
-          "description": "Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth"
-        },
-        "_fit_r_squared": {
-          "type": "number",
-          "description": "Coefficient of determination (R-squared) for the fit"
-        },
-        "_fit_rmse": {
-          "type": "number",
-          "description": "Root-mean-square error of the fit (see _units_loading)"
-        }
-      }
-    },
-
-    "analysis_fit_parameters": {
-      "$comment": "Analysis Fit Parameters: Loop columns for the parameters of each fitted model. Linked to the fit summary via _fit_param_id referencing _fit_id.",
-      "x-dic-id": "ANALYSIS_FIT_PARAM",
-      "x-dic-prefix": "analysis_fit_param",
-      "type": "object",
-      "properties": {
-        "_fit_param_id": {
-          "type": "integer",
-          "description": "Foreign key referencing _analysis_fit_id in the fit summary loop",
-          "x-dic-purpose": "Key"
-        },
-        "_fit_param_name": {
-          "type": "string",
-          "description": "Name of the fitted parameter, e.g. q_max, K_L, n"
-        },
-        "_fit_param_value": {
-          "type": "number",
-          "description": "Fitted value of the parameter"
-        },
-        "_fit_param_uncertainty": {
-          "type": "number",
-          "description": "Uncertainty of the fitted parameter value"
-        },
-        "_fit_param_unit": {
-          "type": "string",
-          "description": "Unit of the fitted parameter, e.g. mmol/g, 1/Pa"
-        }
-      }
-    },
  
     "citation": {
       "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
@@ -659,52 +491,6 @@
           "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
         }
       }
-    },
-    
-    "data": {
-      "$comment": "Data Provenance: Authorship, licensing, and cross-references to related AIF files, databases, and datasets for FAIR data practices.",
-      "type": "object",
-      "properties": {
-        "_data_license": {
-          "type": "string",
-          "description": "License under which the data is distributed (SPDX identifier preferred), e.g. CC-BY-4.0"
-        },
-        "_data_orcid": {
-          "type": "string",
-          "description": "ORCID iD of the data author or contact person"
-        },
-        "_data_contact_email": {
-          "type": "string",
-          "description": "Contact email for inquiries about the data"
-        },
-        "_data_related_dataset_url": {
-          "type": "string",
-          "description": "URL to the dataset in an external repository"
-        },
-        "_data_related_nist_isodb_id": {
-          "type": "string",
-          "description": "NIST/ARPA-E ISODB identifier for this dataset",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
-        }
-      }
-    },
-
-    "data_related": {
-      "$comment": "Data Related: Loop columns for cross-references to related AIF files in the same collection. One row per related file.",
-      "x-dic-id": "DATA_RELATED",
-      "x-dic-prefix": "data_related",
-      "type": "object",
-      "properties": {
-        "_data_related_aif_file": {
-          "type": "string",
-          "description": "Filename or path of a related AIF file in the same collection"
-        },
-        "_data_related_aif_relationship": {
-          "type": "string",
-          "description": "Description of the relationship to the related AIF file, e.g. cycle 1 of same sample, same sample different gas"
-        }
-      }
     }
   },
 
@@ -714,17 +500,10 @@
     { "$ref": "#/definitions/adsorbent" },
     { "$ref": "#/definitions/adsorptive" },
     { "$ref": "#/definitions/simulation" },
-    { "$ref": "#/definitions/instrument" },
     { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/citation" },
-    { "$ref": "#/definitions/data" },
     { "$ref": "#/definitions/adsorption_data" },
-    { "$ref": "#/definitions/desorption_data" },
-    { "$ref": "#/definitions/analysis" },
-    { "$ref": "#/definitions/analysis_psd" },
-    { "$ref": "#/definitions/analysis_fit_summary" },
-    { "$ref": "#/definitions/analysis_fit_parameters" },
-    { "$ref": "#/definitions/data_related" }
+    { "$ref": "#/definitions/desorption_data" }
   ],
 
   "patternProperties": {

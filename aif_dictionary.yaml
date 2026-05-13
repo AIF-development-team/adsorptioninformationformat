@@ -273,58 +273,6 @@ slots:
     aliases: ["_simltn_lot"]
     description: Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field
 
-  # ── Instrument ──────────────────────────────
-
-  instrument_manufacturer:
-    aliases: ["_instrument_manufacturer"]
-    description: Manufacturer of the adsorption instrument
-
-  instrument_model:
-    aliases: ["_instrument_model"]
-    description: Model name or number of the instrument
-
-  instrument_firmware_version:
-    aliases: ["_instrument_firmware_version"]
-    description: Firmware or software version of the instrument
-
-  instrument_last_calibration_date:
-    aliases: ["_instrument_last_calibration_date"]
-    description: Date of last instrument calibration in ISO 8601 format
-    range: datetime
-
-  instrument_equilibration_criterion:
-    aliases: ["_instrument_equilibration_criterion"]
-    description: Criterion used to determine equilibrium at each data point
-
-  instrument_leak_rate:
-    aliases: ["_instrument_leak_rate"]
-    description: Measured leak rate of the instrument manifold (see _units_leak_rate)
-    range: float
-
-  instrument_dead_volume:
-    aliases: ["_instrument_dead_volume"]
-    description: Total dead (free-space) volume of the measurement cell (see _units_dead_volume)
-    range: float
-
-  instrument_cold_dead_volume:
-    aliases: ["_instrument_cold_dead_volume"]
-    description: Cold zone dead volume (see _units_dead_volume)
-    range: float
-
-  instrument_warm_dead_volume:
-    aliases: ["_instrument_warm_dead_volume"]
-    description: Warm zone dead volume (see _units_dead_volume)
-    range: float
-
-  instrument_reference_material:
-    aliases: ["_instrument_reference_material"]
-    description: Certified reference material used for instrument validation
-
-  instrument_reference_agreement:
-    aliases: ["_instrument_reference_agreement"]
-    description: Deviation from reference value (%)
-    range: float
-
   # ── Units ───────────────────────────────────
 
   units_temperature:
@@ -401,6 +349,11 @@ slots:
   adsorp_fugacity:
     aliases: ["_adsorp_fugacity"]
     description: Fugacity of the adsorptive at each adsorption data point (see _units_pressure)
+    range: float
+
+  adsorp_henry:
+    aliases: ["_adsorp_henry"]
+    description: Henry coefficient describing the infinite-dilution and low-pressure adsorption affinity (see _units_henry)
     range: float
 
   adsorp_p0:
@@ -505,114 +458,6 @@ slots:
     description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
     range: float
 
-  # ── Analysis ────────────────────────────────
-
-  analysis_method:
-    aliases: ["_analysis_method"]
-    description: Analysis method(s) or description used for derived quantities, e.g. BET and HK
-
-  analysis_bet_area:
-    aliases: ["_analysis_bet_area"]
-    description: BET surface area (see _units_surface_area)
-    range: float
-
-  analysis_bet_c_constant:
-    aliases: ["_analysis_bet_c_constant"]
-    description: BET C constant (dimensionless)
-    range: float
-
-  analysis_bet_pressure_range_min:
-    aliases: ["_analysis_bet_pressure_range_min"]
-    description: Lower bound of the relative pressure range used for BET fitting
-    range: float
-
-  analysis_bet_pressure_range_max:
-    aliases: ["_analysis_bet_pressure_range_max"]
-    description: Upper bound of the relative pressure range used for BET fitting
-    range: float
-
-  analysis_langmuir_area:
-    aliases: ["_analysis_langmuir_area"]
-    description: Langmuir surface area (see _units_surface_area)
-    range: float
-
-  analysis_micropore_volume:
-    aliases: ["_analysis_micropore_volume"]
-    description: Micropore volume from t-plot or DR analysis (see _units_pore_volume)
-    range: float
-
-  analysis_total_pore_volume:
-    aliases: ["_analysis_total_pore_volume"]
-    description: Total pore volume (see _units_pore_volume)
-    range: float
-
-  analysis_total_pore_volume_pp0:
-    aliases: ["_analysis_total_pore_volume_pp0"]
-    description: Relative pressure p/p0 at which total pore volume was evaluated
-    range: float
-
-  analysis_psd_method:
-    aliases: ["_analysis_psd_method"]
-    description: Method for determining pore size distribution, e.g. NLDFT-Carbon-N2
-
-  # ── Analysis PSD ────────────────────────────
-
-  analysis_psd_diameter:
-    aliases: ["_analysis_psd_diameter"]
-    description: Pore diameter in a pore-size distribution loop (see _units_pore_diameter)
-    range: float
-
-  analysis_psd_dv_dd:
-    aliases: ["_analysis_psd_dv_dd"]
-    description: Differential pore volume dV/dD at each diameter in a PSD loop
-    range: float
-
-  # ── Analysis Fit Summary ────────────────────
-
-  fit_id:
-    aliases: ["_fit_id"]
-    description: Unique integer key identifying this fit within the file
-    range: integer
-
-  fit_model:
-    aliases: ["_fit_model"]
-    description: Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth
-
-  fit_r_squared:
-    aliases: ["_fit_r_squared"]
-    description: Coefficient of determination (R-squared) for the fit
-    range: float
-
-  fit_rmse:
-    aliases: ["_fit_rmse"]
-    description: Root-mean-square error of the fit (see _units_loading)
-    range: float
-
-  # ── Analysis Fit Parameters ─────────────────
-
-  fit_param_id:
-    aliases: ["_fit_param_id"]
-    description: Foreign key referencing _analysis_fit_id in the fit summary loop
-    range: integer
-
-  fit_param_name:
-    aliases: ["_fit_param_name"]
-    description: Name of the fitted parameter, e.g. q_max, K_L, n
-
-  fit_param_value:
-    aliases: ["_fit_param_value"]
-    description: Fitted value of the parameter
-    range: float
-
-  fit_param_uncertainty:
-    aliases: ["_fit_param_uncertainty"]
-    description: Uncertainty of the fitted parameter value
-    range: float
-
-  fit_param_unit:
-    aliases: ["_fit_param_unit"]
-    description: Unit of the fitted parameter, e.g. mmol/g, 1/Pa
-
   # ── Citation ────────────────────────────────
 
   citation_doi:
@@ -622,38 +467,6 @@ slots:
   citation_source:
     aliases: ["_citation_source"]
     description: Bibliographic source of the data, e.g. journal name, book title, or database
-
-  # ── Data Provenance ─────────────────────────
-
-  data_license:
-    aliases: ["_data_license"]
-    description: License under which the data is distributed (SPDX identifier preferred), e.g. CC-BY-4.0
-
-  data_orcid:
-    aliases: ["_data_orcid"]
-    description: ORCID iD of the data author or contact person
-
-  data_contact_email:
-    aliases: ["_data_contact_email"]
-    description: Contact email for inquiries about the data
-
-  data_related_dataset_url:
-    aliases: ["_data_related_dataset_url"]
-    description: URL to the dataset in an external repository
-
-  data_related_nist_isodb_id:
-    aliases: ["_data_related_nist_isodb_id"]
-    description: NIST/ARPA-E ISODB identifier for this dataset
-
-  # ── Data Related ────────────────────────────
-
-  data_related_aif_file:
-    aliases: ["_data_related_aif_file"]
-    description: Filename or path of a related AIF file in the same collection
-
-  data_related_aif_relationship:
-    aliases: ["_data_related_aif_relationship"]
-    description: Description of the relationship to the related AIF file, e.g. cycle 1 of same sample, same sample different gas
 
 # ──────────────────────────────────────────────
 #  Classes
@@ -668,6 +481,7 @@ classes:
     slots:
       - adsorp_pressure
       - adsorp_fugacity
+      - adsorp_henry
       - adsorp_p0
       - adsorp_amount
       - adsorp_amount_excess
@@ -694,43 +508,6 @@ classes:
       - desorp_enthalpy_integral
       - desorp_molefraction
       - desorp_selectivity
-
-  Analysis_PsdDataPoint:
-    description: >-
-      A single data point in the analysis_psd branch of an isotherm.
-      Corresponds to a row in an AIF loop_ block for analysis_psd.
-    slots:
-      - analysis_psd_diameter
-      - analysis_psd_dv_dd
-
-  Analysis_Fit_SummaryDataPoint:
-    description: >-
-      A single data point in the analysis_fit_summary branch of an isotherm.
-      Corresponds to a row in an AIF loop_ block for analysis_fit_summary.
-    slots:
-      - fit_id
-      - fit_model
-      - fit_r_squared
-      - fit_rmse
-
-  Analysis_Fit_ParametersDataPoint:
-    description: >-
-      A single data point in the analysis_fit_parameters branch of an isotherm.
-      Corresponds to a row in an AIF loop_ block for analysis_fit_parameters.
-    slots:
-      - fit_param_id
-      - fit_param_name
-      - fit_param_value
-      - fit_param_uncertainty
-      - fit_param_unit
-
-  Data_RelatedDataPoint:
-    description: >-
-      A single data point in the data_related branch of an isotherm.
-      Corresponds to a row in an AIF loop_ block for data_related.
-    slots:
-      - data_related_aif_file
-      - data_related_aif_relationship
 
   AdsorptionInformationFile:
     description: >-
@@ -791,18 +568,6 @@ classes:
       - simltn_input_files
       - simltn_sampling
       - simltn_lot
-      # Instrument
-      - instrument_manufacturer
-      - instrument_model
-      - instrument_firmware_version
-      - instrument_last_calibration_date
-      - instrument_equilibration_criterion
-      - instrument_leak_rate
-      - instrument_dead_volume
-      - instrument_cold_dead_volume
-      - instrument_warm_dead_volume
-      - instrument_reference_material
-      - instrument_reference_agreement
       # Units
       - units_temperature
       - units_pressure
@@ -820,26 +585,9 @@ classes:
       - units_dead_volume
       - units_leak_rate
       - units_quadrupole_moment
-      # Analysis
-      - analysis_method
-      - analysis_bet_area
-      - analysis_bet_c_constant
-      - analysis_bet_pressure_range_min
-      - analysis_bet_pressure_range_max
-      - analysis_langmuir_area
-      - analysis_micropore_volume
-      - analysis_total_pore_volume
-      - analysis_total_pore_volume_pp0
-      - analysis_psd_method
       # Citation
       - citation_doi
       - citation_source
-      # Data Provenance
-      - data_license
-      - data_orcid
-      - data_contact_email
-      - data_related_dataset_url
-      - data_related_nist_isodb_id
     attributes:
       adsorption_data:
         description: Adsorption branch data points (loop_ block).
@@ -849,25 +597,5 @@ classes:
       desorption_data:
         description: Desorption branch data points (loop_ block).
         range: DesorptionDataPoint
-        multivalued: true
-        inlined_as_list: true
-      analysis_psd:
-        description: Analysis_Psd branch data points (loop_ block).
-        range: Analysis_PsdDataPoint
-        multivalued: true
-        inlined_as_list: true
-      analysis_fit_summary:
-        description: Analysis_Fit_Summary branch data points (loop_ block).
-        range: Analysis_Fit_SummaryDataPoint
-        multivalued: true
-        inlined_as_list: true
-      analysis_fit_parameters:
-        description: Analysis_Fit_Parameters branch data points (loop_ block).
-        range: Analysis_Fit_ParametersDataPoint
-        multivalued: true
-        inlined_as_list: true
-      data_related:
-        description: Data_Related branch data points (loop_ block).
-        range: Data_RelatedDataPoint
         multivalued: true
         inlined_as_list: true
