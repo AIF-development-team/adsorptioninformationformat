@@ -390,19 +390,19 @@
           "type": "number",
           "description": "Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)"
         },
-        "_adsorp_loading": {
+        "_adsorp_amount": {
           "type": "number",
           "description": "Amount adsorbed at each adsorption data point (see _units_loading)"
         },
-        "_adsorp_loading_excess": {
+        "_adsorp_amount_excess": {
           "type": "number",
           "description": "Excess amount adsorbed at each adsorption data point (see _units_loading)"
         },
-        "_adsorp_loading_absolute": {
+        "_adsorp_amount_absolute": {
           "type": "number",
           "description": "Absolute amount adsorbed at each adsorption data point (see _units_loading)"
         },
-        "_adsorp_loading_net": {
+        "_adsorp_amount_net": {
           "type": "number",
           "description": "Net amount adsorbed at each adsorption data point (see _units_loading)"
         },
@@ -441,19 +441,19 @@
           "type": "number",
           "description": "Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)"
         },
-        "_desorp_loading": {
+        "_desorp_amount": {
           "type": "number",
           "description": "Amount remaining adsorbed at each desorption data point (see _units_loading)"
         },
-        "_desorp_loading_excess": {
+        "_desorp_amount_excess": {
           "type": "number",
           "description": "Excess amount remaining adsorbed at each desorption data point (see _units_loading)"
         },
-        "_desorp_loading_absolute": {
+        "_desorp_amount_absolute": {
           "type": "number",
           "description": "Absolute amount remaining adsorbed at each desorption data point (see _units_loading)"
         },
-        "_desorp_loading_net": {
+        "_desorp_amount_net": {
           "type": "number",
           "description": "Net amount remaining adsorbed at each desorption data point (see _units_loading)"
         },

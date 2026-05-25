@@ -361,23 +361,23 @@ slots:
     description: Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)
     range: float
 
-  adsorp_loading:
-    aliases: ["_adsorp_loading"]
+  adsorp_amount:
+    aliases: ["_adsorp_amount"]
     description: Amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
-  adsorp_loading_excess:
-    aliases: ["_adsorp_loading_excess"]
+  adsorp_amount_excess:
+    aliases: ["_adsorp_amount_excess"]
     description: Excess amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
-  adsorp_loading_absolute:
-    aliases: ["_adsorp_loading_absolute"]
+  adsorp_amount_absolute:
+    aliases: ["_adsorp_amount_absolute"]
     description: Absolute amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
-  adsorp_loading_net:
-    aliases: ["_adsorp_loading_net"]
+  adsorp_amount_net:
+    aliases: ["_adsorp_amount_net"]
     description: Net amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
@@ -418,23 +418,23 @@ slots:
     description: Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)
     range: float
 
-  desorp_loading:
-    aliases: ["_desorp_loading"]
+  desorp_amount:
+    aliases: ["_desorp_amount"]
     description: Amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
-  desorp_loading_excess:
-    aliases: ["_desorp_loading_excess"]
+  desorp_amount_excess:
+    aliases: ["_desorp_amount_excess"]
     description: Excess amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
-  desorp_loading_absolute:
-    aliases: ["_desorp_loading_absolute"]
+  desorp_amount_absolute:
+    aliases: ["_desorp_amount_absolute"]
     description: Absolute amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
-  desorp_loading_net:
-    aliases: ["_desorp_loading_net"]
+  desorp_amount_net:
+    aliases: ["_desorp_amount_net"]
     description: Net amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
@@ -483,10 +483,10 @@ classes:
       - adsorp_fugacity
       - adsorp_henry
       - adsorp_p0
-      - adsorp_loading
-      - adsorp_loading_excess
-      - adsorp_loading_absolute
-      - adsorp_loading_net
+      - adsorp_amount
+      - adsorp_amount_excess
+      - adsorp_amount_absolute
+      - adsorp_amount_net
       - adsorp_enthalpy_differential
       - adsorp_enthalpy_integral
       - adsorp_molefraction
@@ -500,10 +500,10 @@ classes:
       - desorp_pressure
       - desorp_fugacity
       - desorp_p0
-      - desorp_loading
-      - desorp_loading_excess
-      - desorp_loading_absolute
-      - desorp_loading_net
+      - desorp_amount
+      - desorp_amount_excess
+      - desorp_amount_absolute
+      - desorp_amount_net
       - desorp_enthalpy_differential
       - desorp_enthalpy_integral
       - desorp_molefraction
