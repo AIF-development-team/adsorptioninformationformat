@@ -239,11 +239,6 @@ slots:
     aliases: ["_simltn_code"]
     description: Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS
 
-  simltn_date:
-    aliases: ["_simltn_date"]
-    description: Date and time the simulation was performed in ISO 8601 format
-    range: datetime
-
   simltn_size:
     aliases: ["_simltn_size"]
     description: Description of the simulated system size, e.g. number of unit cells or particle count
@@ -531,7 +526,6 @@ classes:
       - adsorptive_quadrupole_moment
       # Simulation
       - simltn_code
-      - simltn_date
       - simltn_size
       - simltn_forcefield_adsorptive
       - simltn_forcefield_adsorbent

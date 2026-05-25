@@ -247,11 +247,6 @@
           "type": "string",
           "description": "Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS"
         },
-        "_simltn_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the simulation was performed in ISO 8601 format"
-        },
         "_simltn_size": {
           "type": "string",
           "description": "Description of the simulated system size, e.g. number of unit cells or particle count"

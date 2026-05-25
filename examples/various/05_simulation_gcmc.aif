@@ -4,19 +4,19 @@ data_gcmc_simulation
 
     _audit_aif_version                "__AIF_VERSION__"
 
+    _exptl_adsorptive                 "Carbon Dioxide"
+    _exptl_adsorptive_name            "CO2"
+    _exptl_temperature                298.15
+    _exptl_isotherm_type              "absolute"
+    _exptl_date                       2024-10-15T22:00:00Z
+
     _simltn_code                      "RASPA-2.0.48"
-    _simltn_date                      2024-10-15T22:00:00Z
     _simltn_size                      "2x2x2 unit cells"
     _simltn_forcefield_adsorptive     "TraPPE"
     _simltn_forcefield_adsorbent      "UFF with DDEC charges"
     _simltn_input_files               "https://github.com/example/simulations/tree/main/gcmc_co2"
     _simltn_sampling                  "Grand Canonical Monte Carlo"
     _simltn_lot                       "classical"
-
-    _exptl_adsorptive                 "Carbon Dioxide"
-    _exptl_adsorptive_name            "CO2"
-    _exptl_temperature                298.15
-    _exptl_isotherm_type              "absolute"
 
     _adsnt_material_id                "MOF-5"
     _adsnt_sample_id                  "MOF5-GCMC-sim01"
