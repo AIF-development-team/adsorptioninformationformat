@@ -42,6 +42,7 @@ DIC_PATH = REPO_ROOT / "aif_dictionary.dic"
 _YAML_RANGE: dict[tuple[str, str | None], str] = {
     ("string", None): "string",
     ("number", None): "float",
+    ("integer", None): "integer",
     ("string", "date-time"): "datetime",
 }
 
@@ -49,12 +50,13 @@ _YAML_RANGE: dict[tuple[str, str | None], str] = {
 _DIC_CONTENTS: dict[tuple[str, str | None], str] = {
     ("string", None): "Text",
     ("number", None): "Real",
+    ("integer", None): "Integer",
     ("string", "date-time"): "DateTime",
 }
 
 # Default DIC _type.purpose / _type.source by JSON type
-_DIC_PURPOSE_DEFAULT = {"string": "Describe", "number": "Measurand"}
-_DIC_SOURCE_DEFAULT = {"string": "Recorded", "number": "Recorded"}
+_DIC_PURPOSE_DEFAULT = {"string": "Describe", "number": "Measurand", "integer": "Describe"}
+_DIC_SOURCE_DEFAULT = {"string": "Recorded", "number": "Recorded", "integer": "Recorded"}
 
 # Regex to extract a unit reference from a property description,
 # e.g. "(see _units_pressure)" → "see _units_pressure"
