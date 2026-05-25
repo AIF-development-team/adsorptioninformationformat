@@ -372,7 +372,7 @@
           "type": "number",
           "description": "Instantaneous temperature recorded during the adsorption dosing step (see _units_temperature)"
         },
-        "_adsorp_transient_amount": {
+        "_adsorp_transient_loading": {
           "type": "number",
           "description": "Instantaneous amount adsorbed recorded during the adsorption dosing step (see _units_loading)"
         }
@@ -399,7 +399,7 @@
           "type": "number",
           "description": "Instantaneous temperature recorded during the desorption step (see _units_temperature)"
         },
-        "_desorp_transient_amount": {
+        "_desorp_transient_loading": {
           "type": "number",
           "description": "Instantaneous amount adsorbed recorded during the desorption step (see _units_loading)"
         }

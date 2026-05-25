@@ -6,20 +6,21 @@ data_transient_gravimetric_CO2
 
     _exptl_operator                   "Bob Zhang"
     _exptl_date                       2026-03-01T14:00:00Z
-    _exptl_adsorptive                 "Carbon dioxide"
-    _exptl_adsorptive_name            "CO2"
     _exptl_temperature                298.15
     _exptl_method                     "gravimetric"
     _exptl_instrument                 "TA Instruments VTI-SA+"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_id                "Zeolite-13X"
-    _adsnt_sample_id                  "13X-pellet-007"
+    _adsnt_material_name              "Zeolite-13X"
+    _adsnt_sample_name                "13X-pellet-007"
     _adsnt_sample_mass                0.0521
     _adsnt_sample_density             1.45
     _adsnt_degas_temperature          350.0
     _adsnt_degas_time                 6.0
     _adsnt_degas_summary              "Degassed under vacuum at 350 C for 6 h"
+
+    _adsorptive_name                  "Carbon dioxide"
+    _adsorptive_info                  "CO2"
 
     _units_temperature                "K"
     _units_pressure                   "kPa"
@@ -60,7 +61,7 @@ data_transient_gravimetric_CO2
         _adsorp_transient_elapsed_time
         _adsorp_transient_pressure
         _adsorp_transient_temperature
-        _adsorp_transient_amount
+        _adsorp_transient_loading
         1    0.0    15.0    298.20    0.00
         1   10.0    13.5    298.18    0.45
         1   20.0    12.0    298.17    0.92
@@ -91,7 +92,7 @@ data_transient_gravimetric_CO2
         _desorp_transient_elapsed_time
         _desorp_transient_pressure
         _desorp_transient_temperature
-        _desorp_transient_amount
+        _desorp_transient_loading
         1    0.0   100.0    298.15    4.21
         1   10.0   100.2    298.15    4.21
         1   20.0   100.0    298.15    4.21

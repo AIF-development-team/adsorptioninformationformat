@@ -356,8 +356,8 @@ slots:
     description: Instantaneous temperature recorded during the adsorption dosing step (see _units_temperature)
     range: float
 
-  adsorp_transient_amount:
-    aliases: ["_adsorp_transient_amount"]
+  adsorp_transient_loading:
+    aliases: ["_adsorp_transient_loading"]
     description: Instantaneous amount adsorbed recorded during the adsorption dosing step (see _units_loading)
     range: float
 
@@ -382,8 +382,8 @@ slots:
     description: Instantaneous temperature recorded during the desorption step (see _units_temperature)
     range: float
 
-  desorp_transient_amount:
-    aliases: ["_desorp_transient_amount"]
+  desorp_transient_loading:
+    aliases: ["_desorp_transient_loading"]
     description: Instantaneous amount adsorbed recorded during the desorption step (see _units_loading)
     range: float
 
@@ -436,7 +436,7 @@ classes:
       - adsorp_transient_elapsed_time
       - adsorp_transient_pressure
       - adsorp_transient_temperature
-      - adsorp_transient_amount
+      - adsorp_transient_loading
 
   Desorption_TransientDataPoint:
     description: >-
@@ -447,7 +447,7 @@ classes:
       - desorp_transient_elapsed_time
       - desorp_transient_pressure
       - desorp_transient_temperature
-      - desorp_transient_amount
+      - desorp_transient_loading
 
   AdsorptionInformationFile:
     description: >-

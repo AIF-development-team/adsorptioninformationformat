@@ -1220,8 +1220,8 @@ save_adsorp_transient.temperature
     _units.code                  'see _units_temperature'
 save_
 
-save_adsorp_transient.amount
-    _definition.id               '_adsorp_transient_amount'
+save_adsorp_transient.loading
+    _definition.id               '_adsorp_transient_loading'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1324,8 +1324,8 @@ save_desorp_transient.temperature
     _units.code                  'see _units_temperature'
 save_
 
-save_desorp_transient.amount
-    _definition.id               '_desorp_transient_amount'
+save_desorp_transient.loading
+    _definition.id               '_desorp_transient_loading'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
