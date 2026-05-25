@@ -371,10 +371,6 @@
           "type": "number",
           "description": "Integral enthalpy of adsorption (see _units_enthalpy)"
         },
-        "_adsorp_molefraction": {
-          "type": "number",
-          "description": "Mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (see _units_composition_type)"
-        },
         "_adsorp_selectivity": {
           "type": "number",
           "description": "Adsorption selectivity for a specified component pair under the given conditions (unitless ratio)"

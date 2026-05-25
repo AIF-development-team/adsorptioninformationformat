@@ -1155,24 +1155,6 @@ save_adsorp.enthalpy_integral
     _units.code                  'see _units_enthalpy'
 save_
 
-save_adsorp.molefraction
-    _definition.id               '_adsorp_molefraction'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Mole fraction of the adsorptive in the gas phase for a
-    multicomponent adsorption measurement (see
-    _units_composition_type)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_composition_type'
-save_
-
 save_adsorp.selectivity
     _definition.id               '_adsorp_selectivity'
     _definition.scope            Item

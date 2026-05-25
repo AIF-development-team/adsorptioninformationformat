@@ -344,11 +344,6 @@ slots:
     description: Integral enthalpy of adsorption (see _units_enthalpy)
     range: float
 
-  adsorp_molefraction:
-    aliases: ["_adsorp_molefraction"]
-    description: Mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (see _units_composition_type)
-    range: float
-
   adsorp_selectivity:
     aliases: ["_adsorp_selectivity"]
     description: Adsorption selectivity for a specified component pair under the given conditions (unitless ratio)
@@ -617,7 +612,6 @@ classes:
       - adsorp_loading_net
       - adsorp_enthalpy_differential
       - adsorp_enthalpy_integral
-      - adsorp_molefraction
       - adsorp_selectivity
       - adsorp_composition_component_1
       - adsorp_composition_component_2
