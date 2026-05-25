@@ -1191,8 +1191,8 @@ save_adsorp.p0
     _units.code                  'see _units_pressure'
 save_
 
-save_adsorp.loading
-    _definition.id               '_adsorp_loading'
+save_adsorp.amount
+    _definition.id               '_adsorp_amount'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1208,8 +1208,8 @@ save_adsorp.loading
     _units.code                  'see _units_loading'
 save_
 
-save_adsorp.loading_excess
-    _definition.id               '_adsorp_loading_excess'
+save_adsorp.amount_excess
+    _definition.id               '_adsorp_amount_excess'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1225,8 +1225,8 @@ save_adsorp.loading_excess
     _units.code                  'see _units_loading'
 save_
 
-save_adsorp.loading_absolute
-    _definition.id               '_adsorp_loading_absolute'
+save_adsorp.amount_absolute
+    _definition.id               '_adsorp_amount_absolute'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1242,8 +1242,8 @@ save_adsorp.loading_absolute
     _units.code                  'see _units_loading'
 save_
 
-save_adsorp.loading_net
-    _definition.id               '_adsorp_loading_net'
+save_adsorp.amount_net
+    _definition.id               '_adsorp_amount_net'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1389,8 +1389,8 @@ save_desorp.p0
     _units.code                  'see _units_pressure'
 save_
 
-save_desorp.loading
-    _definition.id               '_desorp_loading'
+save_desorp.amount
+    _definition.id               '_desorp_amount'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1406,8 +1406,8 @@ save_desorp.loading
     _units.code                  'see _units_loading'
 save_
 
-save_desorp.loading_excess
-    _definition.id               '_desorp_loading_excess'
+save_desorp.amount_excess
+    _definition.id               '_desorp_amount_excess'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1423,8 +1423,8 @@ save_desorp.loading_excess
     _units.code                  'see _units_loading'
 save_
 
-save_desorp.loading_absolute
-    _definition.id               '_desorp_loading_absolute'
+save_desorp.amount_absolute
+    _definition.id               '_desorp_amount_absolute'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1440,8 +1440,8 @@ save_desorp.loading_absolute
     _units.code                  'see _units_loading'
 save_
 
-save_desorp.loading_net
-    _definition.id               '_desorp_loading_net'
+save_desorp.amount_net
+    _definition.id               '_desorp_amount_net'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
