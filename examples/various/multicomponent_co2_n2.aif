@@ -6,7 +6,6 @@ data_multicomponent_co2_n2
 
     _exptl_operator                   "Clara Jensen"
     _exptl_date                       2024-08-10T10:00:00
-    _exptl_adsorptive                 "mixture"
     _exptl_temperature                298.15
     _exptl_method                     "gravimetric"
     _exptl_instrument                 "DVS Carbon"
@@ -16,6 +15,15 @@ data_multicomponent_co2_n2
     _adsnt_sample_id                  "HKUST1-B2-05"
     _adsnt_sample_mass                0.0834
 
+    _adsorptive_name                  "mixture"
+
+    loop_
+        _adsorptive_component_id
+        _adsorptive_component_name
+        _adsorptive_component_cas
+        1  "CO2"  "124-38-9"
+        2  "N2"   "7727-37-9"
+
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
@@ -23,19 +31,12 @@ data_multicomponent_co2_n2
     _units_composition_type           "mole_fraction"
 
     loop_
-        _adsorptive_mixture_component_id
-        _adsorptive_mixture_component_name
-        _adsorptive_mixture_component_cas
-        1  "CO2"  "124-38-9"
-        2  "N2"   "7727-37-9"
-
-    loop_
         _adsorp_pressure
         _adsorp_composition_component_1
         _adsorp_composition_component_2
-        _adsorp_amount_component_1
-        _adsorp_amount_component_2
-	10000.0    0.15	  0.85	0.82   0.05
+        _adsorp_loading_component_1
+        _adsorp_loading_component_2
+        10000.0    0.15	  0.85	0.82   0.05
         25000.0    0.15	  0.85	1.65   0.12
         50000.0    0.15	  0.85	2.78   0.23
         75000.0    0.15	  0.85	3.56   0.34
