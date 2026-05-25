@@ -32,6 +32,19 @@
           "description": "Version of the AIF data-name dictionary used by this file",
           "const": "__AIF_VERSION__",
           "x-dic-source": "Assigned"
+        },
+        "_audit_creation_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the AIF file was created in ISO 8601 format"
+        },
+        "_audit_creation_software": {
+          "type": "string",
+          "description": "Name and version of the software used to generate this AIF file"
+        },
+        "_audit_digitizer": {
+          "type": "string",
+          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         }
       }
     },
@@ -60,7 +73,7 @@
         "_exptl_method": {
           "type": "string",
           "description": "Experimental technique used to measure the amount adsorbed",
-          "enum": ["volumetric", "gravimetric"],
+          "enum": ["volumetric", "gravimetric", "chromatographic", "simulation", "other"],
           "x-enum-name": "ExperimentalMethod",
           "x-enum-description": "Method used to determine amount adsorbed.",
           "x-enum-descriptions": {
@@ -217,11 +230,6 @@
         "_simltn_code": {
           "type": "string",
           "description": "Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS"
-        },
-        "_simltn_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the simulation was performed in ISO 8601 format"
         },
         "_simltn_size": {
           "type": "string",

@@ -58,6 +58,49 @@ save_audit.aif_version
     _enumeration.default         __AIF_VERSION__
 save_
 
+save_audit.creation_date
+    _definition.id               '_audit_creation_date'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Date and time the AIF file was created in ISO 8601 format'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               DateTime
+save_
+
+save_audit.creation_software
+    _definition.id               '_audit_creation_software'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name and version of the software used to generate this AIF file
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_audit.digitizer
+    _definition.id               '_audit_digitizer'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who digitized the data, if extracted from a
+    published figure or table
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 ##############################################################################
 #                                                                            #
 #                               EXPTL CATEGORY                               #
@@ -150,6 +193,9 @@ save_exptl.method
         _enumeration_set.detail
         volumetric       'Volumetric (manometric) method.'
         gravimetric      'Gravimetric method.'
+        chromatographic  ''
+        simulation       ''
+        other            ''
 save_
 
 save_exptl.isotherm_type
@@ -629,21 +675,6 @@ save_simltn.code
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
-save_
-
-save_simltn.date
-    _definition.id               '_simltn_date'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Date and time the simulation was performed in ISO 8601 format
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               DateTime
 save_
 
 save_simltn.size

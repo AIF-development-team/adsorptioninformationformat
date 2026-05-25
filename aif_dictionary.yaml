@@ -31,6 +31,12 @@ enums:
         description: Volumetric (manometric) method.
       gravimetric:
         description: Gravimetric method.
+      chromatographic:
+        description: 
+      simulation:
+        description: 
+      other:
+        description: 
   IsothermType:
     description: Type of adsorption isotherm.
     permissible_values:
@@ -53,6 +59,19 @@ slots:
     aliases: ["_audit_aif_version"]
     description: Version of the AIF data-name dictionary used by this file
     required: true
+
+  audit_creation_date:
+    aliases: ["_audit_creation_date"]
+    description: Date and time the AIF file was created in ISO 8601 format
+    range: datetime
+
+  audit_creation_software:
+    aliases: ["_audit_creation_software"]
+    description: Name and version of the software used to generate this AIF file
+
+  audit_digitizer:
+    aliases: ["_audit_digitizer"]
+    description: Name of the person who digitized the data, if extracted from a published figure or table
 
   # ── Experimental ────────────────────────────
 
@@ -200,11 +219,6 @@ slots:
   simltn_code:
     aliases: ["_simltn_code"]
     description: Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS
-
-  simltn_date:
-    aliases: ["_simltn_date"]
-    description: Date and time the simulation was performed in ISO 8601 format
-    range: datetime
 
   simltn_size:
     aliases: ["_simltn_size"]
@@ -669,6 +683,9 @@ classes:
     slots:
       # Audit
       - audit_aif_version
+      - audit_creation_date
+      - audit_creation_software
+      - audit_digitizer
       # Experimental
       - exptl_operator
       - exptl_date
@@ -705,7 +722,6 @@ classes:
       - adsorptive_component_smiles
       # Simulation
       - simltn_code
-      - simltn_date
       - simltn_size
       - simltn_forcefield_adsorptive
       - simltn_forcefield_adsorbent
