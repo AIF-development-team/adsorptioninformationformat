@@ -4,8 +4,6 @@ data_gcmc_simulation
 
     _audit_aif_version                "__AIF_VERSION__"
 
-    _exptl_adsorptive                 "Carbon Dioxide"
-    _exptl_adsorptive_name            "CO2"
     _exptl_temperature                298.15
     _exptl_isotherm_type              "absolute"
     _exptl_date                       2024-10-15T22:00:00Z
@@ -25,8 +23,8 @@ data_gcmc_simulation
     _adsnt_composition                "Zn4O(BDC)3"
     _adsnt_molar_mass                 769.87
 
-    _data_license                     "CC-BY-4.0"
-    _data_orcid                       "0000-0001-2345-6789"
+    _adsorptive_name                  "Carbon Dioxide"
+    _adsorptive_info                  "CO2"
 
     _units_temperature                "K"
     _units_pressure                   "Pa"

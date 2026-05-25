@@ -6,8 +6,6 @@ data_high_pressure_ch4
 
     _exptl_operator                   "Karl Nguyen"
     _exptl_date                       2024-03-28T14:45:00Z
-    _exptl_adsorptive                 "Methane"
-    _exptl_adsorptive_name            "CH4"
     _exptl_temperature                298.15
     _exptl_method                     "volumetric"
     _exptl_instrument                 "HPVA-II-100"
@@ -18,6 +16,8 @@ data_high_pressure_ch4
     _adsnt_sample_mass                0.5123
     _adsnt_sample_density             2.2
 
+    _adsorptive_name                  "Methane"
+    _adsorptive_info                  "CH4"
     _adsorptive_cas                   "74-82-8"
     _adsorptive_molecular_weight      16.043
     _adsorptive_critical_temperature  190.56

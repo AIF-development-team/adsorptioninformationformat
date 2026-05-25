@@ -161,43 +161,6 @@ save_exptl.instrument
     _type.contents               Text
 save_
 
-save_exptl.adsorptive
-    _definition.id               '_exptl_adsorptive'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2,
-    Water
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-    _description.common
-;
-    Required field. The common or IUPAC name of the gas/vapour
-    used as adsorptive in the experiment or simulation.
-;
-save_
-
-save_exptl.adsorptive_name
-    _definition.id               '_exptl_adsorptive_name'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Alternative or secondary name for the adsorptive, e.g. chemical
-    formula or abbreviation
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
 save_exptl.temperature
     _definition.id               '_exptl_temperature'
     _definition.scope            Item
@@ -551,8 +514,8 @@ save_ADSORPTIVE
 ;
 save_
 
-save_adsorptive.id
-    _definition.id               '_adsorptive_id'
+save_adsorptive.name
+    _definition.id               '_adsorptive_name'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09

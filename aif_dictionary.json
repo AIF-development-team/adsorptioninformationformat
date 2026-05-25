@@ -66,15 +66,6 @@
           "type": "string",
           "description": "Identifier or model name of the instrument used for the measurement"
         },
-        "_exptl_adsorptive": {
-          "type": "string",
-          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
-        },
-        "_exptl_adsorptive_name": {
-          "type": "string",
-          "description": "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation"
-        },
         "_exptl_temperature": {
           "type": "number",
           "description": "Temperature at which the experiment was conducted (see _units_temperature)"
@@ -193,7 +184,7 @@
       "$comment": "Adsorptive: Physical and chemical identifiers and properties of the adsorptive molecule.",
       "type": "object",
       "properties": {
-        "_adsorptive_id": {
+        "_adsorptive_name": {
           "type": "string",
           "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
           "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."

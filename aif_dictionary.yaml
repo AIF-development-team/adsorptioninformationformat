@@ -88,15 +88,6 @@ slots:
     aliases: ["_exptl_instrument"]
     description: Identifier or model name of the instrument used for the measurement
 
-  exptl_adsorptive:
-    aliases: ["_exptl_adsorptive"]
-    description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
-    required: true
-
-  exptl_adsorptive_name:
-    aliases: ["_exptl_adsorptive_name"]
-    description: Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation
-
   exptl_temperature:
     aliases: ["_exptl_temperature"]
     description: Temperature at which the experiment was conducted (see _units_temperature)
@@ -188,8 +179,8 @@ slots:
 
   # ── Adsorptive ──────────────────────────────
 
-  adsorptive_id:
-    aliases: ["_adsorptive_id"]
+  adsorptive_name:
+    aliases: ["_adsorptive_name"]
     description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
 
   adsorptive_info:
@@ -491,8 +482,6 @@ classes:
       - exptl_operator
       - exptl_date
       - exptl_instrument
-      - exptl_adsorptive
-      - exptl_adsorptive_name
       - exptl_temperature
       - exptl_method
       - exptl_isotherm_type
@@ -514,7 +503,7 @@ classes:
       - adsnt_degas_time
       - adsnt_cycle_number
       # Adsorptive
-      - adsorptive_id
+      - adsorptive_name
       - adsorptive_info
       - adsorptive_inchi
       - adsorptive_cas

@@ -6,8 +6,6 @@ data_water_vapor_silica
 
     _exptl_operator                   "David Park"
     _exptl_date                       2024-04-22T11:15:00Z
-    _exptl_adsorptive                 "Water"
-    _exptl_adsorptive_name            "H2O"
     _exptl_temperature                298.15
     _exptl_method                     "gravimetric"
     _exptl_instrument                 "DVS-Resolution"
@@ -17,6 +15,8 @@ data_water_vapor_silica
     _adsnt_sample_id                  "SGA-001"
     _adsnt_sample_mass                0.0123
 
+    _adsorptive_name                  "Water"
+    _adsorptive_info                  "H2O"
     _adsorptive_cas                   "7732-18-5"
     _adsorptive_molecular_weight      18.015
     _adsorptive_smiles                "O"

@@ -6,8 +6,6 @@ data_mof_structure_link
 
     _exptl_operator                   "Fatima Al-Rashid"
     _exptl_date                       2024-05-18T16:30:00Z
-    _exptl_adsorptive                 "Nitrogen"
-    _exptl_adsorptive_name            "N2"
     _exptl_temperature                77.35
     _exptl_method                     "volumetric"
     _exptl_instrument                 "ASAP-2020-003"
@@ -22,6 +20,9 @@ data_mof_structure_link
     _adsnt_molar_mass                 604.87
     _adsnt_structure_smiles           "OC(=O)c1cc(C(O)=O)cc(C(O)=O)c1"
 
+    _adsorptive_name                  "Nitrogen"
+    _adsorptive_info                  "N2"
+    
     _citation_doi                     "10.1126/science.283.5405.1148"
     _citation_source                  "Science"
 

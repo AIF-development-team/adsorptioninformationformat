@@ -7,8 +7,6 @@ data_full_featured_aif
 
     _exptl_operator                   "Nina Johansson"
     _exptl_date                       2025-02-20T09:00:00Z
-    _exptl_adsorptive                 "Carbon Dioxide"
-    _exptl_adsorptive_name            "CO2"
     _exptl_temperature                298.15
     _exptl_method                     "volumetric"
     _exptl_instrument                 "ASAP-2020-HD"
@@ -28,6 +26,8 @@ data_full_featured_aif
     _adsnt_degas_temperature          120.0
     _adsnt_degas_time                 16.0
 
+    _adsorptive_name                  "Carbon Dioxide"
+    _adsorptive_info                  "CO2"
     _adsorptive_cas                   "124-38-9"
     _adsorptive_molecular_weight      44.01
     _adsorptive_critical_temperature  304.13

@@ -6,8 +6,6 @@ data_basic_n2_77K
 
     _exptl_operator                   "Alice Chen"
     _exptl_date                       2024-03-15T09:30:00Z
-    _exptl_adsorptive                 "Nitrogen"
-    _exptl_adsorptive_name            "N2"
     _exptl_temperature                77.35
     _exptl_method                     "volumetric"
     _exptl_instrument                 "ASAP-2020-001"
@@ -17,6 +15,8 @@ data_basic_n2_77K
     _adsnt_sample_id                  "Z13X-batch4-01"
     _adsnt_sample_mass                0.1523
 
+    _adsorptive_name                 "Nitrogen"
+
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
@@ -25,7 +25,7 @@ data_basic_n2_77K
     loop_
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_amount
+        _adsorp_loading
         5.2       101325.0  0.45
         15.8      101325.0  1.12
         52.3      101325.0  2.34
