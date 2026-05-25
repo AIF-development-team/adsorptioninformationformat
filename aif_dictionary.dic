@@ -271,6 +271,26 @@ save_adsnt.info
     _type.contents               Text
 save_
 
+save_adsnt.sample_id
+    _definition.id               '_adsnt_sample_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Unique sample identifier assigned by the operator or laboratory
+;
+    _type.purpose                Key
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+    _description.common
+;
+    Required field. A unique identifier for the specific sample
+    used in the experiment.
+;
+save_
+
 save_adsnt.hashkey
     _definition.id               '_adsnt_hashkey'
     _definition.scope            Item
@@ -381,26 +401,6 @@ save_adsnt.synthesis
     _type.contents               Text
 save_
 
-save_adsnt.sample_id
-    _definition.id               '_adsnt_sample_id'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Unique sample identifier assigned by the operator or laboratory
-;
-    _type.purpose                Key
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-    _description.common
-;
-    Required field. A unique identifier for the specific sample
-    used in the experiment.
-;
-save_
-
 save_adsnt.sample_mass
     _definition.id               '_adsnt_sample_mass'
     _definition.scope            Item
@@ -478,22 +478,6 @@ save_adsnt.degas_time
     _type.container              Single
     _type.contents               Real
     _units.code                  'see _units_time'
-save_
-
-save_adsnt.cycle_number
-    _definition.id               '_adsnt_cycle_number'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Adsorption-desorption cycle index (1-based) for multi-cycle
-    studies
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Integer
 save_
 
 ##############################################################################
@@ -585,85 +569,6 @@ save_adsorptive.smiles
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
-save_
-
-save_adsorptive.molecular_weight
-    _definition.id               '_adsorptive_molecular_weight'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Molecular weight of the adsorptive (see _units_molecular_weight)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_molecular_weight'
-save_
-
-save_adsorptive.critical_temperature
-    _definition.id               '_adsorptive_critical_temperature'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Critical temperature of the adsorptive (see _units_temperature)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_temperature'
-save_
-
-save_adsorptive.critical_pressure
-    _definition.id               '_adsorptive_critical_pressure'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Critical pressure of the adsorptive (see _units_pressure)'
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_pressure'
-save_
-
-save_adsorptive.kinetic_diameter
-    _definition.id               '_adsorptive_kinetic_diameter'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Kinetic diameter of the adsorptive molecule (see
-    _units_kinetic_diameter)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_kinetic_diameter'
-save_
-
-save_adsorptive.quadrupole_moment
-    _definition.id               '_adsorptive_quadrupole_moment'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Quadrupole moment of the adsorptive (see
-    _units_quadrupole_moment)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_quadrupole_moment'
 save_
 
 ##############################################################################
@@ -961,70 +866,6 @@ save_units.time
     _type.contents               Text
 save_
 
-save_units.composition_type
-    _definition.id               '_units_composition_type'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Definition of how mixture compositions are expressed, e.g.
-    mole_fraction, mass_fraction
-;
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.enthalpy
-    _definition.id               '_units_enthalpy'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of enthalpy values in this file, e.g. kJ/mol'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.surface_area
-    _definition.id               '_units_surface_area'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of surface area values in this file, e.g. m2/g'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.pore_volume
-    _definition.id               '_units_pore_volume'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of pore volume values in this file, e.g. cm3/g'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.pore_diameter
-    _definition.id               '_units_pore_diameter'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of pore diameter values in this file, e.g. nm'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
 save_units.molecular_weight
     _definition.id               '_units_molecular_weight'
     _definition.scope            Item
@@ -1037,48 +878,12 @@ save_units.molecular_weight
     _type.contents               Text
 save_
 
-save_units.kinetic_diameter
-    _definition.id               '_units_kinetic_diameter'
+save_units.enthalpy
+    _definition.id               '_units_enthalpy'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Unit of kinetic diameter values in this file, e.g. angstrom'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.dead_volume
-    _definition.id               '_units_dead_volume'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of dead volume values in this file, e.g. cm3'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.leak_rate
-    _definition.id               '_units_leak_rate'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of leak rate values in this file, e.g. Pa/min'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.quadrupole_moment
-    _definition.id               '_units_quadrupole_moment'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of quadrupole moment values in this file, e.g. Debye·Å'
+    _description.text            'Unit of enthalpy values in this file, e.g. kJ/mol'
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -1102,6 +907,22 @@ save_ADSORP
     adsorption branch of the isotherm. These fields appear inside a
     CIF loop_ construct, with one row per equilibrium point.
 ;
+save_
+
+save_adsorp.index
+    _definition.id               '_adsorp_index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Index of the adsorption data point, starting from 1 and
+    incrementing by 1 for each point.
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
 save_
 
 save_adsorp.pressure
@@ -1283,6 +1104,22 @@ save_DESORP
     desorption branch of the isotherm. Mirrors the adsorption data
     section for the reverse process.
 ;
+save_
+
+save_desorp.index
+    _definition.id               '_desorp_index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Index of the desorption data point, starting from 1 and
+    incrementing by 1 for each point.
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
 save_
 
 save_desorp.pressure
