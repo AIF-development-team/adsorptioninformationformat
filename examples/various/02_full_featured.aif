@@ -3,9 +3,9 @@
 data_full_featured_aif
 
     _audit_aif_version                "__AIF_VERSION__"
+    _audit_digitizer                  "Nina Johansson"
 
     _exptl_operator                   "Nina Johansson"
-    _exptl_digitizer                  "Nina Johansson"
     _exptl_date                       2025-02-20T09:00:00Z
     _exptl_adsorptive                 "Carbon Dioxide"
     _exptl_adsorptive_name            "CO2"

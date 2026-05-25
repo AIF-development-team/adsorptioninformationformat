@@ -85,6 +85,22 @@ save_audit.creation_software
     _type.contents               Text
 save_
 
+save_audit.digitizer
+    _definition.id               '_audit_digitizer'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who digitized the data, if extracted from a
+    published figure or table
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 ##############################################################################
 #                                                                            #
 #                               EXPTL CATEGORY                               #
@@ -111,22 +127,6 @@ save_exptl.operator
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text            'Name of the person who performed the experiment'
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_exptl.digitizer
-    _definition.id               '_exptl_digitizer'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Name of the person who digitized the data, if extracted from a
-    published figure or table
-;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single

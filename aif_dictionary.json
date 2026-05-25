@@ -41,6 +41,10 @@
         "_audit_creation_software": {
           "type": "string",
           "description": "Name and version of the software used to generate this AIF file"
+        },
+        "_audit_digitizer": {
+          "type": "string",
+          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         }
       }
     },
@@ -52,10 +56,6 @@
         "_exptl_operator": {
           "type": "string",
           "description": "Name of the person who performed the experiment"
-        },
-        "_exptl_digitizer": {
-          "type": "string",
-          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         },
         "_exptl_date": {
           "type": "string",

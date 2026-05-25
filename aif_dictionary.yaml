@@ -69,15 +69,15 @@ slots:
     aliases: ["_audit_creation_software"]
     description: Name and version of the software used to generate this AIF file
 
+  audit_digitizer:
+    aliases: ["_audit_digitizer"]
+    description: Name of the person who digitized the data, if extracted from a published figure or table
+
   # ── Experimental ────────────────────────────
 
   exptl_operator:
     aliases: ["_exptl_operator"]
     description: Name of the person who performed the experiment
-
-  exptl_digitizer:
-    aliases: ["_exptl_digitizer"]
-    description: Name of the person who digitized the data, if extracted from a published figure or table
 
   exptl_date:
     aliases: ["_exptl_date"]
@@ -486,9 +486,9 @@ classes:
       - audit_aif_version
       - audit_creation_date
       - audit_creation_software
+      - audit_digitizer
       # Experimental
       - exptl_operator
-      - exptl_digitizer
       - exptl_date
       - exptl_instrument
       - exptl_adsorptive
