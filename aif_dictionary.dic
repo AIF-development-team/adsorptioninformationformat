@@ -253,23 +253,6 @@ save_exptl.isotherm_type
         net              'Net adsorption.'
 save_
 
-save_exptl.p0
-    _definition.id               '_exptl_p0'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Saturation pressure of the adsorptive at the experimental
-    temperature (see _units_pressure)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_pressure'
-save_
-
 ##############################################################################
 #                                                                            #
 #                               ADSNT CATEGORY                               #
@@ -867,6 +850,56 @@ save_
 
 ##############################################################################
 #                                                                            #
+#                             CITATION CATEGORY                              #
+#                                                                            #
+##############################################################################
+
+save_CITATION
+    _definition.id               CITATION
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the CITATION category record bibliographic
+    reference for the source publication or dataset.
+;
+save_
+
+save_citation.doi
+    _definition.id               '_citation_doi'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Digital Object Identifier (DOI) of the publication associated
+    with this data
+;
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_citation.source
+    _definition.id               '_citation_source'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Bibliographic source of the data, e.g. journal name, book title,
+    or database
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
 #                               UNITS CATEGORY                               #
 #                                                                            #
 ##############################################################################
@@ -1285,40 +1318,6 @@ save_adsorp.enthalpy_integral
     _units.code                  'see _units_enthalpy'
 save_
 
-save_adsorp.molefraction
-    _definition.id               '_adsorp_molefraction'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Mole fraction of the adsorptive in the gas phase for a
-    multicomponent adsorption measurement (see
-    _units_composition_type)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_composition_type'
-save_
-
-save_adsorp.selectivity
-    _definition.id               '_adsorp_selectivity'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Adsorption selectivity for a specified component pair under the
-    given conditions (unitless ratio)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-save_
-
 ##############################################################################
 #                                                                            #
 #                              DESORP CATEGORY                               #
@@ -1481,90 +1480,6 @@ save_desorp.enthalpy_integral
     _type.container              Single
     _type.contents               Real
     _units.code                  'see _units_enthalpy'
-save_
-
-save_desorp.molefraction
-    _definition.id               '_desorp_molefraction'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Mole fraction of the adsorptive in the gas phase for a
-    multicomponent desorption measurement (see
-    _units_composition_type)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_composition_type'
-save_
-
-save_desorp.selectivity
-    _definition.id               '_desorp_selectivity'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Desorption selectivity for a specified component pair under the
-    given conditions (unitless ratio)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-save_
-
-##############################################################################
-#                                                                            #
-#                             CITATION CATEGORY                              #
-#                                                                            #
-##############################################################################
-
-save_CITATION
-    _definition.id               CITATION
-    _definition.scope            Category
-    _definition.class            Set
-    _definition.update           2026-03-09
-    _description.text
-;
-    Data items in the CITATION category record bibliographic
-    reference for the source publication or dataset.
-;
-save_
-
-save_citation.doi
-    _definition.id               '_citation_doi'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Digital Object Identifier (DOI) of the publication associated
-    with this data
-;
-    _type.purpose                Encode
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_citation.source
-    _definition.id               '_citation_source'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Bibliographic source of the data, e.g. journal name, book title,
-    or database
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
 save_
 
 ##############################################################################

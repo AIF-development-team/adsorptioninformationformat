@@ -15,7 +15,6 @@ data_example_isotherm_aif
     _exptl_method                     "volumetric"
     _exptl_instrument                 "Instrument-123"
     _exptl_isotherm_type              "absolute"
-    _exptl_p0                         101.325
 
     _adsnt_material_id                "Material-XYZ"
     _adsnt_sample_id                  "Sample-001"

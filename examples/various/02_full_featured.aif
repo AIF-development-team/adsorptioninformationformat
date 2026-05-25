@@ -13,7 +13,6 @@ data_full_featured_aif
     _exptl_method                     "volumetric"
     _exptl_instrument                 "ASAP-2020-HD"
     _exptl_isotherm_type              "excess"
-    _exptl_p0                         6427400.0
 
     _adsnt_material_id                "UiO-66-NH2"
     _adsnt_sample_id                  "UiO66NH2-full-01"
