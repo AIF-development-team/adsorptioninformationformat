@@ -31,12 +31,6 @@ enums:
         description: Volumetric (manometric) method.
       gravimetric:
         description: Gravimetric method.
-      chromatographic:
-        description: Chromatographic method.
-      simulation:
-        description: Data originates from molecular simulation rather than experiment.
-      other:
-        description: Other method not specified here.
   IsothermType:
     description: Type of adsorption isotherm.
     permissible_values:
@@ -60,19 +54,6 @@ slots:
     description: Version of the AIF data-name dictionary used by this file
     required: true
 
-  audit_creation_date:
-    aliases: ["_audit_creation_date"]
-    description: Date and time the AIF file was created in ISO 8601 format
-    range: datetime
-
-  audit_creation_software:
-    aliases: ["_audit_creation_software"]
-    description: Name and version of the software used to generate this AIF file
-
-  audit_digitizer:
-    aliases: ["_audit_digitizer"]
-    description: Name of the person who digitized the data, if extracted from a published figure or table
-
   # ── Experimental ────────────────────────────
 
   exptl_operator:
@@ -87,6 +68,15 @@ slots:
   exptl_instrument:
     aliases: ["_exptl_instrument"]
     description: Identifier or model name of the instrument used for the measurement
+
+  exptl_adsorptive:
+    aliases: ["_exptl_adsorptive"]
+    description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
+    required: true
+
+  exptl_adsorptive_name:
+    aliases: ["_exptl_adsorptive_name"]
+    description: Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation
 
   exptl_temperature:
     aliases: ["_exptl_temperature"]
@@ -103,7 +93,31 @@ slots:
     description: Classification of the reported adsorbed amount
     range: IsothermType
 
+  exptl_p0:
+    aliases: ["_exptl_p0"]
+    description: Saturation pressure of the adsorptive at the experimental temperature (see _units_pressure)
+    range: float
+
+  exptl_digitizer:
+    aliases: ["_exptl_digitizer"]
+    description: Name of the person who digitized the data, if extracted from a published figure or table
+
   # ── Adsorbent ───────────────────────────────
+
+  adsnt_sample_mass:
+    aliases: ["_adsnt_sample_mass"]
+    description: Mass of the adsorbent sample used in the measurement (see _units_mass)
+    range: float
+
+  adsnt_sample_density:
+    aliases: ["_adsnt_sample_density"]
+    description: Bulk or skeletal density of the adsorbent sample (see _units_density)
+    range: float
+
+  adsnt_sample_id:
+    aliases: ["_adsnt_sample_id"]
+    description: Unique sample identifier assigned by the operator or laboratory
+    required: true
 
   adsnt_material_id:
     aliases: ["_adsnt_material_id"]
@@ -117,46 +131,6 @@ slots:
   adsnt_hashkey:
     aliases: ["_adsnt_hashkey"]
     description: Machine-readable hash key for programmatic identification of the adsorbent
-
-  adsnt_structure_csd_refcode:
-    aliases: ["_adsnt_structure_csd_refcode"]
-    description: Cambridge Structural Database (CSD) reference code for the adsorbent structure
-
-  adsnt_structure_topology:
-    aliases: ["_adsnt_structure_topology"]
-    description: Network topology descriptor (e.g. RCSR symbol) for the adsorbent
-
-  adsnt_structure_smiles:
-    aliases: ["_adsnt_structure_smiles"]
-    description: SMILES of the organic linker or building block of the adsorbent
-
-  adsnt_composition:
-    aliases: ["_adsnt_composition"]
-    description: Chemical composition or formula of the adsorbent, e.g. Cu3(BTC)2
-
-  adsnt_molar_mass:
-    aliases: ["_adsnt_molar_mass"]
-    description: Molar mass of the adsorbent formula unit (see _units_molecular_weight)
-    range: float
-
-  adsnt_synthesis:
-    aliases: ["_adsnt_synthesis"]
-    description: Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc
-
-  adsnt_sample_id:
-    aliases: ["_adsnt_sample_id"]
-    description: Unique sample identifier assigned by the operator or laboratory
-    required: true
-
-  adsnt_sample_mass:
-    aliases: ["_adsnt_sample_mass"]
-    description: Mass of the adsorbent sample used in the measurement (see _units_mass)
-    range: float
-
-  adsnt_sample_density:
-    aliases: ["_adsnt_sample_density"]
-    description: Bulk or skeletal density of the adsorbent sample (see _units_density)
-    range: float
 
   adsnt_degas_summary:
     aliases: ["_adsnt_degas_summary"]
@@ -172,63 +146,16 @@ slots:
     description: Duration of the degassing step (see _units_time)
     range: float
 
-  adsnt_cycle_number:
-    aliases: ["_adsnt_cycle_number"]
-    description: Adsorption-desorption cycle index (1-based) for multi-cycle studies
-    range: integer
-
-  # ── Adsorptive ──────────────────────────────
-
-  adsorptive_name:
-    aliases: ["_adsorptive_name"]
-    description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
-
-  adsorptive_info:
-    aliases: ["_adsorptive_info"]
-    description: Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation
-
-  adsorptive_inchi:
-    aliases: ["_adsorptive_inchi"]
-    description: IUPAC InChI identifier of the adsorptive
-
-  adsorptive_cas:
-    aliases: ["_adsorptive_cas"]
-    description: CAS Registry Number of the adsorptive
-
-  adsorptive_smiles:
-    aliases: ["_adsorptive_smiles"]
-    description: Canonical SMILES string of the adsorptive
-
-  adsorptive_molecular_weight:
-    aliases: ["_adsorptive_molecular_weight"]
-    description: Molecular weight of the adsorptive (see _units_molecular_weight)
-    range: float
-
-  adsorptive_critical_temperature:
-    aliases: ["_adsorptive_critical_temperature"]
-    description: Critical temperature of the adsorptive (see _units_temperature)
-    range: float
-
-  adsorptive_critical_pressure:
-    aliases: ["_adsorptive_critical_pressure"]
-    description: Critical pressure of the adsorptive (see _units_pressure)
-    range: float
-
-  adsorptive_kinetic_diameter:
-    aliases: ["_adsorptive_kinetic_diameter"]
-    description: Kinetic diameter of the adsorptive molecule (see _units_kinetic_diameter)
-    range: float
-
-  adsorptive_quadrupole_moment:
-    aliases: ["_adsorptive_quadrupole_moment"]
-    description: Quadrupole moment of the adsorptive (see _units_quadrupole_moment)
-    range: float
-
   # ── Simulation ──────────────────────────────
 
   simltn_code:
     aliases: ["_simltn_code"]
     description: Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS
+
+  simltn_date:
+    aliases: ["_simltn_date"]
+    description: Date and time the simulation was performed in ISO 8601 format
+    range: datetime
 
   simltn_size:
     aliases: ["_simltn_size"]
@@ -294,42 +221,6 @@ slots:
     aliases: ["_units_composition_type"]
     description: Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction
 
-  units_enthalpy:
-    aliases: ["_units_enthalpy"]
-    description: Unit of enthalpy values in this file, e.g. kJ/mol
-
-  units_surface_area:
-    aliases: ["_units_surface_area"]
-    description: Unit of surface area values in this file, e.g. m2/g
-
-  units_pore_volume:
-    aliases: ["_units_pore_volume"]
-    description: Unit of pore volume values in this file, e.g. cm3/g
-
-  units_pore_diameter:
-    aliases: ["_units_pore_diameter"]
-    description: Unit of pore diameter values in this file, e.g. nm
-
-  units_molecular_weight:
-    aliases: ["_units_molecular_weight"]
-    description: Unit of molecular weight values in this file, e.g. g/mol
-
-  units_kinetic_diameter:
-    aliases: ["_units_kinetic_diameter"]
-    description: Unit of kinetic diameter values in this file, e.g. angstrom
-
-  units_dead_volume:
-    aliases: ["_units_dead_volume"]
-    description: Unit of dead volume values in this file, e.g. cm3
-
-  units_leak_rate:
-    aliases: ["_units_leak_rate"]
-    description: Unit of leak rate values in this file, e.g. Pa/min
-
-  units_quadrupole_moment:
-    aliases: ["_units_quadrupole_moment"]
-    description: Unit of quadrupole moment values in this file, e.g. Debye·Å
-
   # ── Adsorption Data ─────────────────────────
 
   adsorp_pressure:
@@ -342,33 +233,28 @@ slots:
     description: Fugacity of the adsorptive at each adsorption data point (see _units_pressure)
     range: float
 
-  adsorp_henry:
-    aliases: ["_adsorp_henry"]
-    description: Henry coefficient describing the infinite-dilution and low-pressure adsorption affinity (see _units_henry)
-    range: float
-
   adsorp_p0:
     aliases: ["_adsorp_p0"]
     description: Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)
     range: float
 
-  adsorp_loading:
-    aliases: ["_adsorp_loading"]
+  adsorp_amount:
+    aliases: ["_adsorp_amount"]
     description: Amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
-  adsorp_loading_excess:
-    aliases: ["_adsorp_loading_excess"]
+  adsorp_amount_excess:
+    aliases: ["_adsorp_amount_excess"]
     description: Excess amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
-  adsorp_loading_absolute:
-    aliases: ["_adsorp_loading_absolute"]
+  adsorp_amount_absolute:
+    aliases: ["_adsorp_amount_absolute"]
     description: Absolute amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
-  adsorp_loading_net:
-    aliases: ["_adsorp_loading_net"]
+  adsorp_amount_net:
+    aliases: ["_adsorp_amount_net"]
     description: Net amount adsorbed at each adsorption data point (see _units_loading)
     range: float
 
@@ -380,6 +266,16 @@ slots:
   adsorp_enthalpy_integral:
     aliases: ["_adsorp_enthalpy_integral"]
     description: Integral enthalpy of adsorption (see _units_enthalpy)
+    range: float
+
+  adsorp_molefraction:
+    aliases: ["_adsorp_molefraction"]
+    description: Mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_selectivity:
+    aliases: ["_adsorp_selectivity"]
+    description: Adsorption selectivity for a specified component pair under the given conditions (unitless ratio)
     range: float
 
   # ── Desorption Data ─────────────────────────
@@ -399,23 +295,23 @@ slots:
     description: Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)
     range: float
 
-  desorp_loading:
-    aliases: ["_desorp_loading"]
+  desorp_amount:
+    aliases: ["_desorp_amount"]
     description: Amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
-  desorp_loading_excess:
-    aliases: ["_desorp_loading_excess"]
+  desorp_amount_excess:
+    aliases: ["_desorp_amount_excess"]
     description: Excess amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
-  desorp_loading_absolute:
-    aliases: ["_desorp_loading_absolute"]
+  desorp_amount_absolute:
+    aliases: ["_desorp_amount_absolute"]
     description: Absolute amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
-  desorp_loading_net:
-    aliases: ["_desorp_loading_net"]
+  desorp_amount_net:
+    aliases: ["_desorp_amount_net"]
     description: Net amount remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
@@ -427,6 +323,16 @@ slots:
   desorp_enthalpy_integral:
     aliases: ["_desorp_enthalpy_integral"]
     description: Integral enthalpy of desorption (see _units_enthalpy)
+    range: float
+
+  desorp_molefraction:
+    aliases: ["_desorp_molefraction"]
+    description: Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_selectivity:
+    aliases: ["_desorp_selectivity"]
+    description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
     range: float
 
 # ──────────────────────────────────────────────
@@ -442,14 +348,15 @@ classes:
     slots:
       - adsorp_pressure
       - adsorp_fugacity
-      - adsorp_henry
       - adsorp_p0
-      - adsorp_loading
-      - adsorp_loading_excess
-      - adsorp_loading_absolute
-      - adsorp_loading_net
+      - adsorp_amount
+      - adsorp_amount_excess
+      - adsorp_amount_absolute
+      - adsorp_amount_net
       - adsorp_enthalpy_differential
       - adsorp_enthalpy_integral
+      - adsorp_molefraction
+      - adsorp_selectivity
 
   DesorptionDataPoint:
     description: >-
@@ -459,12 +366,14 @@ classes:
       - desorp_pressure
       - desorp_fugacity
       - desorp_p0
-      - desorp_loading
-      - desorp_loading_excess
-      - desorp_loading_absolute
-      - desorp_loading_net
+      - desorp_amount
+      - desorp_amount_excess
+      - desorp_amount_absolute
+      - desorp_amount_net
       - desorp_enthalpy_differential
       - desorp_enthalpy_integral
+      - desorp_molefraction
+      - desorp_selectivity
 
   AdsorptionInformationFile:
     description: >-
@@ -475,46 +384,30 @@ classes:
     slots:
       # Audit
       - audit_aif_version
-      - audit_creation_date
-      - audit_creation_software
-      - audit_digitizer
       # Experimental
       - exptl_operator
       - exptl_date
       - exptl_instrument
+      - exptl_adsorptive
+      - exptl_adsorptive_name
       - exptl_temperature
       - exptl_method
       - exptl_isotherm_type
+      - exptl_p0
+      - exptl_digitizer
       # Adsorbent
+      - adsnt_sample_mass
+      - adsnt_sample_density
+      - adsnt_sample_id
       - adsnt_material_id
       - adsnt_info
       - adsnt_hashkey
-      - adsnt_structure_csd_refcode
-      - adsnt_structure_topology
-      - adsnt_structure_smiles
-      - adsnt_composition
-      - adsnt_molar_mass
-      - adsnt_synthesis
-      - adsnt_sample_id
-      - adsnt_sample_mass
-      - adsnt_sample_density
       - adsnt_degas_summary
       - adsnt_degas_temperature
       - adsnt_degas_time
-      - adsnt_cycle_number
-      # Adsorptive
-      - adsorptive_name
-      - adsorptive_info
-      - adsorptive_inchi
-      - adsorptive_cas
-      - adsorptive_smiles
-      - adsorptive_molecular_weight
-      - adsorptive_critical_temperature
-      - adsorptive_critical_pressure
-      - adsorptive_kinetic_diameter
-      - adsorptive_quadrupole_moment
       # Simulation
       - simltn_code
+      - simltn_date
       - simltn_size
       - simltn_forcefield_adsorptive
       - simltn_forcefield_adsorbent
@@ -532,15 +425,6 @@ classes:
       - units_density
       - units_time
       - units_composition_type
-      - units_enthalpy
-      - units_surface_area
-      - units_pore_volume
-      - units_pore_diameter
-      - units_molecular_weight
-      - units_kinetic_diameter
-      - units_dead_volume
-      - units_leak_rate
-      - units_quadrupole_moment
     attributes:
       adsorption_data:
         description: Adsorption branch data points (loop_ block).
