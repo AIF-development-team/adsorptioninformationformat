@@ -6,8 +6,6 @@ data_bet_pore_analysis
 
     _exptl_operator                   "Elena Rossi"
     _exptl_date                       2024-01-10T08:45:00Z
-    _exptl_adsorptive                 "Nitrogen"
-    _exptl_adsorptive_name            "N2"
     _exptl_temperature                77.35
     _exptl_method                     "volumetric"
     _exptl_instrument                 "TriStar-II-3020"
@@ -17,15 +15,19 @@ data_bet_pore_analysis
     _adsnt_sample_id                  "SBA15-syn7-02"
     _adsnt_sample_mass                0.0987
 
-    _analysis_method                   "BET area, Langmuir area, pore volume, t-plot, NLDF"
+    _adsorptive_name                  "Nitrogen"
+    _adsorptive_info                  "N2"
+
+    _analysis_method                   "BET area, Langmuir area, pore volume, t-plot, NLDFT"
     _analysis_bet_area                 820.5
     _analysis_bet_c_constant           145.3
     _analysis_bet_pressure_range_min   0.05
     _analysis_bet_pressure_range_max   0.30
     _analysis_langmuir_area            1105.2
-    _analysis_micropore_volume         0.02
     _analysis_total_pore_volume        1.05
     _analysis_total_pore_volume_pp0    0.99
+    _analysis_psd_method               "NLDFT-Carbon-N2"
+    _analysis_pore_geometry            "cylindrical"
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
@@ -33,7 +35,7 @@ data_bet_pore_analysis
     _units_loading                    "mmol/g"
     _units_surface_area               "m2/g"
     _units_pore_volume                "cm3/g"
-    _units_pore_diameter              "nm"
+    _units_pore_size                  "nm"
 
     loop_
         _adsorp_pressure
@@ -58,7 +60,7 @@ data_bet_pore_analysis
         99000.0    101325.0  38.45
 
     loop_
-        _analysis_psd_diameter
+        _analysis_psd_size
         _analysis_psd_dv_dd
         1.0    0.001
         2.0    0.005
