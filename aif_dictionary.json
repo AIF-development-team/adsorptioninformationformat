@@ -41,6 +41,10 @@
         "_audit_creation_software": {
           "type": "string",
           "description": "Name and version of the software used to generate this AIF file"
+        },
+        "_audit_digitizer": {
+          "type": "string",
+          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         }
       }
     },
@@ -53,10 +57,6 @@
           "type": "string",
           "description": "Name of the person who performed the experiment"
         },
-        "_exptl_digitizer": {
-          "type": "string",
-          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
-        },
         "_exptl_date": {
           "type": "string",
           "format": "date-time",
@@ -65,15 +65,6 @@
         "_exptl_instrument": {
           "type": "string",
           "description": "Identifier or model name of the instrument used for the measurement"
-        },
-        "_exptl_adsorptive": {
-          "type": "string",
-          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
-        },
-        "_exptl_adsorptive_name": {
-          "type": "string",
-          "description": "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation"
         },
         "_exptl_temperature": {
           "type": "number",
@@ -104,10 +95,6 @@
             "excess": "Excess adsorption.",
             "net": "Net adsorption."
           }
-        },
-        "_exptl_p0": {
-          "type": "number",
-          "description": "Saturation pressure of the adsorptive at the experimental temperature (see _units_pressure)"
         }
       }
     },
@@ -126,6 +113,13 @@
         "_adsnt_info": {
           "type": "string",
           "description": "Free-text field for additional information about the adsorbent sample"
+        },
+        "_adsnt_sample_id": {
+          "type": "string",
+          "description": "Unique sample identifier assigned by the operator or laboratory",
+          "x-dic-purpose": "Key",
+          "x-dic-source": "Assigned",
+          "x-dic-common": "Required field. A unique identifier for the specific sample\nused in the experiment."
         },
         "_adsnt_hashkey": {
           "type": "string",
@@ -159,13 +153,6 @@
           "type": "string",
           "description": "Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc"
         },
-        "_adsnt_sample_id": {
-          "type": "string",
-          "description": "Unique sample identifier assigned by the operator or laboratory",
-          "x-dic-purpose": "Key",
-          "x-dic-source": "Assigned",
-          "x-dic-common": "Required field. A unique identifier for the specific sample\nused in the experiment."
-        },
         "_adsnt_sample_mass": {
           "type": "number",
           "description": "Mass of the adsorbent sample used in the measurement (see _units_mass)"
@@ -185,10 +172,6 @@
         "_adsnt_degas_time": {
           "type": "number",
           "description": "Duration of the degassing step (see _units_time)"
-        },
-        "_adsnt_cycle_number": {
-          "type": "integer",
-          "description": "Adsorption-desorption cycle index (1-based) for multi-cycle studies"
         }
       }
     },
@@ -197,7 +180,7 @@
       "$comment": "Adsorptive: Physical and chemical identifiers and properties of the adsorptive molecule.",
       "type": "object",
       "properties": {
-        "_adsorptive_id": {
+        "_adsorptive_name": {
           "type": "string",
           "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
           "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
@@ -224,14 +207,6 @@
           "type": "number",
           "description": "Molecular weight of the adsorptive (see _units_molecular_weight)"
         },
-        "_adsorptive_critical_temperature": {
-          "type": "number",
-          "description": "Critical temperature of the adsorptive (see _units_temperature)"
-        },
-        "_adsorptive_critical_pressure": {
-          "type": "number",
-          "description": "Critical pressure of the adsorptive (see _units_pressure)"
-        },
         "_adsorptive_kinetic_diameter": {
           "type": "number",
           "description": "Kinetic diameter of the adsorptive molecule (see _units_kinetic_diameter)"
@@ -250,11 +225,6 @@
         "_simltn_code": {
           "type": "string",
           "description": "Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS"
-        },
-        "_simltn_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the simulation was performed in ISO 8601 format"
         },
         "_simltn_size": {
           "type": "string",
@@ -279,6 +249,23 @@
         "_simltn_lot": {
           "type": "string",
           "description": "Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field"
+        }
+      }
+    },
+ 
+    "citation": {
+      "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
+      "type": "object",
+      "properties": {
+        "_citation_doi": {
+          "type": "string",
+          "description": "Digital Object Identifier (DOI) of the publication associated with this data",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
+        },
+        "_citation_source": {
+          "type": "string",
+          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
         }
       }
     },
@@ -317,9 +304,9 @@
           "description": "Unit of time for all time values in this file, e.g. s, min, hours",
           "x-dic-source": "Assigned"
         },
-        "_units_composition_type": {
+        "_units_molecular_weight": {
           "type": "string",
-          "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction",
+          "description": "Unit of molecular weight values in this file, e.g. g/mol",
           "x-dic-source": "Assigned"
         },
         "_units_enthalpy": {
@@ -337,29 +324,14 @@
           "description": "Unit of pore volume values in this file, e.g. cm3/g",
           "x-dic-source": "Assigned"
         },
-        "_units_pore_diameter": {
+        "_units_pore_size": {
           "type": "string",
-          "description": "Unit of pore diameter values in this file, e.g. nm",
-          "x-dic-source": "Assigned"
-        },
-        "_units_molecular_weight": {
-          "type": "string",
-          "description": "Unit of molecular weight values in this file, e.g. g/mol",
+          "description": "Unit of pore characteristic dimension values in this file, e.g. nm",
           "x-dic-source": "Assigned"
         },
         "_units_kinetic_diameter": {
           "type": "string",
           "description": "Unit of kinetic diameter values in this file, e.g. angstrom",
-          "x-dic-source": "Assigned"
-        },
-        "_units_dead_volume": {
-          "type": "string",
-          "description": "Unit of dead volume values in this file, e.g. cm3",
-          "x-dic-source": "Assigned"
-        },
-        "_units_leak_rate": {
-          "type": "string",
-          "description": "Unit of leak rate values in this file, e.g. Pa/min",
           "x-dic-source": "Assigned"
         },
         "_units_quadrupole_moment": {
@@ -374,6 +346,10 @@
       "$comment": "Adsorption Data: Loop columns for the adsorption branch of the isotherm. These fields appear inside a CIF loop_ construct, with one row per equilibrium point.",
       "type": "object",
       "properties": {
+        "_adsorp_index": {
+          "type": "number",
+          "description": "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point."
+        },
         "_adsorp_pressure": {
           "type": "number",
           "description": "Equilibrium pressure at each adsorption data point (see _units_pressure)"
@@ -413,14 +389,6 @@
         "_adsorp_enthalpy_integral": {
           "type": "number",
           "description": "Integral enthalpy of adsorption (see _units_enthalpy)"
-        },
-        "_adsorp_molefraction": {
-          "type": "number",
-          "description": "Mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (see _units_composition_type)"
-        },
-        "_adsorp_selectivity": {
-          "type": "number",
-          "description": "Adsorption selectivity for a specified component pair under the given conditions (unitless ratio)"
         }
       }
     },
@@ -429,6 +397,10 @@
       "$comment": "Desorption Data: Loop columns for the desorption branch of the isotherm. Mirrors the adsorption data section for the reverse process.",
       "type": "object",
       "properties": {
+        "_desorp_index": {
+          "type": "number",
+          "description": "Index of the desorption data point, starting from 1 and incrementing by 1 for each point."
+        },
         "_desorp_pressure": {
           "type": "number",
           "description": "Equilibrium pressure at each desorption data point (see _units_pressure)"
@@ -505,10 +477,6 @@
           "type": "number",
           "description": "Langmuir surface area (see _units_surface_area)"
         },
-        "_analysis_micropore_volume": {
-          "type": "number",
-          "description": "Micropore volume from t-plot or DR analysis (see _units_pore_volume)"
-        },
         "_analysis_total_pore_volume": {
           "type": "number",
           "description": "Total pore volume (see _units_pore_volume)"
@@ -520,6 +488,10 @@
         "_analysis_psd_method": {
           "type": "string",
           "description": "Method for determining pore size distribution, e.g. NLDFT-Carbon-N2"
+        },
+        "_analysis_pore_geometry": {
+          "type": "string",
+          "description": "Geometry of the pores, e.g. cylindrical, slit-shaped"
         }
       }
     },
@@ -530,9 +502,9 @@
       "x-dic-prefix": "analysis_psd",
       "type": "object",
       "properties": {
-        "_analysis_psd_diameter": {
+        "_analysis_psd_size": {
           "type": "number",
-          "description": "Pore diameter in a pore-size distribution loop (see _units_pore_diameter)"
+          "description": "Pore characteristic dimension in a pore-size distribution loop (see _units_pore_size)"
         },
         "_analysis_psd_dv_dd": {
           "type": "number",
@@ -595,23 +567,6 @@
           "description": "Unit of the fitted parameter, e.g. mmol/g, 1/Pa"
         }
       }
-    },
-
-    "citation": {
-      "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
-      "type": "object",
-      "properties": {
-        "_citation_doi": {
-          "type": "string",
-          "description": "Digital Object Identifier (DOI) of the publication associated with this data",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
-        },
-        "_citation_source": {
-          "type": "string",
-          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
-        }
-      }
     }
   },
 
@@ -621,8 +576,8 @@
     { "$ref": "#/definitions/adsorbent" },
     { "$ref": "#/definitions/adsorptive" },
     { "$ref": "#/definitions/simulation" },
-    { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/citation" },
+    { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
     { "$ref": "#/definitions/desorption_data" },
     { "$ref": "#/definitions/analysis" },
