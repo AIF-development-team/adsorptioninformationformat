@@ -103,7 +103,7 @@
       "$comment": "Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
       "type": "object",
       "properties": {
-        "_adsnt_material_id": {
+        "_adsnt_material_name": {
           "type": "string",
           "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X",
           "x-dic-purpose": "Encode",
@@ -114,7 +114,7 @@
           "type": "string",
           "description": "Free-text field for additional information about the adsorbent sample"
         },
-        "_adsnt_sample_id": {
+        "_adsnt_sample_name": {
           "type": "string",
           "description": "Unique sample identifier assigned by the operator or laboratory",
           "x-dic-purpose": "Key",
@@ -427,8 +427,8 @@
   "required": [
     "_audit_aif_version",
     "_exptl_adsorptive",
-    "_adsnt_sample_id",
-    "_adsnt_material_id"
+    "_adsnt_sample_name",
+    "_adsnt_material_name"
   ],
 
   "additionalProperties": true

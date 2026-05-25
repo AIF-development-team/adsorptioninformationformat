@@ -11,8 +11,8 @@ data_co2_calorimetry
     _exptl_instrument                 "TGA-DSC-001"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_id                "MIL-53(Al)"
-    _adsnt_sample_id                  "MIL53Al-S03"
+    _adsnt_material_name              "MIL-53(Al)"
+    _adsnt_sample_name                "MIL53Al-S03"
     _adsnt_sample_mass                0.0456
 
     _adsorptive_name                  "Carbon Dioxide"

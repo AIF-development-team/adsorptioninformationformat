@@ -14,8 +14,8 @@ data_example_isotherm_aif
     _exptl_instrument                 "Instrument-123"
     _exptl_isotherm_type              "absolute"
 
-    _adsnt_material_id                "Material-XYZ"
-    _adsnt_sample_id                  "Sample-001"
+    _adsnt_material_name              "Material-XYZ"
+    _adsnt_sample_name                "Sample-001"
     _adsnt_sample_mass                0.5
     _adsnt_sample_density             2.1
     _adsnt_info                       "Additional sample info"

@@ -234,8 +234,8 @@ save_ADSNT
 ;
 save_
 
-save_adsnt.material_id
-    _definition.id               '_adsnt_material_id'
+save_adsnt.material_name
+    _definition.id               '_adsnt_material_name'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -271,8 +271,8 @@ save_adsnt.info
     _type.contents               Text
 save_
 
-save_adsnt.sample_id
-    _definition.id               '_adsnt_sample_id'
+save_adsnt.sample_name
+    _definition.id               '_adsnt_sample_name'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09

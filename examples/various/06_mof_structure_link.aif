@@ -11,8 +11,8 @@ data_mof_structure_link
     _exptl_instrument                 "ASAP-2020-003"
     _exptl_isotherm_type              "absolute"
 
-    _adsnt_material_id                "HKUST-1"
-    _adsnt_sample_id                  "CuBTC-batch12"
+    _adsnt_material_name              "HKUST-1"
+    _adsnt_sample_name                "CuBTC-batch12"
     _adsnt_sample_mass                0.0654
     _adsnt_structure_csd_refcode      "FIQCEN"
     _adsnt_structure_topology         "tbo"

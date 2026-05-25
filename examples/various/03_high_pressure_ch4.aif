@@ -11,8 +11,8 @@ data_high_pressure_ch4
     _exptl_instrument                 "HPVA-II-100"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_id                "AX-21"
-    _adsnt_sample_id                  "AX21-HP-03"
+    _adsnt_material_name              "AX-21"
+    _adsnt_sample_name                "AX21-HP-03"
     _adsnt_sample_mass                0.5123
     _adsnt_sample_density             2.2
 

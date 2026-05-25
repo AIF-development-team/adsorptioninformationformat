@@ -7,8 +7,8 @@ data_raw2aif
     _exptl_temperature 77.3
 
     _adsnt_sample_mass 0.0339
-    _adsnt_sample_id 'nk_DUT-6_LP_N2_114pkt'
-    _adsnt_material_id 'DUT-6'
+    _adsnt_sample_name 'nk_DUT-6_LP_N2_114pkt'
+    _adsnt_material_name 'DUT-6'
 
     _adsorptive_name Nitrogen
 

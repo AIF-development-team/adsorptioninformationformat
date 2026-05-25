@@ -105,8 +105,8 @@ slots:
 
   # ── Adsorbent ───────────────────────────────
 
-  adsnt_material_id:
-    aliases: ["_adsnt_material_id"]
+  adsnt_material_name:
+    aliases: ["_adsnt_material_name"]
     description: Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X
     required: true
 
@@ -114,8 +114,8 @@ slots:
     aliases: ["_adsnt_info"]
     description: Free-text field for additional information about the adsorbent sample
 
-  adsnt_sample_id:
-    aliases: ["_adsnt_sample_id"]
+  adsnt_sample_name:
+    aliases: ["_adsnt_sample_name"]
     description: Unique sample identifier assigned by the operator or laboratory
     required: true
 
@@ -436,9 +436,9 @@ classes:
       - exptl_method
       - exptl_isotherm_type
       # Adsorbent
-      - adsnt_material_id
+      - adsnt_material_name
       - adsnt_info
-      - adsnt_sample_id
+      - adsnt_sample_name
       - adsnt_hashkey
       - adsnt_structure_csd_refcode
       - adsnt_structure_topology
