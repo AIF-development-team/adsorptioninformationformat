@@ -3,9 +3,11 @@
 data_example_isotherm_aif
 
     _audit_aif_version                "__AIF_VERSION__"
+    _audit_creation_date              2025-01-01T00:00:00Z
+    _audit_creation_software          "AIF-generator-1.0"
+    _audit_digitizer                  "Jane Smith"
 
     _exptl_operator                   "John Doe"
-    _exptl_digitizer                  "Jane Smith"
     _exptl_date                       2025-01-01T00:00:00Z
     _exptl_adsorptive                 "Nitrogen"
     _exptl_adsorptive_name            "N2"
@@ -13,7 +15,6 @@ data_example_isotherm_aif
     _exptl_method                     "volumetric"
     _exptl_instrument                 "Instrument-123"
     _exptl_isotherm_type              "absolute"
-    _exptl_p0                         101.325
 
     _adsnt_material_id                "Material-XYZ"
     _adsnt_sample_id                  "Sample-001"
@@ -38,7 +39,7 @@ data_example_isotherm_aif
     loop_
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_amount
+        _adsorp_loading
         100.000 101.325000 54.545455
         200.000 101.325000 57.142857
         300.000 101.325000 58.064516
@@ -93,7 +94,7 @@ data_example_isotherm_aif
     loop_
         _desorp_pressure
         _desorp_p0
-        _desorp_amount
+        _desorp_loading
         5000.000 101.325000 59.880240
         4900.000 101.325000 59.877800
         4800.000 101.325000 59.875260
