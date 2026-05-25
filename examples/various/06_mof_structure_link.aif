@@ -33,7 +33,7 @@ data_mof_structure_link
     loop_
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_amount
+        _adsorp_loading
         5.0        101325.0   0.89
         50.0       101325.0   3.45
         500.0      101325.0   7.12

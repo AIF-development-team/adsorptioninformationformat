@@ -34,7 +34,7 @@ data_co2_calorimetry
     loop_
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_amount
+        _adsorp_loading
         _adsorp_enthalpy_differential
         _adsorp_enthalpy_integral
         1000.0    7377300.0   0.15   -38.2   -5.73

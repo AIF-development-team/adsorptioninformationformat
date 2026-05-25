@@ -32,9 +32,9 @@ data_high_pressure_ch4
 
     loop_
         _adsorp_pressure
-        _adsorp_amount
-        _adsorp_amount_excess
-        _adsorp_amount_absolute
+        _adsorp_loading
+        _adsorp_loading_excess
+        _adsorp_loading_absolute
         100000.0     0.45   0.45   0.46
         500000.0     1.89   1.89   1.95
         1000000.0    3.12   3.12   3.28

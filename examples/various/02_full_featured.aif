@@ -1,6 +1,6 @@
 # Full featured AIF - combines many features into one file
 
-data_full_featured
+data_full_featured_aif
 
     _audit_aif_version                "__AIF_VERSION__"
 
@@ -38,29 +38,8 @@ data_full_featured
     _adsorptive_inchi                 "InChI=1S/CO2/c2-1-3"
     _adsorptive_smiles                "O=C=O"
 
-    _instrument_manufacturer             "Micromeritics"
-    _instrument_model                    "ASAP 2020 HD"
-    _instrument_firmware_version         "V5.03"
-    _instrument_last_calibration_date    2025-01-05T09:00:00Z
-    _instrument_equilibration_criterion  "pressure stability < 0.05% over 60s"
-    _instrument_leak_rate                0.00003
-    _instrument_dead_volume              15.23
-    _instrument_cold_dead_volume         7.12
-    _instrument_warm_dead_volume         8.11
-
-    _analysis_bet_area                1045.0
-    _analysis_total_pore_volume       0.52
-    _analysis_total_pore_volume_pp0   0.99
-    _analysis_micropore_volume        0.38
-
     _citation_doi                     "10.1021/ja500330a"
     _citation_source                  "Journal of the American Chemical Society"
-
-    _data_license                     "CC-BY-4.0"
-    _data_orcid                       "0000-0003-4567-8901"
-    _data_contact_email               "nina.johansson@example.se"
-    _data_related_dataset_url              "https://adsorption.nist.gov/isodb/index.php#/doi/10.1021/ja500330a"
-    _data_related_nist_isodb_id            "ISODB-67890"
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
@@ -79,8 +58,8 @@ data_full_featured
     loop_
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_amount
-        _adsorp_amount_excess
+        _adsorp_loading
+        _adsorp_loading_excess
         _adsorp_enthalpy_differential
         500.0      6427400.0   0.08   0.08   -35.2
         1000.0     6427400.0   0.16   0.16   -34.8
@@ -95,7 +74,7 @@ data_full_featured
     loop_
         _desorp_pressure
         _desorp_p0
-        _desorp_amount
+        _desorp_loading
         100000.0   6427400.0   4.67
         75000.0    6427400.0   4.24
         50000.0    6427400.0   3.57
@@ -105,28 +84,3 @@ data_full_featured
         2500.0     6427400.0   0.39
         1000.0     6427400.0   0.17
         500.0      6427400.0   0.09
-
-    loop_
-        _analysis_fit_id
-        _analysis_fit_model
-        _analysis_fit_r_squared
-        _analysis_fit_rmse
-        1  "Langmuir"  0.9987  0.045
-        2  "DSL"       0.9998  0.011
-        3  "Toth"      0.9996  0.015
-
-    loop_
-        _analysis_fit_param_id
-        _analysis_fit_param_name
-        _analysis_fit_param_value
-        _analysis_fit_param_uncertainty
-        _analysis_fit_param_unit
-        1  "q_max"   5.67    0.12    "mmol/g"
-        1  "K"       0.0023  0.0001  "1/Pa"
-        2  "q_max1"  3.12    0.08    "mmol/g"
-        2  "K1"      0.0089  0.0003  "1/Pa"
-        2  "q_max2"  2.68    0.10    "mmol/g"
-        2  "K2"      0.0004  0.00005 "1/Pa"
-        3  "q_max"   5.82    0.09    "mmol/g"
-        3  "K"       0.0021  0.0001  "1/Pa"
-        3  "t"       0.87    0.03    "dimensionless"

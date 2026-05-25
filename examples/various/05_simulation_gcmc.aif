@@ -34,7 +34,7 @@ data_gcmc_simulation
 
     loop_
         _adsorp_pressure
-        _adsorp_amount
+        _adsorp_loading
         100.0      0.012
         500.0      0.058
         1000.0     0.115
