@@ -30,13 +30,13 @@ data_multicomponent_quad_Fieback
     loop_
         _adsorp_pressure
         _adsorp_composition_component_1
-        _adsorp_amount_component_1
+        _adsorp_loading_component_1
         _adsorp_composition_component_2
-        _adsorp_amount_component_2
+        _adsorp_loading_component_2
         _adsorp_composition_component_3
-        _adsorp_amount_component_3
+        _adsorp_loading_component_3
         _adsorp_composition_component_4
-        _adsorp_amount_component_4
+        _adsorp_loading_component_4
         0.223	0.627	1.223	0.301	0.691	0.055	0.095	0.017	0.013
         0.498	0.635	2.15	0.301	1.253	0.047	0.147	0.017	0.067
         0.842	0.631	2.933	0.307	1.78	0.046	0.205	0.017	0.086
