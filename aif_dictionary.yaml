@@ -458,6 +458,114 @@ slots:
     description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
     range: float
 
+  # ── Analysis ────────────────────────────────
+
+  analysis_method:
+    aliases: ["_analysis_method"]
+    description: Analysis method(s) or description used for derived quantities, e.g. BET and HK
+
+  analysis_bet_area:
+    aliases: ["_analysis_bet_area"]
+    description: BET surface area (see _units_surface_area)
+    range: float
+
+  analysis_bet_c_constant:
+    aliases: ["_analysis_bet_c_constant"]
+    description: BET C constant (dimensionless)
+    range: float
+
+  analysis_bet_pressure_range_min:
+    aliases: ["_analysis_bet_pressure_range_min"]
+    description: Lower bound of the relative pressure range used for BET fitting
+    range: float
+
+  analysis_bet_pressure_range_max:
+    aliases: ["_analysis_bet_pressure_range_max"]
+    description: Upper bound of the relative pressure range used for BET fitting
+    range: float
+
+  analysis_langmuir_area:
+    aliases: ["_analysis_langmuir_area"]
+    description: Langmuir surface area (see _units_surface_area)
+    range: float
+
+  analysis_micropore_volume:
+    aliases: ["_analysis_micropore_volume"]
+    description: Micropore volume from t-plot or DR analysis (see _units_pore_volume)
+    range: float
+
+  analysis_total_pore_volume:
+    aliases: ["_analysis_total_pore_volume"]
+    description: Total pore volume (see _units_pore_volume)
+    range: float
+
+  analysis_total_pore_volume_pp0:
+    aliases: ["_analysis_total_pore_volume_pp0"]
+    description: Relative pressure p/p0 at which total pore volume was evaluated
+    range: float
+
+  analysis_psd_method:
+    aliases: ["_analysis_psd_method"]
+    description: Method for determining pore size distribution, e.g. NLDFT-Carbon-N2
+
+  # ── Analysis PSD ────────────────────────────
+
+  analysis_psd_diameter:
+    aliases: ["_analysis_psd_diameter"]
+    description: Pore diameter in a pore-size distribution loop (see _units_pore_diameter)
+    range: float
+
+  analysis_psd_dv_dd:
+    aliases: ["_analysis_psd_dv_dd"]
+    description: Differential pore volume dV/dD at each diameter in a PSD loop
+    range: float
+
+  # ── Analysis Fit Summary ────────────────────
+
+  fit_id:
+    aliases: ["_fit_id"]
+    description: Unique integer key identifying this fit within the file
+    range: integer
+
+  fit_model:
+    aliases: ["_fit_model"]
+    description: Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth
+
+  fit_r_squared:
+    aliases: ["_fit_r_squared"]
+    description: Coefficient of determination (R-squared) for the fit
+    range: float
+
+  fit_rmse:
+    aliases: ["_fit_rmse"]
+    description: Root-mean-square error of the fit (see _units_loading)
+    range: float
+
+  # ── Analysis Fit Parameters ─────────────────
+
+  fit_param_id:
+    aliases: ["_fit_param_id"]
+    description: Foreign key referencing _analysis_fit_id in the fit summary loop
+    range: integer
+
+  fit_param_name:
+    aliases: ["_fit_param_name"]
+    description: Name of the fitted parameter, e.g. q_max, K_L, n
+
+  fit_param_value:
+    aliases: ["_fit_param_value"]
+    description: Fitted value of the parameter
+    range: float
+
+  fit_param_uncertainty:
+    aliases: ["_fit_param_uncertainty"]
+    description: Uncertainty of the fitted parameter value
+    range: float
+
+  fit_param_unit:
+    aliases: ["_fit_param_unit"]
+    description: Unit of the fitted parameter, e.g. mmol/g, 1/Pa
+
   # ── Citation ────────────────────────────────
 
   citation_doi:
@@ -508,6 +616,35 @@ classes:
       - desorp_enthalpy_integral
       - desorp_molefraction
       - desorp_selectivity
+
+  Analysis_PsdDataPoint:
+    description: >-
+      A single data point in the analysis_psd branch of an isotherm.
+      Corresponds to a row in an AIF loop_ block for analysis_psd.
+    slots:
+      - analysis_psd_diameter
+      - analysis_psd_dv_dd
+
+  Analysis_Fit_SummaryDataPoint:
+    description: >-
+      A single data point in the analysis_fit_summary branch of an isotherm.
+      Corresponds to a row in an AIF loop_ block for analysis_fit_summary.
+    slots:
+      - fit_id
+      - fit_model
+      - fit_r_squared
+      - fit_rmse
+
+  Analysis_Fit_ParametersDataPoint:
+    description: >-
+      A single data point in the analysis_fit_parameters branch of an isotherm.
+      Corresponds to a row in an AIF loop_ block for analysis_fit_parameters.
+    slots:
+      - fit_param_id
+      - fit_param_name
+      - fit_param_value
+      - fit_param_uncertainty
+      - fit_param_unit
 
   AdsorptionInformationFile:
     description: >-
@@ -585,6 +722,17 @@ classes:
       - units_dead_volume
       - units_leak_rate
       - units_quadrupole_moment
+      # Analysis
+      - analysis_method
+      - analysis_bet_area
+      - analysis_bet_c_constant
+      - analysis_bet_pressure_range_min
+      - analysis_bet_pressure_range_max
+      - analysis_langmuir_area
+      - analysis_micropore_volume
+      - analysis_total_pore_volume
+      - analysis_total_pore_volume_pp0
+      - analysis_psd_method
       # Citation
       - citation_doi
       - citation_source
@@ -597,5 +745,20 @@ classes:
       desorption_data:
         description: Desorption branch data points (loop_ block).
         range: DesorptionDataPoint
+        multivalued: true
+        inlined_as_list: true
+      analysis_psd:
+        description: Analysis_Psd branch data points (loop_ block).
+        range: Analysis_PsdDataPoint
+        multivalued: true
+        inlined_as_list: true
+      analysis_fit_summary:
+        description: Analysis_Fit_Summary branch data points (loop_ block).
+        range: Analysis_Fit_SummaryDataPoint
+        multivalued: true
+        inlined_as_list: true
+      analysis_fit_parameters:
+        description: Analysis_Fit_Parameters branch data points (loop_ block).
+        range: Analysis_Fit_ParametersDataPoint
         multivalued: true
         inlined_as_list: true

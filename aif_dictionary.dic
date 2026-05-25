@@ -1519,6 +1519,371 @@ save_
 
 ##############################################################################
 #                                                                            #
+#                             ANALYSIS CATEGORY                              #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS
+    _definition.id               ANALYSIS
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS category record derived scalar
+    quantities from standard analysis methods (BET, Langmuir, pore
+    characterization). These are single-value metadata fields
+    summarising the analysis results.
+;
+save_
+
+save_analysis.method
+    _definition.id               '_analysis_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Analysis method(s) or description used for derived quantities,
+    e.g. BET and HK
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis.bet_area
+    _definition.id               '_analysis_bet_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'BET surface area (see _units_surface_area)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_surface_area'
+save_
+
+save_analysis.bet_c_constant
+    _definition.id               '_analysis_bet_c_constant'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'BET C constant (dimensionless)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.bet_pressure_range_min
+    _definition.id               '_analysis_bet_pressure_range_min'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Lower bound of the relative pressure range used for BET fitting
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.bet_pressure_range_max
+    _definition.id               '_analysis_bet_pressure_range_max'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Upper bound of the relative pressure range used for BET fitting
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.langmuir_area
+    _definition.id               '_analysis_langmuir_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Langmuir surface area (see _units_surface_area)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_surface_area'
+save_
+
+save_analysis.micropore_volume
+    _definition.id               '_analysis_micropore_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Micropore volume from t-plot or DR analysis (see
+    _units_pore_volume)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_volume'
+save_
+
+save_analysis.total_pore_volume
+    _definition.id               '_analysis_total_pore_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Total pore volume (see _units_pore_volume)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_volume'
+save_
+
+save_analysis.total_pore_volume_pp0
+    _definition.id               '_analysis_total_pore_volume_pp0'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Relative pressure p/p0 at which total pore volume was evaluated
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.psd_method
+    _definition.id               '_analysis_psd_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Method for determining pore size distribution, e.g. NLDFT-
+    Carbon-N2
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                           ANALYSIS_PSD CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_PSD
+    _definition.id               ANALYSIS_PSD
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS_PSD category record loop columns for
+    pore size distribution data. One row per diameter bin.
+;
+save_
+
+save_analysis_psd.diameter
+    _definition.id               '_analysis_psd_diameter'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Pore diameter in a pore-size distribution loop (see
+    _units_pore_diameter)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_diameter'
+save_
+
+save_analysis_psd.dv_dd
+    _definition.id               '_analysis_psd_dv_dd'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Differential pore volume dV/dD at each diameter in a PSD loop
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+##############################################################################
+#                                                                            #
+#                           ANALYSIS_FIT CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_FIT
+    _definition.id               ANALYSIS_FIT
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS_FIT category record loop columns for
+    recording fitted isotherm models. One row per model, linked to
+    fit parameters via _fit_id.
+;
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unique integer key identifying this fit within the file'
+    _type.purpose                Key
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_model'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_r_squared'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Coefficient of determination (R-squared) for the fit'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit.
+    _definition.id               '_fit_rmse'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Root-mean-square error of the fit (see _units_loading)'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+##############################################################################
+#                                                                            #
+#                        ANALYSIS_FIT_PARAM CATEGORY                         #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_FIT_PARAM
+    _definition.id               ANALYSIS_FIT_PARAM
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the ANALYSIS_FIT_PARAM category record loop
+    columns for the parameters of each fitted model. Linked to the
+    fit summary via _fit_param_id referencing _fit_id.
+;
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Foreign key referencing _analysis_fit_id in the fit summary loop
+;
+    _type.purpose                Key
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_name'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Name of the fitted parameter, e.g. q_max, K_L, n'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_value'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Fitted value of the parameter'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit_param.ty
+    _definition.id               '_fit_param_uncertainty'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Uncertainty of the fitted parameter value'
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit_param.
+    _definition.id               '_fit_param_unit'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of the fitted parameter, e.g. mmol/g, 1/Pa'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
 #                             CITATION CATEGORY                              #
 #                                                                            #
 ##############################################################################
