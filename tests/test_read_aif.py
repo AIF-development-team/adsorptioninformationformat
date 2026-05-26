@@ -234,14 +234,14 @@ class TestGravimetricAdsorpTransient:
         assert grav_block.find_loop("_adsorp_transient_step")
 
     def test_transient_amount_exists(self, grav_block):
-        assert grav_block.find_loop("_adsorp_transient_amount")
+        assert grav_block.find_loop("_adsorp_transient_loading")
 
     def test_transient_columns_same_length(self, grav_block):
         cols = ["_adsorp_transient_step",
                 "_adsorp_transient_elapsed_time",
                 "_adsorp_transient_pressure",
                 "_adsorp_transient_temperature",
-                "_adsorp_transient_amount"]
+                "_adsorp_transient_loading"]
         lengths = [len(list(grav_block.find_loop(c))) for c in cols]
         assert len(set(lengths)) == 1
 
@@ -251,7 +251,7 @@ class TestGravimetricAdsorpTransient:
 
     def test_step3_final_amount_matches_equilibrium(self, grav_block):
         steps = [int(v) for v in grav_block.find_loop("_adsorp_transient_step")]
-        tr_amount = [float(v) for v in grav_block.find_loop("_adsorp_transient_amount")]
+        tr_amount = [float(v) for v in grav_block.find_loop("_adsorp_transient_loading")]
         eq_amount = [float(v) for v in grav_block.find_loop("_adsorp_amount")]
         step3_amount = [a for s, a in zip(steps, tr_amount) if s == 3]
         assert step3_amount[-1] == pytest.approx(eq_amount[2])
@@ -262,14 +262,14 @@ class TestGravimetricDesorpTransient:
         assert grav_block.find_loop("_desorp_transient_step")
 
     def test_transient_amount_exists(self, grav_block):
-        assert grav_block.find_loop("_desorp_transient_amount")
+        assert grav_block.find_loop("_desorp_transient_loading")
 
     def test_transient_columns_same_length(self, grav_block):
         cols = ["_desorp_transient_step",
                 "_desorp_transient_elapsed_time",
                 "_desorp_transient_pressure",
                 "_desorp_transient_temperature",
-                "_desorp_transient_amount"]
+                "_desorp_transient_loading"]
         lengths = [len(list(grav_block.find_loop(c))) for c in cols]
         assert len(set(lengths)) == 1
 
@@ -279,7 +279,7 @@ class TestGravimetricDesorpTransient:
 
     def test_step3_final_amount_matches_equilibrium(self, grav_block):
         steps = [int(v) for v in grav_block.find_loop("_desorp_transient_step")]
-        tr_amount = [float(v) for v in grav_block.find_loop("_desorp_transient_amount")]
+        tr_amount = [float(v) for v in grav_block.find_loop("_desorp_transient_loading")]
         eq_amount = [float(v) for v in grav_block.find_loop("_desorp_amount")]
         step3_amount = [a for s, a in zip(steps, tr_amount) if s == 3]
         assert step3_amount[-1] == pytest.approx(eq_amount[2])
@@ -289,7 +289,7 @@ class TestGravimetricDesorpTransient:
                      "_desorp_transient_elapsed_time",
                      "_desorp_transient_pressure",
                      "_desorp_transient_temperature",
-                     "_desorp_transient_amount"]:
+                     "_desorp_transient_loading"]:
             for val in grav_block.find_loop(col):
                 float(val)
 
