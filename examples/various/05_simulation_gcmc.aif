@@ -7,6 +7,7 @@ data_gcmc_simulation
     _exptl_temperature                298.15
     _exptl_isotherm_type              "absolute"
     _exptl_date                       2024-10-15T22:00:00Z
+    _exptl_method                     "simulation"
 
     _simltn_code                      "RASPA-2.0.48"
     _simltn_size                      "2x2x2 unit cells"
