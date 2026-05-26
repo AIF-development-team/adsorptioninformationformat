@@ -571,6 +571,18 @@ save_adsorptive.smiles
     _type.contents               Text
 save_
 
+save_adsorptive.formula
+    _definition.id               '_adsorptive_formula'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Chemical formula of the adsorptive'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 ##############################################################################
 #                                                                            #
 #                              SIMLTN CATEGORY                               #

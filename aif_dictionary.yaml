@@ -117,7 +117,6 @@ slots:
   adsnt_sample_name:
     aliases: ["_adsnt_sample_name"]
     description: Unique sample identifier assigned by the operator or laboratory
-    required: true
 
   adsnt_hashkey:
     aliases: ["_adsnt_hashkey"]
@@ -177,6 +176,7 @@ slots:
   adsorptive_name:
     aliases: ["_adsorptive_name"]
     description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
+    required: true
 
   adsorptive_info:
     aliases: ["_adsorptive_info"]
@@ -193,6 +193,10 @@ slots:
   adsorptive_smiles:
     aliases: ["_adsorptive_smiles"]
     description: Canonical SMILES string of the adsorptive
+
+  adsorptive_formula:
+    aliases: ["_adsorptive_formula"]
+    description: Chemical formula of the adsorptive
 
   # ── Simulation ──────────────────────────────
 
@@ -457,6 +461,7 @@ classes:
       - adsorptive_inchi
       - adsorptive_cas
       - adsorptive_smiles
+      - adsorptive_formula
       # Simulation
       - simltn_code
       - simltn_size

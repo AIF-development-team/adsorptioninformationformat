@@ -202,6 +202,10 @@
         "_adsorptive_smiles": {
           "type": "string",
           "description": "Canonical SMILES string of the adsorptive"
+        },
+        "_adsorptive_formula": {
+          "type": "string",
+          "description": "Chemical formula of the adsorptive"
         }
       }
     },
@@ -426,8 +430,7 @@
 
   "required": [
     "_audit_aif_version",
-    "_exptl_adsorptive",
-    "_adsnt_sample_name",
+    "_adsorptive_name",
     "_adsnt_material_name"
   ],
 
