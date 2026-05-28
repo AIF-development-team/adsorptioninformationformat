@@ -200,25 +200,29 @@
           "type": "string",
           "description": "Canonical SMILES string of the adsorptive"
         },
-        "_adsorptive_component_id": {
-          "type": "string",
-          "description": "Identifier for the adsorptive component in a mixture"
+        "_adsorptive_component_index": {
+          "type": "number",
+          "description": "Index for the adsorptive component in a mixture"
         },
         "_adsorptive_component_name": {
           "type": "string",
-          "description": "Name of the adsorptive component in a mixture"
+          "description": "Name of an adsorptive component in a mixture"
         },
         "_adsorptive_component_info": {
           "type": "string",
-          "description": "Additional information about the adsorptive component in a mixture"
+          "description": "Additional information about an adsorptive component in a mixture"
         },
         "_adsorptive_component_inchi": {
           "type": "string",
-          "description": "IUPAC InChI identifier of the adsorptive component in a mixture"
+          "description": "IUPAC InChI identifier of an adsorptive component in a mixture"
+        },
+        "_adsorptive_component_cas": {
+          "type": "string",
+          "description": "CAS registry Number of an adsorptive component in a mixture"
         },
         "_adsorptive_component_smiles": {
           "type": "string",
-          "description": "Canonical SMILES string of the adsorptive component in a mixture"
+          "description": "Canonical SMILES of an adsorptive component in a mixture"
         }
       }
     },
