@@ -286,8 +286,8 @@ save_adsnt.sample_name
     _type.contents               Text
     _description.common
 ;
-    Required field. A unique identifier for the specific sample
-    used in the experiment.
+    Required field. A unique identifier for the specific sample used
+    in the experiment.
 ;
 save_
 
