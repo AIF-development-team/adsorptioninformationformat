@@ -431,8 +431,10 @@
   "required": [
     "_audit_aif_version",
     "_adsorptive_name",
-    "_adsnt_material_name"
+    "_adsnt_material_name",
+    "_exptl_method"
   ],
 
   "additionalProperties": true
+
 }

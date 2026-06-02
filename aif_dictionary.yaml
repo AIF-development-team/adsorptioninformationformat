@@ -96,6 +96,7 @@ slots:
   exptl_method:
     aliases: ["_exptl_method"]
     description: Experimental technique used to measure the amount adsorbed
+    required: true
     range: ExperimentalMethod
 
   exptl_isotherm_type:
