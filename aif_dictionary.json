@@ -211,7 +211,7 @@
     },
 
     "simulation": {
-      "$comment": "Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment.",
+      "$comment": "Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment. Requires _exptl_method = simulation.",
       "type": "object",
       "properties": {
         "_simltn_code": {
@@ -417,7 +417,27 @@
     { "$ref": "#/definitions/citation" },
     { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
-    { "$ref": "#/definitions/desorption_data" }
+    { "$ref": "#/definitions/desorption_data" },
+    {
+      "if": {
+        "anyOf": [
+          { "required": ["_simltn_code"] },
+          { "required": ["_simltn_forcefield_adsorbent"] },
+          { "required": ["_simltn_forcefield_adsorptive"] },
+          { "required": ["_simltn_input_files"] },
+          { "required": ["_simltn_lot"] },
+          { "required": ["_simltn_sampling"] },
+          { "required": ["_simltn_size"] }
+        ]
+      },
+      "then": {
+        "properties": {
+          "_exptl_method": {
+            "const": "simulation"
+          }
+        }
+      }
+    }
   ],
 
   "patternProperties": {

@@ -599,7 +599,7 @@ save_SIMLTN
     Data items in the SIMLTN category record computational method
     details for simulated isotherms (e.g. GCMC, MD). Only relevant
     when the data originates from molecular simulation rather than
-    experiment.
+    experiment. Requires _exptl_method = simulation.
 ;
 save_
 
