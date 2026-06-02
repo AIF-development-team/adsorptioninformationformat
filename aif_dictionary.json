@@ -435,6 +435,67 @@
     "_exptl_method"
   ],
 
-  "additionalProperties": true
+  "additionalProperties": true,
+
+  "dependentRequired": {
+    "_adsnt_composition": ["_adsnt_material_name"],
+    "_adsnt_degas_summary": ["_adsnt_material_name"],
+    "_adsnt_degas_temperature": ["_adsnt_material_name", "_units_temperature"],
+    "_adsnt_degas_time": ["_adsnt_material_name", "_units_time"],
+    "_adsnt_hashkey": ["_adsnt_material_name"],
+    "_adsnt_info": ["_adsnt_material_name"],
+    "_adsnt_molar_mass": ["_adsnt_material_name", "_units_molecular_weight"],
+    "_adsnt_sample_density": ["_adsnt_material_name", "_units_density"],
+    "_adsnt_sample_mass": ["_adsnt_material_name", "_units_mass"],
+    "_adsnt_structure_csd_refcode": ["_adsnt_material_name"],
+    "_adsnt_structure_smiles": ["_adsnt_material_name"],
+    "_adsnt_structure_topology": ["_adsnt_material_name"],
+    "_adsnt_synthesis": ["_adsnt_material_name"],
+    "_adsorp_enthalpy_differential": ["_units_enthalpy"],
+    "_adsorp_enthalpy_integral":      ["_units_enthalpy"],
+    "_adsorp_henry": ["_units_henry"],
+    "_adsorp_loading":      ["_units_loading"],
+    "_adsorp_loading_excess":["_units_loading", "_adsorp_loading"],
+    "_adsorp_loading_absolute":["_units_loading", "_adsorp_loading"],
+    "_adsorp_loading_net":  ["_units_loading", "_adsorp_loading"],
+    "_adsorp_p0":          ["_units_pressure"],
+    "_adsorp_pressure":    ["_units_pressure"],
+    "_adsorptive_cas": ["_adsorptive_name"],
+    "_adsorptive_formula": ["_adsorptive_name"],
+    "_adsorptive_inchi": ["_adsorptive_name"],
+    "_adsorptive_info": ["_adsorptive_name"],
+    "_adsorptive_smiles": ["_adsorptive_name"],
+    "_desorp_enthalpy_differential": ["_units_enthalpy"],
+    "_desorp_enthalpy_integral":      ["_units_enthalpy"],
+    "_desorp_loading":      ["_units_loading"],
+    "_desorp_loading_excess":["_units_loading", "_adsorp_loading"],
+    "_desorp_loading_absolute":["_units_loading", "_adsorp_loading"],
+    "_desorp_loading_net":  ["_units_loading", "_adsorp_loading"],
+    "_desorp_p0":          ["_units_pressure"],
+    "_desorp_pressure":    ["_units_pressure"],
+    "_exptl_temperature":   ["_units_temperature"],
+    "_simltn_code": ["_exptl_method"],
+    "_simltn_forcefield_adsorbent": ["_exptl_method"],
+    "_simltn_forcefield_adsorptive": ["_exptl_method"],
+    "_simltn_input_files": ["_exptl_method"],
+    "_simltn_lot": ["_exptl_method"],
+    "_simltn_sampling": ["_exptl_method"],
+    "_simltn_size": ["_exptl_method"]
+    },
+
+  "dependentSchemas": {
+    "_adsorp_fugacity": {
+      "oneOf": [
+        {"required": "_units_pressure"},
+        {"required": "_units_fugacity"}
+      ]
+    },
+    "_desorp_fugacity": {
+      "oneOf": [
+        {"required": "_units_pressure"},
+        {"required": "_units_fugacity"}
+      ]
+    }
+  }
 
 }
