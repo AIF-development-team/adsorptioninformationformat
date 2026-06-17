@@ -119,7 +119,7 @@
           "description": "Unique sample identifier assigned by the operator or laboratory",
           "x-dic-purpose": "Key",
           "x-dic-source": "Assigned",
-          "x-dic-common": "Required field. A unique identifier for the specific sample used in the experiment."
+          "x-dic-common": "A unique identifier for the specific sample used in the experiment."
         },
         "_adsnt_hashkey": {
           "type": "string",
@@ -183,7 +183,7 @@
         "_adsorptive_name": {
           "type": "string",
           "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
+          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
         },
         "_adsorptive_info": {
           "type": "string",

@@ -286,8 +286,8 @@ save_adsnt.sample_name
     _type.contents               Text
     _description.common
 ;
-    Required field. A unique identifier for the specific sample used
-    in the experiment.
+    A unique identifier for the specific sample used in the
+    experiment.
 ;
 save_
 
@@ -514,8 +514,8 @@ save_adsorptive.name
     _type.contents               Text
     _description.common
 ;
-    Required field. The common or IUPAC name of the gas/vapour
-    used as adsorptive in the experiment or simulation.
+    Required field. The common or IUPAC name of the gas/vapour used
+    as adsorptive in the experiment or simulation.
 ;
 save_
 
