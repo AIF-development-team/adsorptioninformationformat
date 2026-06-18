@@ -1,0 +1,43 @@
+data_multicomponent_quad_Fieback
+
+    _audit_aif_version                "__AIF_VERSION__"
+
+    _exptl_temperature                298.0
+    _exptl_method                     "manometric-gravimetric"
+    _exptl_instrument                 "Custom"
+    _exptl_isotherm_type              "excess"
+
+    _adsnt_material_name                "Norit R1 Extra"
+
+    loop_
+        _adsorptive_component_index
+        _adsorptive_component_name
+        _adsorptive_component_inchi
+        1  "CH4"  "VNWKTOKETHGBQD-UHFFFAOYSA-N"
+        2  "CO2"  "CURLTUGMZLYLDI-UHFFFAOYSA-N"
+        3  "N2"   "IJGRMHOSHXDMSA-UHFFFAOYSA-N"
+        4  "H2"   "UFHFLCQGNIYNRP-UHFFFAOYSA-N"
+
+    _units_temperature                "K"
+    _units_pressure                   "MegPA"
+    _units_loading                    "MilliMOL-PER-GM"
+    _units_composition_type           "MoleFraction"
+
+    _citation_doi                     "10.1007/s10450-013-9527-2"
+
+    loop_
+        _adsorp_index
+        _adsorp_pressure
+        _adsorp_composition_component_1
+        _adsorp_loading_component_1
+        _adsorp_composition_component_2
+        _adsorp_loading_component_2
+        _adsorp_composition_component_3
+        _adsorp_loading_component_3
+        _adsorp_composition_component_4
+        _adsorp_loading_component_4
+        1  0.223	0.627	1.223	0.301	0.691	0.055	0.095	0.017	0.013
+        2  0.498	0.635	2.15	0.301	1.253	0.047	0.147	0.017	0.067
+        3  0.842	0.631	2.933	0.307	1.78	0.046	0.205	0.017	0.086
+        4  1.209	0.631	3.556	0.304	2.199	0.047	0.234	0.019	0.093
+        5  1.592	0.632	4.007	0.303	2.224	0.045	0.32	0.02	0.067
