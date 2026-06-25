@@ -9,8 +9,6 @@ data_multicomponent_quad_Fieback
 
     _adsnt_material_name              "Norit R1 Extra"
 
-    _adsorptive_name                  "mixture"
-
     loop_
         _adsorptive_component_index
         _adsorptive_component_name

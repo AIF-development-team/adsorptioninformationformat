@@ -207,7 +207,7 @@
         "_adsorptive_component_index": {
           "type": "integer",
           "description": "Index for an adsorptive component in a mixture",
-          "x-dic-common": "Required field for mixtures. "
+          "x-dic-common": "Required field for mixtures."
         },
         "_adsorptive_component_name": {
           "type": "string",
@@ -595,13 +595,9 @@
           "type": "number",
           "description": "Fugacity of ninth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
         },
-        "_desorp_molefraction": {
+        "_desorp_fugacity_component_10": {
           "type": "number",
-          "description": "Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)"
-        },
-        "_desorp_selectivity": {
-          "type": "number",
-          "description": "Desorption selectivity for a specified component pair under the given conditions (unitless ratio)"
+          "description": "Fugacity of tenth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
         },
         "_desorp_composition_component_1": {
           "type": "number",
@@ -639,6 +635,10 @@
           "type": "number",
           "description": "Mole fraction of the ninth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
         },
+        "_desorp_composition_component_10": {
+          "type": "number",
+          "description": "Mole fraction of the tenth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
         "_desorp_loading_component_1": {
           "type": "number",
           "description": "Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
@@ -674,6 +674,10 @@
         "_desorp_loading_component_9": {
           "type": "number",
           "description": "Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_10": {
+          "type": "number",
+          "description": "Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
         }
       }
     }

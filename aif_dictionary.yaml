@@ -608,14 +608,9 @@ slots:
     description: Fugacity of ninth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
     range: float
 
-  desorp_molefraction:
-    aliases: ["_desorp_molefraction"]
-    description: Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)
-    range: float
-
-  desorp_selectivity:
-    aliases: ["_desorp_selectivity"]
-    description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
+  desorp_fugacity_component_10:
+    aliases: ["_desorp_fugacity_component_10"]
+    description: Fugacity of tenth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
     range: float
 
   desorp_composition_component_1:
@@ -663,6 +658,11 @@ slots:
     description: Mole fraction of the ninth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
     range: float
 
+  desorp_composition_component_10:
+    aliases: ["_desorp_composition_component_10"]
+    description: Mole fraction of the tenth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
   desorp_loading_component_1:
     aliases: ["_desorp_loading_component_1"]
     description: Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
@@ -706,6 +706,11 @@ slots:
   desorp_loading_component_9:
     aliases: ["_desorp_loading_component_9"]
     description: Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_10:
+    aliases: ["_desorp_loading_component_10"]
+    description: Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
     range: float
 
 # ──────────────────────────────────────────────
@@ -784,8 +789,7 @@ classes:
       - desorp_fugacity_component_7
       - desorp_fugacity_component_8
       - desorp_fugacity_component_9
-      - desorp_molefraction
-      - desorp_selectivity
+      - desorp_fugacity_component_10
       - desorp_composition_component_1
       - desorp_composition_component_2
       - desorp_composition_component_3
@@ -795,6 +799,7 @@ classes:
       - desorp_composition_component_7
       - desorp_composition_component_8
       - desorp_composition_component_9
+      - desorp_composition_component_10
       - desorp_loading_component_1
       - desorp_loading_component_2
       - desorp_loading_component_3
@@ -804,6 +809,7 @@ classes:
       - desorp_loading_component_7
       - desorp_loading_component_8
       - desorp_loading_component_9
+      - desorp_loading_component_10
 
   AdsorptionInformationFile:
     description: >-

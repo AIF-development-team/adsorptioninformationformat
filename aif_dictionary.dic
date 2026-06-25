@@ -2064,38 +2064,21 @@ save_desorp.fugacity_component_9
     _units.code                  'see _units_pressure'
 save_
 
-save_desorp.molefraction
-    _definition.id               '_desorp_molefraction'
+save_desorp.fugacity_component_10
+    _definition.id               '_desorp_fugacity_component_10'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Mole fraction of the adsorptive in the gas phase for a
-    multicomponent desorption measurement (see
-    _units_composition_type)
+    Fugacity of tenth adsorptive component in the bulk phase at each
+    desorption measurement (see _units_pressure)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_composition_type'
-save_
-
-save_desorp.selectivity
-    _definition.id               '_desorp_selectivity'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Desorption selectivity for a specified component pair under the
-    given conditions (unitless ratio)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
+    _units.code                  'see _units_pressure'
 save_
 
 save_desorp.composition_component_1
@@ -2260,6 +2243,24 @@ save_desorp.composition_component_9
     _units.code                  'see _units_composition_type'
 save_
 
+save_desorp.composition_component_10
+    _definition.id               '_desorp_composition_component_10'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the tenth component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
 save_desorp.loading_component_1
     _definition.id               '_desorp_loading_component_1'
     _definition.scope            Item
@@ -2404,6 +2405,23 @@ save_desorp.loading_component_9
     _description.text
 ;
     Loading of the ninth component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_10
+    _definition.id               '_desorp_loading_component_10'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the tenth component in the adsorbed phase for a
     multicomponent desorption measurement (see _units_loading)
 ;
     _type.purpose                Measurand
