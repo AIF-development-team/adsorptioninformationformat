@@ -5,7 +5,6 @@ data_raw2aif
     _exptl_date 2009-09-17T19:56:00
     _exptl_instrument 'Autosorb Station 1'
     _exptl_temperature 77.3
-
     _adsnt_sample_mass 0.0339
     _adsnt_sample_name 'nk_DUT-6_LP_N2_114pkt'
     _adsnt_material_name 'DUT-6'
