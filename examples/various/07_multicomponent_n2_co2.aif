@@ -11,9 +11,11 @@ data_multicomponent_co2_n2
     _exptl_instrument                 "DVS Carbon"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_name             "HKUST-1"
-    _adsnt_sample_name               "HKUST1-B2-05"
+    _adsnt_material_name              "HKUST-1"
+    _adsnt_sample_name                "HKUST1-B2-05"
     _adsnt_sample_mass                0.0834
+
+    _adsorptive_name                  "mixture"
 
     loop_
         _adsorptive_component_index

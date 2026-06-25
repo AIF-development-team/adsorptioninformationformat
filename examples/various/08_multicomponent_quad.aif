@@ -7,7 +7,9 @@ data_multicomponent_quad_Fieback
     _exptl_instrument                 "Custom"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_name                "Norit R1 Extra"
+    _adsnt_material_name              "Norit R1 Extra"
+
+    _adsorptive_name                  "mixture"
 
     loop_
         _adsorptive_component_index
