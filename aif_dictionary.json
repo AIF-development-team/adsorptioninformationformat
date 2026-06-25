@@ -41,6 +41,10 @@
         "_audit_creation_software": {
           "type": "string",
           "description": "Name and version of the software used to generate this AIF file"
+        },
+        "_audit_digitizer": {
+          "type": "string",
+          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         }
       }
     },
@@ -53,10 +57,6 @@
           "type": "string",
           "description": "Name of the person who performed the experiment"
         },
-        "_exptl_digitizer": {
-          "type": "string",
-          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
-        },
         "_exptl_date": {
           "type": "string",
           "format": "date-time",
@@ -65,15 +65,6 @@
         "_exptl_instrument": {
           "type": "string",
           "description": "Identifier or model name of the instrument used for the measurement"
-        },
-        "_exptl_adsorptive": {
-          "type": "string",
-          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
-        },
-        "_exptl_adsorptive_name": {
-          "type": "string",
-          "description": "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation"
         },
         "_exptl_temperature": {
           "type": "number",
@@ -87,10 +78,7 @@
           "x-enum-description": "Method used to determine amount adsorbed.",
           "x-enum-descriptions": {
             "volumetric": "Volumetric (manometric) method.",
-            "gravimetric": "Gravimetric method.",
-            "chromatographic": "Chromatographic method.",
-            "simulation": "Data originates from molecular simulation rather than experiment.",
-            "other": "Other method not specified here."
+            "gravimetric": "Gravimetric method."
           }
         },
         "_exptl_isotherm_type": {
@@ -104,10 +92,6 @@
             "excess": "Excess adsorption.",
             "net": "Net adsorption."
           }
-        },
-        "_exptl_p0": {
-          "type": "number",
-          "description": "Saturation pressure of the adsorptive at the experimental temperature (see _units_pressure)"
         }
       }
     },
@@ -116,16 +100,23 @@
       "$comment": "Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
       "type": "object",
       "properties": {
-        "_adsnt_material_id": {
+        "_adsnt_material_name": {
           "type": "string",
           "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X",
           "x-dic-purpose": "Encode",
           "x-dic-source": "Assigned",
-          "x-dic-common": "Required field. The name of the material, e.g. the common name,\nCSD refcode, or other standard identifier."
+          "x-dic-common": "Required field. The name of the material, e.g. the common name, CSD refcode, or other standard identifier."
         },
         "_adsnt_info": {
           "type": "string",
           "description": "Free-text field for additional information about the adsorbent sample"
+        },
+        "_adsnt_sample_name": {
+          "type": "string",
+          "description": "Unique sample identifier assigned by the operator or laboratory",
+          "x-dic-purpose": "Key",
+          "x-dic-source": "Assigned",
+          "x-dic-common": "A unique identifier for the specific sample used in the experiment."
         },
         "_adsnt_hashkey": {
           "type": "string",
@@ -159,13 +150,6 @@
           "type": "string",
           "description": "Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc"
         },
-        "_adsnt_sample_id": {
-          "type": "string",
-          "description": "Unique sample identifier assigned by the operator or laboratory",
-          "x-dic-purpose": "Key",
-          "x-dic-source": "Assigned",
-          "x-dic-common": "Required field. A unique identifier for the specific sample\nused in the experiment."
-        },
         "_adsnt_sample_mass": {
           "type": "number",
           "description": "Mass of the adsorbent sample used in the measurement (see _units_mass)"
@@ -185,10 +169,6 @@
         "_adsnt_degas_time": {
           "type": "number",
           "description": "Duration of the degassing step (see _units_time)"
-        },
-        "_adsnt_cycle_number": {
-          "type": "integer",
-          "description": "Adsorption-desorption cycle index (1-based) for multi-cycle studies"
         }
       }
     },
@@ -197,10 +177,10 @@
       "$comment": "Adsorptive: Physical and chemical identifiers and properties of the adsorptive molecule.",
       "type": "object",
       "properties": {
-        "_adsorptive_id": {
+        "_adsorptive_name": {
           "type": "string",
           "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour\nused as adsorptive in the experiment or simulation."
+          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
         },
         "_adsorptive_info": {
           "type": "string",
@@ -220,41 +200,52 @@
           "type": "string",
           "description": "Canonical SMILES string of the adsorptive"
         },
-        "_adsorptive_molecular_weight": {
-          "type": "number",
-          "description": "Molecular weight of the adsorptive (see _units_molecular_weight)"
+        "_adsorptive_formula": {
+          "type": "string",
+          "description": "Chemical formula of the adsorptive"
         },
-        "_adsorptive_critical_temperature": {
-          "type": "number",
-          "description": "Critical temperature of the adsorptive (see _units_temperature)"
+        "_adsorptive_component_index": {
+          "type": "integer",
+          "description": "Index for an adsorptive component in a mixture",
+          "x-dic-common": "Required field for mixtures. "
         },
-        "_adsorptive_critical_pressure": {
-          "type": "number",
-          "description": "Critical pressure of the adsorptive (see _units_pressure)"
+        "_adsorptive_component_name": {
+          "type": "string",
+          "description": "Common name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water",
+          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
         },
-        "_adsorptive_kinetic_diameter": {
-          "type": "number",
-          "description": "Kinetic diameter of the adsorptive molecule (see _units_kinetic_diameter)"
+        "_adsorptive_component_info": {
+          "type": "string",
+          "description": "Alternative or secondary name for an adsorptive component in a mixture, e.g. chemical formula or abbreviation"
         },
-        "_adsorptive_quadrupole_moment": {
-          "type": "number",
-          "description": "Quadrupole moment of the adsorptive (see _units_quadrupole_moment)"
+        "_adsorptive_component_inchi": {
+          "type": "string",
+          "description": "IUPAC InChI identifier of an adsorptive component in a mixture"
+        },
+        "_adsorptive_component_cas": {
+          "type": "string",
+          "description": "CAS Registry Number of an adsorptive component in a mixture",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
+        },
+        "_adsorptive_component_smiles": {
+          "type": "string",
+          "description": "Canonical SMILES string of an adsorptive component in a mixture"
+        },
+        "_adsorptive_component_formula": {
+          "type": "string",
+          "description": "Chemical formula of an adsorptive component in a mixture"
         }
       }
     },
 
     "simulation": {
-      "$comment": "Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment.",
+      "$comment": "Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment. Requires _exptl_method = simulation.",
       "type": "object",
       "properties": {
         "_simltn_code": {
           "type": "string",
           "description": "Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS"
-        },
-        "_simltn_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time the simulation was performed in ISO 8601 format"
         },
         "_simltn_size": {
           "type": "string",
@@ -279,6 +270,23 @@
         "_simltn_lot": {
           "type": "string",
           "description": "Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field"
+        }
+      }
+    },
+
+    "citation": {
+      "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
+      "type": "object",
+      "properties": {
+        "_citation_doi": {
+          "type": "string",
+          "description": "Digital Object Identifier (DOI) of the publication associated with this data",
+          "x-dic-purpose": "Encode",
+          "x-dic-source": "Assigned"
+        },
+        "_citation_source": {
+          "type": "string",
+          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
         }
       }
     },
@@ -317,9 +325,9 @@
           "description": "Unit of time for all time values in this file, e.g. s, min, hours",
           "x-dic-source": "Assigned"
         },
-        "_units_composition_type": {
+        "_units_molecular_weight": {
           "type": "string",
-          "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction",
+          "description": "Unit of molecular weight values in this file, e.g. g/mol",
           "x-dic-source": "Assigned"
         },
         "_units_enthalpy": {
@@ -327,44 +335,14 @@
           "description": "Unit of enthalpy values in this file, e.g. kJ/mol",
           "x-dic-source": "Assigned"
         },
-        "_units_surface_area": {
+        "_units_composition_type": {
           "type": "string",
-          "description": "Unit of surface area values in this file, e.g. m2/g",
+          "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction, partial_pressure, relative_humidity, concentration",
           "x-dic-source": "Assigned"
         },
-        "_units_pore_volume": {
+        "_units_concentration": {
           "type": "string",
-          "description": "Unit of pore volume values in this file, e.g. cm3/g",
-          "x-dic-source": "Assigned"
-        },
-        "_units_pore_diameter": {
-          "type": "string",
-          "description": "Unit of pore diameter values in this file, e.g. nm",
-          "x-dic-source": "Assigned"
-        },
-        "_units_molecular_weight": {
-          "type": "string",
-          "description": "Unit of molecular weight values in this file, e.g. g/mol",
-          "x-dic-source": "Assigned"
-        },
-        "_units_kinetic_diameter": {
-          "type": "string",
-          "description": "Unit of kinetic diameter values in this file, e.g. angstrom",
-          "x-dic-source": "Assigned"
-        },
-        "_units_dead_volume": {
-          "type": "string",
-          "description": "Unit of dead volume values in this file, e.g. cm3",
-          "x-dic-source": "Assigned"
-        },
-        "_units_leak_rate": {
-          "type": "string",
-          "description": "Unit of leak rate values in this file, e.g. Pa/min",
-          "x-dic-source": "Assigned"
-        },
-        "_units_quadrupole_moment": {
-          "type": "string",
-          "description": "Unit of quadrupole moment values in this file, e.g. Debye·Å",
+          "description": "Unit of concentration. Requires _units_composition_type = concentration",
           "x-dic-source": "Assigned"
         }
       }
@@ -374,6 +352,10 @@
       "$comment": "Adsorption Data: Loop columns for the adsorption branch of the isotherm. These fields appear inside a CIF loop_ construct, with one row per equilibrium point.",
       "type": "object",
       "properties": {
+        "_adsorp_index": {
+          "type": "number",
+          "description": "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point."
+        },
         "_adsorp_pressure": {
           "type": "number",
           "description": "Equilibrium pressure at each adsorption data point (see _units_pressure)"
@@ -382,29 +364,25 @@
           "type": "number",
           "description": "Fugacity of the adsorptive at each adsorption data point (see _units_pressure)"
         },
-        "_adsorp_henry": {
-          "type": "number",
-          "description": "Henry coefficient describing the infinite-dilution and low-pressure adsorption affinity (see _units_henry)"
-        },
         "_adsorp_p0": {
           "type": "number",
           "description": "Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)"
         },
         "_adsorp_loading": {
           "type": "number",
-          "description": "Amount adsorbed at each adsorption data point (see _units_loading)"
+          "description": "Loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting."
         },
         "_adsorp_loading_excess": {
           "type": "number",
-          "description": "Excess amount adsorbed at each adsorption data point (see _units_loading)"
+          "description": "Excess loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting."
         },
         "_adsorp_loading_absolute": {
           "type": "number",
-          "description": "Absolute amount adsorbed at each adsorption data point (see _units_loading)"
+          "description": "Absolute loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting."
         },
         "_adsorp_loading_net": {
           "type": "number",
-          "description": "Net amount adsorbed at each adsorption data point (see _units_loading)"
+          "description": "Net loading at each adsorption data point (see _units_loading)"
         },
         "_adsorp_enthalpy_differential": {
           "type": "number",
@@ -414,13 +392,125 @@
           "type": "number",
           "description": "Integral enthalpy of adsorption (see _units_enthalpy)"
         },
-        "_adsorp_molefraction": {
+        "_adsorp_fugacity_component_1": {
           "type": "number",
-          "description": "Mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (see _units_composition_type)"
+          "description": "Fugacity of first adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
         },
-        "_adsorp_selectivity": {
+        "_adsorp_fugacity_component_2": {
           "type": "number",
-          "description": "Adsorption selectivity for a specified component pair under the given conditions (unitless ratio)"
+          "description": "Fugacity of second adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_3": {
+          "type": "number",
+          "description": "Fugacity of third adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_4": {
+          "type": "number",
+          "description": "Fugacity of fourth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_5": {
+          "type": "number",
+          "description": "Fugacity of fifth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_6": {
+          "type": "number",
+          "description": "Fugacity of sixth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_7": {
+          "type": "number",
+          "description": "Fugacity of seventh adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_8": {
+          "type": "number",
+          "description": "Fugacity of eighth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_9": {
+          "type": "number",
+          "description": "Fugacity of ninth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_fugacity_component_10": {
+          "type": "number",
+          "description": "Fugacity of tenth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)"
+        },
+        "_adsorp_composition_component_1": {
+          "type": "number",
+          "description": "Mole fraction of the first component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_2": {
+          "type": "number",
+          "description": "Mole fraction of the second component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_3": {
+          "type": "number",
+          "description": "Mole fraction of the third component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_4": {
+          "type": "number",
+          "description": "Mole fraction of the fourth component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_5": {
+          "type": "number",
+          "description": "Mole fraction of the fifth component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_6": {
+          "type": "number",
+          "description": "Mole fraction of the sixth component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_7": {
+          "type": "number",
+          "description": "Mole fraction of the seventh component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_8": {
+          "type": "number",
+          "description": "Mole fraction of the eighth component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_9": {
+          "type": "number",
+          "description": "Mole fraction of the ninth component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_composition_component_10": {
+          "type": "number",
+          "description": "Mole fraction of the tenth component in the bulk phase at each adsorption measurement (see _units_composition_type)"
+        },
+        "_adsorp_loading_component_1": {
+          "type": "number",
+          "description": "Sorptive loading of the first component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_2": {
+          "type": "number",
+          "description": "Sorptive loading of the second component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_3": {
+          "type": "number",
+          "description": "Sorptive loading of the third component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_4": {
+          "type": "number",
+          "description": "Sorptive loading of the fourth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_5": {
+          "type": "number",
+          "description": "Sorptive loading of the fifth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_6": {
+          "type": "number",
+          "description": "Sorptive loading of the sixth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_7": {
+          "type": "number",
+          "description": "Sorptive loading of the seventh component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_8": {
+          "type": "number",
+          "description": "Sorptive loading of the eighth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_9": {
+          "type": "number",
+          "description": "Sorptive loading of the ninth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+        },
+        "_adsorp_loading_component_10": {
+          "type": "number",
+          "description": "Sorptive loading of the tenth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
         }
       }
     },
@@ -429,6 +519,10 @@
       "$comment": "Desorption Data: Loop columns for the desorption branch of the isotherm. Mirrors the adsorption data section for the reverse process.",
       "type": "object",
       "properties": {
+        "_desorp_index": {
+          "type": "number",
+          "description": "Index of the desorption data point, starting from 1 and incrementing by 1 for each point."
+        },
         "_desorp_pressure": {
           "type": "number",
           "description": "Equilibrium pressure at each desorption data point (see _units_pressure)"
@@ -443,19 +537,19 @@
         },
         "_desorp_loading": {
           "type": "number",
-          "description": "Amount remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Loading remaining adsorbed at each desorption data point (see _units_loading)"
         },
         "_desorp_loading_excess": {
           "type": "number",
-          "description": "Excess amount remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Excess loading remaining adsorbed at each desorption data point (see _units_loading)"
         },
         "_desorp_loading_absolute": {
           "type": "number",
-          "description": "Absolute amount remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Absolute loading remaining adsorbed at each desorption data point (see _units_loading)"
         },
         "_desorp_loading_net": {
           "type": "number",
-          "description": "Net amount remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Net loading remaining adsorbed at each desorption data point (see _units_loading)"
         },
         "_desorp_enthalpy_differential": {
           "type": "number",
@@ -465,6 +559,42 @@
           "type": "number",
           "description": "Integral enthalpy of desorption (see _units_enthalpy)"
         },
+        "_desorp_fugacity_component_1": {
+          "type": "number",
+          "description": "Fugacity of first adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_2": {
+          "type": "number",
+          "description": "Fugacity of second adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_3": {
+          "type": "number",
+          "description": "Fugacity of third adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_4": {
+          "type": "number",
+          "description": "Fugacity of fourth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_5": {
+          "type": "number",
+          "description": "Fugacity of fifth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_6": {
+          "type": "number",
+          "description": "Fugacity of sixth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_7": {
+          "type": "number",
+          "description": "Fugacity of seventh adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_8": {
+          "type": "number",
+          "description": "Fugacity of eighth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
+        "_desorp_fugacity_component_9": {
+          "type": "number",
+          "description": "Fugacity of ninth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)"
+        },
         "_desorp_molefraction": {
           "type": "number",
           "description": "Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)"
@@ -472,23 +602,78 @@
         "_desorp_selectivity": {
           "type": "number",
           "description": "Desorption selectivity for a specified component pair under the given conditions (unitless ratio)"
-        }
-      }
-    },
- 
-    "citation": {
-      "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
-      "type": "object",
-      "properties": {
-        "_citation_doi": {
-          "type": "string",
-          "description": "Digital Object Identifier (DOI) of the publication associated with this data",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
         },
-        "_citation_source": {
-          "type": "string",
-          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
+        "_desorp_composition_component_1": {
+          "type": "number",
+          "description": "Mole fraction of the first component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_2": {
+          "type": "number",
+          "description": "Mole fraction of the second component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_3": {
+          "type": "number",
+          "description": "Mole fraction of the third component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_4": {
+          "type": "number",
+          "description": "Mole fraction of the fourth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_5": {
+          "type": "number",
+          "description": "Mole fraction of the fifth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_6": {
+          "type": "number",
+          "description": "Mole fraction of the sixth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_7": {
+          "type": "number",
+          "description": "Mole fraction of the seventh component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_8": {
+          "type": "number",
+          "description": "Mole fraction of the eighth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_composition_component_9": {
+          "type": "number",
+          "description": "Mole fraction of the ninth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
+        },
+        "_desorp_loading_component_1": {
+          "type": "number",
+          "description": "Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_2": {
+          "type": "number",
+          "description": "Loading of the second component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_3": {
+          "type": "number",
+          "description": "Loading of the third component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_4": {
+          "type": "number",
+          "description": "Loading of the fourth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_5": {
+          "type": "number",
+          "description": "Loading of the fifth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_6": {
+          "type": "number",
+          "description": "Loading of the sixth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_7": {
+          "type": "number",
+          "description": "Loading of the seventh component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_8": {
+          "type": "number",
+          "description": "Loading of the eighth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+        },
+        "_desorp_loading_component_9": {
+          "type": "number",
+          "description": "Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
         }
       }
     }
@@ -500,10 +685,46 @@
     { "$ref": "#/definitions/adsorbent" },
     { "$ref": "#/definitions/adsorptive" },
     { "$ref": "#/definitions/simulation" },
-    { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/citation" },
+    { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
-    { "$ref": "#/definitions/desorption_data" }
+    { "$ref": "#/definitions/desorption_data" },
+    {
+      "if": {
+        "anyOf": [
+          { "required": ["_simltn_code"] },
+          { "required": ["_simltn_forcefield_adsorbent"] },
+          { "required": ["_simltn_forcefield_adsorptive"] },
+          { "required": ["_simltn_input_files"] },
+          { "required": ["_simltn_lot"] },
+          { "required": ["_simltn_sampling"] },
+          { "required": ["_simltn_size"] }
+        ]
+      },
+      "then": {
+        "properties": {
+          "_exptl_method": {
+            "const": "simulation"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "_units_composition_type": { "const": "concentration" }
+        }
+      },
+      "then": {
+        "required": ["_units_concentration"]
+      }
+    },
+    {
+      "anyOf": [
+        { "required": ["_adsorptive_name"] },
+        { "required": ["_adsorptive_component_name"] }
+      ]
+    }
   ],
 
   "patternProperties": {
@@ -516,10 +737,71 @@
 
   "required": [
     "_audit_aif_version",
-    "_exptl_adsorptive",
-    "_adsnt_sample_id",
-    "_adsnt_material_id"
+    "_adsnt_material_name",
+    "_exptl_method"
   ],
 
-  "additionalProperties": true
+  "additionalProperties": true,
+
+  "dependentRequired": {
+    "_adsnt_composition": ["_adsnt_material_name"],
+    "_adsnt_degas_summary": ["_adsnt_material_name"],
+    "_adsnt_degas_temperature": ["_adsnt_material_name", "_units_temperature"],
+    "_adsnt_degas_time": ["_adsnt_material_name", "_units_time"],
+    "_adsnt_hashkey": ["_adsnt_material_name"],
+    "_adsnt_info": ["_adsnt_material_name"],
+    "_adsnt_molar_mass": ["_adsnt_material_name", "_units_molecular_weight"],
+    "_adsnt_sample_density": ["_adsnt_material_name", "_units_density"],
+    "_adsnt_sample_mass": ["_adsnt_material_name", "_units_mass"],
+    "_adsnt_structure_csd_refcode": ["_adsnt_material_name"],
+    "_adsnt_structure_smiles": ["_adsnt_material_name"],
+    "_adsnt_structure_topology": ["_adsnt_material_name"],
+    "_adsnt_synthesis": ["_adsnt_material_name"],
+    "_adsorp_enthalpy_differential": ["_units_enthalpy"],
+    "_adsorp_enthalpy_integral":      ["_units_enthalpy"],
+    "_adsorp_henry": ["_units_henry"],
+    "_adsorp_loading": ["_units_loading"],
+    "_adsorp_loading_excess": ["_units_loading", "_adsorp_loading"],
+    "_adsorp_loading_absolute": ["_units_loading", "_adsorp_loading"],
+    "_adsorp_loading_net": ["_units_loading", "_adsorp_loading"],
+    "_adsorp_p0": ["_units_pressure"],
+    "_adsorp_pressure": ["_units_pressure"],
+    "_adsorptive_cas": ["_adsorptive_name"],
+    "_adsorptive_formula": ["_adsorptive_name"],
+    "_adsorptive_inchi": ["_adsorptive_name"],
+    "_adsorptive_info": ["_adsorptive_name"],
+    "_adsorptive_smiles": ["_adsorptive_name"],
+    "_desorp_enthalpy_differential": ["_units_enthalpy"],
+    "_desorp_enthalpy_integral": ["_units_enthalpy"],
+    "_desorp_loading": ["_units_loading"],
+    "_desorp_loading_excess": ["_units_loading", "_adsorp_loading"],
+    "_desorp_loading_absolute": ["_units_loading", "_adsorp_loading"],
+    "_desorp_loading_net": ["_units_loading", "_adsorp_loading"],
+    "_desorp_p0": ["_units_pressure"],
+    "_desorp_pressure": ["_units_pressure"],
+    "_exptl_temperature": ["_units_temperature"],
+    "_simltn_code": ["_exptl_method"],
+    "_simltn_forcefield_adsorbent": ["_exptl_method"],
+    "_simltn_forcefield_adsorptive": ["_exptl_method"],
+    "_simltn_input_files": ["_exptl_method"],
+    "_simltn_lot": ["_exptl_method"],
+    "_simltn_sampling": ["_exptl_method"],
+    "_simltn_size": ["_exptl_method"]
+    },
+
+  "dependentSchemas": {
+    "_adsorp_fugacity": {
+      "oneOf": [
+        {"required": "_units_pressure"},
+        {"required": "_units_fugacity"}
+      ]
+    },
+    "_desorp_fugacity": {
+      "oneOf": [
+        {"required": "_units_pressure"},
+        {"required": "_units_fugacity"}
+      ]
+    }
+  }
+
 }

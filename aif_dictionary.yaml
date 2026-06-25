@@ -32,11 +32,11 @@ enums:
       gravimetric:
         description: Gravimetric method.
       chromatographic:
-        description: Chromatographic method.
+        description: 
       simulation:
-        description: Data originates from molecular simulation rather than experiment.
+        description: 
       other:
-        description: Other method not specified here.
+        description: 
   IsothermType:
     description: Type of adsorption isotherm.
     permissible_values:
@@ -69,15 +69,15 @@ slots:
     aliases: ["_audit_creation_software"]
     description: Name and version of the software used to generate this AIF file
 
+  audit_digitizer:
+    aliases: ["_audit_digitizer"]
+    description: Name of the person who digitized the data, if extracted from a published figure or table
+
   # ── Experimental ────────────────────────────
 
   exptl_operator:
     aliases: ["_exptl_operator"]
     description: Name of the person who performed the experiment
-
-  exptl_digitizer:
-    aliases: ["_exptl_digitizer"]
-    description: Name of the person who digitized the data, if extracted from a published figure or table
 
   exptl_date:
     aliases: ["_exptl_date"]
@@ -88,15 +88,6 @@ slots:
     aliases: ["_exptl_instrument"]
     description: Identifier or model name of the instrument used for the measurement
 
-  exptl_adsorptive:
-    aliases: ["_exptl_adsorptive"]
-    description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
-    required: true
-
-  exptl_adsorptive_name:
-    aliases: ["_exptl_adsorptive_name"]
-    description: Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation
-
   exptl_temperature:
     aliases: ["_exptl_temperature"]
     description: Temperature at which the experiment was conducted (see _units_temperature)
@@ -105,6 +96,7 @@ slots:
   exptl_method:
     aliases: ["_exptl_method"]
     description: Experimental technique used to measure the amount adsorbed
+    required: true
     range: ExperimentalMethod
 
   exptl_isotherm_type:
@@ -112,21 +104,20 @@ slots:
     description: Classification of the reported adsorbed amount
     range: IsothermType
 
-  exptl_p0:
-    aliases: ["_exptl_p0"]
-    description: Saturation pressure of the adsorptive at the experimental temperature (see _units_pressure)
-    range: float
-
   # ── Adsorbent ───────────────────────────────
 
-  adsnt_material_id:
-    aliases: ["_adsnt_material_id"]
+  adsnt_material_name:
+    aliases: ["_adsnt_material_name"]
     description: Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X
     required: true
 
   adsnt_info:
     aliases: ["_adsnt_info"]
     description: Free-text field for additional information about the adsorbent sample
+
+  adsnt_sample_name:
+    aliases: ["_adsnt_sample_name"]
+    description: Unique sample identifier assigned by the operator or laboratory
 
   adsnt_hashkey:
     aliases: ["_adsnt_hashkey"]
@@ -157,11 +148,6 @@ slots:
     aliases: ["_adsnt_synthesis"]
     description: Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc
 
-  adsnt_sample_id:
-    aliases: ["_adsnt_sample_id"]
-    description: Unique sample identifier assigned by the operator or laboratory
-    required: true
-
   adsnt_sample_mass:
     aliases: ["_adsnt_sample_mass"]
     description: Mass of the adsorbent sample used in the measurement (see _units_mass)
@@ -186,15 +172,10 @@ slots:
     description: Duration of the degassing step (see _units_time)
     range: float
 
-  adsnt_cycle_number:
-    aliases: ["_adsnt_cycle_number"]
-    description: Adsorption-desorption cycle index (1-based) for multi-cycle studies
-    range: integer
-
   # ── Adsorptive ──────────────────────────────
 
-  adsorptive_id:
-    aliases: ["_adsorptive_id"]
+  adsorptive_name:
+    aliases: ["_adsorptive_name"]
     description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
 
   adsorptive_info:
@@ -213,41 +194,44 @@ slots:
     aliases: ["_adsorptive_smiles"]
     description: Canonical SMILES string of the adsorptive
 
-  adsorptive_molecular_weight:
-    aliases: ["_adsorptive_molecular_weight"]
-    description: Molecular weight of the adsorptive (see _units_molecular_weight)
-    range: float
+  adsorptive_formula:
+    aliases: ["_adsorptive_formula"]
+    description: Chemical formula of the adsorptive
 
-  adsorptive_critical_temperature:
-    aliases: ["_adsorptive_critical_temperature"]
-    description: Critical temperature of the adsorptive (see _units_temperature)
-    range: float
+  adsorptive_component_index:
+    aliases: ["_adsorptive_component_index"]
+    description: Index for an adsorptive component in a mixture
+    range: integer
 
-  adsorptive_critical_pressure:
-    aliases: ["_adsorptive_critical_pressure"]
-    description: Critical pressure of the adsorptive (see _units_pressure)
-    range: float
+  adsorptive_component_name:
+    aliases: ["_adsorptive_component_name"]
+    description: Common name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water
 
-  adsorptive_kinetic_diameter:
-    aliases: ["_adsorptive_kinetic_diameter"]
-    description: Kinetic diameter of the adsorptive molecule (see _units_kinetic_diameter)
-    range: float
+  adsorptive_component_info:
+    aliases: ["_adsorptive_component_info"]
+    description: Alternative or secondary name for an adsorptive component in a mixture, e.g. chemical formula or abbreviation
 
-  adsorptive_quadrupole_moment:
-    aliases: ["_adsorptive_quadrupole_moment"]
-    description: Quadrupole moment of the adsorptive (see _units_quadrupole_moment)
-    range: float
+  adsorptive_component_inchi:
+    aliases: ["_adsorptive_component_inchi"]
+    description: IUPAC InChI identifier of an adsorptive component in a mixture
+
+  adsorptive_component_cas:
+    aliases: ["_adsorptive_component_cas"]
+    description: CAS Registry Number of an adsorptive component in a mixture
+
+  adsorptive_component_smiles:
+    aliases: ["_adsorptive_component_smiles"]
+    description: Canonical SMILES string of an adsorptive component in a mixture
+
+  adsorptive_component_formula:
+    aliases: ["_adsorptive_component_formula"]
+    description: Chemical formula of an adsorptive component in a mixture
 
   # ── Simulation ──────────────────────────────
 
   simltn_code:
     aliases: ["_simltn_code"]
     description: Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS
-
-  simltn_date:
-    aliases: ["_simltn_date"]
-    description: Date and time the simulation was performed in ISO 8601 format
-    range: datetime
 
   simltn_size:
     aliases: ["_simltn_size"]
@@ -272,6 +256,16 @@ slots:
   simltn_lot:
     aliases: ["_simltn_lot"]
     description: Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field
+
+  # ── Citation ────────────────────────────────
+
+  citation_doi:
+    aliases: ["_citation_doi"]
+    description: Digital Object Identifier (DOI) of the publication associated with this data
+
+  citation_source:
+    aliases: ["_citation_source"]
+    description: Bibliographic source of the data, e.g. journal name, book title, or database
 
   # ── Units ───────────────────────────────────
 
@@ -299,47 +293,28 @@ slots:
     aliases: ["_units_time"]
     description: Unit of time for all time values in this file, e.g. s, min, hours
 
-  units_composition_type:
-    aliases: ["_units_composition_type"]
-    description: Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction
+  units_molecular_weight:
+    aliases: ["_units_molecular_weight"]
+    description: Unit of molecular weight values in this file, e.g. g/mol
 
   units_enthalpy:
     aliases: ["_units_enthalpy"]
     description: Unit of enthalpy values in this file, e.g. kJ/mol
 
-  units_surface_area:
-    aliases: ["_units_surface_area"]
-    description: Unit of surface area values in this file, e.g. m2/g
+  units_composition_type:
+    aliases: ["_units_composition_type"]
+    description: Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction, partial_pressure, relative_humidity, concentration
 
-  units_pore_volume:
-    aliases: ["_units_pore_volume"]
-    description: Unit of pore volume values in this file, e.g. cm3/g
-
-  units_pore_diameter:
-    aliases: ["_units_pore_diameter"]
-    description: Unit of pore diameter values in this file, e.g. nm
-
-  units_molecular_weight:
-    aliases: ["_units_molecular_weight"]
-    description: Unit of molecular weight values in this file, e.g. g/mol
-
-  units_kinetic_diameter:
-    aliases: ["_units_kinetic_diameter"]
-    description: Unit of kinetic diameter values in this file, e.g. angstrom
-
-  units_dead_volume:
-    aliases: ["_units_dead_volume"]
-    description: Unit of dead volume values in this file, e.g. cm3
-
-  units_leak_rate:
-    aliases: ["_units_leak_rate"]
-    description: Unit of leak rate values in this file, e.g. Pa/min
-
-  units_quadrupole_moment:
-    aliases: ["_units_quadrupole_moment"]
-    description: Unit of quadrupole moment values in this file, e.g. Debye·Å
+  units_concentration:
+    aliases: ["_units_concentration"]
+    description: Unit of concentration. Requires _units_composition_type = concentration
 
   # ── Adsorption Data ─────────────────────────
+
+  adsorp_index:
+    aliases: ["_adsorp_index"]
+    description: Index of the adsorption data point, starting from 1 and incrementing by 1 for each point.
+    range: float
 
   adsorp_pressure:
     aliases: ["_adsorp_pressure"]
@@ -351,11 +326,6 @@ slots:
     description: Fugacity of the adsorptive at each adsorption data point (see _units_pressure)
     range: float
 
-  adsorp_henry:
-    aliases: ["_adsorp_henry"]
-    description: Henry coefficient describing the infinite-dilution and low-pressure adsorption affinity (see _units_henry)
-    range: float
-
   adsorp_p0:
     aliases: ["_adsorp_p0"]
     description: Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)
@@ -363,22 +333,22 @@ slots:
 
   adsorp_loading:
     aliases: ["_adsorp_loading"]
-    description: Amount adsorbed at each adsorption data point (see _units_loading)
+    description: Loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting.
     range: float
 
   adsorp_loading_excess:
     aliases: ["_adsorp_loading_excess"]
-    description: Excess amount adsorbed at each adsorption data point (see _units_loading)
+    description: Excess loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting.
     range: float
 
   adsorp_loading_absolute:
     aliases: ["_adsorp_loading_absolute"]
-    description: Absolute amount adsorbed at each adsorption data point (see _units_loading)
+    description: Absolute loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting.
     range: float
 
   adsorp_loading_net:
     aliases: ["_adsorp_loading_net"]
-    description: Net amount adsorbed at each adsorption data point (see _units_loading)
+    description: Net loading at each adsorption data point (see _units_loading)
     range: float
 
   adsorp_enthalpy_differential:
@@ -391,17 +361,162 @@ slots:
     description: Integral enthalpy of adsorption (see _units_enthalpy)
     range: float
 
-  adsorp_molefraction:
-    aliases: ["_adsorp_molefraction"]
-    description: Mole fraction of the adsorptive in the gas phase for a multicomponent adsorption measurement (see _units_composition_type)
+  adsorp_fugacity_component_1:
+    aliases: ["_adsorp_fugacity_component_1"]
+    description: Fugacity of first adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
     range: float
 
-  adsorp_selectivity:
-    aliases: ["_adsorp_selectivity"]
-    description: Adsorption selectivity for a specified component pair under the given conditions (unitless ratio)
+  adsorp_fugacity_component_2:
+    aliases: ["_adsorp_fugacity_component_2"]
+    description: Fugacity of second adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_3:
+    aliases: ["_adsorp_fugacity_component_3"]
+    description: Fugacity of third adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_4:
+    aliases: ["_adsorp_fugacity_component_4"]
+    description: Fugacity of fourth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_5:
+    aliases: ["_adsorp_fugacity_component_5"]
+    description: Fugacity of fifth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_6:
+    aliases: ["_adsorp_fugacity_component_6"]
+    description: Fugacity of sixth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_7:
+    aliases: ["_adsorp_fugacity_component_7"]
+    description: Fugacity of seventh adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_8:
+    aliases: ["_adsorp_fugacity_component_8"]
+    description: Fugacity of eighth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_9:
+    aliases: ["_adsorp_fugacity_component_9"]
+    description: Fugacity of ninth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_fugacity_component_10:
+    aliases: ["_adsorp_fugacity_component_10"]
+    description: Fugacity of tenth adsorptive component in the bulk phase at each adsorption measurement (see _units_pressure)
+    range: float
+
+  adsorp_composition_component_1:
+    aliases: ["_adsorp_composition_component_1"]
+    description: Mole fraction of the first component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_2:
+    aliases: ["_adsorp_composition_component_2"]
+    description: Mole fraction of the second component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_3:
+    aliases: ["_adsorp_composition_component_3"]
+    description: Mole fraction of the third component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_4:
+    aliases: ["_adsorp_composition_component_4"]
+    description: Mole fraction of the fourth component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_5:
+    aliases: ["_adsorp_composition_component_5"]
+    description: Mole fraction of the fifth component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_6:
+    aliases: ["_adsorp_composition_component_6"]
+    description: Mole fraction of the sixth component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_7:
+    aliases: ["_adsorp_composition_component_7"]
+    description: Mole fraction of the seventh component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_8:
+    aliases: ["_adsorp_composition_component_8"]
+    description: Mole fraction of the eighth component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_9:
+    aliases: ["_adsorp_composition_component_9"]
+    description: Mole fraction of the ninth component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_composition_component_10:
+    aliases: ["_adsorp_composition_component_10"]
+    description: Mole fraction of the tenth component in the bulk phase at each adsorption measurement (see _units_composition_type)
+    range: float
+
+  adsorp_loading_component_1:
+    aliases: ["_adsorp_loading_component_1"]
+    description: Sorptive loading of the first component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_2:
+    aliases: ["_adsorp_loading_component_2"]
+    description: Sorptive loading of the second component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_3:
+    aliases: ["_adsorp_loading_component_3"]
+    description: Sorptive loading of the third component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_4:
+    aliases: ["_adsorp_loading_component_4"]
+    description: Sorptive loading of the fourth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_5:
+    aliases: ["_adsorp_loading_component_5"]
+    description: Sorptive loading of the fifth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_6:
+    aliases: ["_adsorp_loading_component_6"]
+    description: Sorptive loading of the sixth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_7:
+    aliases: ["_adsorp_loading_component_7"]
+    description: Sorptive loading of the seventh component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_8:
+    aliases: ["_adsorp_loading_component_8"]
+    description: Sorptive loading of the eighth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_9:
+    aliases: ["_adsorp_loading_component_9"]
+    description: Sorptive loading of the ninth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+    range: float
+
+  adsorp_loading_component_10:
+    aliases: ["_adsorp_loading_component_10"]
+    description: Sorptive loading of the tenth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
     range: float
 
   # ── Desorption Data ─────────────────────────
+
+  desorp_index:
+    aliases: ["_desorp_index"]
+    description: Index of the desorption data point, starting from 1 and incrementing by 1 for each point.
+    range: float
 
   desorp_pressure:
     aliases: ["_desorp_pressure"]
@@ -420,22 +535,22 @@ slots:
 
   desorp_loading:
     aliases: ["_desorp_loading"]
-    description: Amount remaining adsorbed at each desorption data point (see _units_loading)
+    description: Loading remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
   desorp_loading_excess:
     aliases: ["_desorp_loading_excess"]
-    description: Excess amount remaining adsorbed at each desorption data point (see _units_loading)
+    description: Excess loading remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
   desorp_loading_absolute:
     aliases: ["_desorp_loading_absolute"]
-    description: Absolute amount remaining adsorbed at each desorption data point (see _units_loading)
+    description: Absolute loading remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
   desorp_loading_net:
     aliases: ["_desorp_loading_net"]
-    description: Net amount remaining adsorbed at each desorption data point (see _units_loading)
+    description: Net loading remaining adsorbed at each desorption data point (see _units_loading)
     range: float
 
   desorp_enthalpy_differential:
@@ -448,6 +563,51 @@ slots:
     description: Integral enthalpy of desorption (see _units_enthalpy)
     range: float
 
+  desorp_fugacity_component_1:
+    aliases: ["_desorp_fugacity_component_1"]
+    description: Fugacity of first adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_2:
+    aliases: ["_desorp_fugacity_component_2"]
+    description: Fugacity of second adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_3:
+    aliases: ["_desorp_fugacity_component_3"]
+    description: Fugacity of third adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_4:
+    aliases: ["_desorp_fugacity_component_4"]
+    description: Fugacity of fourth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_5:
+    aliases: ["_desorp_fugacity_component_5"]
+    description: Fugacity of fifth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_6:
+    aliases: ["_desorp_fugacity_component_6"]
+    description: Fugacity of sixth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_7:
+    aliases: ["_desorp_fugacity_component_7"]
+    description: Fugacity of seventh adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_8:
+    aliases: ["_desorp_fugacity_component_8"]
+    description: Fugacity of eighth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
+  desorp_fugacity_component_9:
+    aliases: ["_desorp_fugacity_component_9"]
+    description: Fugacity of ninth adsorptive component in the bulk phase at each desorption measurement (see _units_pressure)
+    range: float
+
   desorp_molefraction:
     aliases: ["_desorp_molefraction"]
     description: Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)
@@ -458,15 +618,95 @@ slots:
     description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
     range: float
 
-  # ── Citation ────────────────────────────────
+  desorp_composition_component_1:
+    aliases: ["_desorp_composition_component_1"]
+    description: Mole fraction of the first component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
 
-  citation_doi:
-    aliases: ["_citation_doi"]
-    description: Digital Object Identifier (DOI) of the publication associated with this data
+  desorp_composition_component_2:
+    aliases: ["_desorp_composition_component_2"]
+    description: Mole fraction of the second component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
 
-  citation_source:
-    aliases: ["_citation_source"]
-    description: Bibliographic source of the data, e.g. journal name, book title, or database
+  desorp_composition_component_3:
+    aliases: ["_desorp_composition_component_3"]
+    description: Mole fraction of the third component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_composition_component_4:
+    aliases: ["_desorp_composition_component_4"]
+    description: Mole fraction of the fourth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_composition_component_5:
+    aliases: ["_desorp_composition_component_5"]
+    description: Mole fraction of the fifth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_composition_component_6:
+    aliases: ["_desorp_composition_component_6"]
+    description: Mole fraction of the sixth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_composition_component_7:
+    aliases: ["_desorp_composition_component_7"]
+    description: Mole fraction of the seventh component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_composition_component_8:
+    aliases: ["_desorp_composition_component_8"]
+    description: Mole fraction of the eighth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_composition_component_9:
+    aliases: ["_desorp_composition_component_9"]
+    description: Mole fraction of the ninth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_loading_component_1:
+    aliases: ["_desorp_loading_component_1"]
+    description: Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_2:
+    aliases: ["_desorp_loading_component_2"]
+    description: Loading of the second component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_3:
+    aliases: ["_desorp_loading_component_3"]
+    description: Loading of the third component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_4:
+    aliases: ["_desorp_loading_component_4"]
+    description: Loading of the fourth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_5:
+    aliases: ["_desorp_loading_component_5"]
+    description: Loading of the fifth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_6:
+    aliases: ["_desorp_loading_component_6"]
+    description: Loading of the sixth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_7:
+    aliases: ["_desorp_loading_component_7"]
+    description: Loading of the seventh component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_8:
+    aliases: ["_desorp_loading_component_8"]
+    description: Loading of the eighth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
+
+  desorp_loading_component_9:
+    aliases: ["_desorp_loading_component_9"]
+    description: Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+    range: float
 
 # ──────────────────────────────────────────────
 #  Classes
@@ -479,9 +719,9 @@ classes:
       A single data point in the adsorption branch of an isotherm.
       Corresponds to a row in an AIF loop_ block for adsorption.
     slots:
+      - adsorp_index
       - adsorp_pressure
       - adsorp_fugacity
-      - adsorp_henry
       - adsorp_p0
       - adsorp_loading
       - adsorp_loading_excess
@@ -489,14 +729,43 @@ classes:
       - adsorp_loading_net
       - adsorp_enthalpy_differential
       - adsorp_enthalpy_integral
-      - adsorp_molefraction
-      - adsorp_selectivity
+      - adsorp_fugacity_component_1
+      - adsorp_fugacity_component_2
+      - adsorp_fugacity_component_3
+      - adsorp_fugacity_component_4
+      - adsorp_fugacity_component_5
+      - adsorp_fugacity_component_6
+      - adsorp_fugacity_component_7
+      - adsorp_fugacity_component_8
+      - adsorp_fugacity_component_9
+      - adsorp_fugacity_component_10
+      - adsorp_composition_component_1
+      - adsorp_composition_component_2
+      - adsorp_composition_component_3
+      - adsorp_composition_component_4
+      - adsorp_composition_component_5
+      - adsorp_composition_component_6
+      - adsorp_composition_component_7
+      - adsorp_composition_component_8
+      - adsorp_composition_component_9
+      - adsorp_composition_component_10
+      - adsorp_loading_component_1
+      - adsorp_loading_component_2
+      - adsorp_loading_component_3
+      - adsorp_loading_component_4
+      - adsorp_loading_component_5
+      - adsorp_loading_component_6
+      - adsorp_loading_component_7
+      - adsorp_loading_component_8
+      - adsorp_loading_component_9
+      - adsorp_loading_component_10
 
   DesorptionDataPoint:
     description: >-
       A single data point in the desorption branch of an isotherm.
       Corresponds to a row in an AIF loop_ block for desorption.
     slots:
+      - desorp_index
       - desorp_pressure
       - desorp_fugacity
       - desorp_p0
@@ -506,8 +775,35 @@ classes:
       - desorp_loading_net
       - desorp_enthalpy_differential
       - desorp_enthalpy_integral
+      - desorp_fugacity_component_1
+      - desorp_fugacity_component_2
+      - desorp_fugacity_component_3
+      - desorp_fugacity_component_4
+      - desorp_fugacity_component_5
+      - desorp_fugacity_component_6
+      - desorp_fugacity_component_7
+      - desorp_fugacity_component_8
+      - desorp_fugacity_component_9
       - desorp_molefraction
       - desorp_selectivity
+      - desorp_composition_component_1
+      - desorp_composition_component_2
+      - desorp_composition_component_3
+      - desorp_composition_component_4
+      - desorp_composition_component_5
+      - desorp_composition_component_6
+      - desorp_composition_component_7
+      - desorp_composition_component_8
+      - desorp_composition_component_9
+      - desorp_loading_component_1
+      - desorp_loading_component_2
+      - desorp_loading_component_3
+      - desorp_loading_component_4
+      - desorp_loading_component_5
+      - desorp_loading_component_6
+      - desorp_loading_component_7
+      - desorp_loading_component_8
+      - desorp_loading_component_9
 
   AdsorptionInformationFile:
     description: >-
@@ -520,20 +816,18 @@ classes:
       - audit_aif_version
       - audit_creation_date
       - audit_creation_software
+      - audit_digitizer
       # Experimental
       - exptl_operator
-      - exptl_digitizer
       - exptl_date
       - exptl_instrument
-      - exptl_adsorptive
-      - exptl_adsorptive_name
       - exptl_temperature
       - exptl_method
       - exptl_isotherm_type
-      - exptl_p0
       # Adsorbent
-      - adsnt_material_id
+      - adsnt_material_name
       - adsnt_info
+      - adsnt_sample_name
       - adsnt_hashkey
       - adsnt_structure_csd_refcode
       - adsnt_structure_topology
@@ -541,33 +835,36 @@ classes:
       - adsnt_composition
       - adsnt_molar_mass
       - adsnt_synthesis
-      - adsnt_sample_id
       - adsnt_sample_mass
       - adsnt_sample_density
       - adsnt_degas_summary
       - adsnt_degas_temperature
       - adsnt_degas_time
-      - adsnt_cycle_number
       # Adsorptive
-      - adsorptive_id
+      - adsorptive_name
       - adsorptive_info
       - adsorptive_inchi
       - adsorptive_cas
       - adsorptive_smiles
-      - adsorptive_molecular_weight
-      - adsorptive_critical_temperature
-      - adsorptive_critical_pressure
-      - adsorptive_kinetic_diameter
-      - adsorptive_quadrupole_moment
+      - adsorptive_formula
+      - adsorptive_component_index
+      - adsorptive_component_name
+      - adsorptive_component_info
+      - adsorptive_component_inchi
+      - adsorptive_component_cas
+      - adsorptive_component_smiles
+      - adsorptive_component_formula
       # Simulation
       - simltn_code
-      - simltn_date
       - simltn_size
       - simltn_forcefield_adsorptive
       - simltn_forcefield_adsorbent
       - simltn_input_files
       - simltn_sampling
       - simltn_lot
+      # Citation
+      - citation_doi
+      - citation_source
       # Units
       - units_temperature
       - units_pressure
@@ -575,19 +872,10 @@ classes:
       - units_loading
       - units_density
       - units_time
-      - units_composition_type
-      - units_enthalpy
-      - units_surface_area
-      - units_pore_volume
-      - units_pore_diameter
       - units_molecular_weight
-      - units_kinetic_diameter
-      - units_dead_volume
-      - units_leak_rate
-      - units_quadrupole_moment
-      # Citation
-      - citation_doi
-      - citation_source
+      - units_enthalpy
+      - units_composition_type
+      - units_concentration
     attributes:
       adsorption_data:
         description: Adsorption branch data points (loop_ block).

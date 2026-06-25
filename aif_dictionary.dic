@@ -85,6 +85,22 @@ save_audit.creation_software
     _type.contents               Text
 save_
 
+save_audit.digitizer
+    _definition.id               '_audit_digitizer'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who digitized the data, if extracted from a
+    published figure or table
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 ##############################################################################
 #                                                                            #
 #                               EXPTL CATEGORY                               #
@@ -117,22 +133,6 @@ save_exptl.operator
     _type.contents               Text
 save_
 
-save_exptl.digitizer
-    _definition.id               '_exptl_digitizer'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Name of the person who digitized the data, if extracted from a
-    published figure or table
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
 save_exptl.date
     _definition.id               '_exptl_date'
     _definition.scope            Item
@@ -154,43 +154,6 @@ save_exptl.instrument
 ;
     Identifier or model name of the instrument used for the
     measurement
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_exptl.adsorptive
-    _definition.id               '_exptl_adsorptive'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2,
-    Water
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-    _description.common
-;
-    Required field. The common or IUPAC name of the gas/vapour
-    used as adsorptive in the experiment or simulation.
-;
-save_
-
-save_exptl.adsorptive_name
-    _definition.id               '_exptl_adsorptive_name'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Alternative or secondary name for the adsorptive, e.g. chemical
-    formula or abbreviation
 ;
     _type.purpose                Describe
     _type.source                 Recorded
@@ -230,9 +193,9 @@ save_exptl.method
         _enumeration_set.detail
         volumetric       'Volumetric (manometric) method.'
         gravimetric      'Gravimetric method.'
-        chromatographic  'Chromatographic method.'
-        simulation       'Data originates from molecular simulation rather than experiment.'
-        other            'Other method not specified here.'
+        chromatographic  ''
+        simulation       ''
+        other            ''
 save_
 
 save_exptl.isotherm_type
@@ -253,23 +216,6 @@ save_exptl.isotherm_type
         net              'Net adsorption.'
 save_
 
-save_exptl.p0
-    _definition.id               '_exptl_p0'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Saturation pressure of the adsorptive at the experimental
-    temperature (see _units_pressure)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_pressure'
-save_
-
 ##############################################################################
 #                                                                            #
 #                               ADSNT CATEGORY                               #
@@ -288,8 +234,8 @@ save_ADSNT
 ;
 save_
 
-save_adsnt.material_id
-    _definition.id               '_adsnt_material_id'
+save_adsnt.material_name
+    _definition.id               '_adsnt_material_name'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -323,6 +269,26 @@ save_adsnt.info
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
+save_
+
+save_adsnt.sample_name
+    _definition.id               '_adsnt_sample_name'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Unique sample identifier assigned by the operator or laboratory
+;
+    _type.purpose                Key
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+    _description.common
+;
+    A unique identifier for the specific sample used in the
+    experiment.
+;
 save_
 
 save_adsnt.hashkey
@@ -435,26 +401,6 @@ save_adsnt.synthesis
     _type.contents               Text
 save_
 
-save_adsnt.sample_id
-    _definition.id               '_adsnt_sample_id'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Unique sample identifier assigned by the operator or laboratory
-;
-    _type.purpose                Key
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-    _description.common
-;
-    Required field. A unique identifier for the specific sample
-    used in the experiment.
-;
-save_
-
 save_adsnt.sample_mass
     _definition.id               '_adsnt_sample_mass'
     _definition.scope            Item
@@ -534,22 +480,6 @@ save_adsnt.degas_time
     _units.code                  'see _units_time'
 save_
 
-save_adsnt.cycle_number
-    _definition.id               '_adsnt_cycle_number'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Adsorption-desorption cycle index (1-based) for multi-cycle
-    studies
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Integer
-save_
-
 ##############################################################################
 #                                                                            #
 #                            ADSORPTIVE CATEGORY                             #
@@ -568,8 +498,8 @@ save_ADSORPTIVE
 ;
 save_
 
-save_adsorptive.id
-    _definition.id               '_adsorptive_id'
+save_adsorptive.name
+    _definition.id               '_adsorptive_name'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -584,8 +514,8 @@ save_adsorptive.id
     _type.contents               Text
     _description.common
 ;
-    Required field. The common or IUPAC name of the gas/vapour
-    used as adsorptive in the experiment or simulation.
+    Required field. The common or IUPAC name of the gas/vapour used
+    as adsorptive in the experiment or simulation.
 ;
 save_
 
@@ -641,83 +571,123 @@ save_adsorptive.smiles
     _type.contents               Text
 save_
 
-save_adsorptive.molecular_weight
-    _definition.id               '_adsorptive_molecular_weight'
+save_adsorptive.formula
+    _definition.id               '_adsorptive_formula'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Chemical formula of the adsorptive'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsorptive.component_index
+    _definition.id               '_adsorptive_component_index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Index for an adsorptive component in a mixture'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+    _description.common
+;
+    Required field for mixtures.
+;
+save_
+
+save_adsorptive.component_name
+    _definition.id               '_adsorptive_component_name'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Molecular weight of the adsorptive (see _units_molecular_weight)
+    Common name of an adsorptive component in a mixture, e.g.
+    Nitrogen, CO2, Water
 ;
-    _type.purpose                Measurand
+    _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_molecular_weight'
+    _type.contents               Text
+    _description.common
+;
+    Required field. The common or IUPAC name of the gas/vapour used
+    as adsorptive in the experiment or simulation.
+;
 save_
 
-save_adsorptive.critical_temperature
-    _definition.id               '_adsorptive_critical_temperature'
+save_adsorptive.component_info
+    _definition.id               '_adsorptive_component_info'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Critical temperature of the adsorptive (see _units_temperature)
+    Alternative or secondary name for an adsorptive component in a
+    mixture, e.g. chemical formula or abbreviation
 ;
-    _type.purpose                Measurand
+    _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_temperature'
+    _type.contents               Text
 save_
 
-save_adsorptive.critical_pressure
-    _definition.id               '_adsorptive_critical_pressure'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Critical pressure of the adsorptive (see _units_pressure)'
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_pressure'
-save_
-
-save_adsorptive.kinetic_diameter
-    _definition.id               '_adsorptive_kinetic_diameter'
+save_adsorptive.component_inchi
+    _definition.id               '_adsorptive_component_inchi'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Kinetic diameter of the adsorptive molecule (see
-    _units_kinetic_diameter)
+    IUPAC InChI identifier of an adsorptive component in a mixture
 ;
-    _type.purpose                Measurand
+    _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_kinetic_diameter'
+    _type.contents               Text
 save_
 
-save_adsorptive.quadrupole_moment
-    _definition.id               '_adsorptive_quadrupole_moment'
+save_adsorptive.component_cas
+    _definition.id               '_adsorptive_component_cas'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'CAS Registry Number of an adsorptive component in a mixture'
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_adsorptive.component_smiles
+    _definition.id               '_adsorptive_component_smiles'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Quadrupole moment of the adsorptive (see
-    _units_quadrupole_moment)
+    Canonical SMILES string of an adsorptive component in a mixture
 ;
-    _type.purpose                Measurand
+    _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_quadrupole_moment'
+    _type.contents               Text
+save_
+
+save_adsorptive.component_formula
+    _definition.id               '_adsorptive_component_formula'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Chemical formula of an adsorptive component in a mixture'
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
 save_
 
 ##############################################################################
@@ -736,7 +706,7 @@ save_SIMLTN
     Data items in the SIMLTN category record computational method
     details for simulated isotherms (e.g. GCMC, MD). Only relevant
     when the data originates from molecular simulation rather than
-    experiment.
+    experiment. Requires _exptl_method = simulation.
 ;
 save_
 
@@ -754,21 +724,6 @@ save_simltn.code
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
-save_
-
-save_simltn.date
-    _definition.id               '_simltn_date'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Date and time the simulation was performed in ISO 8601 format
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               DateTime
 save_
 
 save_simltn.size
@@ -858,6 +813,56 @@ save_simltn.lot
 ;
     Level of theory for the calculation, e.g. DFT, machine-learned
     potential, classical force field
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                             CITATION CATEGORY                              #
+#                                                                            #
+##############################################################################
+
+save_CITATION
+    _definition.id               CITATION
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the CITATION category record bibliographic
+    reference for the source publication or dataset.
+;
+save_
+
+save_citation.doi
+    _definition.id               '_citation_doi'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Digital Object Identifier (DOI) of the publication associated
+    with this data
+;
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_citation.source
+    _definition.id               '_citation_source'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Bibliographic source of the data, e.g. journal name, book title,
+    or database
 ;
     _type.purpose                Describe
     _type.source                 Recorded
@@ -980,16 +985,12 @@ save_units.time
     _type.contents               Text
 save_
 
-save_units.composition_type
-    _definition.id               '_units_composition_type'
+save_units.molecular_weight
+    _definition.id               '_units_molecular_weight'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text
-;
-    Definition of how mixture compositions are expressed, e.g.
-    mole_fraction, mass_fraction
-;
+    _description.text            'Unit of molecular weight values in this file, e.g. g/mol'
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -1008,96 +1009,33 @@ save_units.enthalpy
     _type.contents               Text
 save_
 
-save_units.surface_area
-    _definition.id               '_units_surface_area'
+save_units.composition_type
+    _definition.id               '_units_composition_type'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Unit of surface area values in this file, e.g. m2/g'
+    _description.text
+;
+    Definition of how mixture compositions are expressed, e.g.
+    mole_fraction, mass_fraction, partial_pressure,
+    relative_humidity, concentration
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
 save_
 
-save_units.pore_volume
-    _definition.id               '_units_pore_volume'
+save_units.concentration
+    _definition.id               '_units_concentration'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Unit of pore volume values in this file, e.g. cm3/g'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.pore_diameter
-    _definition.id               '_units_pore_diameter'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of pore diameter values in this file, e.g. nm'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.molecular_weight
-    _definition.id               '_units_molecular_weight'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of molecular weight values in this file, e.g. g/mol'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.kinetic_diameter
-    _definition.id               '_units_kinetic_diameter'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of kinetic diameter values in this file, e.g. angstrom'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.dead_volume
-    _definition.id               '_units_dead_volume'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of dead volume values in this file, e.g. cm3'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.leak_rate
-    _definition.id               '_units_leak_rate'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of leak rate values in this file, e.g. Pa/min'
-    _type.purpose                Describe
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_units.quadrupole_moment
-    _definition.id               '_units_quadrupole_moment'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text            'Unit of quadrupole moment values in this file, e.g. Debye·Å'
+    _description.text
+;
+    Unit of concentration. Requires _units_composition_type =
+    concentration
+;
     _type.purpose                Describe
     _type.source                 Assigned
     _type.container              Single
@@ -1121,6 +1059,22 @@ save_ADSORP
     adsorption branch of the isotherm. These fields appear inside a
     CIF loop_ construct, with one row per equilibrium point.
 ;
+save_
+
+save_adsorp.index
+    _definition.id               '_adsorp_index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Index of the adsorption data point, starting from 1 and
+    incrementing by 1 for each point.
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
 save_
 
 save_adsorp.pressure
@@ -1157,23 +1111,6 @@ save_adsorp.fugacity
     _units.code                  'see _units_pressure'
 save_
 
-save_adsorp.henry
-    _definition.id               '_adsorp_henry'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Henry coefficient describing the infinite-dilution and low-
-    pressure adsorption affinity (see _units_henry)
-;
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_henry'
-save_
-
 save_adsorp.p0
     _definition.id               '_adsorp_p0'
     _definition.scope            Item
@@ -1198,8 +1135,8 @@ save_adsorp.loading
     _definition.update           2026-03-09
     _description.text
 ;
-    Amount adsorbed at each adsorption data point (see
-    _units_loading)
+    Loading at each adsorption data point (see _units_loading).
+    Total loading in a multicomponent setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1215,8 +1152,8 @@ save_adsorp.loading_excess
     _definition.update           2026-03-09
     _description.text
 ;
-    Excess amount adsorbed at each adsorption data point (see
-    _units_loading)
+    Excess loading at each adsorption data point (see
+    _units_loading). Total loading in a multicomponent setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1232,8 +1169,8 @@ save_adsorp.loading_absolute
     _definition.update           2026-03-09
     _description.text
 ;
-    Absolute amount adsorbed at each adsorption data point (see
-    _units_loading)
+    Absolute loading at each adsorption data point (see
+    _units_loading). Total loading in a multicomponent setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1249,8 +1186,7 @@ save_adsorp.loading_net
     _definition.update           2026-03-09
     _description.text
 ;
-    Net amount adsorbed at each adsorption data point (see
-    _units_loading)
+    Net loading at each adsorption data point (see _units_loading)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1285,16 +1221,185 @@ save_adsorp.enthalpy_integral
     _units.code                  'see _units_enthalpy'
 save_
 
-save_adsorp.molefraction
-    _definition.id               '_adsorp_molefraction'
+save_adsorp.fugacity_component_1
+    _definition.id               '_adsorp_fugacity_component_1'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Mole fraction of the adsorptive in the gas phase for a
-    multicomponent adsorption measurement (see
-    _units_composition_type)
+    Fugacity of first adsorptive component in the bulk phase at each
+    adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_2
+    _definition.id               '_adsorp_fugacity_component_2'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of second adsorptive component in the bulk phase at
+    each adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_3
+    _definition.id               '_adsorp_fugacity_component_3'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of third adsorptive component in the bulk phase at each
+    adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_4
+    _definition.id               '_adsorp_fugacity_component_4'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of fourth adsorptive component in the bulk phase at
+    each adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_5
+    _definition.id               '_adsorp_fugacity_component_5'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of fifth adsorptive component in the bulk phase at each
+    adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_6
+    _definition.id               '_adsorp_fugacity_component_6'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of sixth adsorptive component in the bulk phase at each
+    adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_7
+    _definition.id               '_adsorp_fugacity_component_7'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of seventh adsorptive component in the bulk phase at
+    each adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_8
+    _definition.id               '_adsorp_fugacity_component_8'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of eighth adsorptive component in the bulk phase at
+    each adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_9
+    _definition.id               '_adsorp_fugacity_component_9'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of ninth adsorptive component in the bulk phase at each
+    adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.fugacity_component_10
+    _definition.id               '_adsorp_fugacity_component_10'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of tenth adsorptive component in the bulk phase at each
+    adsorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp.composition_component_1
+    _definition.id               '_adsorp_composition_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the first component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1303,20 +1408,327 @@ save_adsorp.molefraction
     _units.code                  'see _units_composition_type'
 save_
 
-save_adsorp.selectivity
-    _definition.id               '_adsorp_selectivity'
+save_adsorp.composition_component_2
+    _definition.id               '_adsorp_composition_component_2'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Adsorption selectivity for a specified component pair under the
-    given conditions (unitless ratio)
+    Mole fraction of the second component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_3
+    _definition.id               '_adsorp_composition_component_3'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the third component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_4
+    _definition.id               '_adsorp_composition_component_4'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the fourth component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_5
+    _definition.id               '_adsorp_composition_component_5'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the fifth component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_6
+    _definition.id               '_adsorp_composition_component_6'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the sixth component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_7
+    _definition.id               '_adsorp_composition_component_7'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the seventh component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_8
+    _definition.id               '_adsorp_composition_component_8'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the eighth component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_9
+    _definition.id               '_adsorp_composition_component_9'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the ninth component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.composition_component_10
+    _definition.id               '_adsorp_composition_component_10'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the tenth component in the bulk phase at each
+    adsorption measurement (see _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp.loading_component_1
+    _definition.id               '_adsorp_loading_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the first component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_2
+    _definition.id               '_adsorp_loading_component_2'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the second component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_3
+    _definition.id               '_adsorp_loading_component_3'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the third component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_4
+    _definition.id               '_adsorp_loading_component_4'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the fourth component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_5
+    _definition.id               '_adsorp_loading_component_5'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the fifth component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_6
+    _definition.id               '_adsorp_loading_component_6'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the sixth component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_7
+    _definition.id               '_adsorp_loading_component_7'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the seventh component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_8
+    _definition.id               '_adsorp_loading_component_8'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the eighth component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_9
+    _definition.id               '_adsorp_loading_component_9'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the ninth component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_adsorp.loading_component_10
+    _definition.id               '_adsorp_loading_component_10'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Sorptive loading of the tenth component in the adsorbed phase
+    for a multicomponent adsorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
 save_
 
 ##############################################################################
@@ -1336,6 +1748,22 @@ save_DESORP
     desorption branch of the isotherm. Mirrors the adsorption data
     section for the reverse process.
 ;
+save_
+
+save_desorp.index
+    _definition.id               '_desorp_index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Index of the desorption data point, starting from 1 and
+    incrementing by 1 for each point.
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
 save_
 
 save_desorp.pressure
@@ -1396,7 +1824,7 @@ save_desorp.loading
     _definition.update           2026-03-09
     _description.text
 ;
-    Amount remaining adsorbed at each desorption data point (see
+    Loading remaining adsorbed at each desorption data point (see
     _units_loading)
 ;
     _type.purpose                Measurand
@@ -1413,7 +1841,7 @@ save_desorp.loading_excess
     _definition.update           2026-03-09
     _description.text
 ;
-    Excess amount remaining adsorbed at each desorption data point
+    Excess loading remaining adsorbed at each desorption data point
     (see _units_loading)
 ;
     _type.purpose                Measurand
@@ -1430,8 +1858,8 @@ save_desorp.loading_absolute
     _definition.update           2026-03-09
     _description.text
 ;
-    Absolute amount remaining adsorbed at each desorption data point
-    (see _units_loading)
+    Absolute loading remaining adsorbed at each desorption data
+    point (see _units_loading)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1447,8 +1875,8 @@ save_desorp.loading_net
     _definition.update           2026-03-09
     _description.text
 ;
-    Net amount remaining adsorbed at each desorption data point (see
-    _units_loading)
+    Net loading remaining adsorbed at each desorption data point
+    (see _units_loading)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1481,6 +1909,159 @@ save_desorp.enthalpy_integral
     _type.container              Single
     _type.contents               Real
     _units.code                  'see _units_enthalpy'
+save_
+
+save_desorp.fugacity_component_1
+    _definition.id               '_desorp_fugacity_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of first adsorptive component in the bulk phase at each
+    desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_2
+    _definition.id               '_desorp_fugacity_component_2'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of second adsorptive component in the bulk phase at
+    each desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_3
+    _definition.id               '_desorp_fugacity_component_3'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of third adsorptive component in the bulk phase at each
+    desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_4
+    _definition.id               '_desorp_fugacity_component_4'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of fourth adsorptive component in the bulk phase at
+    each desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_5
+    _definition.id               '_desorp_fugacity_component_5'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of fifth adsorptive component in the bulk phase at each
+    desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_6
+    _definition.id               '_desorp_fugacity_component_6'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of sixth adsorptive component in the bulk phase at each
+    desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_7
+    _definition.id               '_desorp_fugacity_component_7'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of seventh adsorptive component in the bulk phase at
+    each desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_8
+    _definition.id               '_desorp_fugacity_component_8'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of eighth adsorptive component in the bulk phase at
+    each desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp.fugacity_component_9
+    _definition.id               '_desorp_fugacity_component_9'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Fugacity of ninth adsorptive component in the bulk phase at each
+    desorption measurement (see _units_pressure)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
 save_
 
 save_desorp.molefraction
@@ -1517,54 +2098,319 @@ save_desorp.selectivity
     _type.contents               Real
 save_
 
-##############################################################################
-#                                                                            #
-#                             CITATION CATEGORY                              #
-#                                                                            #
-##############################################################################
-
-save_CITATION
-    _definition.id               CITATION
-    _definition.scope            Category
-    _definition.class            Set
-    _definition.update           2026-03-09
-    _description.text
-;
-    Data items in the CITATION category record bibliographic
-    reference for the source publication or dataset.
-;
-save_
-
-save_citation.doi
-    _definition.id               '_citation_doi'
+save_desorp.composition_component_1
+    _definition.id               '_desorp_composition_component_1'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Digital Object Identifier (DOI) of the publication associated
-    with this data
+    Mole fraction of the first component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
 ;
-    _type.purpose                Encode
-    _type.source                 Assigned
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_citation.source
-    _definition.id               '_citation_source'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Bibliographic source of the data, e.g. journal name, book title,
-    or database
-;
-    _type.purpose                Describe
+    _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
-    _type.contents               Text
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_2
+    _definition.id               '_desorp_composition_component_2'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the second component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_3
+    _definition.id               '_desorp_composition_component_3'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the third component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_4
+    _definition.id               '_desorp_composition_component_4'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the fourth component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_5
+    _definition.id               '_desorp_composition_component_5'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the fifth component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_6
+    _definition.id               '_desorp_composition_component_6'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the sixth component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_7
+    _definition.id               '_desorp_composition_component_7'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the seventh component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_8
+    _definition.id               '_desorp_composition_component_8'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the eighth component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.composition_component_9
+    _definition.id               '_desorp_composition_component_9'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the ninth component in the bulk phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.loading_component_1
+    _definition.id               '_desorp_loading_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the first component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_2
+    _definition.id               '_desorp_loading_component_2'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the second component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_3
+    _definition.id               '_desorp_loading_component_3'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the third component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_4
+    _definition.id               '_desorp_loading_component_4'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the fourth component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_5
+    _definition.id               '_desorp_loading_component_5'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the fifth component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_6
+    _definition.id               '_desorp_loading_component_6'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the sixth component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_7
+    _definition.id               '_desorp_loading_component_7'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the seventh component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_8
+    _definition.id               '_desorp_loading_component_8'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the eighth component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
+save_
+
+save_desorp.loading_component_9
+    _definition.id               '_desorp_loading_component_9'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Loading of the ninth component in the adsorbed phase for a
+    multicomponent desorption measurement (see _units_loading)
+;
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_loading'
 save_
 
 ##############################################################################
