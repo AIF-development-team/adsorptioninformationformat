@@ -7,6 +7,7 @@ data_gcmc_simulation
     _exptl_temperature                298.15
     _exptl_isotherm_type              "absolute"
     _exptl_date                       2024-10-15T22:00:00Z
+    _exptl_method                     "simulation"
 
     _simltn_code                      "RASPA-2.0.48"
     _simltn_size                      "2x2x2 unit cells"
@@ -15,9 +16,9 @@ data_gcmc_simulation
     _simltn_input_files               "https://github.com/example/simulations/tree/main/gcmc_co2"
     _simltn_sampling                  "Grand Canonical Monte Carlo"
     _simltn_lot                       "classical"
-
-    _adsnt_material_id                "MOF-5"
-    _adsnt_sample_id                  "MOF5-GCMC-sim01"
+    
+    _adsnt_material_name              "MOF-5"
+    _adsnt_sample_name                "MOF5-GCMC-sim01"
     _adsnt_structure_csd_refcode      "SAHYIK"
     _adsnt_structure_topology         "pcu"
     _adsnt_composition                "Zn4O(BDC)3"

@@ -11,8 +11,8 @@ data_water_vapor_silica
     _exptl_instrument                 "DVS-Resolution"
     _exptl_isotherm_type              "absolute"
 
-    _adsnt_material_id                "Silica-Gel-Type-A"
-    _adsnt_sample_id                  "SGA-001"
+    _adsnt_material_name              "Silica-Gel-Type-A"
+    _adsnt_sample_name                "SGA-001"
     _adsnt_sample_mass                0.0123
 
     _adsorptive_name                  "Water"

@@ -11,8 +11,8 @@ data_basic_n2_77K
     _exptl_instrument                 "ASAP-2020-001"
     _exptl_isotherm_type              "absolute"
 
-    _adsnt_material_id                "Zeolite-13X"
-    _adsnt_sample_id                  "Z13X-batch4-01"
+    _adsnt_material_name              "Zeolite-13X"
+    _adsnt_sample_name                "Z13X-batch4-01"
     _adsnt_sample_mass                0.1523
 
     _adsorptive_name                 "Nitrogen"

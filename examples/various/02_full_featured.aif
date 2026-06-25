@@ -12,8 +12,8 @@ data_full_featured_aif
     _exptl_instrument                 "ASAP-2020-HD"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_id                "UiO-66-NH2"
-    _adsnt_sample_id                  "UiO66NH2-full-01"
+    _adsnt_material_name              "UiO-66-NH2"
+    _adsnt_sample_name                "UiO66NH2-full-01"
     _adsnt_sample_mass                0.0567
     _adsnt_sample_density             1.67
     _adsnt_structure_csd_refcode      "RUBTAK"
