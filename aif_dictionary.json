@@ -270,6 +270,12 @@
         "_simltn_lot": {
           "type": "string",
           "description": "Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field"
+        },
+        "_simltn_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the simulation in ISO 8601 format. This field is deprecated and may be removed in future versions of the AIF schema.",
+          "deprecated": true
         }
       }
     },

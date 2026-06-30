@@ -257,6 +257,12 @@ slots:
     aliases: ["_simltn_lot"]
     description: Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field
 
+  simltn_date:
+    aliases: ["_simltn_date"]
+    description: Date and time of the simulation in ISO 8601 format. This field is deprecated and may be removed in future versions of the AIF schema.
+    range: datetime
+    deprecated: true
+
   # ── Citation ────────────────────────────────
 
   citation_doi:
@@ -868,6 +874,7 @@ classes:
       - simltn_input_files
       - simltn_sampling
       - simltn_lot
+      - simltn_date
       # Citation
       - citation_doi
       - citation_source

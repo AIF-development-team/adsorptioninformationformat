@@ -820,6 +820,28 @@ save_simltn.lot
     _type.contents               Text
 save_
 
+save_simltn.date
+    _definition.id               '_simltn_date'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Date and time of the simulation in ISO 8601 format. This field
+    is deprecated and may be removed in future versions of the AIF
+    schema.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               DateTime
+    _description.common
+;
+    Deprecated. This data name may be removed in a future version of
+    the AIF schema.
+;
+save_
+
 ##############################################################################
 #                                                                            #
 #                             CITATION CATEGORY                              #
