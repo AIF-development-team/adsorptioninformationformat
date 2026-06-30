@@ -29,13 +29,13 @@ data_mof_structure_link
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
 
     loop_
         _adsorp_index
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_loading
+        _adsorp_amount
         1  5.0        101325.0   0.89
         2  50.0       101325.0   3.45
         3  500.0      101325.0   7.12

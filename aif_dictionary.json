@@ -310,7 +310,7 @@
           "description": "Unit of mass for all mass values in this file, e.g. g, mg, kg",
           "x-dic-source": "Assigned"
         },
-        "_units_loading": {
+        "_units_sorbed_amount": {
           "type": "string",
           "description": "Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%",
           "x-dic-source": "Assigned"
@@ -368,21 +368,21 @@
           "type": "number",
           "description": "Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)"
         },
-        "_adsorp_loading": {
+        "_adsorp_amount": {
           "type": "number",
-          "description": "Loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting."
+          "description": "Loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting."
         },
-        "_adsorp_loading_excess": {
+        "_adsorp_amount_excess": { 
           "type": "number",
-          "description": "Excess loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting."
+          "description": "Excess loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting."
         },
-        "_adsorp_loading_absolute": {
+        "_adsorp_amount_absolute": {
           "type": "number",
-          "description": "Absolute loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting."
+          "description": "Absolute loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting."
         },
-        "_adsorp_loading_net": {
+        "_adsorp_amount_net": {
           "type": "number",
-          "description": "Net loading at each adsorption data point (see _units_loading)"
+          "description": "Net loading at each adsorption data point (see _units_sorbed_amount)"
         },
         "_adsorp_enthalpy_differential": {
           "type": "number",
@@ -472,45 +472,45 @@
           "type": "number",
           "description": "Mole fraction of the tenth component in the bulk phase at each adsorption measurement (see _units_composition_type)"
         },
-        "_adsorp_loading_component_1": {
+        "_adsorp_amount_component_1": {
           "type": "number",
-          "description": "Sorptive loading of the first component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the first component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_2": {
+        "_adsorp_amount_component_2": {
           "type": "number",
-          "description": "Sorptive loading of the second component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the second component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_3": {
+        "_adsorp_amount_component_3": {
           "type": "number",
-          "description": "Sorptive loading of the third component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the third component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_4": {
+        "_adsorp_amount_component_4": {
           "type": "number",
-          "description": "Sorptive loading of the fourth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the fourth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_5": {
+        "_adsorp_amount_component_5": {
           "type": "number",
-          "description": "Sorptive loading of the fifth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the fifth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_6": {
+        "_adsorp_amount_component_6": {
           "type": "number",
-          "description": "Sorptive loading of the sixth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the sixth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_7": {
+        "_adsorp_amount_component_7": {
           "type": "number",
-          "description": "Sorptive loading of the seventh component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the seventh component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_8": {
+        "_adsorp_amount_component_8": {
           "type": "number",
-          "description": "Sorptive loading of the eighth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the eighth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_9": {
+        "_adsorp_amount_component_9": {
           "type": "number",
-          "description": "Sorptive loading of the ninth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the ninth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         },
-        "_adsorp_loading_component_10": {
+        "_adsorp_amount_component_10": {
           "type": "number",
-          "description": "Sorptive loading of the tenth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)"
+          "description": "Sorptive loading of the tenth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)"
         }
       }
     },
@@ -535,21 +535,21 @@
           "type": "number",
           "description": "Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)"
         },
-        "_desorp_loading": {
+        "_desorp_amount": {
           "type": "number",
-          "description": "Loading remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)"
         },
-        "_desorp_loading_excess": {
+        "_desorp_amount_excess": {
           "type": "number",
-          "description": "Excess loading remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Excess loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)"
         },
-        "_desorp_loading_absolute": {
+        "_desorp_amount_absolute": {
           "type": "number",
-          "description": "Absolute loading remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Absolute loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)"
         },
-        "_desorp_loading_net": {
+        "_desorp_amount_net": {
           "type": "number",
-          "description": "Net loading remaining adsorbed at each desorption data point (see _units_loading)"
+          "description": "Net loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)"
         },
         "_desorp_enthalpy_differential": {
           "type": "number",
@@ -639,45 +639,45 @@
           "type": "number",
           "description": "Mole fraction of the tenth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)"
         },
-        "_desorp_loading_component_1": {
+        "_desorp_amount_component_1": {
           "type": "number",
-          "description": "Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_2": {
+        "_desorp_amount_component_2": {
           "type": "number",
-          "description": "Loading of the second component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the second component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_3": {
+        "_desorp_amount_component_3": {
           "type": "number",
-          "description": "Loading of the third component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the third component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_4": {
+        "_desorp_amount_component_4": {
           "type": "number",
-          "description": "Loading of the fourth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the fourth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_5": {
+        "_desorp_amount_component_5": {
           "type": "number",
-          "description": "Loading of the fifth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the fifth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_6": {
+        "_desorp_amount_component_6": {
           "type": "number",
-          "description": "Loading of the sixth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the sixth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_7": {
+        "_desorp_amount_component_7": {
           "type": "number",
-          "description": "Loading of the seventh component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the seventh component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_8": {
+        "_desorp_amount_component_8": {
           "type": "number",
-          "description": "Loading of the eighth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the eighth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_9": {
+        "_desorp_amount_component_9": {
           "type": "number",
-          "description": "Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         },
-        "_desorp_loading_component_10": {
+        "_desorp_amount_component_10": {
           "type": "number",
-          "description": "Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)"
+          "description": "Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         }
       }
     }
@@ -764,10 +764,10 @@
     "_adsorp_enthalpy_differential": ["_units_enthalpy"],
     "_adsorp_enthalpy_integral":      ["_units_enthalpy"],
     "_adsorp_henry": ["_units_henry"],
-    "_adsorp_loading": ["_units_loading"],
-    "_adsorp_loading_excess": ["_units_loading", "_adsorp_loading"],
-    "_adsorp_loading_absolute": ["_units_loading", "_adsorp_loading"],
-    "_adsorp_loading_net": ["_units_loading", "_adsorp_loading"],
+    "_adsorp_amount": ["_units_sorbed_amount"],
+    "_adsorp_amount_excess": ["_units_sorbed_amount", "_adsorp_amount"],
+    "_adsorp_amount_absolute": ["_units_sorbed_amount", "_adsorp_amount"],
+    "_adsorp_amount_net": ["_units_sorbed_amount", "_adsorp_amount"],
     "_adsorp_p0": ["_units_pressure"],
     "_adsorp_pressure": ["_units_pressure"],
     "_adsorptive_cas": ["_adsorptive_name"],
@@ -777,10 +777,10 @@
     "_adsorptive_smiles": ["_adsorptive_name"],
     "_desorp_enthalpy_differential": ["_units_enthalpy"],
     "_desorp_enthalpy_integral": ["_units_enthalpy"],
-    "_desorp_loading": ["_units_loading"],
-    "_desorp_loading_excess": ["_units_loading", "_adsorp_loading"],
-    "_desorp_loading_absolute": ["_units_loading", "_adsorp_loading"],
-    "_desorp_loading_net": ["_units_loading", "_adsorp_loading"],
+    "_desorp_amount": ["_units_sorbed_amount"],
+    "_desorp_amount_excess": ["_units_sorbed_amount", "_adsorp_amount"],
+    "_desorp_amount_absolute": ["_units_sorbed_amount", "_adsorp_amount"],
+    "_desorp_amount_net": ["_units_sorbed_amount", "_adsorp_amount"],
     "_desorp_p0": ["_units_pressure"],
     "_desorp_pressure": ["_units_pressure"],
     "_exptl_temperature": ["_units_temperature"],

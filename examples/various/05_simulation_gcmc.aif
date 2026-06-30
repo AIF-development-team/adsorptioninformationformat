@@ -29,12 +29,12 @@ data_gcmc_simulation
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
 
     loop_
         _adsorp_index
         _adsorp_pressure
-        _adsorp_loading
+        _adsorp_amount
         1  100.0      0.012
         2  500.0      0.058
         3  1000.0     0.115

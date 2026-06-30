@@ -281,8 +281,8 @@ slots:
     aliases: ["_units_mass"]
     description: Unit of mass for all mass values in this file, e.g. g, mg, kg
 
-  units_loading:
-    aliases: ["_units_loading"]
+  units_sorbed_amount:
+    aliases: ["_units_sorbed_amount"]
     description: Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%
 
   units_density:
@@ -331,24 +331,24 @@ slots:
     description: Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)
     range: float
 
-  adsorp_loading:
-    aliases: ["_adsorp_loading"]
-    description: Loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting.
+  adsorp_amount:
+    aliases: ["_adsorp_amount"]
+    description: Loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting.
     range: float
 
-  adsorp_loading_excess:
-    aliases: ["_adsorp_loading_excess"]
-    description: Excess loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting.
+  adsorp_amount_excess:
+    aliases: ["_adsorp_amount_excess"]
+    description: Excess loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting.
     range: float
 
-  adsorp_loading_absolute:
-    aliases: ["_adsorp_loading_absolute"]
-    description: Absolute loading at each adsorption data point (see _units_loading). Total loading in a multicomponent setting.
+  adsorp_amount_absolute:
+    aliases: ["_adsorp_amount_absolute"]
+    description: Absolute loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting.
     range: float
 
-  adsorp_loading_net:
-    aliases: ["_adsorp_loading_net"]
-    description: Net loading at each adsorption data point (see _units_loading)
+  adsorp_amount_net:
+    aliases: ["_adsorp_amount_net"]
+    description: Net loading at each adsorption data point (see _units_sorbed_amount)
     range: float
 
   adsorp_enthalpy_differential:
@@ -461,54 +461,54 @@ slots:
     description: Mole fraction of the tenth component in the bulk phase at each adsorption measurement (see _units_composition_type)
     range: float
 
-  adsorp_loading_component_1:
-    aliases: ["_adsorp_loading_component_1"]
-    description: Sorptive loading of the first component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_1:
+    aliases: ["_adsorp_amount_component_1"]
+    description: Sorptive loading of the first component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_2:
-    aliases: ["_adsorp_loading_component_2"]
-    description: Sorptive loading of the second component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_2:
+    aliases: ["_adsorp_amount_component_2"]
+    description: Sorptive loading of the second component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_3:
-    aliases: ["_adsorp_loading_component_3"]
-    description: Sorptive loading of the third component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_3:
+    aliases: ["_adsorp_amount_component_3"]
+    description: Sorptive loading of the third component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_4:
-    aliases: ["_adsorp_loading_component_4"]
-    description: Sorptive loading of the fourth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_4:
+    aliases: ["_adsorp_amount_component_4"]
+    description: Sorptive loading of the fourth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_5:
-    aliases: ["_adsorp_loading_component_5"]
-    description: Sorptive loading of the fifth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_5:
+    aliases: ["_adsorp_amount_component_5"]
+    description: Sorptive loading of the fifth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_6:
-    aliases: ["_adsorp_loading_component_6"]
-    description: Sorptive loading of the sixth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_6:
+    aliases: ["_adsorp_amount_component_6"]
+    description: Sorptive loading of the sixth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_7:
-    aliases: ["_adsorp_loading_component_7"]
-    description: Sorptive loading of the seventh component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_7:
+    aliases: ["_adsorp_amount_component_7"]
+    description: Sorptive loading of the seventh component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_8:
-    aliases: ["_adsorp_loading_component_8"]
-    description: Sorptive loading of the eighth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_8:
+    aliases: ["_adsorp_amount_component_8"]
+    description: Sorptive loading of the eighth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_9:
-    aliases: ["_adsorp_loading_component_9"]
-    description: Sorptive loading of the ninth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_9:
+    aliases: ["_adsorp_amount_component_9"]
+    description: Sorptive loading of the ninth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
-  adsorp_loading_component_10:
-    aliases: ["_adsorp_loading_component_10"]
-    description: Sorptive loading of the tenth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_loading)
+  adsorp_amount_component_10:
+    aliases: ["_adsorp_amount_component_10"]
+    description: Sorptive loading of the tenth component in the adsorbed phase for a multicomponent adsorption measurement (see _units_sorbed_amount)
     range: float
 
   # ── Desorption Data ─────────────────────────
@@ -533,24 +533,24 @@ slots:
     description: Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)
     range: float
 
-  desorp_loading:
-    aliases: ["_desorp_loading"]
-    description: Loading remaining adsorbed at each desorption data point (see _units_loading)
+  desorp_amount:
+    aliases: ["_desorp_amount"]
+    description: Loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_excess:
-    aliases: ["_desorp_loading_excess"]
-    description: Excess loading remaining adsorbed at each desorption data point (see _units_loading)
+  desorp_amount_excess:
+    aliases: ["_desorp_amount_excess"]
+    description: Excess loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_absolute:
-    aliases: ["_desorp_loading_absolute"]
-    description: Absolute loading remaining adsorbed at each desorption data point (see _units_loading)
+  desorp_amount_absolute:
+    aliases: ["_desorp_amount_absolute"]
+    description: Absolute loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_net:
-    aliases: ["_desorp_loading_net"]
-    description: Net loading remaining adsorbed at each desorption data point (see _units_loading)
+  desorp_amount_net:
+    aliases: ["_desorp_amount_net"]
+    description: Net loading remaining adsorbed at each desorption data point (see _units_sorbed_amount)
     range: float
 
   desorp_enthalpy_differential:
@@ -663,54 +663,54 @@ slots:
     description: Mole fraction of the tenth component in the bulk phase for a multicomponent desorption measurement (see _units_composition_type)
     range: float
 
-  desorp_loading_component_1:
-    aliases: ["_desorp_loading_component_1"]
-    description: Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_1:
+    aliases: ["_desorp_amount_component_1"]
+    description: Loading of the first component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_2:
-    aliases: ["_desorp_loading_component_2"]
-    description: Loading of the second component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_2:
+    aliases: ["_desorp_amount_component_2"]
+    description: Loading of the second component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_3:
-    aliases: ["_desorp_loading_component_3"]
-    description: Loading of the third component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_3:
+    aliases: ["_desorp_amount_component_3"]
+    description: Loading of the third component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_4:
-    aliases: ["_desorp_loading_component_4"]
-    description: Loading of the fourth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_4:
+    aliases: ["_desorp_amount_component_4"]
+    description: Loading of the fourth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_5:
-    aliases: ["_desorp_loading_component_5"]
-    description: Loading of the fifth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_5:
+    aliases: ["_desorp_amount_component_5"]
+    description: Loading of the fifth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_6:
-    aliases: ["_desorp_loading_component_6"]
-    description: Loading of the sixth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_6:
+    aliases: ["_desorp_amount_component_6"]
+    description: Loading of the sixth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_7:
-    aliases: ["_desorp_loading_component_7"]
-    description: Loading of the seventh component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_7:
+    aliases: ["_desorp_amount_component_7"]
+    description: Loading of the seventh component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_8:
-    aliases: ["_desorp_loading_component_8"]
-    description: Loading of the eighth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_8:
+    aliases: ["_desorp_amount_component_8"]
+    description: Loading of the eighth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_9:
-    aliases: ["_desorp_loading_component_9"]
-    description: Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_9:
+    aliases: ["_desorp_amount_component_9"]
+    description: Loading of the ninth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_loading_component_10:
-    aliases: ["_desorp_loading_component_10"]
-    description: Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_loading)
+  desorp_amount_component_10:
+    aliases: ["_desorp_amount_component_10"]
+    description: Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
 # ──────────────────────────────────────────────
@@ -728,10 +728,10 @@ classes:
       - adsorp_pressure
       - adsorp_fugacity
       - adsorp_p0
-      - adsorp_loading
-      - adsorp_loading_excess
-      - adsorp_loading_absolute
-      - adsorp_loading_net
+      - adsorp_amount
+      - adsorp_amount_excess
+      - adsorp_amount_absolute
+      - adsorp_amount_net
       - adsorp_enthalpy_differential
       - adsorp_enthalpy_integral
       - adsorp_fugacity_component_1
@@ -754,16 +754,16 @@ classes:
       - adsorp_composition_component_8
       - adsorp_composition_component_9
       - adsorp_composition_component_10
-      - adsorp_loading_component_1
-      - adsorp_loading_component_2
-      - adsorp_loading_component_3
-      - adsorp_loading_component_4
-      - adsorp_loading_component_5
-      - adsorp_loading_component_6
-      - adsorp_loading_component_7
-      - adsorp_loading_component_8
-      - adsorp_loading_component_9
-      - adsorp_loading_component_10
+      - adsorp_amount_component_1
+      - adsorp_amount_component_2
+      - adsorp_amount_component_3
+      - adsorp_amount_component_4
+      - adsorp_amount_component_5
+      - adsorp_amount_component_6
+      - adsorp_amount_component_7
+      - adsorp_amount_component_8
+      - adsorp_amount_component_9
+      - adsorp_amount_component_10
 
   DesorptionDataPoint:
     description: >-
@@ -774,10 +774,10 @@ classes:
       - desorp_pressure
       - desorp_fugacity
       - desorp_p0
-      - desorp_loading
-      - desorp_loading_excess
-      - desorp_loading_absolute
-      - desorp_loading_net
+      - desorp_amount
+      - desorp_amount_excess
+      - desorp_amount_absolute
+      - desorp_amount_net
       - desorp_enthalpy_differential
       - desorp_enthalpy_integral
       - desorp_fugacity_component_1
@@ -800,16 +800,16 @@ classes:
       - desorp_composition_component_8
       - desorp_composition_component_9
       - desorp_composition_component_10
-      - desorp_loading_component_1
-      - desorp_loading_component_2
-      - desorp_loading_component_3
-      - desorp_loading_component_4
-      - desorp_loading_component_5
-      - desorp_loading_component_6
-      - desorp_loading_component_7
-      - desorp_loading_component_8
-      - desorp_loading_component_9
-      - desorp_loading_component_10
+      - desorp_amount_component_1
+      - desorp_amount_component_2
+      - desorp_amount_component_3
+      - desorp_amount_component_4
+      - desorp_amount_component_5
+      - desorp_amount_component_6
+      - desorp_amount_component_7
+      - desorp_amount_component_8
+      - desorp_amount_component_9
+      - desorp_amount_component_10
 
   AdsorptionInformationFile:
     description: >-
@@ -875,7 +875,7 @@ classes:
       - units_temperature
       - units_pressure
       - units_mass
-      - units_loading
+      - units_sorbed_amount
       - units_density
       - units_time
       - units_molecular_weight

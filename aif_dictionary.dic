@@ -937,8 +937,8 @@ save_units.mass
     _type.contents               Text
 save_
 
-save_units.loading
-    _definition.id               '_units_loading'
+save_units.sorbed_amount
+    _definition.id               '_units_sorbed_amount'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -1128,71 +1128,75 @@ save_adsorp.p0
     _units.code                  'see _units_pressure'
 save_
 
-save_adsorp.loading
-    _definition.id               '_adsorp_loading'
+save_adsorp.amount
+    _definition.id               '_adsorp_amount'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Loading at each adsorption data point (see _units_loading).
-    Total loading in a multicomponent setting.
+    Loading at each adsorption data point (see
+    _units_sorbed_amount). Total loading in a multicomponent
+    setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_excess
-    _definition.id               '_adsorp_loading_excess'
+save_adsorp.amount_excess
+    _definition.id               '_adsorp_amount_excess'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Excess loading at each adsorption data point (see
-    _units_loading). Total loading in a multicomponent setting.
+    _units_sorbed_amount). Total loading in a multicomponent
+    setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_absolute
-    _definition.id               '_adsorp_loading_absolute'
+save_adsorp.amount_absolute
+    _definition.id               '_adsorp_amount_absolute'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Absolute loading at each adsorption data point (see
-    _units_loading). Total loading in a multicomponent setting.
+    _units_sorbed_amount). Total loading in a multicomponent
+    setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_net
-    _definition.id               '_adsorp_loading_net'
+save_adsorp.amount_net
+    _definition.id               '_adsorp_amount_net'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Net loading at each adsorption data point (see _units_loading)
+    Net loading at each adsorption data point (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
 save_adsorp.enthalpy_differential
@@ -1561,174 +1565,184 @@ save_adsorp.composition_component_10
     _units.code                  'see _units_composition_type'
 save_
 
-save_adsorp.loading_component_1
-    _definition.id               '_adsorp_loading_component_1'
+save_adsorp.amount_component_1
+    _definition.id               '_adsorp_amount_component_1'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the first component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_2
-    _definition.id               '_adsorp_loading_component_2'
+save_adsorp.amount_component_2
+    _definition.id               '_adsorp_amount_component_2'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the second component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_3
-    _definition.id               '_adsorp_loading_component_3'
+save_adsorp.amount_component_3
+    _definition.id               '_adsorp_amount_component_3'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the third component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_4
-    _definition.id               '_adsorp_loading_component_4'
+save_adsorp.amount_component_4
+    _definition.id               '_adsorp_amount_component_4'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the fourth component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_5
-    _definition.id               '_adsorp_loading_component_5'
+save_adsorp.amount_component_5
+    _definition.id               '_adsorp_amount_component_5'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the fifth component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_6
-    _definition.id               '_adsorp_loading_component_6'
+save_adsorp.amount_component_6
+    _definition.id               '_adsorp_amount_component_6'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the sixth component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_7
-    _definition.id               '_adsorp_loading_component_7'
+save_adsorp.amount_component_7
+    _definition.id               '_adsorp_amount_component_7'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the seventh component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_8
-    _definition.id               '_adsorp_loading_component_8'
+save_adsorp.amount_component_8
+    _definition.id               '_adsorp_amount_component_8'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the eighth component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_9
-    _definition.id               '_adsorp_loading_component_9'
+save_adsorp.amount_component_9
+    _definition.id               '_adsorp_amount_component_9'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the ninth component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_adsorp.loading_component_10
-    _definition.id               '_adsorp_loading_component_10'
+save_adsorp.amount_component_10
+    _definition.id               '_adsorp_amount_component_10'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Sorptive loading of the tenth component in the adsorbed phase
-    for a multicomponent adsorption measurement (see _units_loading)
+    for a multicomponent adsorption measurement (see
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
 ##############################################################################
@@ -1817,72 +1831,72 @@ save_desorp.p0
     _units.code                  'see _units_pressure'
 save_
 
-save_desorp.loading
-    _definition.id               '_desorp_loading'
+save_desorp.amount
+    _definition.id               '_desorp_amount'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading remaining adsorbed at each desorption data point (see
-    _units_loading)
+    _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_excess
-    _definition.id               '_desorp_loading_excess'
+save_desorp.amount_excess
+    _definition.id               '_desorp_amount_excess'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Excess loading remaining adsorbed at each desorption data point
-    (see _units_loading)
+    (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_absolute
-    _definition.id               '_desorp_loading_absolute'
+save_desorp.amount_absolute
+    _definition.id               '_desorp_amount_absolute'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Absolute loading remaining adsorbed at each desorption data
-    point (see _units_loading)
+    point (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_net
-    _definition.id               '_desorp_loading_net'
+save_desorp.amount_net
+    _definition.id               '_desorp_amount_net'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Net loading remaining adsorbed at each desorption data point
-    (see _units_loading)
+    (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
 save_desorp.enthalpy_differential
@@ -2261,174 +2275,174 @@ save_desorp.composition_component_10
     _units.code                  'see _units_composition_type'
 save_
 
-save_desorp.loading_component_1
-    _definition.id               '_desorp_loading_component_1'
+save_desorp.amount_component_1
+    _definition.id               '_desorp_amount_component_1'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the first component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_2
-    _definition.id               '_desorp_loading_component_2'
+save_desorp.amount_component_2
+    _definition.id               '_desorp_amount_component_2'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the second component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_3
-    _definition.id               '_desorp_loading_component_3'
+save_desorp.amount_component_3
+    _definition.id               '_desorp_amount_component_3'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the third component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_4
-    _definition.id               '_desorp_loading_component_4'
+save_desorp.amount_component_4
+    _definition.id               '_desorp_amount_component_4'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the fourth component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_5
-    _definition.id               '_desorp_loading_component_5'
+save_desorp.amount_component_5
+    _definition.id               '_desorp_amount_component_5'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the fifth component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_6
-    _definition.id               '_desorp_loading_component_6'
+save_desorp.amount_component_6
+    _definition.id               '_desorp_amount_component_6'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the sixth component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_7
-    _definition.id               '_desorp_loading_component_7'
+save_desorp.amount_component_7
+    _definition.id               '_desorp_amount_component_7'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the seventh component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_8
-    _definition.id               '_desorp_loading_component_8'
+save_desorp.amount_component_8
+    _definition.id               '_desorp_amount_component_8'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the eighth component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_9
-    _definition.id               '_desorp_loading_component_9'
+save_desorp.amount_component_9
+    _definition.id               '_desorp_amount_component_9'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the ninth component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.loading_component_10
-    _definition.id               '_desorp_loading_component_10'
+save_desorp.amount_component_10
+    _definition.id               '_desorp_amount_component_10'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Loading of the tenth component in the adsorbed phase for a
-    multicomponent desorption measurement (see _units_loading)
+    multicomponent desorption measurement (see _units_sorbed_amount)
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
 ##############################################################################
