@@ -37,7 +37,7 @@ data_full_featured_aif
     _adsorptive_inchi                 "InChI=1S/CO2/c2-1-3"
     _adsorptive_smiles                "O=C=O"
 
-    _citation_doi                     "10.1021/ja500330a"
+    _citation_doi                     "10.1021/example.doi"
     _citation_source                  "Journal of the American Chemical Society"
 
     _units_temperature                "K"
