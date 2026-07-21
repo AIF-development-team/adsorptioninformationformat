@@ -864,6 +864,29 @@ save_digitization.person
     _type.contents               Text
 save_
 
+save_digitization.method
+    _definition.id               '_digitization_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Indicates whether the data was digitized solely by a human
+    person (manual), with ML/AI assistance (AI-aided), or fully by
+    ML/AI tools (AI-automated).
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+    loop_
+        _enumeration_set.state
+        _enumeration_set.detail
+        manual           'Data extracted solely by a human person. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.'
+        AI-aided         'Data extracted in part using machine learning or AI tools, in cooperation with a human person.'
+        AI-automated     'Data extracted automatically from a figure via machine learning or AI tools, without human intervention.'
+save_
+
 save_digitization.software
     _definition.id               '_digitization_software'
     _definition.scope            Item
@@ -873,7 +896,9 @@ save_digitization.software
 ;
     Name and version of the software or tool used to digitize the
     data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual'
-    for pixel-by-pixel manual measurement
+    for pixel-by-pixel manual measurement. This field must be
+    present when _digitization_method is either AI-aided or AI-
+    automated.
 ;
     _type.purpose                Describe
     _type.source                 Recorded

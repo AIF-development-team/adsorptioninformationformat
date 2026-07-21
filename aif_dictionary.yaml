@@ -53,6 +53,15 @@ enums:
         description: Data recorded directly from the instrument, software, or simulation output.
       digitized:
         description: Data extracted from a static image of a published figure or table.
+  DigitizationMethod:
+    description: Method of data extraction from a source figure.
+    permissible_values:
+      manual:
+        description: Data extracted solely by a human person. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.
+      AI-aided:
+        description: Data extracted in part using machine learning or AI tools, in cooperation with a human person.
+      AI-automated:
+        description: Data extracted automatically from a figure via machine learning or AI tools, without human intervention.
 
 # ──────────────────────────────────────────────
 #  Slots (data items / fields)
@@ -271,9 +280,14 @@ slots:
     aliases: ["_digitization_person"]
     description: Name of the person who digitized the data from the published figure or table
 
+  digitization_method:
+    aliases: ["_digitization_method"]
+    description: Indicates whether the data was digitized solely by a human person (manual), with ML/AI assistance (AI-aided), or fully by ML/AI tools (AI-automated).
+    range: DigitizationMethod
+
   digitization_software:
     aliases: ["_digitization_software"]
-    description: Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement
+    description: Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement. This field must be present when _digitization_method is either AI-aided or AI-automated.
 
   digitization_source_figure:
     aliases: ["_digitization_source_figure"]
@@ -900,6 +914,7 @@ classes:
       # Digitization
       - digitization_data_origin
       - digitization_person
+      - digitization_method
       - digitization_software
       - digitization_source_figure
       - digitization_source_page

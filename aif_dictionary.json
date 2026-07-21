@@ -289,9 +289,21 @@
           "type": "string",
           "description": "Name of the person who digitized the data from the published figure or table"
         },
+        "_digitization_method": {
+          "type": "string",
+          "description": "Indicates whether the data was digitized solely by a human person (manual), with ML/AI assistance (AI-aided), or fully by ML/AI tools (AI-automated).",
+          "enum": ["manual", "AI-aided", "AI-automated"],
+          "x-enum-name": "DigitizationMethod",
+          "x-enum-description": "Method of data extraction from a source figure.",
+          "x-enum-descriptions": {
+            "manual": "Data extracted solely by a human person. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.",
+            "AI-aided": "Data extracted in part using machine learning or AI tools, in cooperation with a human person.",
+            "AI-automated": "Data extracted automatically from a figure via machine learning or AI tools, without human intervention."
+          }
+        },
         "_digitization_software": {
           "type": "string",
-          "description": "Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement"
+          "description": "Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement. This field must be present when _digitization_method is either AI-aided or AI-automated."
         },
         "_digitization_source_figure": {
           "type": "string",
@@ -765,6 +777,19 @@
             "const": "digitized"
           }
         }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "_digitization_method": {
+            "enum": ["AI-aided", "AI-automated"]
+          }
+        },
+        "required": ["_digitization_method"]
+      },
+      "then": {
+        "required": ["_digitation_software"]
       }
     },
     {
