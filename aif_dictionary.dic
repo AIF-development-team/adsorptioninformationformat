@@ -85,22 +85,6 @@ save_audit.creation_software
     _type.contents               Text
 save_
 
-save_audit.digitizer
-    _definition.id               '_audit_digitizer'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Name of the person who digitized the data, if extracted from a
-    published figure or table
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
 ##############################################################################
 #                                                                            #
 #                               EXPTL CATEGORY                               #
@@ -813,6 +797,133 @@ save_simltn.lot
 ;
     Level of theory for the calculation, e.g. DFT, machine-learned
     potential, classical force field
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                           DIGITIZATION CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_DIGITIZATION
+    _definition.id               DIGITIZATION
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the DIGITIZATION category record metadata
+    describing when the reported data were extracted from a static
+    image of a published figure or table, rather than recorded
+    directly from an instrument or simulation output.
+;
+save_
+
+save_digitization.data_origin
+    _definition.id               '_digitization_data_origin'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Indicates whether the data in this file were recorded directly
+    (direct) or extracted from a static image of a published figure
+    or table (digitized). The underlying experimental or simulation
+    method is still recorded via _exptl_method regardless of this
+    value.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+    loop_
+        _enumeration_set.state
+        _enumeration_set.detail
+        direct           'Data recorded directly from the instrument, software, or simulation output.'
+        digitized        'Data extracted from a static image of a published figure or table.'
+save_
+
+save_digitization.person
+    _definition.id               '_digitization_person'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who digitized the data from the published
+    figure or table
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.software
+    _definition.id               '_digitization_software'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name and version of the software or tool used to digitize the
+    data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual'
+    for pixel-by-pixel manual measurement
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.source_figure
+    _definition.id               '_digitization_source_figure'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Identifier of the figure or table within the original
+    publication from which the data were digitized, e.g. Figure 3b,
+    Table S2
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.source_page
+    _definition.id               '_digitization_source_page'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Page number or supplementary-information identifier of the
+    original publication containing the digitized figure or table,
+    e.g. 145, S12
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.source_url
+    _definition.id               '_digitization_source_url'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    URL or persistent link to the source image of the digitized
+    figure or table, if available
 ;
     _type.purpose                Describe
     _type.source                 Recorded

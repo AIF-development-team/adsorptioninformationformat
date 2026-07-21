@@ -41,10 +41,6 @@
         "_audit_creation_software": {
           "type": "string",
           "description": "Name and version of the software used to generate this AIF file"
-        },
-        "_audit_digitizer": {
-          "type": "string",
-          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         }
       }
     },
@@ -270,6 +266,44 @@
         "_simltn_lot": {
           "type": "string",
           "description": "Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field"
+        }
+      }
+    },
+
+"digitization": {
+      "$comment": "Digitization: Metadata describing when the reported data were extracted from a static image of a published figure or table, rather than recorded directly from an instrument or simulation output.",
+      "type": "object",
+      "properties": {
+        "_digitization_data_origin": {
+          "type": "string",
+          "description": "Indicates whether the data in this file were recorded directly (direct) or extracted from a static image of a published figure or table (digitized). The underlying experimental or simulation method is still recorded via _exptl_method regardless of this value.",
+          "enum": ["direct", "digitized"],
+          "x-enum-name": "DataOrigin",
+          "x-enum-description": "Acquisition pathway of the reported data.",
+          "x-enum-descriptions": {
+            "direct": "Data recorded directly from the instrument, software, or simulation output.",
+            "digitized": "Data extracted from a static image of a published figure or table."
+          }
+        },
+        "_digitization_person": {
+          "type": "string",
+          "description": "Name of the person who digitized the data from the published figure or table"
+        },
+        "_digitization_software": {
+          "type": "string",
+          "description": "Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement"
+        },
+        "_digitization_source_figure": {
+          "type": "string",
+          "description": "Identifier of the figure or table within the original publication from which the data were digitized, e.g. Figure 3b, Table S2"
+        },
+        "_digitization_source_page": {
+          "type": "string",
+          "description": "Page number or supplementary-information identifier of the original publication containing the digitized figure or table, e.g. 145, S12"
+        },
+        "_digitization_source_url": {
+          "type": "string",
+          "description": "URL or persistent link to the source image of the digitized figure or table, if available"
         }
       }
     },
@@ -689,6 +723,7 @@
     { "$ref": "#/definitions/adsorbent" },
     { "$ref": "#/definitions/adsorptive" },
     { "$ref": "#/definitions/simulation" },
+    { "$ref": "#/definitions/digitization" },
     { "$ref": "#/definitions/citation" },
     { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
@@ -709,6 +744,25 @@
         "properties": {
           "_exptl_method": {
             "const": "simulation"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          { "required": ["_digitization_person"] },
+          { "required": ["_digitization_software"] },
+          { "required": ["_digitization_source_figure"] },
+          { "required": ["_digitization_source_page"] },
+          { "required": ["_digitization_source_url"] }
+        ]
+      },
+      "then": {
+        "required": ["_digitization_data_origin"],
+        "properties": {
+          "_digitization_data_origin": {
+            "const": "digitized"
           }
         }
       }
@@ -783,6 +837,11 @@
     "_desorp_loading_net": ["_units_loading", "_adsorp_loading"],
     "_desorp_p0": ["_units_pressure"],
     "_desorp_pressure": ["_units_pressure"],
+    "_digitization_person": ["_digitization_data_origin"],
+    "_digitization_software": ["_digitization_data_origin"],
+    "_digitization_source_figure": ["_digitization_data_origin"],
+    "_digitization_source_page": ["_digitization_data_origin"],
+    "_digitization_source_url": ["_digitization_data_origin"],
     "_exptl_temperature": ["_units_temperature"],
     "_simltn_code": ["_exptl_method"],
     "_simltn_forcefield_adsorbent": ["_exptl_method"],

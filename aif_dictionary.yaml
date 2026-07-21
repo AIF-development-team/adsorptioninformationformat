@@ -46,6 +46,13 @@ enums:
         description: Excess adsorption.
       net:
         description: Net adsorption.
+  DataOrigin:
+    description: Acquisition pathway of the reported data.
+    permissible_values:
+      direct:
+        description: Data recorded directly from the instrument, software, or simulation output.
+      digitized:
+        description: Data extracted from a static image of a published figure or table.
 
 # ──────────────────────────────────────────────
 #  Slots (data items / fields)
@@ -68,10 +75,6 @@ slots:
   audit_creation_software:
     aliases: ["_audit_creation_software"]
     description: Name and version of the software used to generate this AIF file
-
-  audit_digitizer:
-    aliases: ["_audit_digitizer"]
-    description: Name of the person who digitized the data, if extracted from a published figure or table
 
   # ── Experimental ────────────────────────────
 
@@ -256,6 +259,33 @@ slots:
   simltn_lot:
     aliases: ["_simltn_lot"]
     description: Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field
+
+  # ── Digitization ────────────────────────────
+
+  digitization_data_origin:
+    aliases: ["_digitization_data_origin"]
+    description: Indicates whether the data in this file were recorded directly (direct) or extracted from a static image of a published figure or table (digitized). The underlying experimental or simulation method is still recorded via _exptl_method regardless of this value.
+    range: DataOrigin
+
+  digitization_person:
+    aliases: ["_digitization_person"]
+    description: Name of the person who digitized the data from the published figure or table
+
+  digitization_software:
+    aliases: ["_digitization_software"]
+    description: Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement
+
+  digitization_source_figure:
+    aliases: ["_digitization_source_figure"]
+    description: Identifier of the figure or table within the original publication from which the data were digitized, e.g. Figure 3b, Table S2
+
+  digitization_source_page:
+    aliases: ["_digitization_source_page"]
+    description: Page number or supplementary-information identifier of the original publication containing the digitized figure or table, e.g. 145, S12
+
+  digitization_source_url:
+    aliases: ["_digitization_source_url"]
+    description: URL or persistent link to the source image of the digitized figure or table, if available
 
   # ── Citation ────────────────────────────────
 
@@ -822,7 +852,6 @@ classes:
       - audit_aif_version
       - audit_creation_date
       - audit_creation_software
-      - audit_digitizer
       # Experimental
       - exptl_operator
       - exptl_date
@@ -868,6 +897,13 @@ classes:
       - simltn_input_files
       - simltn_sampling
       - simltn_lot
+      # Digitization
+      - digitization_data_origin
+      - digitization_person
+      - digitization_software
+      - digitization_source_figure
+      - digitization_source_page
+      - digitization_source_url
       # Citation
       - citation_doi
       - citation_source
