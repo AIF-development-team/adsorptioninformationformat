@@ -46,13 +46,6 @@ enums:
         description: Excess adsorption.
       net:
         description: Net adsorption.
-  DataOrigin:
-    description: Acquisition pathway of the reported data.
-    permissible_values:
-      direct:
-        description: Data recorded directly from the instrument, software, or simulation output.
-      digitized:
-        description: Data extracted from a static image of a published figure or table.
   DigitizationMethod:
     description: Method of data extraction from a source figure.
     permissible_values:
@@ -76,10 +69,18 @@ slots:
     description: Version of the AIF data-name dictionary used by this file
     required: true
 
+  audit_author:
+    aliases: ["_audit_author"]
+    description: Name of the person who created the data block, if different from the experiment operator.
+
   audit_creation_date:
     aliases: ["_audit_creation_date"]
     description: Date and time the AIF file was created in ISO 8601 format
     range: datetime
+
+  audit_creation_method:
+    aliases: ["_audit_creation_method"]
+    description: The method by which the AIF file was created, e.g. 'manual', 'scripted', 'exported', etc.
 
   audit_creation_software:
     aliases: ["_audit_creation_software"]
@@ -89,7 +90,7 @@ slots:
 
   exptl_operator:
     aliases: ["_exptl_operator"]
-    description: Name of the person who performed the experiment
+    description: Name of the person who performed the experiment or ran the simulation.
 
   exptl_date:
     aliases: ["_exptl_date"]
@@ -271,14 +272,14 @@ slots:
 
   # ── Digitization ────────────────────────────
 
-  digitization_data_origin:
-    aliases: ["_digitization_data_origin"]
-    description: Indicates whether the data in this file were recorded directly (direct) or extracted from a static image of a published figure or table (digitized). The underlying experimental or simulation method is still recorded via _exptl_method regardless of this value.
-    range: DataOrigin
-
-  digitization_person:
-    aliases: ["_digitization_person"]
+  digitization_author:
+    aliases: ["_digitization_author"]
     description: Name of the person who digitized the data from the published figure or table
+
+  digitization_date:
+    aliases: ["_digitization_date"]
+    description: Date when the data were digitized from the published figure or table
+    range: datetime
 
   digitization_method:
     aliases: ["_digitization_method"]
@@ -300,6 +301,10 @@ slots:
   digitization_source_url:
     aliases: ["_digitization_source_url"]
     description: URL or persistent link to the source image of the digitized figure or table, if available
+
+  digitization_notes:
+    aliases: ["_digitization_notes"]
+    description: Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information.
 
   # ── Citation ────────────────────────────────
 
@@ -864,7 +869,9 @@ classes:
     slots:
       # Audit
       - audit_aif_version
+      - audit_author
       - audit_creation_date
+      - audit_creation_method
       - audit_creation_software
       # Experimental
       - exptl_operator
@@ -912,13 +919,14 @@ classes:
       - simltn_sampling
       - simltn_lot
       # Digitization
-      - digitization_data_origin
-      - digitization_person
+      - digitization_author
+      - digitization_date
       - digitization_method
       - digitization_software
       - digitization_source_figure
       - digitization_source_page
       - digitization_source_url
+      - digitization_notes
       # Citation
       - citation_doi
       - citation_source

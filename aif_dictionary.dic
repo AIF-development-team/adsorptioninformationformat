@@ -58,6 +58,22 @@ save_audit.aif_version
     _enumeration.default         __AIF_VERSION__
 save_
 
+save_audit.author
+    _definition.id               '_audit_author'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who created the data block, if different from
+    the experiment operator.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 save_audit.creation_date
     _definition.id               '_audit_creation_date'
     _definition.scope            Item
@@ -68,6 +84,22 @@ save_audit.creation_date
     _type.source                 Recorded
     _type.container              Single
     _type.contents               DateTime
+save_
+
+save_audit.creation_method
+    _definition.id               '_audit_creation_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    The method by which the AIF file was created, e.g. 'manual',
+    'scripted', 'exported', etc.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
 save_
 
 save_audit.creation_software
@@ -110,7 +142,11 @@ save_exptl.operator
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Name of the person who performed the experiment'
+    _description.text
+;
+    Name of the person who performed the experiment or ran the
+    simulation.
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -817,39 +853,18 @@ save_DIGITIZATION
     _definition.update           2026-03-09
     _description.text
 ;
-    Data items in the DIGITIZATION category record metadata
-    describing when the reported data were extracted from a static
-    image of a published figure or table, rather than recorded
-    directly from an instrument or simulation output.
+    Data items in the DIGITIZATION category record metadata relevant
+    when file data were extracted/reconstructed from a static image
+    of a published figure or table, rather than recorded directly
+    from an instrument or simulation output. Presence of any field
+    in this section implies the data were digitized; the underlying
+    experimental or simulation method is still recorded via
+    _exptl_method regardless.
 ;
 save_
 
-save_digitization.data_origin
-    _definition.id               '_digitization_data_origin'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Indicates whether the data in this file were recorded directly
-    (direct) or extracted from a static image of a published figure
-    or table (digitized). The underlying experimental or simulation
-    method is still recorded via _exptl_method regardless of this
-    value.
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-    loop_
-        _enumeration_set.state
-        _enumeration_set.detail
-        direct           'Data recorded directly from the instrument, software, or simulation output.'
-        digitized        'Data extracted from a static image of a published figure or table.'
-save_
-
-save_digitization.person
-    _definition.id               '_digitization_person'
+save_digitization.author
+    _definition.id               '_digitization_author'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -862,6 +877,22 @@ save_digitization.person
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
+save_
+
+save_digitization.date
+    _definition.id               '_digitization_date'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Date when the data were digitized from the published figure or
+    table
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               DateTime
 save_
 
 save_digitization.method
@@ -949,6 +980,24 @@ save_digitization.source_url
 ;
     URL or persistent link to the source image of the digitized
     figure or table, if available
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.notes
+    _definition.id               '_digitization_notes'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Free-text field for any additional notes about the digitization
+    process or source, like assumptions, limitations, data
+    identification (e.g. which curve was digitized), or any other
+    relevant information.
 ;
     _type.purpose                Describe
     _type.source                 Recorded

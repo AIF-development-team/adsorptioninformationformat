@@ -33,10 +33,18 @@
           "const": "__AIF_VERSION__",
           "x-dic-source": "Assigned"
         },
+        "_audit_author": {
+          "type": "string",
+          "description": "Name of the person who created the data block, if different from the experiment operator."
+        },
         "_audit_creation_date": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time the AIF file was created in ISO 8601 format"
+        },
+        "_audit_creation_method": {
+          "type": "string",
+          "description": "The method by which the AIF file was created, e.g. 'manual', 'scripted', 'exported', etc."
         },
         "_audit_creation_software": {
           "type": "string",
@@ -51,7 +59,7 @@
       "properties": {
         "_exptl_operator": {
           "type": "string",
-          "description": "Name of the person who performed the experiment"
+          "description": "Name of the person who performed the experiment or ran the simulation."
         },
         "_exptl_date": {
           "type": "string",
@@ -270,24 +278,18 @@
       }
     },
 
-"digitization": {
-      "$comment": "Digitization: Metadata describing when the reported data were extracted from a static image of a published figure or table, rather than recorded directly from an instrument or simulation output.",
+    "digitization": {
+      "$comment": "Digitization: Metadata relevant when file data were extracted/reconstructed from a static image of a published figure or table, rather than recorded directly from an instrument or simulation output. Presence of any field in this section implies the data were digitized; the underlying experimental or simulation method is still recorded via _exptl_method regardless.",
       "type": "object",
       "properties": {
-        "_digitization_data_origin": {
-          "type": "string",
-          "description": "Indicates whether the data in this file were recorded directly (direct) or extracted from a static image of a published figure or table (digitized). The underlying experimental or simulation method is still recorded via _exptl_method regardless of this value.",
-          "enum": ["direct", "digitized"],
-          "x-enum-name": "DataOrigin",
-          "x-enum-description": "Acquisition pathway of the reported data.",
-          "x-enum-descriptions": {
-            "direct": "Data recorded directly from the instrument, software, or simulation output.",
-            "digitized": "Data extracted from a static image of a published figure or table."
-          }
-        },
-        "_digitization_person": {
+        "_digitization_author": {
           "type": "string",
           "description": "Name of the person who digitized the data from the published figure or table"
+        },
+        "_digitization_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the data were digitized from the published figure or table"
         },
         "_digitization_method": {
           "type": "string",
@@ -316,6 +318,10 @@
         "_digitization_source_url": {
           "type": "string",
           "description": "URL or persistent link to the source image of the digitized figure or table, if available"
+        },
+        "_digitization_notes": {
+          "type": "string",
+          "description": "Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information."
         }
       }
     },
@@ -762,25 +768,6 @@
     },
     {
       "if": {
-        "anyOf": [
-          { "required": ["_digitization_person"] },
-          { "required": ["_digitization_software"] },
-          { "required": ["_digitization_source_figure"] },
-          { "required": ["_digitization_source_page"] },
-          { "required": ["_digitization_source_url"] }
-        ]
-      },
-      "then": {
-        "required": ["_digitization_data_origin"],
-        "properties": {
-          "_digitization_data_origin": {
-            "const": "digitized"
-          }
-        }
-      }
-    },
-    {
-      "if": {
         "properties": {
           "_digitization_method": {
             "enum": ["AI-aided", "AI-automated"]
@@ -789,7 +776,7 @@
         "required": ["_digitization_method"]
       },
       "then": {
-        "required": ["_digitation_software"]
+        "required": ["_digitization_software"]
       }
     },
     {
@@ -862,11 +849,6 @@
     "_desorp_loading_net": ["_units_loading", "_adsorp_loading"],
     "_desorp_p0": ["_units_pressure"],
     "_desorp_pressure": ["_units_pressure"],
-    "_digitization_person": ["_digitization_data_origin"],
-    "_digitization_software": ["_digitization_data_origin"],
-    "_digitization_source_figure": ["_digitization_data_origin"],
-    "_digitization_source_page": ["_digitization_data_origin"],
-    "_digitization_source_url": ["_digitization_data_origin"],
     "_exptl_temperature": ["_units_temperature"],
     "_simltn_code": ["_exptl_method"],
     "_simltn_forcefield_adsorbent": ["_exptl_method"],
