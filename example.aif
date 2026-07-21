@@ -30,7 +30,7 @@ data_example_isotherm_aif
     _units_temperature                "K"
     _units_pressure                   "kPa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
     _units_density                    "g/cm3"
     _units_time                       "hours"
 
@@ -41,7 +41,7 @@ data_example_isotherm_aif
         _adsorp_index
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_loading
+        _adsorp_amount
         1 100.000 101.325000 54.545455
         2 200.000 101.325000 57.142857
         3 300.000 101.325000 58.064516
@@ -97,7 +97,7 @@ data_example_isotherm_aif
         _desorp_index
         _desorp_pressure
         _desorp_p0
-        _desorp_loading
+        _desorp_amount
         1 5000.000 101.325000 59.880240
         2 4900.000 101.325000 59.877800
         3 4800.000 101.325000 59.875260

@@ -26,7 +26,7 @@ data_co2_calorimetry
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
     _units_enthalpy                   "kJ/mol"
     _units_molecular_weight           "g/mol"
 
@@ -34,7 +34,7 @@ data_co2_calorimetry
         _adsorp_index
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_loading
+        _adsorp_amount
         _adsorp_enthalpy_differential
         _adsorp_enthalpy_integral
         1 1000.0    7377300.0   0.15   -38.2   -5.73

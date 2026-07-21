@@ -20,13 +20,13 @@ data_basic_n2_77K
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
 
     loop_
         _adsorp_index
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_loading
+        _adsorp_amount
         1 5.2       101325.0  0.45
         2 15.8      101325.0  1.12
         3 52.3      101325.0  2.34

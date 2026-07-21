@@ -205,6 +205,24 @@ def _prop_source(prop: dict) -> str:
     return _DIC_SOURCE_DEFAULT.get(prop.get("type", "string"), "Recorded")
 
 
+def _prop_is_deprecated(prop: dict) -> bool:
+    """Whether the JSON schema marks this property as deprecated."""
+    return bool(prop.get("deprecated", False))
+
+
+def _prop_dic_deprecation_common(prop: dict) -> str | None:
+    """Optional DIC ``_description.common`` text for deprecated properties."""
+    if not _prop_is_deprecated(prop):
+        return None
+    note = prop.get("x-deprecation-message")
+    if note:
+        return f"Deprecated: {note}"
+    return (
+        "Deprecated. This data name may be removed in a future "
+        "version of the AIF schema."
+    )
+
+
 # ── Formatting helpers ──────────────────────────────────────────────────────
 
 
@@ -404,6 +422,8 @@ def generate_yaml(schema: dict) -> str:
                 lines.append("    required: true")
             if rng:
                 lines.append(f"    range: {rng}")
+            if _prop_is_deprecated(prop):
+                lines.append("    deprecated: true")
             lines.append("")
 
     # ── Classes ──────────────────────────────────────────────────
@@ -582,9 +602,17 @@ def generate_dic(schema: dict) -> str:
                 )
 
             # Common description (from x-dic-common on the property)
+            common_parts: list[str] = []
             common_text = prop.get("x-dic-common")
             if common_text:
-                lines.extend(_format_common(common_text))
+                common_parts.append(common_text)
+
+            deprecation_common = _prop_dic_deprecation_common(prop)
+            if deprecation_common:
+                common_parts.append(deprecation_common)
+
+            if common_parts:
+                lines.extend(_format_common("\n\n".join(common_parts)))
 
             lines.append("save_")
 
