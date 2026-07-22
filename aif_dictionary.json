@@ -299,7 +299,7 @@
         },
         "_digitization_method": {
           "type": "string",
-          "description": "Indicates whether the data was digitized solely by a human (human), with ML/AI assistance (AI-aided), or fully by ML/AI tools (AI-automated).",
+          "description": "The decision making method in validating the data: solely by a human (human), with ML/AI assistance or AI with human review (AI-aided), or fully automated via ML/AI without human intervention (AI-automated).",
           "enum": ["human", "AI-aided", "AI-automated"],
           "x-enum-name": "DigitizationMethod",
           "x-enum-description": "Method of data extraction from a source figure.",
