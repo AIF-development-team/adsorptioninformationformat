@@ -320,7 +320,7 @@ slots:
 
   citation_source:
     aliases: ["_citation_source"]
-    description: Bibliographic source of the data, e.g. journal name, book title, or database
+    description: Bibliographic source or full citation of the data, e.g. journal name, book title, or database
 
   # ── Units ───────────────────────────────────
 

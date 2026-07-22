@@ -1068,8 +1068,8 @@ save_citation.source
     _definition.update           2026-03-09
     _description.text
 ;
-    Bibliographic source of the data, e.g. journal name, book title,
-    or database
+    Bibliographic source or full citation of the data, e.g. journal
+    name, book title, or database
 ;
     _type.purpose                Describe
     _type.source                 Recorded

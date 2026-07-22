@@ -344,7 +344,7 @@
         },
         "_citation_source": {
           "type": "string",
-          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
+          "description": "Bibliographic source or full citation of the data, e.g. journal name, book title, or database"
         }
       }
     },
