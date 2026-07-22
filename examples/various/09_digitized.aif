@@ -1,4 +1,5 @@
 data_raw2aif
+
     _audit_aif_version '__AIF_VERSION__'
 
     _exptl_operator 'Nicole'
@@ -12,10 +13,12 @@ data_raw2aif
     _adsorptive_name Nitrogen
 
     _digitization_author 'Jack'
-    _digitization_method 'manual'
+    _digitization_method 'human'
     _digitization_date ?
     _digitization_software 'webplotdigitizer'
     _digitization_source_figure ?
+
+    _citation_doi '@jack!'
 
     _units_temperature K
     _units_pressure bar
