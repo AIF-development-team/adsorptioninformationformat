@@ -49,10 +49,10 @@ enums:
   DigitizationMethod:
     description: Method of data extraction from a source figure.
     permissible_values:
-      manual:
-        description: Data extracted solely by a human person. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.
+      human:
+        description: Data extracted solely by a human. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.
       AI-aided:
-        description: Data extracted in part using machine learning or AI tools, in cooperation with a human person.
+        description: Data extracted in part using machine learning or AI tools, in cooperation or verified by  a human person.
       AI-automated:
         description: Data extracted automatically from a figure via machine learning or AI tools, without human intervention.
 
@@ -289,7 +289,7 @@ slots:
 
   digitization_method:
     aliases: ["_digitization_method"]
-    description: Indicates whether the data was digitized solely by a human person (manual), with ML/AI assistance (AI-aided), or fully by ML/AI tools (AI-automated).
+    description: Indicates whether the data was digitized solely by a human (human), with ML/AI assistance (AI-aided), or fully by ML/AI tools (AI-automated).
     range: DigitizationMethod
 
   digitization_software:

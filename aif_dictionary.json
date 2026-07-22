@@ -299,13 +299,13 @@
         },
         "_digitization_method": {
           "type": "string",
-          "description": "Indicates whether the data was digitized solely by a human person (manual), with ML/AI assistance (AI-aided), or fully by ML/AI tools (AI-automated).",
-          "enum": ["manual", "AI-aided", "AI-automated"],
+          "description": "Indicates whether the data was digitized solely by a human (human), with ML/AI assistance (AI-aided), or fully by ML/AI tools (AI-automated).",
+          "enum": ["human", "AI-aided", "AI-automated"],
           "x-enum-name": "DigitizationMethod",
           "x-enum-description": "Method of data extraction from a source figure.",
           "x-enum-descriptions": {
-            "manual": "Data extracted solely by a human person. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.",
-            "AI-aided": "Data extracted in part using machine learning or AI tools, in cooperation with a human person.",
+            "human": "Data extracted solely by a human. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.",
+            "AI-aided": "Data extracted in part using machine learning or AI tools, in cooperation or verified by  a human person.",
             "AI-automated": "Data extracted automatically from a figure via machine learning or AI tools, without human intervention."
           }
         },
