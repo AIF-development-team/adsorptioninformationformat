@@ -822,6 +822,11 @@
         { "required": ["_adsorptive_name"] },
         { "required": ["_adsorptive_component_name"] }
       ]
+    },
+    {
+      "anyOf": [
+        { "required": ["_exptl_temperature"] }
+      ]
     }
   ],
 
