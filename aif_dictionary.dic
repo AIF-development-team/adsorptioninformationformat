@@ -213,9 +213,9 @@ save_exptl.method
         _enumeration_set.detail
         volumetric       'Volumetric (manometric) method.'
         gravimetric      'Gravimetric method.'
-        chromatographic  ''
-        simulation       ''
-        other            ''
+        chromatographic  'Chromatographic method.'
+        simulation       'Computational simulation method.'
+        other            'Other method not listed.'
 save_
 
 save_exptl.isotherm_type
@@ -1344,8 +1344,8 @@ save_adsorp.amount
     _description.text
 ;
     Loading at each adsorption data point (see
-    _units_sorbed_amount). Total loading in a multicomponent
-    setting.
+    _units_sorbed_amount). Key is used as total loading in a
+    multicomponent setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1362,8 +1362,8 @@ save_adsorp.amount_excess
     _description.text
 ;
     Excess loading at each adsorption data point (see
-    _units_sorbed_amount). Total loading in a multicomponent
-    setting.
+    _units_sorbed_amount). Key is used as total loading in a
+    multicomponent setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded
@@ -1380,8 +1380,8 @@ save_adsorp.amount_absolute
     _description.text
 ;
     Absolute loading at each adsorption data point (see
-    _units_sorbed_amount). Total loading in a multicomponent
-    setting.
+    _units_sorbed_amount). Key is used as total loading in a
+    multicomponent setting.
 ;
     _type.purpose                Measurand
     _type.source                 Recorded

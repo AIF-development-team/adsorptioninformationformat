@@ -32,11 +32,11 @@ enums:
       gravimetric:
         description: Gravimetric method.
       chromatographic:
-        description: ""
+        description: Chromatographic method.
       simulation:
-        description: ""
+        description: Computational simulation method.
       other:
-        description: ""
+        description: Other method not listed.
   IsothermType:
     description: Type of adsorption isotherm.
     permissible_values:
@@ -388,17 +388,17 @@ slots:
 
   adsorp_amount:
     aliases: ["_adsorp_amount"]
-    description: Loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting.
+    description: Loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting.
     range: float
 
   adsorp_amount_excess:
     aliases: ["_adsorp_amount_excess"]
-    description: Excess loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting.
+    description: Excess loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting.
     range: float
 
   adsorp_amount_absolute:
     aliases: ["_adsorp_amount_absolute"]
-    description: Absolute loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting.
+    description: Absolute loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting.
     range: float
 
   adsorp_amount_net:

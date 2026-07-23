@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/aif_dictionary.json",
   "title": "Adsorption Information Format (AIF)",
   "description": "Dictionary for STAR format adsorption experiment and simulation data files",
@@ -82,7 +82,10 @@
           "x-enum-description": "Method used to determine amount adsorbed.",
           "x-enum-descriptions": {
             "volumetric": "Volumetric (manometric) method.",
-            "gravimetric": "Gravimetric method."
+            "gravimetric": "Gravimetric method.",
+            "chromatographic": "Chromatographic method.",
+            "simulation": "Computational simulation method.",
+            "other": "Other method not listed."
           }
         },
         "_exptl_isotherm_type": {
@@ -428,15 +431,15 @@
         },
         "_adsorp_amount": {
           "type": "number",
-          "description": "Loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting."
+          "description": "Loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting."
         },
         "_adsorp_amount_excess": { 
           "type": "number",
-          "description": "Excess loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting."
+          "description": "Excess loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting."
         },
         "_adsorp_amount_absolute": {
           "type": "number",
-          "description": "Absolute loading at each adsorption data point (see _units_sorbed_amount). Total loading in a multicomponent setting."
+          "description": "Absolute loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting."
         },
         "_adsorp_amount_net": {
           "type": "number",
@@ -859,12 +862,12 @@
     "_adsnt_structure_topology": ["_adsnt_material_name"],
     "_adsnt_synthesis": ["_adsnt_material_name"],
     "_adsorp_enthalpy_differential": ["_units_enthalpy"],
-    "_adsorp_enthalpy_integral":      ["_units_enthalpy"],
-    "_adsorp_henry": ["_units_henry"],
+    "_adsorp_enthalpy_integral": ["_units_enthalpy"],
     "_adsorp_amount": ["_units_sorbed_amount"],
     "_adsorp_amount_excess": ["_units_sorbed_amount", "_adsorp_amount"],
     "_adsorp_amount_absolute": ["_units_sorbed_amount", "_adsorp_amount"],
     "_adsorp_amount_net": ["_units_sorbed_amount", "_adsorp_amount"],
+    "_adsorp_fugacity": ["_units_pressure"],
     "_adsorp_p0": ["_units_pressure"],
     "_adsorp_pressure": ["_units_pressure"],
     "_adsorptive_cas": ["_adsorptive_name"],
@@ -875,9 +878,10 @@
     "_desorp_enthalpy_differential": ["_units_enthalpy"],
     "_desorp_enthalpy_integral": ["_units_enthalpy"],
     "_desorp_amount": ["_units_sorbed_amount"],
-    "_desorp_amount_excess": ["_units_sorbed_amount", "_adsorp_amount"],
-    "_desorp_amount_absolute": ["_units_sorbed_amount", "_adsorp_amount"],
-    "_desorp_amount_net": ["_units_sorbed_amount", "_adsorp_amount"],
+    "_desorp_amount_excess": ["_units_sorbed_amount", "_desorp_amount"],
+    "_desorp_amount_absolute": ["_units_sorbed_amount", "_desorp_amount"],
+    "_desorp_amount_net": ["_units_sorbed_amount", "_desorp_amount"],
+    "_desorp_fugacity": ["_units_pressure"],
     "_desorp_p0": ["_units_pressure"],
     "_desorp_pressure": ["_units_pressure"],
     "_exptl_temperature": ["_units_temperature"],
@@ -888,21 +892,6 @@
     "_simltn_lot": ["_exptl_method"],
     "_simltn_sampling": ["_exptl_method"],
     "_simltn_size": ["_exptl_method"]
-    },
-
-  "dependentSchemas": {
-    "_adsorp_fugacity": {
-      "oneOf": [
-        {"required": "_units_pressure"},
-        {"required": "_units_fugacity"}
-      ]
-    },
-    "_desorp_fugacity": {
-      "oneOf": [
-        {"required": "_units_pressure"},
-        {"required": "_units_fugacity"}
-      ]
-    }
   },
 
   "additionalProperties": true
