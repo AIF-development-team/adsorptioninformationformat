@@ -20,7 +20,6 @@ data_full_featured_aif
     _adsnt_composition                "Zr6O4(OH)4(BDC-NH2)6"
     _adsnt_molar_mass                 1746.23
     _adsnt_synthesis                  "solvothermal"
-    _adsnt_cycle_number               1
     _adsnt_degas_summary              "Degassed at 120C under vacuum for 16 hours"
     _adsnt_degas_temperature          120.0
     _adsnt_degas_time                 16.0
@@ -28,11 +27,6 @@ data_full_featured_aif
     _adsorptive_name                  "Carbon Dioxide"
     _adsorptive_info                  "CO2"
     _adsorptive_cas                   "124-38-9"
-    _adsorptive_molecular_weight      44.01
-    _adsorptive_critical_temperature  304.13
-    _adsorptive_critical_pressure     7377300.0
-    _adsorptive_kinetic_diameter      3.3
-    _adsorptive_quadrupole_moment     4.3
     _adsorptive_inchi                 "InChI=1S/CO2/c2-1-3"
     _adsorptive_smiles                "O=C=O"
 
@@ -46,12 +40,6 @@ data_full_featured_aif
     _units_density                    "g/cm3"
     _units_time                       "hours"
     _units_enthalpy                   "kJ/mol"
-    _units_surface_area               "m2/g"
-    _units_pore_volume                "cm3/g"
-    _units_molecular_weight           "g/mol"
-    _units_kinetic_diameter           "angstrom"
-    _units_dead_volume                "cm3"
-    _units_leak_rate                  "Pa/min"
 
     loop_
         _adsorp_index

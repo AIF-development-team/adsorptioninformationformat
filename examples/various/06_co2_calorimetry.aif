@@ -18,17 +18,12 @@ data_co2_calorimetry
     _adsorptive_name                  "Carbon Dioxide"
     _adsorptive_info                  "CO2"
     _adsorptive_cas                   "124-38-9"
-    _adsorptive_molecular_weight      44.01
-    _adsorptive_critical_temperature  304.13
-    _adsorptive_critical_pressure     7377300.0
-    _adsorptive_kinetic_diameter      3.3
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
     _units_sorbed_amount              "mmol/g"
     _units_enthalpy                   "kJ/mol"
-    _units_molecular_weight           "g/mol"
 
     loop_
         _adsorp_index

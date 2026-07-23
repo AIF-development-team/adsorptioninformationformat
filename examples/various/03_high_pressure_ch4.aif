@@ -19,16 +19,12 @@ data_high_pressure_ch4
     _adsorptive_name                  "Methane"
     _adsorptive_info                  "CH4"
     _adsorptive_cas                   "74-82-8"
-    _adsorptive_molecular_weight      16.043
-    _adsorptive_critical_temperature  190.56
-    _adsorptive_critical_pressure     4599200.0
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
     _units_sorbed_amount              "mmol/g"
     _units_density                    "g/cm3"
-    _units_molecular_weight           "g/mol"
 
     loop_
         _adsorp_index
