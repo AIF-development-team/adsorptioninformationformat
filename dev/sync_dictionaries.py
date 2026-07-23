@@ -30,6 +30,7 @@ import re
 import sys
 import textwrap
 from pathlib import Path
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 JSON_PATH = REPO_ROOT / "aif_dictionary.json"
@@ -295,6 +296,22 @@ def _yaml_header(name: str) -> str:
     return f"{sep}\n#  {name}\n{sep}"
 
 
+def _yaml_scalar(value: Any) -> str:
+    """Return a YAML-safe scalar string for a description-like field."""
+    if value is None:
+        return '""'
+
+    text = str(value)
+    if not text:
+        return '""'
+
+    if re.search(r"[\n\r\t\"':#{}\[\],&*?!|>@%`\\]", text):
+        escaped = text.replace('\\', '\\\\').replace('"', '\\"')
+        return f'"{escaped}"'
+
+    return text
+
+
 def _format_common(text: str) -> list[str]:
     """Format a ``_description.common`` CIF block and return lines."""
     if "\n" in text:
@@ -393,11 +410,11 @@ def generate_yaml(schema: dict) -> str:
         lines.append("")
         for ename, edata in enums.items():
             lines.append(f"  {ename}:")
-            lines.append(f"    description: {edata['description']}")
+            lines.append(f"    description: {_yaml_scalar(edata['description'])}")
             lines.append("    permissible_values:")
             for val, vdesc in edata["values"].items():
                 lines.append(f"      {val}:")
-                lines.append(f"        description: {vdesc}")
+                lines.append(f"        description: {_yaml_scalar(vdesc)}")
         lines.append("")
 
     # ── Slots ────────────────────────────────────────────────────
@@ -417,7 +434,7 @@ def generate_yaml(schema: dict) -> str:
             rng = _yaml_range(prop)
             lines.append(f"  {slot}:")
             lines.append(f'    aliases: ["{pname}"]')
-            lines.append(f"    description: {desc}")
+            lines.append(f"    description: {_yaml_scalar(desc)}")
             if pname in required_set:
                 lines.append("    required: true")
             if rng:
@@ -482,7 +499,7 @@ def generate_yaml(schema: dict) -> str:
             direction = lsk.replace("_data", "")
             lines.append(f"      {attr_name}:")
             lines.append(
-                f"        description: {direction.title()} branch data points (loop_ block)."
+                f"        description: {_yaml_scalar(direction.title() + ' branch data points (loop_ block).')}"
             )
             lines.append(f"        range: {cls_name}")
             lines.append("        multivalued: true")

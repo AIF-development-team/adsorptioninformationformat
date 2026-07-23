@@ -58,6 +58,22 @@ save_audit.aif_version
     _enumeration.default         __AIF_VERSION__
 save_
 
+save_audit.author
+    _definition.id               '_audit_author'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who created the data block, if different from
+    the experiment operator.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 save_audit.creation_date
     _definition.id               '_audit_creation_date'
     _definition.scope            Item
@@ -70,6 +86,22 @@ save_audit.creation_date
     _type.contents               DateTime
 save_
 
+save_audit.creation_method
+    _definition.id               '_audit_creation_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    The method by which the AIF file was created, e.g. 'manual',
+    'scripted', 'exported', etc.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 save_audit.creation_software
     _definition.id               '_audit_creation_software'
     _definition.scope            Item
@@ -78,22 +110,6 @@ save_audit.creation_software
     _description.text
 ;
     Name and version of the software used to generate this AIF file
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_audit.digitizer
-    _definition.id               '_audit_digitizer'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Name of the person who digitized the data, if extracted from a
-    published figure or table
 ;
     _type.purpose                Describe
     _type.source                 Recorded
@@ -126,7 +142,11 @@ save_exptl.operator
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Name of the person who performed the experiment'
+    _description.text
+;
+    Name of the person who performed the experiment or ran the
+    simulation.
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
@@ -844,6 +864,172 @@ save_
 
 ##############################################################################
 #                                                                            #
+#                           DIGITIZATION CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_DIGITIZATION
+    _definition.id               DIGITIZATION
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the DIGITIZATION category record metadata relevant
+    when file data were extracted/reconstructed from a static image
+    of a published figure or table, rather than recorded directly
+    from an instrument or simulation output. Presence of any field
+    in this section implies the data were digitized; the underlying
+    experimental or simulation method is still recorded via
+    _exptl_method regardless.
+;
+save_
+
+save_digitization.author
+    _definition.id               '_digitization_author'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name of the person who digitized the data from the published
+    figure or table
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.date
+    _definition.id               '_digitization_date'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Date when the data were digitized from the published figure or
+    table
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               DateTime
+save_
+
+save_digitization.method
+    _definition.id               '_digitization_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    The decision making method in validating the data: solely by a
+    human (human), with ML/AI assistance or AI with human review
+    (AI-aided), or fully automated via ML/AI without human
+    intervention (AI-automated).
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+    loop_
+        _enumeration_set.state
+        _enumeration_set.detail
+        human            'Data extracted solely by a human. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.'
+        AI-aided         'Data extracted in part using machine learning or AI tools, in cooperation with or verified by a human person.'
+        AI-automated     'Data extracted automatically from a figure via machine learning or AI tools, without human intervention.'
+save_
+
+save_digitization.software
+    _definition.id               '_digitization_software'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Name and version of the software or tool used to digitize the
+    data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual'
+    for pixel-by-pixel manual measurement. This field must be
+    present when _digitization_method is either AI-aided or AI-
+    automated.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.source_figure
+    _definition.id               '_digitization_source_figure'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Identifier of the figure or table within the original
+    publication from which the data were digitized, e.g. Figure 3b,
+    Table S2
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.source_page
+    _definition.id               '_digitization_source_page'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Page number or supplementary-information identifier of the
+    original publication containing the digitized figure or table,
+    e.g. 145, S12
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.source_url
+    _definition.id               '_digitization_source_url'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    URL or persistent link to the source image of the digitized
+    figure or table, if available
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_digitization.notes
+    _definition.id               '_digitization_notes'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Free-text field for any additional notes about the digitization
+    process or source, like assumptions, limitations, data
+    identification (e.g. which curve was digitized), or any other
+    relevant information.
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
 #                             CITATION CATEGORY                              #
 #                                                                            #
 ##############################################################################
@@ -883,8 +1069,8 @@ save_citation.source
     _definition.update           2026-03-09
     _description.text
 ;
-    Bibliographic source of the data, e.g. journal name, book title,
-    or database
+    Bibliographic source or full citation of the data, e.g. journal
+    name, book title, or database
 ;
     _type.purpose                Describe
     _type.source                 Recorded

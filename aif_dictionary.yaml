@@ -32,11 +32,11 @@ enums:
       gravimetric:
         description: Gravimetric method.
       chromatographic:
-        description: 
+        description: ""
       simulation:
-        description: 
+        description: ""
       other:
-        description: 
+        description: ""
   IsothermType:
     description: Type of adsorption isotherm.
     permissible_values:
@@ -46,6 +46,15 @@ enums:
         description: Excess adsorption.
       net:
         description: Net adsorption.
+  DigitizationMethod:
+    description: Method of data extraction from a source figure.
+    permissible_values:
+      human:
+        description: Data extracted solely by a human. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.
+      AI-aided:
+        description: "Data extracted in part using machine learning or AI tools, in cooperation with or verified by a human person."
+      AI-automated:
+        description: "Data extracted automatically from a figure via machine learning or AI tools, without human intervention."
 
 # ──────────────────────────────────────────────
 #  Slots (data items / fields)
@@ -60,24 +69,28 @@ slots:
     description: Version of the AIF data-name dictionary used by this file
     required: true
 
+  audit_author:
+    aliases: ["_audit_author"]
+    description: "Name of the person who created the data block, if different from the experiment operator."
+
   audit_creation_date:
     aliases: ["_audit_creation_date"]
     description: Date and time the AIF file was created in ISO 8601 format
     range: datetime
 
+  audit_creation_method:
+    aliases: ["_audit_creation_method"]
+    description: "The method by which the AIF file was created, e.g. 'manual', 'scripted', 'exported', etc."
+
   audit_creation_software:
     aliases: ["_audit_creation_software"]
     description: Name and version of the software used to generate this AIF file
-
-  audit_digitizer:
-    aliases: ["_audit_digitizer"]
-    description: Name of the person who digitized the data, if extracted from a published figure or table
 
   # ── Experimental ────────────────────────────
 
   exptl_operator:
     aliases: ["_exptl_operator"]
-    description: Name of the person who performed the experiment
+    description: Name of the person who performed the experiment or ran the simulation.
 
   exptl_date:
     aliases: ["_exptl_date"]
@@ -108,7 +121,7 @@ slots:
 
   adsnt_material_name:
     aliases: ["_adsnt_material_name"]
-    description: Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X
+    description: "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X"
     required: true
 
   adsnt_info:
@@ -137,7 +150,7 @@ slots:
 
   adsnt_composition:
     aliases: ["_adsnt_composition"]
-    description: Chemical composition or formula of the adsorbent, e.g. Cu3(BTC)2
+    description: "Chemical composition or formula of the adsorbent, e.g. Cu3(BTC)2"
 
   adsnt_molar_mass:
     aliases: ["_adsnt_molar_mass"]
@@ -146,7 +159,7 @@ slots:
 
   adsnt_synthesis:
     aliases: ["_adsnt_synthesis"]
-    description: Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc
+    description: "Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc"
 
   adsnt_sample_mass:
     aliases: ["_adsnt_sample_mass"]
@@ -176,11 +189,11 @@ slots:
 
   adsorptive_name:
     aliases: ["_adsorptive_name"]
-    description: Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water
+    description: "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water"
 
   adsorptive_info:
     aliases: ["_adsorptive_info"]
-    description: Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation
+    description: "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation"
 
   adsorptive_inchi:
     aliases: ["_adsorptive_inchi"]
@@ -205,11 +218,11 @@ slots:
 
   adsorptive_component_name:
     aliases: ["_adsorptive_component_name"]
-    description: Common name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water
+    description: "Common name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water"
 
   adsorptive_component_info:
     aliases: ["_adsorptive_component_info"]
-    description: Alternative or secondary name for an adsorptive component in a mixture, e.g. chemical formula or abbreviation
+    description: "Alternative or secondary name for an adsorptive component in a mixture, e.g. chemical formula or abbreviation"
 
   adsorptive_component_inchi:
     aliases: ["_adsorptive_component_inchi"]
@@ -231,19 +244,19 @@ slots:
 
   simltn_code:
     aliases: ["_simltn_code"]
-    description: Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS
+    description: "Name and version of the simulation software, e.g. RASPA 2.0, LAMMPS"
 
   simltn_size:
     aliases: ["_simltn_size"]
-    description: Description of the simulated system size, e.g. number of unit cells or particle count
+    description: "Description of the simulated system size, e.g. number of unit cells or particle count"
 
   simltn_forcefield_adsorptive:
     aliases: ["_simltn_forcefield_adsorptive"]
-    description: Force field or interaction model used for the adsorptive, e.g. TraPPE, OPLS-AA
+    description: "Force field or interaction model used for the adsorptive, e.g. TraPPE, OPLS-AA"
 
   simltn_forcefield_adsorbent:
     aliases: ["_simltn_forcefield_adsorbent"]
-    description: Force field or interaction model used for the adsorbent framework, e.g. UFF, DREIDING
+    description: "Force field or interaction model used for the adsorbent framework, e.g. UFF, DREIDING"
 
   simltn_input_files:
     aliases: ["_simltn_input_files"]
@@ -251,17 +264,53 @@ slots:
 
   simltn_sampling:
     aliases: ["_simltn_sampling"]
-    description: Phase-space sampling method used, e.g. GCMC, MD, Widom insertion
+    description: "Phase-space sampling method used, e.g. GCMC, MD, Widom insertion"
 
   simltn_lot:
     aliases: ["_simltn_lot"]
-    description: Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field
+    description: "Level of theory for the calculation, e.g. DFT, machine-learned potential, classical force field"
 
   simltn_date:
     aliases: ["_simltn_date"]
     description: Date and time of the simulation in ISO 8601 format. This field is deprecated and may be removed in future versions of the AIF schema.
     range: datetime
     deprecated: true
+
+  # ── Digitization ────────────────────────────
+
+  digitization_author:
+    aliases: ["_digitization_author"]
+    description: Name of the person who digitized the data from the published figure or table
+
+  digitization_date:
+    aliases: ["_digitization_date"]
+    description: Date when the data were digitized from the published figure or table
+    range: datetime
+
+  digitization_method:
+    aliases: ["_digitization_method"]
+    description: "The decision making method in validating the data: solely by a human (human), with ML/AI assistance or AI with human review (AI-aided), or fully automated via ML/AI without human intervention (AI-automated)."
+    range: DigitizationMethod
+
+  digitization_software:
+    aliases: ["_digitization_software"]
+    description: "Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement. This field must be present when _digitization_method is either AI-aided or AI-automated."
+
+  digitization_source_figure:
+    aliases: ["_digitization_source_figure"]
+    description: "Identifier of the figure or table within the original publication from which the data were digitized, e.g. Figure 3b, Table S2"
+
+  digitization_source_page:
+    aliases: ["_digitization_source_page"]
+    description: "Page number or supplementary-information identifier of the original publication containing the digitized figure or table, e.g. 145, S12"
+
+  digitization_source_url:
+    aliases: ["_digitization_source_url"]
+    description: "URL or persistent link to the source image of the digitized figure or table, if available"
+
+  digitization_notes:
+    aliases: ["_digitization_notes"]
+    description: "Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information."
 
   # ── Citation ────────────────────────────────
 
@@ -271,45 +320,45 @@ slots:
 
   citation_source:
     aliases: ["_citation_source"]
-    description: Bibliographic source of the data, e.g. journal name, book title, or database
+    description: "Bibliographic source or full citation of the data, e.g. journal name, book title, or database"
 
   # ── Units ───────────────────────────────────
 
   units_temperature:
     aliases: ["_units_temperature"]
-    description: Unit of temperature for all temperature values in this file, e.g. K, °C
+    description: "Unit of temperature for all temperature values in this file, e.g. K, °C"
 
   units_pressure:
     aliases: ["_units_pressure"]
-    description: Unit of pressure for all pressure values in this file, e.g. kPa, bar, mmHg
+    description: "Unit of pressure for all pressure values in this file, e.g. kPa, bar, mmHg"
 
   units_mass:
     aliases: ["_units_mass"]
-    description: Unit of mass for all mass values in this file, e.g. g, mg, kg
+    description: "Unit of mass for all mass values in this file, e.g. g, mg, kg"
 
   units_sorbed_amount:
     aliases: ["_units_sorbed_amount"]
-    description: Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%
+    description: "Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%"
 
   units_density:
     aliases: ["_units_density"]
-    description: Unit of density for all density values in this file, e.g. g/cm3, kg/m3
+    description: "Unit of density for all density values in this file, e.g. g/cm3, kg/m3"
 
   units_time:
     aliases: ["_units_time"]
-    description: Unit of time for all time values in this file, e.g. s, min, hours
+    description: "Unit of time for all time values in this file, e.g. s, min, hours"
 
   units_molecular_weight:
     aliases: ["_units_molecular_weight"]
-    description: Unit of molecular weight values in this file, e.g. g/mol
+    description: "Unit of molecular weight values in this file, e.g. g/mol"
 
   units_enthalpy:
     aliases: ["_units_enthalpy"]
-    description: Unit of enthalpy values in this file, e.g. kJ/mol
+    description: "Unit of enthalpy values in this file, e.g. kJ/mol"
 
   units_composition_type:
     aliases: ["_units_composition_type"]
-    description: Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction, partial_pressure, relative_humidity, concentration
+    description: "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction, partial_pressure, relative_humidity, concentration"
 
   units_concentration:
     aliases: ["_units_concentration"]
@@ -319,7 +368,7 @@ slots:
 
   adsorp_index:
     aliases: ["_adsorp_index"]
-    description: Index of the adsorption data point, starting from 1 and incrementing by 1 for each point.
+    description: "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point."
     range: float
 
   adsorp_pressure:
@@ -334,7 +383,7 @@ slots:
 
   adsorp_p0:
     aliases: ["_adsorp_p0"]
-    description: Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)
+    description: "Saturation pressure at each adsorption data point, for use in relative pressure calculations (see _units_pressure)"
     range: float
 
   adsorp_amount:
@@ -521,7 +570,7 @@ slots:
 
   desorp_index:
     aliases: ["_desorp_index"]
-    description: Index of the desorption data point, starting from 1 and incrementing by 1 for each point.
+    description: "Index of the desorption data point, starting from 1 and incrementing by 1 for each point."
     range: float
 
   desorp_pressure:
@@ -536,7 +585,7 @@ slots:
 
   desorp_p0:
     aliases: ["_desorp_p0"]
-    description: Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)
+    description: "Saturation pressure at each desorption data point, for use in relative pressure calculations (see _units_pressure)"
     range: float
 
   desorp_amount:
@@ -826,9 +875,10 @@ classes:
     slots:
       # Audit
       - audit_aif_version
+      - audit_author
       - audit_creation_date
+      - audit_creation_method
       - audit_creation_software
-      - audit_digitizer
       # Experimental
       - exptl_operator
       - exptl_date
@@ -875,6 +925,15 @@ classes:
       - simltn_sampling
       - simltn_lot
       - simltn_date
+      # Digitization
+      - digitization_author
+      - digitization_date
+      - digitization_method
+      - digitization_software
+      - digitization_source_figure
+      - digitization_source_page
+      - digitization_source_url
+      - digitization_notes
       # Citation
       - citation_doi
       - citation_source

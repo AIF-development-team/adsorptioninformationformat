@@ -33,18 +33,22 @@
           "const": "__AIF_VERSION__",
           "x-dic-source": "Assigned"
         },
+        "_audit_author": {
+          "type": "string",
+          "description": "Name of the person who created the data block, if different from the experiment operator."
+        },
         "_audit_creation_date": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time the AIF file was created in ISO 8601 format"
         },
+        "_audit_creation_method": {
+          "type": "string",
+          "description": "The method by which the AIF file was created, e.g. 'manual', 'scripted', 'exported', etc."
+        },
         "_audit_creation_software": {
           "type": "string",
           "description": "Name and version of the software used to generate this AIF file"
-        },
-        "_audit_digitizer": {
-          "type": "string",
-          "description": "Name of the person who digitized the data, if extracted from a published figure or table"
         }
       }
     },
@@ -55,7 +59,7 @@
       "properties": {
         "_exptl_operator": {
           "type": "string",
-          "description": "Name of the person who performed the experiment"
+          "description": "Name of the person who performed the experiment or ran the simulation."
         },
         "_exptl_date": {
           "type": "string",
@@ -280,6 +284,54 @@
       }
     },
 
+    "digitization": {
+      "$comment": "Digitization: Metadata relevant when file data were extracted/reconstructed from a static image of a published figure or table, rather than recorded directly from an instrument or simulation output. Presence of any field in this section implies the data were digitized; the underlying experimental or simulation method is still recorded via _exptl_method regardless.",
+      "type": "object",
+      "properties": {
+        "_digitization_author": {
+          "type": "string",
+          "description": "Name of the person who digitized the data from the published figure or table"
+        },
+        "_digitization_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the data were digitized from the published figure or table"
+        },
+        "_digitization_method": {
+          "type": "string",
+          "description": "The decision making method in validating the data: solely by a human (human), with ML/AI assistance or AI with human review (AI-aided), or fully automated via ML/AI without human intervention (AI-automated).",
+          "enum": ["human", "AI-aided", "AI-automated"],
+          "x-enum-name": "DigitizationMethod",
+          "x-enum-description": "Method of data extraction from a source figure.",
+          "x-enum-descriptions": {
+            "human": "Data extracted solely by a human. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.",
+            "AI-aided": "Data extracted in part using machine learning or AI tools, in cooperation with or verified by a human person.",
+            "AI-automated": "Data extracted automatically from a figure via machine learning or AI tools, without human intervention."
+          }
+        },
+        "_digitization_software": {
+          "type": "string",
+          "description": "Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement. This field must be present when _digitization_method is either AI-aided or AI-automated."
+        },
+        "_digitization_source_figure": {
+          "type": "string",
+          "description": "Identifier of the figure or table within the original publication from which the data were digitized, e.g. Figure 3b, Table S2"
+        },
+        "_digitization_source_page": {
+          "type": "string",
+          "description": "Page number or supplementary-information identifier of the original publication containing the digitized figure or table, e.g. 145, S12"
+        },
+        "_digitization_source_url": {
+          "type": "string",
+          "description": "URL or persistent link to the source image of the digitized figure or table, if available"
+        },
+        "_digitization_notes": {
+          "type": "string",
+          "description": "Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information."
+        }
+      }
+    },
+
     "citation": {
       "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
       "type": "object",
@@ -292,7 +344,7 @@
         },
         "_citation_source": {
           "type": "string",
-          "description": "Bibliographic source of the data, e.g. journal name, book title, or database"
+          "description": "Bibliographic source or full citation of the data, e.g. journal name, book title, or database"
         }
       }
     },
@@ -695,6 +747,7 @@
     { "$ref": "#/definitions/adsorbent" },
     { "$ref": "#/definitions/adsorptive" },
     { "$ref": "#/definitions/simulation" },
+    { "$ref": "#/definitions/digitization" },
     { "$ref": "#/definitions/citation" },
     { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
@@ -722,6 +775,41 @@
     {
       "if": {
         "properties": {
+          "_digitization_method": {
+            "enum": ["AI-aided", "AI-automated"]
+          }
+        },
+        "required": ["_digitization_method"]
+      },
+      "then": {
+        "required": ["_digitization_software"]
+      }
+    },
+    {
+      "if": {
+        "anyOf": [
+          { "required": ["_digitization_author"] },
+          { "required": ["_digitization_date"] },
+          { "required": ["_digitization_method"] },
+          { "required": ["_digitization_software"] },
+          { "required": ["_digitization_source_figure"] },
+          { "required": ["_digitization_source_page"] },
+          { "required": ["_digitization_source_url"] },
+          { "required": ["_digitization_notes"] }
+        ]
+      },
+      "then": {
+        "required": ["_digitization_source_figure"],
+        "anyOf": [
+          { "required": ["_citation_doi"] },
+          { "required": ["_citation_source"] },
+          { "required": ["_digitization_source_url"] }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
           "_units_composition_type": { "const": "concentration" }
         }
       },
@@ -733,6 +821,11 @@
       "anyOf": [
         { "required": ["_adsorptive_name"] },
         { "required": ["_adsorptive_component_name"] }
+      ]
+    },
+    {
+      "anyOf": [
+        { "required": ["_exptl_temperature"] }
       ]
     }
   ],
@@ -750,8 +843,6 @@
     "_adsnt_material_name",
     "_exptl_method"
   ],
-
-  "additionalProperties": true,
 
   "dependentRequired": {
     "_adsnt_composition": ["_adsnt_material_name"],
@@ -812,6 +903,7 @@
         {"required": "_units_fugacity"}
       ]
     }
-  }
+  },
 
+  "additionalProperties": true
 }
