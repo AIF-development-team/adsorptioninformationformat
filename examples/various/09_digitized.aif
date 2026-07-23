@@ -12,13 +12,14 @@ data_raw2aif
 
     _adsorptive_name Nitrogen
 
-    _digitization_author 'Jack'
+    _digitization_author 'Jack Evans'
     _digitization_method 'human'
-    _digitization_date ?
+    _digitization_date 2016-04-01T13:12:00
     _digitization_software 'webplotdigitizer'
-    _digitization_source_figure ?
+    _digitization_source_figure 'Figure 2a'
 
-    _citation_doi '@jack!'
+    _citation_doi '10.1002/anie.200904599'
+    _citation_source 'Angew. Chem. Int. Ed. 2009, 48, 9954-9957'
 
     _units_temperature K
     _units_pressure bar
