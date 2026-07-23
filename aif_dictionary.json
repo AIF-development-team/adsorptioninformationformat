@@ -305,7 +305,7 @@
           "x-enum-description": "Method of data extraction from a source figure.",
           "x-enum-descriptions": {
             "human": "Data extracted solely by a human. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.",
-            "AI-aided": "Data extracted in part using machine learning or AI tools, in cooperation or verified by  a human person.",
+            "AI-aided": "Data extracted in part using machine learning or AI tools, in cooperation with or verified by a human person.",
             "AI-automated": "Data extracted automatically from a figure via machine learning or AI tools, without human intervention."
           }
         },
@@ -787,6 +787,28 @@
     },
     {
       "if": {
+        "anyOf": [
+          { "required": ["_digitization_author"] },
+          { "required": ["_digitization_date"] },
+          { "required": ["_digitization_method"] },
+          { "required": ["_digitization_software"] },
+          { "required": ["_digitization_source_figure"] },
+          { "required": ["_digitization_source_page"] },
+          { "required": ["_digitization_source_url"] },
+          { "required": ["_digitization_notes"] }
+        ]
+      },
+      "then": {
+        "required": ["_digitization_source_figure"],
+        "anyOf": [
+          { "required": ["_citation_doi"] },
+          { "required": ["_citation_source"] },
+          { "required": ["_digitization_source_url"] }
+        ]
+      }
+    },
+    {
+      "if": {
         "properties": {
           "_units_composition_type": { "const": "concentration" }
         }
@@ -816,8 +838,6 @@
     "_adsnt_material_name",
     "_exptl_method"
   ],
-
-  "additionalProperties": true,
 
   "dependentRequired": {
     "_adsnt_composition": ["_adsnt_material_name"],
@@ -878,6 +898,7 @@
         {"required": "_units_fugacity"}
       ]
     }
-  }
+  },
 
+  "additionalProperties": true
 }

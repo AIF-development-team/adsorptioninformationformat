@@ -937,7 +937,7 @@ save_digitization.method
         _enumeration_set.state
         _enumeration_set.detail
         human            'Data extracted solely by a human. This does not exclude the use of software tools but indicates that data selection decisions were made exclusively by a human person.'
-        AI-aided         'Data extracted in part using machine learning or AI tools, in cooperation or verified by  a human person.'
+        AI-aided         'Data extracted in part using machine learning or AI tools, in cooperation with or verified by a human person.'
         AI-automated     'Data extracted automatically from a figure via machine learning or AI tools, without human intervention.'
 save_
 
