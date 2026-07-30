@@ -316,18 +316,6 @@
           "type": "string",
           "description": "Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement. This field must be present when _digitization_method is either AI-aided or AI-automated."
         },
-        "_digitization_source_figure": {
-          "type": "string",
-          "description": "Identifier of the figure or table within the original publication from which the data were digitized, e.g. Figure 3b, Table S2"
-        },
-        "_digitization_source_page": {
-          "type": "string",
-          "description": "Page number or supplementary-information identifier of the original publication containing the digitized figure or table, e.g. 145, S12"
-        },
-        "_digitization_source_url": {
-          "type": "string",
-          "description": "URL or persistent link to the source image of the digitized figure or table, if available"
-        },
         "_digitization_notes": {
           "type": "string",
           "description": "Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information."
@@ -348,6 +336,18 @@
         "_citation_source": {
           "type": "string",
           "description": "Bibliographic source or full citation of the data, e.g. journal name, book title, or database"
+        },
+        "_citation_figure": {
+          "type": "string",
+          "description": "Identifier of the figure or table within the original publication, e.g. Figure 3b, Table S2"
+        },
+        "_citation_page": {
+          "type": "string",
+          "description": "Page number or supplementary-information identifier of the original publication, e.g. 145, S12"
+        },
+        "_citation_url": {
+          "type": "string",
+          "description": "URL or persistent link to the source of the publication, data, figure or table, if available."
         }
       }
     },
@@ -433,7 +433,7 @@
           "type": "number",
           "description": "Loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting."
         },
-        "_adsorp_amount_excess": { 
+        "_adsorp_amount_excess": {
           "type": "number",
           "description": "Excess loading at each adsorption data point (see _units_sorbed_amount). Key is used as total loading in a multicomponent setting."
         },
@@ -795,18 +795,15 @@
           { "required": ["_digitization_date"] },
           { "required": ["_digitization_method"] },
           { "required": ["_digitization_software"] },
-          { "required": ["_digitization_source_figure"] },
-          { "required": ["_digitization_source_page"] },
-          { "required": ["_digitization_source_url"] },
           { "required": ["_digitization_notes"] }
         ]
       },
       "then": {
-        "required": ["_digitization_source_figure"],
+        "required": ["_citation_figure"],
         "anyOf": [
           { "required": ["_citation_doi"] },
           { "required": ["_citation_source"] },
-          { "required": ["_digitization_source_url"] }
+          { "required": ["_citation_url"] }
         ]
       }
     },

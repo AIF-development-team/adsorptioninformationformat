@@ -296,18 +296,6 @@ slots:
     aliases: ["_digitization_software"]
     description: "Name and version of the software or tool used to digitize the data, e.g. WebPlotDigitizer 4.6, Engauge Digitizer, or 'manual' for pixel-by-pixel manual measurement. This field must be present when _digitization_method is either AI-aided or AI-automated."
 
-  digitization_source_figure:
-    aliases: ["_digitization_source_figure"]
-    description: "Identifier of the figure or table within the original publication from which the data were digitized, e.g. Figure 3b, Table S2"
-
-  digitization_source_page:
-    aliases: ["_digitization_source_page"]
-    description: "Page number or supplementary-information identifier of the original publication containing the digitized figure or table, e.g. 145, S12"
-
-  digitization_source_url:
-    aliases: ["_digitization_source_url"]
-    description: "URL or persistent link to the source image of the digitized figure or table, if available"
-
   digitization_notes:
     aliases: ["_digitization_notes"]
     description: "Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information."
@@ -321,6 +309,18 @@ slots:
   citation_source:
     aliases: ["_citation_source"]
     description: "Bibliographic source or full citation of the data, e.g. journal name, book title, or database"
+
+  citation_figure:
+    aliases: ["_citation_figure"]
+    description: "Identifier of the figure or table within the original publication, e.g. Figure 3b, Table S2"
+
+  citation_page:
+    aliases: ["_citation_page"]
+    description: "Page number or supplementary-information identifier of the original publication, e.g. 145, S12"
+
+  citation_url:
+    aliases: ["_citation_url"]
+    description: "URL or persistent link to the source of the publication, data, figure or table, if available."
 
   # ── Units ───────────────────────────────────
 
@@ -930,13 +930,13 @@ classes:
       - digitization_date
       - digitization_method
       - digitization_software
-      - digitization_source_figure
-      - digitization_source_page
-      - digitization_source_url
       - digitization_notes
       # Citation
       - citation_doi
       - citation_source
+      - citation_figure
+      - citation_page
+      - citation_url
       # Units
       - units_temperature
       - units_pressure

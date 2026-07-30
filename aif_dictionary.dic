@@ -960,56 +960,6 @@ save_digitization.software
     _type.contents               Text
 save_
 
-save_digitization.source_figure
-    _definition.id               '_digitization_source_figure'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Identifier of the figure or table within the original
-    publication from which the data were digitized, e.g. Figure 3b,
-    Table S2
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_digitization.source_page
-    _definition.id               '_digitization_source_page'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Page number or supplementary-information identifier of the
-    original publication containing the digitized figure or table,
-    e.g. 145, S12
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
-save_digitization.source_url
-    _definition.id               '_digitization_source_url'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    URL or persistent link to the source image of the digitized
-    figure or table, if available
-;
-    _type.purpose                Describe
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Text
-save_
-
 save_digitization.notes
     _definition.id               '_digitization_notes'
     _definition.scope            Item
@@ -1071,6 +1021,54 @@ save_citation.source
 ;
     Bibliographic source or full citation of the data, e.g. journal
     name, book title, or database
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_citation.figure
+    _definition.id               '_citation_figure'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Identifier of the figure or table within the original
+    publication, e.g. Figure 3b, Table S2
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_citation.page
+    _definition.id               '_citation_page'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Page number or supplementary-information identifier of the
+    original publication, e.g. 145, S12
+;
+    _type.purpose                Describe
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_citation.url
+    _definition.id               '_citation_url'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    URL or persistent link to the source of the publication, data,
+    figure or table, if available.
 ;
     _type.purpose                Describe
     _type.source                 Recorded
