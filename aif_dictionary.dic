@@ -909,7 +909,7 @@ save_digitization.date
     _description.text
 ;
     Date when the data were digitized from the published figure or
-    table
+    table in ISO 8601 format.
 ;
     _type.purpose                Describe
     _type.source                 Recorded
