@@ -10,7 +10,10 @@ New sections added to ``definitions`` in the JSON schema are automatically
 picked up — no script changes required.  Section metadata (DIC class,
 prefix, label, category description) is derived from the ``$comment`` and
 property names, with optional ``x-*`` overrides on sections or individual
-properties when the defaults aren't right.
+properties when the defaults aren't right. ``x-dic-description`` and
+``x-deprecation-message`` are supported override keys not currently used
+by any section in aif_dictionary.json — they remain available for future
+sections/deprecations that need custom text.
 
 Usage
 -----
@@ -30,7 +33,7 @@ import re
 import sys
 import textwrap
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 JSON_PATH = REPO_ROOT / "aif_dictionary.json"
@@ -151,17 +154,19 @@ def _build_section_meta(
 ) -> dict[str, str]:
     """Build the metadata dict for one definitions section.
 
-    Respects ``x-dic-id``, ``x-dic-class``, ``x-dic-prefix``,
-    ``x-label``, and ``x-dic-description`` overrides on the section
-    object, falling back to auto-detection.
+    Respects ``x-dic-id``, ``x-dic-prefix``, ``x-category-class``,
+    ``x-linkml-label``, and ``x-dic-description`` overrides on the section
+    object, falling back to auto-detection. ``x-category-class`` drives
+    both the DIC ``_definition.class`` and YAML Loop/DataPoint-class
+    detection, so it isn't DIC-specific despite the other ``x-dic-*`` keys.
     """
     comment = section.get("$comment", "")
     properties = section.get("properties", {})
 
     prefix = section.get("x-dic-prefix", _detect_prefix(properties))
     dic_id = section.get("x-dic-id", prefix.upper())
-    dic_class = section.get("x-dic-class", _detect_dic_class(section_key, comment))
-    label = section.get("x-label", _detect_label(section_key, comment))
+    dic_class = section.get("x-category-class", _detect_dic_class(section_key, comment))
+    label = section.get("x-linkml-label", _detect_label(section_key, comment))
     dic_desc = section.get(
         "x-dic-description",
         _generate_dic_category_desc(dic_id, comment),
@@ -174,6 +179,54 @@ def _build_section_meta(
         "yaml_label": label,
         "dic_desc": dic_desc,
     }
+
+
+# ── Required-field detection ────────────────────────────────────────────────
+
+
+class RequiredIndex(NamedTuple):
+    """Fields required unconditionally vs. groups of mutually-alternative ones."""
+
+    unconditional: frozenset[str]
+    alt_groups: tuple[frozenset[str], ...]
+
+
+def _build_required_index(schema: dict) -> RequiredIndex:
+    """Derive required-field info from the schema's ``required`` and ``allOf``.
+
+    Reads the top-level ``required`` array plus any bare ``anyOf`` clause in
+    the top-level ``allOf`` (skipping ``if``/``then`` conditionals, which
+    express value-dependent requirements rather than alternatives). A
+    single-member ``anyOf`` group has no real alternative and is treated as
+    unconditional; a multi-member group means each member is required only
+    if none of the others are present.
+    """
+    unconditional: set[str] = set(schema.get("required", []))
+    alt_groups: list[frozenset[str]] = []
+
+    for clause in schema.get("allOf", []):
+        if "if" in clause or "anyOf" not in clause:
+            continue
+        members = {
+            name for alt in clause["anyOf"] for name in alt.get("required", [])
+        }
+        if len(members) <= 1:
+            unconditional.update(members)
+        else:
+            alt_groups.append(frozenset(members))
+
+    return RequiredIndex(unconditional=frozenset(unconditional), alt_groups=tuple(alt_groups))
+
+
+def _required_note(pname: str, req_index: RequiredIndex) -> str | None:
+    """DIC ``_description.common`` note describing whether *pname* is required."""
+    if pname in req_index.unconditional:
+        return "Required field."
+    for group in req_index.alt_groups:
+        if pname in group:
+            others = " or ".join(sorted(group - {pname}))
+            return f"Required unless {others} is provided."
+    return None
 
 
 # ── Per-property helpers ────────────────────────────────────────────────────
@@ -315,7 +368,8 @@ def _yaml_scalar(value: Any) -> str:
 def _format_common(text: str) -> list[str]:
     """Format a ``_description.common`` CIF block and return lines."""
     if "\n" in text:
-        indented = "\n".join(f"    {ln}" for ln in text.split("\n"))
+        # Blank paragraph separators must stay truly empty, not "    ".
+        indented = "\n".join(f"    {ln}" if ln else "" for ln in text.split("\n"))
     else:
         indented = textwrap.fill(
             text, width=68, initial_indent="    ", subsequent_indent="    "
@@ -360,13 +414,15 @@ def generate_yaml(schema: dict) -> str:
     }
 
     # ── Preamble ─────────────────────────────────────────────────
-    lines.append(f"id: {schema['x-linkml-id']}")
+    lines.append(f"id: {schema['x-schema-uri']}")
     lines.append(f"name: {schema['x-linkml-name']}")
     lines.append(f"title: {schema['title']}")
     lines.append("description: >-")
+    citation = schema["x-citation"]
+    first_author = citation["authors"].split(";")[0].split(",")[0].strip()
     desc_ref = (
         schema["description"]
-        + " Reference: Evans et al., Langmuir 2021, 37, 4222-4226."
+        + f" Reference: {first_author} et al., {citation['journal']}"
     )
     for wl in textwrap.wrap(desc_ref, width=70):
         lines.append(f"  {wl}")
@@ -517,17 +573,17 @@ def generate_dic(schema: dict) -> str:
     definitions = schema.get("definitions", {})
     version = schema.get("version", "__AIF_VERSION__")
     dic_date = schema.get("x-dic-date", "2026-01-01")
+    citation = schema["x-citation"]
 
     section_keys = list(definitions.keys())
     section_metas = {
         sk: _build_section_meta(sk, definitions[sk]) for sk in section_keys
     }
+    req_index = _build_required_index(schema)
 
     # ── Header ───────────────────────────────────────────────────
     lines.append(r"#\#CIF_2.0")
-    lines.append(
-        _dic_banner("ADSORPTION INFORMATION FORMAT (AIF) DDLm DICTIONARY")
-    )
+    lines.append(_dic_banner(f"{schema['title'].upper()} DDLm DICTIONARY"))
     lines.append("data_AIF_DIC")
     lines.append("")
     lines.append(_dic_kv("_dictionary.title", "AIF_DIC"))
@@ -535,25 +591,17 @@ def generate_dic(schema: dict) -> str:
     lines.append(_dic_kv("_dictionary.version", version))
     lines.append(_dic_kv("_dictionary.date", dic_date))
     lines.append("    _dictionary.uri")
-    lines.append(
-        "        https://github.com/AIF-development-team/"
-        "adsorptioninformationformat"
-    )
+    lines.append(f"        {schema['x-schema-uri']}")
     lines.append(_dic_kv("_dictionary.ddl_conformance", "4.2.0"))
     lines.append(_dic_kv("_dictionary.namespace", "AifDic"))
     lines.append("    _description.text")
     lines.append(";")
-    lines.append(
-        "    Dictionary for STAR format adsorption experiment and simulation data"
-    )
-    lines.append(
-        "    files, known as the Adsorption Information Format (AIF)."
-    )
+    lines.append(f"    {schema['title']}: {schema['description']}")
     lines.append("")
     lines.append("    Reference:")
-    lines.append("    Evans, J. D.; Bon, V.; Senkovska, I.; Kaskel, S.")
-    lines.append("    Langmuir 2021, 37, 4222-4226.")
-    lines.append("    DOI: 10.1021/acs.langmuir.1c00122")
+    lines.append(f"    {citation['authors']}")
+    lines.append(f"    {citation['journal']}")
+    lines.append(f"    DOI: {citation['doi']}")
     lines.append(";")
 
     # ── Sections ─────────────────────────────────────────────────
@@ -620,6 +668,9 @@ def generate_dic(schema: dict) -> str:
 
             # Common description (from x-dic-common on the property)
             common_parts: list[str] = []
+            required_note = _required_note(pname, req_index)
+            if required_note:
+                common_parts.append(required_note)
             common_text = prop.get("x-dic-common")
             if common_text:
                 common_parts.append(common_text)

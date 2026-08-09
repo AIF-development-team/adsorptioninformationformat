@@ -2,12 +2,17 @@
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/aif_dictionary.json",
   "title": "Adsorption Information Format (AIF)",
-  "description": "Dictionary for STAR format adsorption experiment and simulation data files",
+  "description": "Dictionary for STAR format adsorption data files.",
   "$comment": "Properties are organized into logical sections via 'definitions'. Each section groups related CIF-style data names by prefix. The schema is composed using 'allOf' references so that all section properties are validated together.",
   "type": "object",
   "version": "__AIF_VERSION__",
+  "x-citation": {
+    "authors": "Evans, J. D.; Bon, V.; Senkovska, I.; Kaskel, S.",
+    "journal": "Langmuir 2021, 37, 4222-4226.",
+    "doi": "10.1021/acs.langmuir.1c00122"
+  },
+  "x-schema-uri": "https://github.com/AIF-development-team/adsorptioninformationformat",
   "x-dic-date": "2026-03-09",
-  "x-linkml-id": "https://github.com/AIF-development-team/adsorptioninformationformat",
   "x-linkml-name": "aif",
   "x-linkml-license": "MIT",
   "x-linkml-prefixes": {
@@ -18,13 +23,12 @@
   },
   "x-linkml-imports": ["linkml:types"],
   "x-linkml-default-range": "string",
+ 
 
   "definitions": {
 
     "audit": {
       "$comment": "Audit: Version and format tracking. Required for every AIF file.",
-      "x-dic-id": "AUDIT",
-      "x-dic-prefix": "audit",
       "type": "object",
       "properties": {
         "_audit_aif_version": {
@@ -112,7 +116,7 @@
           "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X",
           "x-dic-purpose": "Encode",
           "x-dic-source": "Assigned",
-          "x-dic-common": "Required field. The name of the material, e.g. the common name, CSD refcode, or other standard identifier."
+          "x-dic-common": "The name of the material, e.g. the common name, CSD refcode, or other standard identifier."
         },
         "_adsnt_info": {
           "type": "string",
@@ -187,7 +191,7 @@
         "_adsorptive_name": {
           "type": "string",
           "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
+          "x-dic-common": "The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
         },
         "_adsorptive_info": {
           "type": "string",
@@ -219,7 +223,7 @@
         "_adsorptive_component_name": {
           "type": "string",
           "description": "Common name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "Required field. The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
+          "x-dic-common": "The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
         },
         "_adsorptive_component_info": {
           "type": "string",

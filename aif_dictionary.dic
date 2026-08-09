@@ -18,8 +18,7 @@ data_AIF_DIC
     _dictionary.namespace        AifDic
     _description.text
 ;
-    Dictionary for STAR format adsorption experiment and simulation data
-    files, known as the Adsorption Information Format (AIF).
+    Adsorption Information Format (AIF): Dictionary for STAR format adsorption data files.
 
     Reference:
     Evans, J. D.; Bon, V.; Senkovska, I.; Kaskel, S.
@@ -56,6 +55,10 @@ save_audit.aif_version
     _type.container              Single
     _type.contents               Text
     _enumeration.default         __AIF_VERSION__
+    _description.common
+;
+    Required field.
+;
 save_
 
 save_audit.author
@@ -196,6 +199,10 @@ save_exptl.temperature
     _type.container              Single
     _type.contents               Real
     _units.code                  'see _units_temperature'
+    _description.common
+;
+    Required field.
+;
 save_
 
 save_exptl.method
@@ -216,6 +223,10 @@ save_exptl.method
         chromatographic  'Chromatographic method.'
         simulation       'Computational simulation method.'
         other            'Other method not listed.'
+    _description.common
+;
+    Required field.
+;
 save_
 
 save_exptl.isotherm_type
@@ -270,8 +281,9 @@ save_adsnt.material_name
     _type.contents               Text
     _description.common
 ;
-    Required field. The name of the material, e.g. the common name,
-    CSD refcode, or other standard identifier.
+    Required field.
+
+    The name of the material, e.g. the common name, CSD refcode, or other standard identifier.
 ;
 save_
 
@@ -534,8 +546,9 @@ save_adsorptive.name
     _type.contents               Text
     _description.common
 ;
-    Required field. The common or IUPAC name of the gas/vapour used
-    as adsorptive in the experiment or simulation.
+    Required unless _adsorptive_component_name is provided.
+
+    The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation.
 ;
 save_
 
@@ -635,8 +648,9 @@ save_adsorptive.component_name
     _type.contents               Text
     _description.common
 ;
-    Required field. The common or IUPAC name of the gas/vapour used
-    as adsorptive in the experiment or simulation.
+    Required unless _adsorptive_name is provided.
+
+    The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation.
 ;
 save_
 

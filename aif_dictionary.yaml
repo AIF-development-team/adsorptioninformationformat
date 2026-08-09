@@ -2,8 +2,8 @@ id: https://github.com/AIF-development-team/adsorptioninformationformat
 name: aif
 title: Adsorption Information Format (AIF)
 description: >-
-  Dictionary for STAR format adsorption experiment and simulation data
-  files Reference: Evans et al., Langmuir 2021, 37, 4222-4226.
+  Dictionary for STAR format adsorption data files. Reference: Evans et
+  al., Langmuir 2021, 37, 4222-4226.
 version: "__AIF_VERSION__"
 license: MIT
 
