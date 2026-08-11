@@ -302,7 +302,7 @@
         "_digitization_date": {
           "type": "string",
           "format": "date-time",
-          "description": "Date when the data were digitized from the published figure or table"
+          "description": "Date when the data were digitized from the published figure or table in ISO 8601 format."
         },
         "_digitization_method": {
           "type": "string",
