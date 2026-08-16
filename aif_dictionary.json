@@ -29,6 +29,7 @@
 
     "audit": {
       "$comment": "Audit: Version and format tracking. Required for every AIF file.",
+      "x-schema-star-prefix": "_audit",
       "type": "object",
       "properties": {
         "_audit_aif_version": {
@@ -59,6 +60,7 @@
 
     "experimental": {
       "$comment": "Experimental: Conditions, methods, and operator details for the adsorption experiment. These are scalar (single-value) metadata fields that describe the overall experiment.",
+      "x-schema-star-prefix": "_exptl",
       "type": "object",
       "properties": {
         "_exptl_operator": {
@@ -109,14 +111,14 @@
 
     "adsorbent": {
       "$comment": "Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
+      "x-schema-star-prefix": "_adsnt",
       "type": "object",
       "properties": {
         "_adsnt_material_name": {
           "type": "string",
-          "description": "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X",
+          "description": "The name of the material, e.g. the common name, CSD refcode, or other standard identifier e.g. UiO-66, Zeolite-13X",
           "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned",
-          "x-dic-common": "The name of the material, e.g. the common name, CSD refcode, or other standard identifier."
+          "x-dic-source": "Assigned"
         },
         "_adsnt_info": {
           "type": "string",
@@ -126,8 +128,7 @@
           "type": "string",
           "description": "Unique sample identifier assigned by the operator or laboratory",
           "x-dic-purpose": "Key",
-          "x-dic-source": "Assigned",
-          "x-dic-common": "A unique identifier for the specific sample used in the experiment."
+          "x-dic-source": "Assigned"
         },
         "_adsnt_hashkey": {
           "type": "string",
@@ -186,12 +187,12 @@
 
     "adsorptive": {
       "$comment": "Adsorptive: Physical and chemical identifiers and properties of the adsorptive molecule.",
+      "x-schema-star-prefix": "_adsorptive",
       "type": "object",
       "properties": {
         "_adsorptive_name": {
           "type": "string",
-          "description": "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
+          "description": "The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation e.g. Nitrogen, CO2, Water"
         },
         "_adsorptive_info": {
           "type": "string",
@@ -218,13 +219,11 @@
         "_adsorptive_component_index": {
           "type": "integer",
           "minimum": 1,
-          "description": "Index for an adsorptive component in a mixture",
-          "x-dic-common": "Required field for mixtures."
+          "description": "Index for an adsorptive component in a mixture. Required field for mixtures."
         },
         "_adsorptive_component_name": {
           "type": "string",
-          "description": "Common name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water",
-          "x-dic-common": "The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation."
+          "description": "The common or IUPAC name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water"
         },
         "_adsorptive_component_info": {
           "type": "string",
@@ -253,6 +252,7 @@
 
     "simulation": {
       "$comment": "Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment. Requires _exptl_method = simulation.",
+      "x-schema-star-prefix": "_simltn",
       "type": "object",
       "properties": {
         "_simltn_code": {
@@ -294,6 +294,7 @@
 
     "digitization": {
       "$comment": "Digitization: Metadata relevant when file data were extracted/reconstructed from a static image of a published figure or table, rather than recorded directly from an instrument or simulation output. Presence of any field in this section implies the data were digitized; the underlying experimental or simulation method is still recorded via _exptl_method regardless.",
+      "x-schema-star-prefix": "_digitization",
       "type": "object",
       "properties": {
         "_digitization_author": {
@@ -330,6 +331,7 @@
 
     "citation": {
       "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
+      "x-schema-star-prefix": "_citation",
       "type": "object",
       "properties": {
         "_citation_doi": {
@@ -359,6 +361,7 @@
 
     "units": {
       "$comment": "Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly. The units are recommended to follow the QUDT ontology (http://qudt.org/) or other standard ontologies.",
+      "x-schema-star-prefix": "_units",
       "type": "object",
       "properties": {
         "_units_temperature": {
@@ -416,7 +419,7 @@
 
     "adsorption_data": {
       "$comment": "Adsorption Data: Loop columns for the adsorption branch of the isotherm. These fields appear inside a STAR loop_ construct, with one row per equilibrium point.",
-      "x-schema": "loop",
+      "x-schema-star-prefix": "_adsorp",
       "type": "object",
       "properties": {
         "_adsorp_index": {
@@ -584,7 +587,7 @@
 
     "desorption_data": {
       "$comment": "Desorption Data: Loop columns for the desorption branch of the isotherm. Mirrors the adsorption data section for the reverse process.",
-      "x-schema": "loop",
+      "x-schema-star-prefix": "_desorp",
       "type": "object",
       "properties": {
         "_desorp_index": {

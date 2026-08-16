@@ -263,7 +263,7 @@ def test_alt_group_fields_have_required_unless_note_in_dic(json_schema, dic_text
 
 
 def test_no_unrelated_field_claims_required_field_in_dic(json_schema, dic_text):
-    """Guards against a field's x-dic-common text claiming 'Required field.'
+    """Guards against a field's description claiming 'Required field.'
     when the JSON schema does not actually require it unconditionally."""
     req_index = sd._build_required_index(json_schema)
     alt_members = {p for group in req_index.alt_groups for p in group}

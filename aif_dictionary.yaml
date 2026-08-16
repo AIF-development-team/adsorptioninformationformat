@@ -122,7 +122,7 @@ slots:
 
   adsnt_material_name:
     aliases: ["_adsnt_material_name"]
-    description: "Name or designation of the adsorbent material, e.g. UiO-66, Zeolite-13X"
+    description: "The name of the material, e.g. the common name, CSD refcode, or other standard identifier e.g. UiO-66, Zeolite-13X"
     required: true
 
   adsnt_info:
@@ -190,7 +190,7 @@ slots:
 
   adsorptive_name:
     aliases: ["_adsorptive_name"]
-    description: "Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2, Water"
+    description: "The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation e.g. Nitrogen, CO2, Water"
 
   adsorptive_info:
     aliases: ["_adsorptive_info"]
@@ -214,12 +214,12 @@ slots:
 
   adsorptive_component_index:
     aliases: ["_adsorptive_component_index"]
-    description: Index for an adsorptive component in a mixture
+    description: Index for an adsorptive component in a mixture. Required field for mixtures.
     range: integer
 
   adsorptive_component_name:
     aliases: ["_adsorptive_component_name"]
-    description: "Common name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water"
+    description: "The common or IUPAC name of an adsorptive component in a mixture, e.g. Nitrogen, CO2, Water"
 
   adsorptive_component_info:
     aliases: ["_adsorptive_component_info"]

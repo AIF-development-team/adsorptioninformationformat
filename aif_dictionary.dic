@@ -272,8 +272,8 @@ save_adsnt.material_name
     _definition.update           2026-03-09
     _description.text
 ;
-    Name or designation of the adsorbent material, e.g. UiO-66,
-    Zeolite-13X
+    The name of the material, e.g. the common name, CSD refcode, or
+    other standard identifier e.g. UiO-66, Zeolite-13X
 ;
     _type.purpose                Encode
     _type.source                 Assigned
@@ -282,8 +282,6 @@ save_adsnt.material_name
     _description.common
 ;
     Required field.
-
-    The name of the material, e.g. the common name, CSD refcode, or other standard identifier.
 ;
 save_
 
@@ -316,11 +314,6 @@ save_adsnt.sample_name
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
-    _description.common
-;
-    A unique identifier for the specific sample used in the
-    experiment.
-;
 save_
 
 save_adsnt.hashkey
@@ -537,8 +530,8 @@ save_adsorptive.name
     _definition.update           2026-03-09
     _description.text
 ;
-    Common name of the adsorptive gas or vapour, e.g. Nitrogen, CO2,
-    Water
+    The common or IUPAC name of the gas/vapour used as adsorptive in
+    the experiment or simulation e.g. Nitrogen, CO2, Water
 ;
     _type.purpose                Describe
     _type.source                 Recorded
@@ -547,8 +540,6 @@ save_adsorptive.name
     _description.common
 ;
     Required unless _adsorptive_component_name is provided.
-
-    The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation.
 ;
 save_
 
@@ -621,15 +612,15 @@ save_adsorptive.component_index
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Index for an adsorptive component in a mixture'
+    _description.text
+;
+    Index for an adsorptive component in a mixture. Required field
+    for mixtures.
+;
     _type.purpose                Describe
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Integer
-    _description.common
-;
-    Required field for mixtures.
-;
 save_
 
 save_adsorptive.component_name
@@ -639,8 +630,8 @@ save_adsorptive.component_name
     _definition.update           2026-03-09
     _description.text
 ;
-    Common name of an adsorptive component in a mixture, e.g.
-    Nitrogen, CO2, Water
+    The common or IUPAC name of an adsorptive component in a
+    mixture, e.g. Nitrogen, CO2, Water
 ;
     _type.purpose                Describe
     _type.source                 Recorded
@@ -649,8 +640,6 @@ save_adsorptive.component_name
     _description.common
 ;
     Required unless _adsorptive_name is provided.
-
-    The common or IUPAC name of the gas/vapour used as adsorptive in the experiment or simulation.
 ;
 save_
 

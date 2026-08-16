@@ -666,14 +666,11 @@ def generate_dic(schema: dict) -> str:
                     _dic_kv("_enumeration.default", prop["const"])
                 )
 
-            # Common description (from x-dic-common on the property)
+            # Common description
             common_parts: list[str] = []
             required_note = _required_note(pname, req_index)
             if required_note:
                 common_parts.append(required_note)
-            common_text = prop.get("x-dic-common")
-            if common_text:
-                common_parts.append(common_text)
 
             deprecation_common = _prop_dic_deprecation_common(prop)
             if deprecation_common:

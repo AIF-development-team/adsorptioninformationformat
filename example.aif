@@ -23,7 +23,7 @@ data_example_isotherm_aif
     _adsnt_degas_temperature          200.0
     _adsnt_degas_time                 12.0
 
-    _adsorptive_name                 "Nitrogen"
+    _adsorptive_name                  "Nitrogen"
     _adsorptive_info                  "N2"
 
     _units_temperature                "K"
