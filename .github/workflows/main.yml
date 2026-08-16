@@ -3,7 +3,7 @@ name: Update AIF Version
 on:
   push:
     tags:
-      - 'v*.*'
+      - 'v*.*.*'
 
 permissions:
   contents: write
@@ -35,7 +35,7 @@ jobs:
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          if [[ ! "$RELEASE_TAG" =~ ^v?[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+          if [[ ! "$RELEASE_TAG" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Invalid release tag: $RELEASE_TAG" >&2
             exit 1
           fi
@@ -44,7 +44,7 @@ jobs:
         run: |
           # Get the previous tag (the one before the current tag)
           current_tag="${{ github.ref_name }}"
-          previous_tag=$(git tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+(\.[0-9]+)?$' | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          previous_tag=$(git tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$' | grep -v "^${current_tag}$" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
             python dev/update_version.py --check --version "$current_tag" --previous "$previous_tag"
           else
@@ -55,7 +55,7 @@ jobs:
         id: changelog
         run: |
           current_tag="${{ github.ref_name }}"
-          previous_tag=$(git tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+(\.[0-9]+)?$' | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          previous_tag=$(git tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+$' | grep -v "^${current_tag}$" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
             changelog=$(git log "$previous_tag"..HEAD --pretty=format:"- %s")
           else
