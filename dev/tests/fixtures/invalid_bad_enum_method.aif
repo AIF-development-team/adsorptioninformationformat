@@ -1,0 +1,21 @@
+# INVALID: _exptl_method uses a value not in the allowed enum
+
+data_test_bad_enum
+
+    _audit_aif_version                "__AIF_VERSION__"
+    _exptl_method                     "magic_method"
+    _exptl_temperature                77.0
+
+    _adsnt_material_name              "TestMaterial"
+    _adsnt_sample_name                "TestSample-003"
+
+    _adsorptive_name                  "Nitrogen"
+
+    _units_temperature                "K"
+    _units_pressure                   "Pa"
+    _units_sorbed_amount              "mmol/g"
+
+    loop_
+        _adsorp_pressure
+        _adsorp_amount
+        1000.0  0.5

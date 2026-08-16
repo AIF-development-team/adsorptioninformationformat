@@ -1,0 +1,22 @@
+# INVALID: loop_ data row has more columns than declared headers
+
+data_test_loop_mismatch
+
+    _audit_aif_version                "__AIF_VERSION__"
+    _exptl_method                     "volumetric"
+    _exptl_temperature                77.0
+
+    _adsnt_material_name              "TestMaterial"
+    _adsnt_sample_name                "TestSample-004"
+
+    _adsorptive_name                  "Nitrogen"
+
+    _units_temperature                "K"
+    _units_pressure                   "Pa"
+    _units_sorbed_amount              "mmol/g"
+
+    loop_
+        _adsorp_pressure
+        _adsorp_amount
+        1000.0  0.5  99.9
+        5000.0  1.2  99.9

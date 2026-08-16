@@ -1,0 +1,21 @@
+# INVALID: the required version field is intentionally missing
+
+data_test_no_version
+
+    _exptl_method                     "volumetric"
+    _exptl_temperature                77.0
+
+    _adsnt_material_name              "TestMaterial"
+    _adsnt_sample_name                "TestSample-002"
+
+    _adsorptive_name                  "Nitrogen"
+
+    _units_temperature                "K"
+    _units_pressure                   "Pa"
+    _units_sorbed_amount              "mmol/g"
+
+    loop_
+        _adsorp_pressure
+        _adsorp_amount
+        1000.0  0.5
+        5000.0  1.2
