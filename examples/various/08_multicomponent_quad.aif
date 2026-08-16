@@ -21,7 +21,7 @@ data_multicomponent_quad_Fieback
     _units_temperature                "K"
     _units_pressure                   "MegPA"
     _units_sorbed_amount              "MilliMOL-PER-GM"
-    _units_composition_type           "MoleFraction"
+    _units_composition_type           "mole_fraction"
 
     _citation_doi                     "10.1007/s10450-013-9527-2"
 
