@@ -143,7 +143,7 @@ branches.
 
 - **Feature** branches (`feature/xyz`) are created from `develop` and merged
   back into `develop` when complete.
-- **Release** branches (`release/1.0.2`) are created from `develop`, stamped
+- **Release** branches (`release/v1.0.2`) are created from `develop`, stamped
   with a version, tagged (e.g. `v1.0.2`), and merged into both `master` and
   `develop`.
 - **Hotfix** branches are created from `master` for urgent fixes and merged

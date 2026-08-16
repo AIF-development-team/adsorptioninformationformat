@@ -3,16 +3,24 @@ name: Update AIF Version
 on:
   push:
     tags:
-      - '*'
+      - 'v*.*'
+
+permissions:
+  contents: write
 
 jobs:
   new_release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
 
       - name: Validate JSON syntax
         run: python -m json.tool aif_dictionary.json > /dev/null
@@ -23,11 +31,20 @@ jobs:
       - name: Check YAML/DIC are in sync with JSON schema
         run: python dev/sync_dictionaries.py --check
 
+      - name: Validate release tag format
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v?[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+            echo "Invalid release tag: $RELEASE_TAG" >&2
+            exit 1
+          fi
+
       - name: Validate version bump
         run: |
           # Get the previous tag (the one before the current tag)
           current_tag="${{ github.ref_name }}"
-          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          previous_tag=$(git tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+(\.[0-9]+)?$' | grep -v "^${current_tag}$" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
             python dev/update_version.py --check --version "$current_tag" --previous "$previous_tag"
           else
@@ -38,7 +55,7 @@ jobs:
         id: changelog
         run: |
           current_tag="${{ github.ref_name }}"
-          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          previous_tag=$(git tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+(\.[0-9]+)?$' | grep -v "^${current_tag}$" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
             changelog=$(git log "$previous_tag"..HEAD --pretty=format:"- %s")
           else
