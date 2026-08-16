@@ -405,7 +405,7 @@ def load_schema() -> dict:
 def generate_yaml(schema: dict) -> str:
     lines: list[str] = []
     definitions = schema.get("definitions", {})
-    required_set = set(schema.get("required", []))
+    required_set = _build_required_index(schema).unconditional
 
     # Build section metadata for every definition
     section_keys = list(definitions.keys())

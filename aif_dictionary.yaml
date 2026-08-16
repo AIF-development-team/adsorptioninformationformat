@@ -104,6 +104,7 @@ slots:
   exptl_temperature:
     aliases: ["_exptl_temperature"]
     description: Temperature at which the experiment was conducted (see _units_temperature)
+    required: true
     range: float
 
   exptl_method:

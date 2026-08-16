@@ -1106,7 +1106,9 @@ save_UNITS
     Data items in the UNITS category record measurement unit
     definitions for all numerical quantities. These scalar fields
     declare the units used throughout the file so that data columns
-    can be interpreted correctly.
+    can be interpreted correctly. The units are recommended to
+    follow the QUDT ontology (http://qudt.org/) or other standard
+    ontologies.
 ;
 save_
 

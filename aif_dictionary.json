@@ -357,7 +357,7 @@
     },
 
     "units": {
-      "$comment": "Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly.",
+      "$comment": "Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly. The units are recommended to follow the QUDT ontology (http://qudt.org/) or other standard ontologies.",
       "type": "object",
       "properties": {
         "_units_temperature": {
@@ -815,7 +815,8 @@
       "if": {
         "properties": {
           "_units_composition_type": { "const": "concentration" }
-        }
+        },
+        "required": ["_units_composition_type"]
       },
       "then": {
         "required": ["_units_concentration"]
