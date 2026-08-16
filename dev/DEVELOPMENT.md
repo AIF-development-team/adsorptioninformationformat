@@ -69,7 +69,8 @@ Two workflows run automatically:
 - **`.github/workflows/validate.yml`** — on every push and PR to `develop`,
   `master`, `feature/**`, and `release/**` branches.  Validates JSON syntax,
   version consistency (`check_aif_format.py`), and dictionary sync
-  (`sync_dictionaries.py --check`).
+   (`sync_dictionaries.py --check`), then runs the tracked test suite under
+   `dev/tests/` with pytest.
 - **`.github/workflows/main.yml`** — on tag pushes. Runs the same validations,
   verifies the version bump, generates a changelog, and creates a GitHub release.
 
