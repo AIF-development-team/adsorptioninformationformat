@@ -1279,7 +1279,7 @@ save_ADSORP
 ;
     Data items in the ADSORP category record loop columns for the
     adsorption branch of the isotherm. These fields appear inside a
-    CIF loop_ construct, with one row per equilibrium point.
+    STAR loop_ construct, with one row per equilibrium point.
 ;
 save_
 
