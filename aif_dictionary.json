@@ -11,15 +11,16 @@
     "journal": "Langmuir 2021, 37, 4222-4226.",
     "doi": "10.1021/acs.langmuir.1c00122"
   },
-  "x-schema-uri": "https://github.com/AIF-development-team/adsorptioninformationformat",
-  "x-dic-date": "2026-03-09",
+  "x-schema-guide": "https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/dev/SCHEMA.md",
+  "x-schema-date": "2026-03-09",
+  "x-schema-star-ddl-compliance": "4.1.0",
   "x-linkml-name": "aif",
   "x-linkml-license": "MIT",
   "x-linkml-prefixes": {
     "aif": "https://github.com/AIF-development-team/adsorptioninformationformat/",
     "linkml": "https://w3id.org/linkml/",
     "schema": "http://schema.org/",
-    "qudt": "http://qudt.org/schema/qudt/"
+    "qudt": "http://qudt.org/schema/qudt/       # what is this?"
   },
   "x-linkml-imports": ["linkml:types"],
   "x-linkml-default-range": "string",
@@ -29,14 +30,15 @@
 
     "audit": {
       "$comment": "Audit: Version and format tracking. Required for every AIF file.",
-      "x-schema-star-prefix": "_audit",
+      "x-schema-star-definition-id": "audit",
+      "x-schema-star-definition-class": "Set",
       "type": "object",
       "properties": {
         "_audit_aif_version": {
           "type": "string",
           "description": "Version of the AIF data-name dictionary used by this file",
           "const": "__AIF_VERSION__",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_audit_author": {
           "type": "string",
@@ -60,7 +62,8 @@
 
     "experimental": {
       "$comment": "Experimental: Conditions, methods, and operator details for the adsorption experiment. These are scalar (single-value) metadata fields that describe the overall experiment.",
-      "x-schema-star-prefix": "_exptl",
+      "x-schema-star-definition-id": "exptl",
+      "x-schema-star-definition-class": "Set",
       "type": "object",
       "properties": {
         "_exptl_operator": {
@@ -83,6 +86,7 @@
         "_exptl_method": {
           "type": "string",
           "description": "Experimental technique used to measure the amount adsorbed",
+          "x-schema-star-type-purpose": "State",
           "enum": ["volumetric", "gravimetric", "chromatographic", "simulation", "other"],
           "x-enum-name": "ExperimentalMethod",
           "x-enum-description": "Method used to determine amount adsorbed.",
@@ -111,14 +115,14 @@
 
     "adsorbent": {
       "$comment": "Adsorbent / Sample: Identification, physical properties, and degassing conditions for the adsorbent material.",
-      "x-schema-star-prefix": "_adsnt",
+      "x-schema-star-definition-id": "adsnt",
+      "x-schema-star-definition-class": "Set",
       "type": "object",
       "properties": {
         "_adsnt_material_name": {
           "type": "string",
           "description": "The name of the material, e.g. the common name, CSD refcode, or other standard identifier e.g. UiO-66, Zeolite-13X",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsnt_info": {
           "type": "string",
@@ -127,20 +131,17 @@
         "_adsnt_sample_name": {
           "type": "string",
           "description": "Unique sample identifier assigned by the operator or laboratory",
-          "x-dic-purpose": "Key",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsnt_hashkey": {
           "type": "string",
           "description": "Machine-readable hash key for programmatic identification of the adsorbent",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsnt_structure_csd_refcode": {
           "type": "string",
           "description": "Cambridge Structural Database (CSD) reference code for the adsorbent structure",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsnt_structure_topology": {
           "type": "string",
@@ -186,8 +187,9 @@
     },
 
     "adsorptive": {
-      "$comment": "Adsorptive: Physical and chemical identifiers and properties of the adsorptive molecule.",
-      "x-schema-star-prefix": "_adsorptive",
+      "$comment": "Adsorptive: Physical and chemical identifiers and properties of a single-component adsorptive.",
+      "x-schema-star-definition-id": "adsorptive",
+      "x-schema-star-definition-class": "Set",
       "type": "object",
       "properties": {
         "_adsorptive_name": {
@@ -205,8 +207,7 @@
         "_adsorptive_cas": {
           "type": "string",
           "description": "CAS Registry Number of the adsorptive",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsorptive_smiles": {
           "type": "string",
@@ -215,11 +216,23 @@
         "_adsorptive_formula": {
           "type": "string",
           "description": "Chemical formula of the adsorptive"
-        },
+        }
+      }
+    },
+
+    "adsorptive_component": {
+      "$comment": "Adsorptive Component: One row per component of a multicomponent adsorptive mixture. Sub-loop of Adsorptive, keyed by _adsorptive_component_index.",
+      "x-schema-star-definition-id": "adsorptive_component",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": "_adsorptive_component_index",
+      "type": "object",
+      "properties": {
         "_adsorptive_component_index": {
           "type": "integer",
           "minimum": 1,
-          "description": "Index for an adsorptive component in a mixture. Required field for mixtures."
+          "description": "Index for an adsorptive component in a mixture. Required field for mixtures.",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsorptive_component_name": {
           "type": "string",
@@ -236,8 +249,7 @@
         "_adsorptive_component_cas": {
           "type": "string",
           "description": "CAS Registry Number of an adsorptive component in a mixture",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsorptive_component_smiles": {
           "type": "string",
@@ -252,7 +264,8 @@
 
     "simulation": {
       "$comment": "Simulation: Computational method details for simulated isotherms (e.g. GCMC, MD). Only relevant when the data originates from molecular simulation rather than experiment. Requires _exptl_method = simulation.",
-      "x-schema-star-prefix": "_simltn",
+      "x-schema-star-definition-id": "simltn",
+      "x-schema-star-definition-class": "Set",
       "type": "object",
       "properties": {
         "_simltn_code": {
@@ -294,7 +307,8 @@
 
     "digitization": {
       "$comment": "Digitization: Metadata relevant when file data were extracted/reconstructed from a static image of a published figure or table, rather than recorded directly from an instrument or simulation output. Presence of any field in this section implies the data were digitized; the underlying experimental or simulation method is still recorded via _exptl_method regardless.",
-      "x-schema-star-prefix": "_digitization",
+      "x-schema-star-definition-id": "digitization",
+      "x-schema-star-definition-class": "Set",
       "type": "object",
       "properties": {
         "_digitization_author": {
@@ -331,14 +345,14 @@
 
     "citation": {
       "$comment": "Citation: Bibliographic reference for the source publication or dataset.",
-      "x-schema-star-prefix": "_citation",
+      "x-schema-star-definition-id": "citation",
+      "x-schema-star-definition-class": "Set",
       "type": "object",
       "properties": {
         "_citation_doi": {
           "type": "string",
           "description": "Digital Object Identifier (DOI) of the publication associated with this data",
-          "x-dic-purpose": "Encode",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_citation_source": {
           "type": "string",
@@ -361,70 +375,74 @@
 
     "units": {
       "$comment": "Units: Measurement unit definitions for all numerical quantities. These scalar fields declare the units used throughout the file so that data columns can be interpreted correctly. The units are recommended to follow the QUDT ontology (http://qudt.org/) or other standard ontologies.",
-      "x-schema-star-prefix": "_units",
+      "x-schema-star-definition-id": "_units",
       "type": "object",
       "properties": {
         "_units_temperature": {
           "type": "string",
           "description": "Unit of temperature for all temperature values in this file, e.g. K, °C",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_pressure": {
           "type": "string",
           "description": "Unit of pressure for all pressure values in this file, e.g. kPa, bar, mmHg",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_mass": {
           "type": "string",
           "description": "Unit of mass for all mass values in this file, e.g. g, mg, kg",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_sorbed_amount": {
           "type": "string",
           "description": "Unit of amount adsorbed for all loading values in this file, e.g. mmol/g, cm3(STP)/g, wt%",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_density": {
           "type": "string",
           "description": "Unit of density for all density values in this file, e.g. g/cm3, kg/m3",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_time": {
           "type": "string",
           "description": "Unit of time for all time values in this file, e.g. s, min, hours",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_molecular_weight": {
           "type": "string",
           "description": "Unit of molecular weight values in this file, e.g. g/mol",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_enthalpy": {
           "type": "string",
           "description": "Unit of enthalpy values in this file, e.g. kJ/mol",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_composition_type": {
           "type": "string",
           "description": "Definition of how mixture compositions are expressed, e.g. mole_fraction, mass_fraction, partial_pressure, relative_humidity, concentration",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         },
         "_units_concentration": {
           "type": "string",
           "description": "Unit of concentration. Requires _units_composition_type = concentration",
-          "x-dic-source": "Assigned"
+          "x-schema-star-type-source": "Assigned"
         }
       }
     },
 
     "adsorption_data": {
       "$comment": "Adsorption Data: Loop columns for the adsorption branch of the isotherm. These fields appear inside a STAR loop_ construct, with one row per equilibrium point.",
-      "x-schema-star-prefix": "_adsorp",
+      "x-schema-star-definition-id": "_adsorp",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": "_adsorp_index",
       "type": "object",
       "properties": {
         "_adsorp_index": {
           "type": "number",
-          "description": "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point."
+          "description": "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point.",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
         },
         "_adsorp_pressure": {
           "type": "number",
@@ -587,12 +605,16 @@
 
     "desorption_data": {
       "$comment": "Desorption Data: Loop columns for the desorption branch of the isotherm. Mirrors the adsorption data section for the reverse process.",
-      "x-schema-star-prefix": "_desorp",
+      "x-schema-star-definition-id": "desorp",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": "_desorp_index",
       "type": "object",
       "properties": {
         "_desorp_index": {
           "type": "number",
-          "description": "Index of the desorption data point, starting from 1 and incrementing by 1 for each point."
+          "description": "Index of the desorption data point, starting from 1 and incrementing by 1 for each point.",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
         },
         "_desorp_pressure": {
           "type": "number",
@@ -754,6 +776,13 @@
     }
   },
 
+  "properties": {
+    "adsorptive_component": {
+      "description": "Rows describing each component of a multicomponent adsorptive mixture (sub-loop of _adsorptive_*). See definitions.adsorptive_component.",
+      "$ref": "#/definitions/adsorptive_component"
+    }
+  },
+
   "allOf": [
     { "$ref": "#/definitions/audit" },
     { "$ref": "#/definitions/experimental" },
@@ -831,7 +860,12 @@
     {
       "anyOf": [
         { "required": ["_adsorptive_name"] },
-        { "required": ["_adsorptive_component_name"] }
+        {
+          "properties": {
+            "adsorptive_component": { "type": "array", "minItems": 1 }
+          },
+          "required": ["adsorptive_component"]
+        }
       ]
     },
     {
@@ -846,6 +880,11 @@
       "$comment": "Any data name ending in '_uncertainty' is treated as the uncertainty (error bar) for the corresponding base field.",
       "type": "number",
       "description": "Uncertainty (standard or expanded) associated with the corresponding data name, in the same units"
+    },
+    ".*_su$": {
+      "$comment": "Any data name ending in '_su' is an alias for the standard uncertainty for the corresponding base field.",
+      "type": "number",
+      "description": "Standard uncertainty associated with the corresponding data name, in the same units. For the meaning of 'standard uncertainty', see the International vocabulary of metrology – Basic and general concepts and associated terms (VIM) - https://doi.org/10.59161/JCGM200-2012."
     }
   },
 
@@ -909,8 +948,6 @@
     "_adsorp_amount_component_9": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_adsorp_amount_component_10": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_adsorptive_cas": ["_adsorptive_name"],
-    "_adsorptive_component_name": ["_adsorptive_component_index"],
-    "_adsorptive_component_index": ["_adsorptive_component_name"],
     "_adsorptive_formula": ["_adsorptive_name"],
     "_adsorptive_inchi": ["_adsorptive_name"],
     "_adsorptive_info": ["_adsorptive_name"],

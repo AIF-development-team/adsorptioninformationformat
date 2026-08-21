@@ -210,7 +210,7 @@ def check_example_file(path: Path) -> tuple[list[str], list[str]]:
 
 def main() -> int:
     json_path = REPO_ROOT / "aif_dictionary.json"
-    dic_path = REPO_ROOT / "aif_dictionary.dic"
+    ddlm_path = REPO_ROOT / "aif_dictionary.dic"
     yaml_path = REPO_ROOT / "aif_dictionary.yaml"
     aif_path = REPO_ROOT / "example.aif"
 
@@ -219,7 +219,7 @@ def main() -> int:
 
     for checker, path in [
         (check_json, json_path),
-        (check_dic, dic_path),
+        (check_dic, ddlm_path),
         (check_yaml, yaml_path),
         (check_example_file, aif_path),
     ]:

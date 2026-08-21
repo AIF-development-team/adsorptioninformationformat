@@ -36,10 +36,10 @@ def _yaml_defined_aliases(yaml_text: str) -> set[str]:
     return set(re.findall(r'"(_\w+)"', yaml_text))
 
 
-def _dic_save_frames(dic_text: str) -> set[str]:
+def _ddlm_save_frames(ddlm_text: str) -> set[str]:
     """Return a set of CIF names reconstructed from ``save_<cat>.<item>`` blocks."""
     names: set[str] = set()
-    for m in re.finditer(r"save_(\w+)\.(\w+)", dic_text):
+    for m in re.finditer(r"save_(\w+)\.(\w+)", ddlm_text):
         names.add(f"_{m.group(1)}_{m.group(2)}")
     return names
 
@@ -55,7 +55,7 @@ def json_schema():
 
 
 @pytest.fixture(scope="module")
-def dic_text():
+def ddlm_text():
     return (REPO_ROOT / "aif_dictionary.dic").read_text(encoding="utf-8")
 
 
@@ -96,17 +96,17 @@ def test_json_version_is_present(json_schema):
     assert json_schema.get("version"), "aif_dictionary.json is missing a 'version' key"
 
 
-def test_dic_version_is_present(dic_text):
-    assert _version_from_dic(dic_text), "aif_dictionary.dic is missing _dictionary.version"
+def test_dic_version_is_present(ddlm_text):
+    assert _version_from_dic(ddlm_text), "aif_dictionary.dic is missing _dictionary.version"
 
 
 def test_yaml_version_is_present(yaml_text):
     assert _version_from_yaml(yaml_text), "aif_dictionary.yaml is missing a 'version' key"
 
 
-def test_all_three_versions_are_identical(json_schema, dic_text, yaml_text):
+def test_all_three_versions_are_identical(json_schema, ddlm_text, yaml_text):
     v_json = _version_from_json(json_schema)
-    v_dic = _version_from_dic(dic_text)
+    v_dic = _version_from_dic(ddlm_text)
     v_yaml = _version_from_yaml(yaml_text)
     assert v_json == v_dic == v_yaml, (
         f"Version mismatch across dictionaries: "
@@ -134,10 +134,10 @@ def test_json_fields_have_aliases_in_yaml(json_schema, yaml_text):
     )
 
 
-def test_json_fields_have_save_frames_in_dic(json_schema, dic_text):
+def test_json_fields_have_save_frames_in_dic(json_schema, ddlm_text):
     """Every CIF field in the JSON schema must have a save_ frame in the DIC."""
     json_fields = _json_all_fields(json_schema)
-    dic_names = _dic_save_frames(dic_text)
+    dic_names = _ddlm_save_frames(ddlm_text)
     missing = json_fields - dic_names
     assert not missing, (
         f"{len(missing)} JSON field(s) have no save frame in aif_dictionary.dic:\n"
@@ -184,7 +184,7 @@ def test_adsnt_sample_name_exists_in_json(json_schema):
 # ── Enum consistency ──────────────────────────────────────────────────────────
 
 
-def test_exptl_method_enum_consistent_across_formats(json_schema, yaml_text, dic_text):
+def test_exptl_method_enum_consistent_across_formats(json_schema, yaml_text, ddlm_text):
     """The ExperimentalMethod enum values must appear in all three formats."""
     expected_values = {"volumetric", "gravimetric", "chromatographic", "simulation", "other"}
 
@@ -208,7 +208,7 @@ def test_exptl_method_enum_consistent_across_formats(json_schema, yaml_text, dic
 
     # DIC – each value should appear as an _enumeration.set entry
     for val in expected_values:
-        assert val in dic_text, (
+        assert val in ddlm_text, (
             f"Value '{val}' not found in aif_dictionary.dic"
         )
 
@@ -216,9 +216,9 @@ def test_exptl_method_enum_consistent_across_formats(json_schema, yaml_text, dic
 # ── Required-field note consistency (DIC) ─────────────────────────────────────
 
 
-def _dic_item_block(dic_text: str, save_name: str) -> str:
-    """Return the body of a ``save_<save_name>`` item frame in the DIC text."""
-    match = re.search(rf"save_{re.escape(save_name)}(.*?)\nsave_\n", dic_text, re.DOTALL)
+def _ddlm_item_block(ddlm_text: str, save_name: str) -> str:
+    """Return the body of a ``save_<save_name>`` item frame in the DDLm text."""
+    match = re.search(rf"save_{re.escape(save_name)}(.*?)\nsave_\n", ddlm_text, re.DOTALL)
     assert match is not None, f"No save_{save_name} block found in aif_dictionary.dic"
     return match.group(1)
 
@@ -228,32 +228,35 @@ def _all_pname_save_names(json_schema: dict) -> dict[str, str]:
     save_names: dict[str, str] = {}
     for sk, sec in json_schema.get("definitions", {}).items():
         meta = sd._build_section_meta(sk, sec)
-        for pname in sec.get("properties", {}):
-            save_names[pname] = sd._dic_save_name(pname, meta["prefix"])
+        for pname in sd._section_properties(sec):
+            save_names[pname] = sd._ddlm_save_name(pname, meta.prefix)[0]
     return save_names
 
 
-def test_unconditionally_required_fields_have_required_note_in_dic(json_schema, dic_text):
+def test_unconditionally_required_fields_have_required_note_in_dic(json_schema, ddlm_text):
     """Every field required via the top-level 'required' array or a singleton
     'anyOf' must carry a 'Required field.' note in its DIC common text."""
     req_index = sd._build_required_index(json_schema)
     save_names = _all_pname_save_names(json_schema)
     for pname in sorted(req_index.unconditional):
-        block = _dic_item_block(dic_text, save_names[pname])
+        block = _ddlm_item_block(ddlm_text, save_names[pname])
         assert "Required field." in block, (
             f"{pname} is unconditionally required but its DIC entry has no "
             "'Required field.' note"
         )
 
 
-def test_alt_group_fields_have_required_unless_note_in_dic(json_schema, dic_text):
+def test_alt_group_fields_have_required_unless_note_in_dic(json_schema, ddlm_text):
     """Fields in a multi-member top-level 'anyOf' group must carry an accurate
     'Required unless <other member> is provided.' note, not an unconditional one."""
     req_index = sd._build_required_index(json_schema)
     save_names = _all_pname_save_names(json_schema)
     for group in req_index.alt_groups:
         for pname in group:
-            block = _dic_item_block(dic_text, save_names[pname])
+            if pname not in save_names:
+                # schema-level key (e.g. sub-loop array), not a CIF data item
+                continue
+            block = _ddlm_item_block(ddlm_text, save_names[pname])
             others = " or ".join(sorted(group - {pname}))
             expected = f"Required unless {others} is provided."
             assert expected in block, (
@@ -262,7 +265,7 @@ def test_alt_group_fields_have_required_unless_note_in_dic(json_schema, dic_text
             )
 
 
-def test_no_unrelated_field_claims_required_field_in_dic(json_schema, dic_text):
+def test_no_unrelated_field_claims_required_field_in_dic(json_schema, ddlm_text):
     """Guards against a field's description claiming 'Required field.'
     when the JSON schema does not actually require it unconditionally."""
     req_index = sd._build_required_index(json_schema)
@@ -271,7 +274,7 @@ def test_no_unrelated_field_claims_required_field_in_dic(json_schema, dic_text):
     for pname, save_name in save_names.items():
         if pname in req_index.unconditional or pname in alt_members:
             continue
-        block = _dic_item_block(dic_text, save_name)
+        block = _ddlm_item_block(ddlm_text, save_name)
         assert "Required field." not in block, (
             f"{pname} is not required by the JSON schema but its DIC entry "
             "claims 'Required field.'"
