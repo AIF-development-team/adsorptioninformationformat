@@ -126,7 +126,8 @@
         },
         "_adsnt_info": {
           "type": "string",
-          "description": "Free-text field for additional information about the adsorbent sample"
+          "description": "Free-text field for additional information about the adsorbent sample",
+          "x-schema-star-type-purpose": "Describe"
         },
         "_adsnt_sample_name": {
           "type": "string",
@@ -161,7 +162,8 @@
         },
         "_adsnt_synthesis": {
           "type": "string",
-          "description": "Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc"
+          "description": "Synthesis route or details used, e.g. solvothermal, mechanochemical, reference to MPIF, etc",
+          "x-schema-star-type-purpose": "Describe"
         },
         "_adsnt_sample_mass": {
           "type": "number",
@@ -173,7 +175,8 @@
         },
         "_adsnt_degas_summary": {
           "type": "string",
-          "description": "Human-readable summary of the degassing procedure and conditions"
+          "description": "Human-readable summary of the degassing procedure and conditions",
+          "x-schema-star-type-purpose": "Describe"
         },
         "_adsnt_degas_temperature": {
           "type": "number",
@@ -198,7 +201,8 @@
         },
         "_adsorptive_info": {
           "type": "string",
-          "description": "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation"
+          "description": "Alternative or secondary name for the adsorptive, e.g. chemical formula or abbreviation",
+          "x-schema-star-type-purpose": "Describe"
         },
         "_adsorptive_inchi": {
           "type": "string",
@@ -240,7 +244,8 @@
         },
         "_adsorptive_component_info": {
           "type": "string",
-          "description": "Alternative or secondary name for an adsorptive component in a mixture, e.g. chemical formula or abbreviation"
+          "description": "Alternative or secondary name for an adsorptive component in a mixture, e.g. chemical formula or abbreviation",
+          "x-schema-star-type-purpose": "Describe"
         },
         "_adsorptive_component_inchi": {
           "type": "string",
@@ -338,7 +343,8 @@
         },
         "_digitization_notes": {
           "type": "string",
-          "description": "Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information."
+          "description": "Free-text field for any additional notes about the digitization process or source, like assumptions, limitations, data identification (e.g. which curve was digitized), or any other relevant information.",
+          "x-schema-star-type-purpose": "Describe"
         }
       }
     },

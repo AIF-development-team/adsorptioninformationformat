@@ -66,7 +66,7 @@ save_audit.aif_version
     _description.text            'Version of the AIF data-name dictionary used by this file'
     _name.category_id            AUDIT
     _name.object_id              aif_version
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -89,7 +89,7 @@ save_audit.author
 ;
     _name.category_id            AUDIT
     _name.object_id              author
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -103,7 +103,7 @@ save_audit.creation_date
     _description.text            'Date and time the AIF file was created in ISO 8601 format'
     _name.category_id            AUDIT
     _name.object_id              creation_date
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               DateTime
@@ -121,7 +121,7 @@ save_audit.creation_method
 ;
     _name.category_id            AUDIT
     _name.object_id              creation_method
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -138,7 +138,7 @@ save_audit.creation_software
 ;
     _name.category_id            AUDIT
     _name.object_id              creation_software
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -178,7 +178,7 @@ save_exptl.operator
 ;
     _name.category_id            EXPTL
     _name.object_id              operator
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -192,7 +192,7 @@ save_exptl.date
     _description.text            'Date and time of the experiment in ISO 8601 format'
     _name.category_id            EXPTL
     _name.object_id              date
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               DateTime
@@ -210,7 +210,7 @@ save_exptl.instrument
 ;
     _name.category_id            EXPTL
     _name.object_id              instrument
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -273,7 +273,7 @@ save_exptl.isotherm_type
     _description.text            'Classification of the reported adsorbed amount'
     _name.category_id            EXPTL
     _name.object_id              isotherm_type
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -317,7 +317,7 @@ save_adsnt.material_name
 ;
     _name.category_id            ADSNT
     _name.object_id              material_name
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -356,7 +356,7 @@ save_adsnt.sample_name
 ;
     _name.category_id            ADSNT
     _name.object_id              sample_name
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -374,7 +374,7 @@ save_adsnt.hashkey
 ;
     _name.category_id            ADSNT
     _name.object_id              hashkey
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -392,7 +392,7 @@ save_adsnt.structure_csd_refcode
 ;
     _name.category_id            ADSNT
     _name.object_id              structure_csd_refcode
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -409,7 +409,7 @@ save_adsnt.structure_topology
 ;
     _name.category_id            ADSNT
     _name.object_id              structure_topology
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -426,7 +426,7 @@ save_adsnt.structure_smiles
 ;
     _name.category_id            ADSNT
     _name.object_id              structure_smiles
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -443,7 +443,7 @@ save_adsnt.composition
 ;
     _name.category_id            ADSNT
     _name.object_id              composition
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -608,7 +608,7 @@ save_adsorptive.name
 ;
     _name.category_id            ADSORPTIVE
     _name.object_id              name
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -644,7 +644,7 @@ save_adsorptive.inchi
     _description.text            'IUPAC InChI identifier of the adsorptive'
     _name.category_id            ADSORPTIVE
     _name.object_id              inchi
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -658,7 +658,7 @@ save_adsorptive.cas
     _description.text            'CAS Registry Number of the adsorptive'
     _name.category_id            ADSORPTIVE
     _name.object_id              cas
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -672,7 +672,7 @@ save_adsorptive.smiles
     _description.text            'Canonical SMILES string of the adsorptive'
     _name.category_id            ADSORPTIVE
     _name.object_id              smiles
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -686,7 +686,7 @@ save_adsorptive.formula
     _description.text            'Chemical formula of the adsorptive'
     _name.category_id            ADSORPTIVE
     _name.object_id              formula
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -744,7 +744,7 @@ save_adsorptive_component.name
 ;
     _name.category_id            ADSORPTIVE_COMPONENT
     _name.object_id              name
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -779,7 +779,7 @@ save_adsorptive_component.inchi
 ;
     _name.category_id            ADSORPTIVE_COMPONENT
     _name.object_id              inchi
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -793,7 +793,7 @@ save_adsorptive_component.cas
     _description.text            'CAS Registry Number of an adsorptive component in a mixture'
     _name.category_id            ADSORPTIVE_COMPONENT
     _name.object_id              cas
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -810,7 +810,7 @@ save_adsorptive_component.smiles
 ;
     _name.category_id            ADSORPTIVE_COMPONENT
     _name.object_id              smiles
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -824,7 +824,7 @@ save_adsorptive_component.formula
     _description.text            'Chemical formula of an adsorptive component in a mixture'
     _name.category_id            ADSORPTIVE_COMPONENT
     _name.object_id              formula
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -864,7 +864,7 @@ save_simltn.code
 ;
     _name.category_id            SIMLTN
     _name.object_id              code
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -882,7 +882,7 @@ save_simltn.size
 ;
     _name.category_id            SIMLTN
     _name.object_id              size
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -900,7 +900,7 @@ save_simltn.forcefield_adsorptive
 ;
     _name.category_id            SIMLTN
     _name.object_id              forcefield_adsorptive
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -918,7 +918,7 @@ save_simltn.forcefield_adsorbent
 ;
     _name.category_id            SIMLTN
     _name.object_id              forcefield_adsorbent
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -935,7 +935,7 @@ save_simltn.input_files
 ;
     _name.category_id            SIMLTN
     _name.object_id              input_files
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -952,7 +952,7 @@ save_simltn.sampling
 ;
     _name.category_id            SIMLTN
     _name.object_id              sampling
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -970,7 +970,7 @@ save_simltn.lot
 ;
     _name.category_id            SIMLTN
     _name.object_id              lot
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -989,7 +989,7 @@ save_simltn.date
 ;
     _name.category_id            SIMLTN
     _name.object_id              date
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               DateTime
@@ -1037,7 +1037,7 @@ save_digitization.author
 ;
     _name.category_id            DIGITIZATION
     _name.object_id              author
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -1055,7 +1055,7 @@ save_digitization.date
 ;
     _name.category_id            DIGITIZATION
     _name.object_id              date
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               DateTime
@@ -1075,7 +1075,7 @@ save_digitization.method
 ;
     _name.category_id            DIGITIZATION
     _name.object_id              method
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -1102,7 +1102,7 @@ save_digitization.software
 ;
     _name.category_id            DIGITIZATION
     _name.object_id              software
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -1160,7 +1160,7 @@ save_citation.doi
 ;
     _name.category_id            CITATION
     _name.object_id              doi
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1178,7 +1178,7 @@ save_citation.source
 ;
     _name.category_id            CITATION
     _name.object_id              source
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -1196,7 +1196,7 @@ save_citation.figure
 ;
     _name.category_id            CITATION
     _name.object_id              figure
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -1214,7 +1214,7 @@ save_citation.page
 ;
     _name.category_id            CITATION
     _name.object_id              page
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -1232,7 +1232,7 @@ save_citation.url
 ;
     _name.category_id            CITATION
     _name.object_id              url
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
@@ -1274,7 +1274,7 @@ save_units.temperature
 ;
     _name.category_id            UNITS
     _name.object_id              temperature
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1292,7 +1292,7 @@ save_units.pressure
 ;
     _name.category_id            UNITS
     _name.object_id              pressure
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1309,7 +1309,7 @@ save_units.mass
 ;
     _name.category_id            UNITS
     _name.object_id              mass
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1327,7 +1327,7 @@ save_units.sorbed_amount
 ;
     _name.category_id            UNITS
     _name.object_id              sorbed_amount
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1345,7 +1345,7 @@ save_units.density
 ;
     _name.category_id            UNITS
     _name.object_id              density
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1363,7 +1363,7 @@ save_units.time
 ;
     _name.category_id            UNITS
     _name.object_id              time
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1377,7 +1377,7 @@ save_units.molecular_weight
     _description.text            'Unit of molecular weight values in this file, e.g. g/mol'
     _name.category_id            UNITS
     _name.object_id              molecular_weight
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1391,7 +1391,7 @@ save_units.enthalpy
     _description.text            'Unit of enthalpy values in this file, e.g. kJ/mol'
     _name.category_id            UNITS
     _name.object_id              enthalpy
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1410,7 +1410,7 @@ save_units.composition_type
 ;
     _name.category_id            UNITS
     _name.object_id              composition_type
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
@@ -1428,7 +1428,7 @@ save_units.concentration
 ;
     _name.category_id            UNITS
     _name.object_id              concentration
-    _type.purpose                Describe
+    _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text

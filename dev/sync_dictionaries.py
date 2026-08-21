@@ -59,7 +59,7 @@ _DDLm_TYPE_CONTENTS: dict[tuple[str, str | None], str] = {
 
 # Default DIC _type.purpose / _type.source by JSON type
 _DDLm_TYPE_PURPOSE_DEFAULT = {
-    "string": "Describe",
+    "string": "Encode",
     "number": "Measurand",
     "integer": "Describe",
 }
