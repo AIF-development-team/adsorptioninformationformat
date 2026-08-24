@@ -11,7 +11,6 @@ prefixes:
   aif: https://github.com/AIF-development-team/adsorptioninformationformat/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
-  qudt: http://qudt.org/schema/qudt/       # what is this?
 
 imports:
   - linkml:types
