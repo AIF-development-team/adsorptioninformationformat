@@ -1,6 +1,6 @@
 # AIF custom JSON Schema keywords
 
-The AIF schema is stored in `aif_dictionary.json` and is used as the source of truth for generating both the LinkML schema and the DDMm/DIC dictionary. To make that conversion explicit and stable, the project adds a small set of custom JSON Schema extension keys under the `x-` namespace.
+The AIF schema is stored in `aif_dictionary.json` and is used as the source of truth for generating both the LinkML schema and the DDLm/DIC dictionary. To make that conversion explicit and stable, the project adds a small set of custom JSON Schema extension keys under the `x-` namespace.
 
 These keywords are not part of the base JSON Schema standard, but they carry metadata that the dictionary-generation script consumes when producing `aif_dictionary.yaml` and `aif_dictionary.dic`.
 
