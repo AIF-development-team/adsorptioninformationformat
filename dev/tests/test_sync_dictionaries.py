@@ -150,7 +150,7 @@ class TestRequiredNote:
         assert sd._required_note("_adsnt_info", idx) is None
 
 
-# ── _slot_name / _dic_save_name ──────────────────────────────────────────────
+# ── _slot_name / _ddlm_save_name ─────────────────────────────────────────────
 
 
 class TestNamingHelpers:
@@ -158,18 +158,18 @@ class TestNamingHelpers:
         assert sd._slot_name("_exptl_operator") == "exptl_operator"
 
     def test_dic_save_name_formats_correctly(self):
-        assert sd._dic_save_name("_exptl_operator", "exptl") == "exptl.operator"
-        assert sd._dic_save_name("_audit_aif_version", "audit") == "audit.aif_version"
+        assert sd._ddlm_save_name("_exptl_operator", "exptl") == ("exptl.operator", "operator")
+        assert sd._ddlm_save_name("_audit_aif_version", "audit") == ("audit.aif_version", "aif_version")
 
 
 class TestYamlDescriptionEscaping:
     def test_generate_yaml_quotes_descriptions_with_special_characters(self):
         schema = {
-            "x-schema-uri": "aif",
             "x-linkml-name": "aif",
             "title": "AIF",
             "description": "AIF schema",
             "version": "1.0",
+            "$id": "https://example.com/aif_dictionary.json",
             "x-linkml-license": "MIT",
             "x-linkml-prefixes": {},
             "x-linkml-imports": ["linkml:types"],
@@ -208,7 +208,7 @@ class TestDeprecatedPropagation:
 
         deprecated_slots = []
         for section in schema.get("definitions", {}).values():
-            for name, prop in section.get("properties", {}).items():
+            for name, prop in sd._section_properties(section).items():
                 if prop.get("deprecated") is True:
                     deprecated_slots.append(name.lstrip("_"))
 
@@ -222,29 +222,29 @@ class TestDeprecatedPropagation:
             slot_block = yaml_text[start:end]
             assert "deprecated: true" in slot_block
 
-    def test_generate_dic_adds_common_deprecation_note(self):
+    def test_generate_ddlm_adds_common_deprecation_note(self):
         schema = sd.load_schema()
-        dic_text = sd.generate_dic(schema)
+        ddlm_text = sd.generate_ddlm(schema)
 
         deprecated_items = []
         for section in schema.get("definitions", {}).values():
-            section_props = section.get("properties", {})
+            section_props = sd._section_properties(section)
             section_prefix = sd._detect_prefix(section_props)
             for name, prop in section_props.items():
                 if prop.get("deprecated") is True:
                     deprecated_items.append((name, section_prefix))
 
         if not deprecated_items:
-            assert "Deprecated." not in dic_text
+            assert "Deprecated." not in ddlm_text
             return
 
         for name, section_prefix in deprecated_items:
-            save_name = sd._dic_save_name(name, section_prefix)
-            match = re.search(rf"save_{re.escape(save_name)}(.*?)\nsave_\n", dic_text, re.DOTALL)
+            save_name, _ = sd._ddlm_save_name(name, section_prefix)
+            match = re.search(rf"save_{re.escape(save_name)}(.*?)\nsave_\n", ddlm_text, re.DOTALL)
             assert match is not None
-            item_block = match.group(1)
-            assert "_description.common" in item_block
-            assert "Deprecated." in item_block
+            ddlm_block = match.group(1)
+            assert "_description.common" in ddlm_block
+            assert "Deprecated." in ddlm_block
 
     def test_generate_yaml_includes_unconditional_allof_requirements(self):
         schema = sd.load_schema()

@@ -37,7 +37,7 @@ def json_path(repo_root) -> Path:
 
 
 @pytest.fixture(scope="session")
-def dic_path(repo_root) -> Path:
+def ddlm_path(repo_root) -> Path:
     return repo_root / "aif_dictionary.dic"
 
 

@@ -1,4 +1,4 @@
-id: https://github.com/AIF-development-team/adsorptioninformationformat
+id: https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/aif_dictionary.yaml
 name: aif
 title: Adsorption Information Format (AIF)
 description: >-
@@ -11,7 +11,6 @@ prefixes:
   aif: https://github.com/AIF-development-team/adsorptioninformationformat/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
-  qudt: http://qudt.org/schema/qudt/
 
 imports:
   - linkml:types
@@ -24,7 +23,7 @@ default_range: string
 
 enums:
 
-  ExperimentalMethod:
+  ExptlMethod:
     description: Method used to determine amount adsorbed.
     permissible_values:
       volumetric:
@@ -37,7 +36,7 @@ enums:
         description: Computational simulation method.
       other:
         description: Other method not listed.
-  IsothermType:
+  ExptlIsothermType:
     description: Type of adsorption isotherm.
     permissible_values:
       absolute:
@@ -111,12 +110,12 @@ slots:
     aliases: ["_exptl_method"]
     description: Experimental technique used to measure the amount adsorbed
     required: true
-    range: ExperimentalMethod
+    range: ExptlMethod
 
   exptl_isotherm_type:
     aliases: ["_exptl_isotherm_type"]
     description: Classification of the reported adsorbed amount
-    range: IsothermType
+    range: ExptlIsothermType
 
   # ── Adsorbent ───────────────────────────────
 
@@ -211,6 +210,8 @@ slots:
   adsorptive_formula:
     aliases: ["_adsorptive_formula"]
     description: Chemical formula of the adsorptive
+
+  # ── Adsorptive Component ────────────────────
 
   adsorptive_component_index:
     aliases: ["_adsorptive_component_index"]
@@ -775,6 +776,19 @@ slots:
 
 classes:
 
+  AdsorptiveComponent:
+    description: >-
+      A single row of the Adsorptive Component sub-loop.
+      Corresponds to a row in an AIF loop_ block.
+    slots:
+      - adsorptive_component_index
+      - adsorptive_component_name
+      - adsorptive_component_info
+      - adsorptive_component_inchi
+      - adsorptive_component_cas
+      - adsorptive_component_smiles
+      - adsorptive_component_formula
+
   AdsorptionDataPoint:
     description: >-
       A single data point in the adsorption branch of an isotherm.
@@ -910,13 +924,6 @@ classes:
       - adsorptive_cas
       - adsorptive_smiles
       - adsorptive_formula
-      - adsorptive_component_index
-      - adsorptive_component_name
-      - adsorptive_component_info
-      - adsorptive_component_inchi
-      - adsorptive_component_cas
-      - adsorptive_component_smiles
-      - adsorptive_component_formula
       # Simulation
       - simltn_code
       - simltn_size
@@ -950,6 +957,11 @@ classes:
       - units_composition_type
       - units_concentration
     attributes:
+      adsorptive_component:
+        description: Adsorptive Component sub-loop rows (loop_ block).
+        range: AdsorptiveComponent
+        multivalued: true
+        inlined_as_list: true
       adsorption_data:
         description: Adsorption branch data points (loop_ block).
         range: AdsorptionDataPoint
