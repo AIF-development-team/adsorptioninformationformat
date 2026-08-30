@@ -1,0 +1,38 @@
+# Isobar measurement - CO2 amount vs temperature at constant pressure
+
+data_isobar_co2
+
+    _audit_aif_version                "__AIF_VERSION__"
+
+    _exptl_operator                   "Hannah Lee"
+    _exptl_date                       2024-07-12T09:00:00Z
+    _exptl_adsorptive                 "Carbon Dioxide"
+    _exptl_adsorptive_name            "CO2"
+    _exptl_method                     "gravimetric"
+    _exptl_instrument                 "DVS Vacuum"
+    _exptl_isotherm_type              "absolute"
+    _exptl_pressure                   100000.0
+
+    _adsnt_material_id                "Zeolite-5A"
+    _adsnt_sample_id                  "Z5A-isobar-01"
+    _adsnt_sample_mass                0.0567
+
+    _units_temperature                "K"
+    _units_pressure                   "Pa"
+    _units_mass                       "g"
+    _units_loading                    "mmol/g"
+
+    loop_
+        _isobar_temperature
+        _isobar_amount
+        _isobar_pressure
+        298.15   4.52   100000.0
+        313.15   3.89   100000.0
+        333.15   3.12   100000.0
+        353.15   2.45   100000.0
+        373.15   1.89   100000.0
+        393.15   1.34   100000.0
+        413.15   0.89   100000.0
+        433.15   0.56   100000.0
+        453.15   0.34   100000.0
+        473.15   0.18   100000.0
