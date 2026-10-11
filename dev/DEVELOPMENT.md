@@ -104,6 +104,12 @@ The following hooks are configured in [.pre-commit-config.yaml](.pre-commit-conf
 
 ## Release process
 
+Use the **bare version** (e.g. `1.0.0` or `1.0.0-beta`, without a leading `v`)
+as `<release-version>` everywhere below. Git Flow prepends the configured tag
+prefix itself, so `git flow release finish v1.0.0` would create the tag
+`vv1.0.0`. Branches are named `release/<release-version>` and tags
+`v<release-version>`.
+
 1. **Create a release branch** from `develop`:
 
    ```bash
@@ -153,7 +159,7 @@ branches.
 
 - **Feature** branches (`feature/xyz`) are created from `develop` and merged
   back into `develop` when complete.
-- **Release** branches (`release/v1.0.2`) are created from `develop`, stamped
+- **Release** branches (`release/1.0.2`) are created from `develop`, stamped
   with a version, tagged (e.g. `v1.0.2`), and merged into both `master` and
   `develop`.
 - **Hotfix** branches are created from `master` for urgent fixes and merged

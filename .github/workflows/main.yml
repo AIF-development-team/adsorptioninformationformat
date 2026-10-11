@@ -44,41 +44,27 @@ jobs:
           fi
 
       - name: Generate Changelog
-        id: changelog
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           previous_tag=$(git -c versionsort.suffix=- tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$' | grep -vxF "$RELEASE_TAG" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
-            changelog=$(git log "$previous_tag"..HEAD --pretty=format:"- %s")
+            git log "$previous_tag"..HEAD --pretty=format:"- %s" > "$RUNNER_TEMP/changelog.md"
           else
-            changelog=$(git log --pretty=format:"- %s")
+            git log --pretty=format:"- %s" > "$RUNNER_TEMP/changelog.md"
           fi
-          {
-            echo 'changelog<<EOF'
-            echo "$changelog"
-            echo 'EOF'
-          } >> $GITHUB_ENV
 
-      - name: Detect prerelease
-        id: kind
+      # gh is preinstalled on GitHub-hosted runners (third-party actions are blocked by org policy).
+      - name: Create GitHub Release
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           # A '-' after X.Y.Z (e.g. v1.0.0-beta.1) marks a prerelease.
-          if [[ "$RELEASE_TAG" == *-* ]]; then
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "prerelease=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          body: ${{ env.changelog }}
-          draft: false
-          prerelease: ${{ steps.kind.outputs.prerelease }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          flags=()
+          if [[ "$RELEASE_TAG" == *-* ]]; then flags+=(--prerelease); fi
+          gh release create "$RELEASE_TAG" \
+            --verify-tag \
+            --title "Release $RELEASE_TAG" \
+            --notes-file "$RUNNER_TEMP/changelog.md" \
+            "${flags[@]}"
