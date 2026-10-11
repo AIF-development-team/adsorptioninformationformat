@@ -10,12 +10,12 @@ data_AIF_DIC
 
     _dictionary.title            AIF_DIC
     _dictionary.class            Instance
-    _dictionary.version          1.0.0-beta
+    _dictionary.version          __AIF_VERSION__
     _dictionary.date             2026-03-09
     _dictionary.uri
-        https://github.com/AIF-development-team/adsorptioninformationformat/tree/1.0.0-beta/aif_dictionary.dic
+        https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/aif_dictionary.dic
     _dictionary.guide
-        https://github.com/AIF-development-team/adsorptioninformationformat/tree/1.0.0-beta/dev/SCHEMA.md
+        https://github.com/AIF-development-team/adsorptioninformationformat/tree/__AIF_VERSION__/dev/SCHEMA.md
     _dictionary.ddl_conformance  4.1.0
     _dictionary.namespace        AIFCore
     _description.text
@@ -70,7 +70,7 @@ save_audit.aif_version
     _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
-    _enumeration.default         1.0.0-beta
+    _enumeration.default         __AIF_VERSION__
     _description.common
 ;
     Required field.
