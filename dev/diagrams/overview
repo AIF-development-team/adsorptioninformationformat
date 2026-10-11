@@ -1,0 +1,50 @@
+flowchart TD
+    subgraph init["0 · Initialize Git Flow"]
+        I1["<code>git flow init</code><br>Set version tag prefix to 'v'"]
+    end
+
+    subgraph pre["Pre-commit & CI Checks"]
+        P1["<code>pip install pre-commit</code><br><code>pre-commit install</code>"]
+        P2["check_aif_format.py validates<br>cross-file version consistency"]
+        P1 --> P2
+    end
+
+    subgraph feat["1 · Feature Development"]
+        F1["Branch from develop<br><code>git flow feature start &lt;name&gt;</code>"]
+        F2["Develop & commit"]
+        F3["Finish feature<br><code>git flow feature finish &lt;name&gt;</code>"]
+        F1 --> F2 --> F3
+    end
+
+    subgraph rel["2 · Release"]
+        R1["Branch from develop<br><code>git flow release start &lt;ver&gt;</code>"]
+        R2["Run <code>update_version.py</code><br>Stamps version into<br>.json · .dic · .yaml · examples"]
+        R3["Commit & finish release<br><code>git flow release finish &lt;ver&gt;</code>"]
+        R4["Push all + tags<br>GH Actions creates release"]
+        R1 --> R2 --> R3 --> R4
+    end
+
+    subgraph hot["3 · Hotfix"]
+        H1["Branch from master<br><code>git flow hotfix start &lt;ver&gt;</code>"]
+        H2["Apply fix & commit"]
+        H3["Finish hotfix<br>Merges into master + develop"]
+        H1 --> H2 --> H3
+    end
+
+    subgraph ver["Version Strings"]
+        V1["master → latest released version"]
+        V2["develop → placeholder __AIF_VERSION__"]
+        V3["Tags → matching semantic version"]
+    end
+
+    init --> feat
+    init --> pre
+    feat --> rel
+    rel --> hot
+
+    style init fill:#607D8B,color:#fff
+    style feat fill:#2196F3,color:#fff
+    style rel fill:#4CAF50,color:#fff
+    style hot fill:#F44336,color:#fff
+    style pre fill:#9C27B0,color:#fff
+    style ver fill:#FF9800,color:#000
