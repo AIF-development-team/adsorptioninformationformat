@@ -12,7 +12,7 @@ import sync_dictionaries as sd
 
 REPO_ROOT = Path(__file__).parent.parent.parent
 PLACEHOLDER = "__AIF_VERSION__"
-SEMVER_RE = re.compile(r"^v?\d+\.\d+\.\d+$")
+SEMVER_RE = re.compile(r"^v?\d+\.\d+\.\d+(?:-[0-9A-Za-z.]+)?$")
 
 
 # ── Helpers ──────────────────────────────────────────────────────────────────

@@ -24,6 +24,8 @@ class TestParseVersionString:
             ("release/1.2.3", "1.2.3"),
             ("release/v1.2.3", "1.2.3"),
             ("release/10.0.0", "10.0.0"),
+            ("v1.0.0-beta", "1.0.0-beta"),
+            ("release/v1.0.0-rc.1", "1.0.0-rc.1"),
         ],
     )
     def test_valid_inputs(self, ref, expected):
@@ -40,6 +42,8 @@ class TestParseVersionString:
             "release/",
             "release/bad",
             "feature/1.0.0",
+            "1.0.0-",
+            "1.0.0-beta..1",
             PLACEHOLDER,
         ],
     )
@@ -72,6 +76,29 @@ class TestIsNewerVersion:
     def test_minor_patch_ordering(self):
         assert uv.is_newer_version("1.9.9", "2.0.0") is True
         assert uv.is_newer_version("1.0.9", "1.1.0") is True
+
+    @pytest.mark.parametrize(
+        "old, new",
+        [
+            ("1.0.0-beta", "1.0.0"),
+            ("0.0.6", "1.0.0-beta"),
+            ("1.0.0-alpha", "1.0.0-beta"),
+            ("1.0.0-beta.2", "1.0.0-beta.11"),
+            ("1.0.0-beta", "1.0.0-beta.1"),
+            ("1.0.0-1", "1.0.0-alpha"),
+            (PLACEHOLDER, "0.0.0-alpha"),
+        ],
+    )
+    def test_prerelease_precedence_newer(self, old, new):
+        assert uv.is_newer_version(old, new) is True
+        assert uv.is_newer_version(new, old) is False
+
+    def test_prerelease_equal_is_not_newer(self):
+        assert uv.is_newer_version("1.0.0-beta", "1.0.0-beta") is False
+
+    def test_invalid_version_exits(self):
+        with pytest.raises(SystemExit):
+            uv.is_newer_version("1.0.0", "1.0.x")
 
 
 # ── replace_version_placeholder ──────────────────────────────────────────────

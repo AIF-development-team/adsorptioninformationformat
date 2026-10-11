@@ -4,6 +4,10 @@ import re
 from pathlib import Path
 
 PLACEHOLDER = "__AIF_VERSION__"
+# X.Y.Z with an optional SemVer prerelease suffix (e.g. 1.0.0-beta.1).
+VERSION_RE = re.compile(
+    r"(\d+)\.(\d+)\.(\d+)(?:-([0-9A-Za-z]+(?:\.[0-9A-Za-z]+)*))?"
+)
 REPO_ROOT = Path(__file__).parent.parent
 MAIN_FILES = [
     REPO_ROOT / "example.aif",
@@ -33,13 +37,14 @@ def parse_version_string(ref_string):
     """Extract a version from a branch or tag string.
 
     Accepts values like *release/1.2.3*, *release/v1.2.3*, *v1.2.3* or
-    *1.2.3*.  Returns the bare X.Y.Z portion or raises ValueError.
+    *1.2.3*.  Returns the bare version (X.Y.Z or X.Y.Z-prerelease) or raises
+    ValueError.
     """
     # strip any leading branch prefix
     if ref_string.startswith("release/"):
         ref_string = ref_string.split("/", 1)[1]
     # accept optional leading 'v'
-    match = re.match(r"v?(\d+\.\d+\.\d+)$", ref_string)
+    match = re.fullmatch(r"v?(" + VERSION_RE.pattern + r")", ref_string)
     if match:
         return match.group(1)
     raise ValueError(f"Could not parse version from '{ref_string}'")
@@ -94,15 +99,24 @@ def replace_version_placeholder(tag):
 
 
 def is_newer_version(old_version, new_version):
-    """Compare two version strings in the format X.Y.Z."""
+    """Compare two versions using SemVer precedence (1.0.0-beta < 1.0.0)."""
     def parse_version(version):
-        # Accept versions optionally prefixed with a leading 'v' (e.g. 'v1.2.3').
-        # Versions may also be empty or match the placeholder.
+        # Versions may be empty or the placeholder, optionally 'v'-prefixed.
         if not version or version == PLACEHOLDER:
-            return (0, 0, 0)
-        # strip a leading 'v' or 'V' so int conversion works
-        version = version.lstrip("vV")
-        return tuple(map(int, version.split(".")))
+            return (-1, -1, -1, (0, ()))  # lower than any real version
+        match = VERSION_RE.fullmatch(version.lstrip("vV"))
+        if not match:
+            raise ValueError(version)
+        major, minor, patch, pre = match.groups()
+        if pre is None:
+            pre_key = (1,)  # a release outranks any of its prereleases
+        else:
+            # numeric identifiers rank below alphanumeric ones
+            pre_key = (0, tuple(
+                (0, int(p), "") if p.isdigit() else (1, 0, p)
+                for p in pre.split(".")
+            ))
+        return (int(major), int(minor), int(patch), pre_key)
 
     print(f"Comparing old version '{old_version}' with new version '{new_version}'")
     try:

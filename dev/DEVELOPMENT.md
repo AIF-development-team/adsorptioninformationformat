@@ -55,7 +55,7 @@ The `dev/` directory contains helper scripts used during development and CI:
 
 | Script | Purpose |
 |---|---|
-| [check_aif_format.py](check_aif_format.py) | Validates version consistency across all three dictionary formats. |
+| [check_aif_format.py](check_aif_format.py) | Validates version consistency across all three dictionary formats. Pass `--release-tag vX.Y.Z` for strict release mode: every artifact (dictionaries, `example.aif`, `examples/**/*.aif`) must carry exactly `X.Y.Z` and no `__AIF_VERSION__` may remain. |
 | [sync_dictionaries.py](sync_dictionaries.py) | Regenerates `aif_dictionary.yaml` and `aif_dictionary.dic` from the JSON schema. Pass `--check` to verify they are in sync without modifying files. |
 | [update_version.py](update_version.py) | Stamps the version in all dictionary files, `example.aif`, and any `.aif` files under `examples/`. Auto-detects the version from the current `release/*` branch name, or accepts `--version <ver>` explicitly. |
 | [check_placeholder_on_tag_push.py](check_placeholder_on_tag_push.py) | Pre-push hook that blocks tag pushes when `__AIF_VERSION__` placeholders are still present. |
@@ -66,13 +66,20 @@ The `dev/` directory contains helper scripts used during development and CI:
 
 Two workflows run automatically:
 
-- **`.github/workflows/validate.yml`** — on every push and PR to `develop`,
-  `master`, `feature/**`, and `release/**` branches.  Validates JSON syntax,
+- **`.github/workflows/validate.yml`** — on every push to `develop`, `master`,
+  `feature/**`, `release/**` and `hotfix/**`, and on PRs targeting `develop`,
+  `master`, `release/**` or `hotfix/**`. Validates JSON syntax,
   version consistency (`check_aif_format.py`), and dictionary sync
-   (`sync_dictionaries.py --check`), then runs the tracked test suite under
-   `dev/tests/` with pytest.
-- **`.github/workflows/main.yml`** — on tag pushes. Runs the same validations,
-  verifies the version bump, generates a changelog, and creates a GitHub release.
+  (`sync_dictionaries.py --check`), then runs the tracked test suite under
+  `dev/tests/` with pytest. It is also a reusable workflow: when called with a
+  `release-tag` input it additionally runs the strict release check.
+- **`.github/workflows/main.yml`** — on `vX.Y.Z` tag pushes. A `validate` job
+  calls `validate.yml` with the tag (so the tagged commit gets the full test
+  suite and the strict check, rejecting leftover placeholders). Only if it
+  passes does the `new_release` job (the only one with `contents: write`)
+  verify the version bump, generate a changelog, and create the GitHub release.
+  Tags with a SemVer prerelease suffix (e.g. `v1.0.0-beta`, `v1.0.0-rc.1`) are
+  published as GitHub *pre-releases*; they sort below the matching `vX.Y.Z`.
 
 ### Local hooks (pre-commit)
 
@@ -80,11 +87,12 @@ Install [pre-commit](https://pre-commit.com/) and activate the hooks:
 
 ```bash
 pip install pre-commit
-pre-commit install
-pre-commit install --hook-type pre-push
+pre-commit install -c dev/.pre-commit-config.yaml
+pre-commit install -c dev/.pre-commit-config.yaml --hook-type pre-push
 ```
 
-The following hooks are configured in `.pre-commit-config.yaml`:
+The following hooks are configured in [.pre-commit-config.yaml](.pre-commit-config.yaml)
+(pass `-c dev/.pre-commit-config.yaml` to other `pre-commit` commands, e.g. `run`):
 
 | Hook | Trigger | What it does |
 |---|---|---|
@@ -117,6 +125,7 @@ The following hooks are configured in `.pre-commit-config.yaml`:
    python dev/update_version.py
    git add -A
    git commit -m "Prepare release <release-version>"
+   python dev/check_aif_format.py --release-tag v<release-version>
    ```
 
 4. **Finish the release branch** (tags and merges into `master` and `develop`):

@@ -21,7 +21,9 @@ class TestIsValidVersion:
     def test_placeholder_is_valid(self, v):
         assert caf._is_valid_version(v)
 
-    @pytest.mark.parametrize("v", ["1.0.0", "0.1.0", "10.20.30", "v1.2.3", "v0.0.1"])
+    @pytest.mark.parametrize(
+        "v", ["1.0.0", "0.1.0", "10.20.30", "v1.2.3", "v0.0.1", "1.0.0-beta", "1.0.0-rc.1"]
+    )
     def test_semver_variants_are_valid(self, v):
         assert caf._is_valid_version(v)
 
@@ -36,6 +38,9 @@ class TestIsValidVersion:
             "latest",
             "v",
             "v1",
+            "1.0.0-",
+            "1.0.0-beta..1",
+            "1.0.0+build",
             "release/1.0.0",
         ],
     )
@@ -292,3 +297,110 @@ def test_main_passes_on_real_repo():
     """``main()`` must exit 0 against the actual repository files."""
     rc = caf.main()
     assert rc == 0, "check_aif_format.main() reported errors on the real repo"
+
+
+# ── strict release mode ──────────────────────────────────────────────────────
+
+
+class TestReleaseTag:
+    @pytest.mark.parametrize(
+        "tag,expected",
+        [
+            ("v1.2.3", "1.2.3"),
+            ("1.2.3", "1.2.3"),
+            ("v10.0.1", "10.0.1"),
+            ("v1.0.0-beta", "1.0.0-beta"),
+            ("v1.0.0-rc.1", "1.0.0-rc.1"),
+        ],
+    )
+    def test_version_from_tag(self, tag, expected):
+        assert caf.release_version_from_tag(tag) == expected
+
+    @pytest.mark.parametrize(
+        "tag", ["", "v1.2", "v1.2.3.4", "v1.2.3-", "release/1.2.3", "latest"]
+    )
+    def test_invalid_tag_rejected(self, tag):
+        with pytest.raises(ValueError):
+            caf.release_version_from_tag(tag)
+
+
+class TestReleaseMode:
+    """Run ``main(--release-tag)`` against a stamped copy of the real artifacts."""
+
+    @pytest.fixture
+    def repo(self, tmp_path, monkeypatch):
+        real = caf.REPO_ROOT
+        # The real tree may hold the placeholder (develop) or a stamped release.
+        current = caf.check_json(real / "aif_dictionary.json")[0][0]
+        names = ["aif_dictionary.json", "aif_dictionary.dic",
+                 "aif_dictionary.yaml", "example.aif"]
+        for name in names:
+            text = (real / name).read_text(encoding="utf-8")
+            (tmp_path / name).write_text(
+                text.replace(current, "1.2.3"), encoding="utf-8"
+            )
+        for src in (real / "examples").rglob("*.aif"):
+            dest = tmp_path / src.relative_to(real)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(
+                src.read_text(encoding="utf-8").replace(current, "1.2.3"),
+                encoding="utf-8",
+            )
+        monkeypatch.setattr(caf, "REPO_ROOT", tmp_path)
+        return tmp_path
+
+    def test_stamped_tree_passes(self, repo, capsys):
+        assert caf.main(["--release-tag", "v1.2.3"]) == 0
+
+    def test_bare_tag_without_v_passes(self, repo):
+        assert caf.main(["--release-tag", "1.2.3"]) == 0
+
+    def test_tag_mismatch_fails(self, repo, capsys):
+        assert caf.main(["--release-tag", "v2.0.0"]) == 1
+        assert "does not match release" in capsys.readouterr().err
+
+    def test_invalid_tag_fails(self, repo):
+        assert caf.main(["--release-tag", "v1.2"]) == 1
+
+    def test_placeholder_in_example_fails(self, repo, capsys):
+        example = next((repo / "examples").rglob("*.aif"))
+        example.write_text(
+            example.read_text(encoding="utf-8").replace("1.2.3", PLACEHOLDER),
+            encoding="utf-8",
+        )
+        assert caf.main(["--release-tag", "v1.2.3"]) == 1
+
+    def test_placeholder_in_dictionary_url_fails(self, repo):
+        """A leftover placeholder in a non-version field (e.g. a URL) is caught."""
+        p = repo / "aif_dictionary.yaml"
+        p.write_text(
+            p.read_text(encoding="utf-8") + f"\n# see /tree/{PLACEHOLDER}/\n",
+            encoding="utf-8",
+        )
+        assert caf.main(["--release-tag", "v1.2.3"]) == 1
+
+    def test_stale_example_fails(self, repo):
+        example = next((repo / "examples").rglob("*.aif"))
+        example.write_text(
+            example.read_text(encoding="utf-8").replace("1.2.3", "1.1.0"),
+            encoding="utf-8",
+        )
+        assert caf.main(["--release-tag", "v1.2.3"]) == 1
+
+    def test_missing_file_fails(self, repo):
+        (repo / "aif_dictionary.dic").unlink()
+        assert caf.main(["--release-tag", "v1.2.3"]) == 1
+
+    def test_default_mode_still_accepts_placeholder(self, repo):
+        """Without --release-tag, a stamped tree is simply consistent."""
+        assert caf.main([]) == 0
+
+    def test_prerelease_tree_passes(self, repo):
+        for path in [*repo.glob("*.*"), *(repo / "examples").rglob("*.aif")]:
+            path.write_text(
+                path.read_text(encoding="utf-8").replace("1.2.3", "1.2.3-beta.1"),
+                encoding="utf-8",
+            )
+        assert caf.main(["--release-tag", "v1.2.3-beta.1"]) == 0
+        # the final release tag must not accept a beta-stamped tree
+        assert caf.main(["--release-tag", "v1.2.3"]) == 1
