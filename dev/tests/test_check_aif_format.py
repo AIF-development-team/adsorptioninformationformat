@@ -404,3 +404,19 @@ class TestReleaseMode:
         assert caf.main(["--release-tag", "v1.2.3-beta.1"]) == 0
         # the final release tag must not accept a beta-stamped tree
         assert caf.main(["--release-tag", "v1.2.3"]) == 1
+
+    def test_expect_placeholder_rejects_stamped_tree(self, repo, capsys):
+        assert caf.main(["--expect-placeholder"]) == 1
+        assert "development branches must keep" in capsys.readouterr().err
+
+    def test_expect_placeholder_accepts_placeholder_tree(self, repo):
+        for path in [*repo.glob("*.*"), *(repo / "examples").rglob("*.aif")]:
+            path.write_text(
+                path.read_text(encoding="utf-8").replace("1.2.3", PLACEHOLDER),
+                encoding="utf-8",
+            )
+        assert caf.main(["--expect-placeholder"]) == 0
+
+    def test_modes_are_mutually_exclusive(self, repo):
+        with pytest.raises(SystemExit):
+            caf.main(["--expect-placeholder", "--release-tag", "v1.2.3"])

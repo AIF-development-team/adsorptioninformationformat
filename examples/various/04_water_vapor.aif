@@ -2,7 +2,7 @@
 
 data_water_vapor_silica
 
-    _audit_aif_version                "1.0.0-beta"
+    _audit_aif_version                "1.0.0-beta2"
 
     _exptl_operator                   "David Park"
     _exptl_date                       2024-04-22T11:15:00Z

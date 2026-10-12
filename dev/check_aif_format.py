@@ -8,6 +8,8 @@ Validates that:
 
 With ``--release-tag vX.Y.Z`` the check becomes strict: every artifact must
 carry exactly X.Y.Z and no ``__AIF_VERSION__`` placeholder may remain.
+With ``--expect-placeholder`` the opposite holds: every artifact must still
+hold the placeholder (used on develop and feature branches).
 """
 
 import argparse
@@ -266,10 +268,16 @@ def check_release(
 
 def main(argv: Sequence[str] = ()) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument(
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
         "--release-tag",
         metavar="TAG",
         help="strict release mode: require every artifact to carry this version",
+    )
+    mode.add_argument(
+        "--expect-placeholder",
+        action="store_true",
+        help=f"development mode: require every artifact to hold {PLACEHOLDER}",
     )
     args = parser.parse_args(list(argv))
 
@@ -302,6 +310,14 @@ def main(argv: Sequence[str] = ()) -> int:
 
     if release_version is not None:
         all_errors.extend(check_release(release_version, found, payload))
+
+    if args.expect_placeholder:
+        all_errors.extend(
+            f"{name}: stamped version {v!r}; development branches must keep "
+            f"{PLACEHOLDER}"
+            for name, v in found
+            if v != PLACEHOLDER
+        )
 
     all_versions = [v for _, v in found]
 
