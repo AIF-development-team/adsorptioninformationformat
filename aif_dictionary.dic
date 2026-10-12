@@ -692,6 +692,62 @@ save_adsorptive.formula
     _type.contents               Text
 save_
 
+save_adsorptive.molecular_weight
+    _definition.id               'adsorptive.molecular_weight'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Molecular weight of the adsorptive (see _units_molecular_weight)
+;
+    _name.category_id            ADSORPTIVE
+    _name.object_id              molecular_weight
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_molecular_weight'
+save_
+
+save_adsorptive.kinetic_diameter
+    _definition.id               'adsorptive.kinetic_diameter'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Kinetic diameter of the adsorptive molecule (see
+    _units_kinetic_diameter)
+;
+    _name.category_id            ADSORPTIVE
+    _name.object_id              kinetic_diameter
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_kinetic_diameter'
+save_
+
+save_adsorptive.quadrupole_moment
+    _definition.id               'adsorptive.quadrupole_moment'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Quadrupole moment of the adsorptive (see
+    _units_quadrupole_moment)
+;
+    _name.category_id            ADSORPTIVE
+    _name.object_id              quadrupole_moment
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_quadrupole_moment'
+save_
+
 ##############################################################################
 #                                                                            #
 #                       ADSORPTIVE_COMPONENT CATEGORY                        #
@@ -1428,6 +1484,80 @@ save_units.concentration
 ;
     _name.category_id            UNITS
     _name.object_id              concentration
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.surface_area
+    _definition.id               'units.surface_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of surface area values in this file, e.g. m2/g'
+    _name.category_id            UNITS
+    _name.object_id              surface_area
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.pore_volume
+    _definition.id               'units.pore_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of pore volume values in this file, e.g. cm3/g'
+    _name.category_id            UNITS
+    _name.object_id              pore_volume
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.pore_size
+    _definition.id               'units.pore_size'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Unit of pore characteristic dimension values in this file, e.g.
+    nm
+;
+    _name.category_id            UNITS
+    _name.object_id              pore_size
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.kinetic_diameter
+    _definition.id               'units.kinetic_diameter'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of kinetic diameter values in this file, e.g. angstrom'
+    _name.category_id            UNITS
+    _name.object_id              kinetic_diameter
+    _type.purpose                Encode
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_units.quadrupole_moment
+    _definition.id               'units.quadrupole_moment'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of quadrupole moment values in this file, e.g. Debye·Å'
+    _name.category_id            UNITS
+    _name.object_id              quadrupole_moment
     _type.purpose                Encode
     _type.source                 Assigned
     _type.container              Single
@@ -3001,6 +3131,458 @@ save_desorp.amount_component_10
     _type.container              Single
     _type.contents               Real
     _units.code                  'see _units_sorbed_amount'
+save_
+
+save_desorp.molefraction
+    _definition.id               'desorp.molefraction'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Mole fraction of the adsorptive in the gas phase for a
+    multicomponent desorption measurement (see
+    _units_composition_type)
+;
+    _name.category_id            DESORP
+    _name.object_id              molefraction
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp.selectivity
+    _definition.id               'desorp.selectivity'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Desorption selectivity for a specified component pair under the
+    given conditions (unitless ratio)
+;
+    _name.category_id            DESORP
+    _name.object_id              selectivity
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+##############################################################################
+#                                                                            #
+#                             ANALYSIS CATEGORY                              #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS
+    _definition.id               ANALYSIS
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the analysis category record derived scalar
+    quantities from standard analysis methods (BET, Langmuir, pore
+    characterization). These are single-value metadata fields
+    summarising the analysis results.
+;
+    _name.category_id            AIF_CORE
+    _name.object_id              ANALYSIS
+save_
+
+save_analysis.method
+    _definition.id               'analysis.method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Analysis method(s) or description used for derived quantities,
+    e.g. BET and HK
+;
+    _name.category_id            ANALYSIS
+    _name.object_id              method
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis.bet_area
+    _definition.id               'analysis.bet_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'BET surface area (see _units_surface_area)'
+    _name.category_id            ANALYSIS
+    _name.object_id              bet_area
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_surface_area'
+save_
+
+save_analysis.bet_c_constant
+    _definition.id               'analysis.bet_c_constant'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'BET C constant (dimensionless)'
+    _name.category_id            ANALYSIS
+    _name.object_id              bet_c_constant
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.bet_pressure_range_min
+    _definition.id               'analysis.bet_pressure_range_min'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Lower bound of the relative pressure range used for BET fitting
+;
+    _name.category_id            ANALYSIS
+    _name.object_id              bet_pressure_range_min
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.bet_pressure_range_max
+    _definition.id               'analysis.bet_pressure_range_max'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Upper bound of the relative pressure range used for BET fitting
+;
+    _name.category_id            ANALYSIS
+    _name.object_id              bet_pressure_range_max
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.langmuir_area
+    _definition.id               'analysis.langmuir_area'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Langmuir surface area (see _units_surface_area)'
+    _name.category_id            ANALYSIS
+    _name.object_id              langmuir_area
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_surface_area'
+save_
+
+save_analysis.total_pore_volume
+    _definition.id               'analysis.total_pore_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Total pore volume (see _units_pore_volume)'
+    _name.category_id            ANALYSIS
+    _name.object_id              total_pore_volume
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_volume'
+save_
+
+save_analysis.total_pore_volume_pp0
+    _definition.id               'analysis.total_pore_volume_pp0'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Relative pressure p/p0 at which total pore volume was evaluated
+;
+    _name.category_id            ANALYSIS
+    _name.object_id              total_pore_volume_pp0
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.psd_method
+    _definition.id               'analysis.psd_method'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Method for determining pore size distribution, e.g. NLDFT-
+    Carbon-N2
+;
+    _name.category_id            ANALYSIS
+    _name.object_id              psd_method
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis.pore_geometry
+    _definition.id               'analysis.pore_geometry'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Geometry of the pores, e.g. cylindrical, slit-shaped'
+    _name.category_id            ANALYSIS
+    _name.object_id              pore_geometry
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+##############################################################################
+#                                                                            #
+#                           ANALYSIS_PSD CATEGORY                            #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_PSD
+    _definition.id               ANALYSIS_PSD
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the analysis_psd category record loop columns for
+    pore size distribution data. One row per diameter bin.
+;
+    _name.category_id            AIF_CORE
+    _name.object_id              ANALYSIS_PSD
+    _category.key_id             _analysis_psd_size
+save_
+
+save_analysis_psd.size
+    _definition.id               'analysis_psd.size'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Pore characteristic dimension in a pore-size distribution loop
+    (see _units_pore_size)
+;
+    _name.category_id            ANALYSIS_PSD
+    _name.object_id              size
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pore_size'
+save_
+
+save_analysis_psd.dv_dd
+    _definition.id               'analysis_psd.dv_dd'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Differential pore volume dV/dD at each diameter in a PSD loop
+;
+    _name.category_id            ANALYSIS_PSD
+    _name.object_id              dv_dd
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+##############################################################################
+#                                                                            #
+#                       ANALYSIS_FIT_SUMMARY CATEGORY                        #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_FIT
+    _definition.id               ANALYSIS_FIT
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the analysis_fit category record loop columns for
+    recording fitted isotherm models. One row per model, linked to
+    fit parameters via _analysis_fit_id.
+;
+    _name.category_id            AIF_CORE
+    _name.object_id              ANALYSIS_FIT
+    _category.key_id             _analysis_fit_id
+save_
+
+save_analysis_fit.id
+    _definition.id               'analysis_fit.id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unique integer key identifying this fit within the file'
+    _name.category_id            ANALYSIS_FIT
+    _name.object_id              id
+    _type.purpose                Key
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+save_analysis_fit.model
+    _definition.id               'analysis_fit.model'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth'
+    _name.category_id            ANALYSIS_FIT
+    _name.object_id              model
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_fit.r_squared
+    _definition.id               'analysis_fit.r_squared'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Coefficient of determination (R-squared) for the fit'
+    _name.category_id            ANALYSIS_FIT
+    _name.object_id              r_squared
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit.rmse
+    _definition.id               'analysis_fit.rmse'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Root-mean-square error of the fit (see _units_sorbed_amount)'
+    _name.category_id            ANALYSIS_FIT
+    _name.object_id              rmse
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+##############################################################################
+#                                                                            #
+#                      ANALYSIS_FIT_PARAMETERS CATEGORY                      #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_FIT_PARAM
+    _definition.id               ANALYSIS_FIT_PARAM
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the analysis_fit_param category record loop
+    columns for the parameters of each fitted model. Linked to the
+    fit summary via _analysis_fit_param_id referencing
+    _analysis_fit_id.
+;
+    _name.category_id            AIF_CORE
+    _name.object_id              ANALYSIS_FIT_PARAM
+    _category.key_id             _analysis_fit_param_id
+save_
+
+save_analysis_fit_param.id
+    _definition.id               'analysis_fit_param.id'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Foreign key referencing _analysis_fit_id in the fit summary loop
+;
+    _name.category_id            ANALYSIS_FIT_PARAM
+    _name.object_id              id
+    _type.purpose                Key
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+save_analysis_fit_param.name
+    _definition.id               'analysis_fit_param.name'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Name of the fitted parameter, e.g. q_max, K_L, n'
+    _name.category_id            ANALYSIS_FIT_PARAM
+    _name.object_id              name
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_fit_param.value
+    _definition.id               'analysis_fit_param.value'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Fitted value of the parameter'
+    _name.category_id            ANALYSIS_FIT_PARAM
+    _name.object_id              value
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit_param.uncertainty
+    _definition.id               'analysis_fit_param.uncertainty'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Uncertainty of the fitted parameter value'
+    _name.category_id            ANALYSIS_FIT_PARAM
+    _name.object_id              uncertainty
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis_fit_param.unit
+    _definition.id               'analysis_fit_param.unit'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'Unit of the fitted parameter, e.g. mmol/g, 1/Pa'
+    _name.category_id            ANALYSIS_FIT_PARAM
+    _name.object_id              unit
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
 save_
 
 ##############################################################################

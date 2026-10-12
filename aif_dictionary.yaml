@@ -211,6 +211,21 @@ slots:
     aliases: ["_adsorptive_formula"]
     description: Chemical formula of the adsorptive
 
+  adsorptive_molecular_weight:
+    aliases: ["_adsorptive_molecular_weight"]
+    description: Molecular weight of the adsorptive (see _units_molecular_weight)
+    range: float
+
+  adsorptive_kinetic_diameter:
+    aliases: ["_adsorptive_kinetic_diameter"]
+    description: Kinetic diameter of the adsorptive molecule (see _units_kinetic_diameter)
+    range: float
+
+  adsorptive_quadrupole_moment:
+    aliases: ["_adsorptive_quadrupole_moment"]
+    description: Quadrupole moment of the adsorptive (see _units_quadrupole_moment)
+    range: float
+
   # ── Adsorptive Component ────────────────────
 
   adsorptive_component_index:
@@ -365,6 +380,26 @@ slots:
   units_concentration:
     aliases: ["_units_concentration"]
     description: Unit of concentration. Requires _units_composition_type = concentration
+
+  units_surface_area:
+    aliases: ["_units_surface_area"]
+    description: "Unit of surface area values in this file, e.g. m2/g"
+
+  units_pore_volume:
+    aliases: ["_units_pore_volume"]
+    description: "Unit of pore volume values in this file, e.g. cm3/g"
+
+  units_pore_size:
+    aliases: ["_units_pore_size"]
+    description: "Unit of pore characteristic dimension values in this file, e.g. nm"
+
+  units_kinetic_diameter:
+    aliases: ["_units_kinetic_diameter"]
+    description: "Unit of kinetic diameter values in this file, e.g. angstrom"
+
+  units_quadrupole_moment:
+    aliases: ["_units_quadrupole_moment"]
+    description: "Unit of quadrupole moment values in this file, e.g. Debye·Å"
 
   # ── Adsorption Data ─────────────────────────
 
@@ -770,6 +805,123 @@ slots:
     description: Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
+  desorp_molefraction:
+    aliases: ["_desorp_molefraction"]
+    description: Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)
+    range: float
+
+  desorp_selectivity:
+    aliases: ["_desorp_selectivity"]
+    description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
+    range: float
+
+  # ── Analysis ────────────────────────────────
+
+  analysis_method:
+    aliases: ["_analysis_method"]
+    description: "Analysis method(s) or description used for derived quantities, e.g. BET and HK"
+
+  analysis_bet_area:
+    aliases: ["_analysis_bet_area"]
+    description: BET surface area (see _units_surface_area)
+    range: float
+
+  analysis_bet_c_constant:
+    aliases: ["_analysis_bet_c_constant"]
+    description: BET C constant (dimensionless)
+    range: float
+
+  analysis_bet_pressure_range_min:
+    aliases: ["_analysis_bet_pressure_range_min"]
+    description: Lower bound of the relative pressure range used for BET fitting
+    range: float
+
+  analysis_bet_pressure_range_max:
+    aliases: ["_analysis_bet_pressure_range_max"]
+    description: Upper bound of the relative pressure range used for BET fitting
+    range: float
+
+  analysis_langmuir_area:
+    aliases: ["_analysis_langmuir_area"]
+    description: Langmuir surface area (see _units_surface_area)
+    range: float
+
+  analysis_total_pore_volume:
+    aliases: ["_analysis_total_pore_volume"]
+    description: Total pore volume (see _units_pore_volume)
+    range: float
+
+  analysis_total_pore_volume_pp0:
+    aliases: ["_analysis_total_pore_volume_pp0"]
+    description: Relative pressure p/p0 at which total pore volume was evaluated
+    range: float
+
+  analysis_psd_method:
+    aliases: ["_analysis_psd_method"]
+    description: "Method for determining pore size distribution, e.g. NLDFT-Carbon-N2"
+
+  analysis_pore_geometry:
+    aliases: ["_analysis_pore_geometry"]
+    description: "Geometry of the pores, e.g. cylindrical, slit-shaped"
+
+  # ── Analysis PSD ────────────────────────────
+
+  analysis_psd_size:
+    aliases: ["_analysis_psd_size"]
+    description: Pore characteristic dimension in a pore-size distribution loop (see _units_pore_size)
+    range: float
+
+  analysis_psd_dv_dd:
+    aliases: ["_analysis_psd_dv_dd"]
+    description: Differential pore volume dV/dD at each diameter in a PSD loop
+    range: float
+
+  # ── Analysis Fit Summary ────────────────────
+
+  analysis_fit_id:
+    aliases: ["_analysis_fit_id"]
+    description: Unique integer key identifying this fit within the file
+    range: integer
+
+  analysis_fit_model:
+    aliases: ["_analysis_fit_model"]
+    description: "Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth"
+
+  analysis_fit_r_squared:
+    aliases: ["_analysis_fit_r_squared"]
+    description: Coefficient of determination (R-squared) for the fit
+    range: float
+
+  analysis_fit_rmse:
+    aliases: ["_analysis_fit_rmse"]
+    description: Root-mean-square error of the fit (see _units_sorbed_amount)
+    range: float
+
+  # ── Analysis Fit Parameters ─────────────────
+
+  analysis_fit_param_id:
+    aliases: ["_analysis_fit_param_id"]
+    description: Foreign key referencing _analysis_fit_id in the fit summary loop
+    range: integer
+
+  analysis_fit_param_name:
+    aliases: ["_analysis_fit_param_name"]
+    description: "Name of the fitted parameter, e.g. q_max, K_L, n"
+
+  analysis_fit_param_value:
+    aliases: ["_analysis_fit_param_value"]
+    description: Fitted value of the parameter
+    range: float
+
+  analysis_fit_param_uncertainty:
+    aliases: ["_analysis_fit_param_uncertainty"]
+    description: Uncertainty of the fitted parameter value
+    range: float
+
+  analysis_fit_param_unit:
+    aliases: ["_analysis_fit_param_unit"]
+    description: "Unit of the fitted parameter, e.g. mmol/g, 1/Pa"
+
 # ──────────────────────────────────────────────
 #  Classes
 # ──────────────────────────────────────────────
@@ -880,6 +1032,37 @@ classes:
       - desorp_amount_component_8
       - desorp_amount_component_9
       - desorp_amount_component_10
+      - desorp_molefraction
+      - desorp_selectivity
+
+  AnalysisPsd:
+    description: >-
+      A single row of the Analysis PSD sub-loop.
+      Corresponds to a row in an AIF loop_ block.
+    slots:
+      - analysis_psd_size
+      - analysis_psd_dv_dd
+
+  AnalysisFitSummary:
+    description: >-
+      A single row of the Analysis Fit Summary sub-loop.
+      Corresponds to a row in an AIF loop_ block.
+    slots:
+      - analysis_fit_id
+      - analysis_fit_model
+      - analysis_fit_r_squared
+      - analysis_fit_rmse
+
+  AnalysisFitParameters:
+    description: >-
+      A single row of the Analysis Fit Parameters sub-loop.
+      Corresponds to a row in an AIF loop_ block.
+    slots:
+      - analysis_fit_param_id
+      - analysis_fit_param_name
+      - analysis_fit_param_value
+      - analysis_fit_param_uncertainty
+      - analysis_fit_param_unit
 
   AdsorptionInformationFile:
     description: >-
@@ -924,6 +1107,9 @@ classes:
       - adsorptive_cas
       - adsorptive_smiles
       - adsorptive_formula
+      - adsorptive_molecular_weight
+      - adsorptive_kinetic_diameter
+      - adsorptive_quadrupole_moment
       # Simulation
       - simltn_code
       - simltn_size
@@ -956,6 +1142,22 @@ classes:
       - units_enthalpy
       - units_composition_type
       - units_concentration
+      - units_surface_area
+      - units_pore_volume
+      - units_pore_size
+      - units_kinetic_diameter
+      - units_quadrupole_moment
+      # Analysis
+      - analysis_method
+      - analysis_bet_area
+      - analysis_bet_c_constant
+      - analysis_bet_pressure_range_min
+      - analysis_bet_pressure_range_max
+      - analysis_langmuir_area
+      - analysis_total_pore_volume
+      - analysis_total_pore_volume_pp0
+      - analysis_psd_method
+      - analysis_pore_geometry
     attributes:
       adsorptive_component:
         description: Adsorptive Component sub-loop rows (loop_ block).
@@ -970,5 +1172,20 @@ classes:
       desorption_data:
         description: Desorption branch data points (loop_ block).
         range: DesorptionDataPoint
+        multivalued: true
+        inlined_as_list: true
+      analysis_psd:
+        description: Analysis PSD sub-loop rows (loop_ block).
+        range: AnalysisPsd
+        multivalued: true
+        inlined_as_list: true
+      analysis_fit_summary:
+        description: Analysis Fit Summary sub-loop rows (loop_ block).
+        range: AnalysisFitSummary
+        multivalued: true
+        inlined_as_list: true
+      analysis_fit_parameters:
+        description: Analysis Fit Parameters sub-loop rows (loop_ block).
+        range: AnalysisFitParameters
         multivalued: true
         inlined_as_list: true
