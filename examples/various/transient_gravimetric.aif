@@ -25,7 +25,7 @@ data_transient_gravimetric_CO2
     _units_temperature                "K"
     _units_pressure                   "kPa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
     _units_density                    "g/cm3"
     _units_time                       "s"
 
@@ -57,11 +57,11 @@ data_transient_gravimetric_CO2
     # Adsorption transient traces
     # -------------------------------------------------------
     loop_
-        _adsorp_transient_step
+        _adsorp_transient_index
         _adsorp_transient_elapsed_time
         _adsorp_transient_pressure
         _adsorp_transient_temperature
-        _adsorp_transient_loading
+        _adsorp_transient_amount
         1    0.0    15.0    298.20    0.00
         1   10.0    13.5    298.18    0.45
         1   20.0    12.0    298.17    0.92
@@ -88,11 +88,11 @@ data_transient_gravimetric_CO2
     # Desorption transient traces
     # -------------------------------------------------------
     loop_
-        _desorp_transient_step
+        _desorp_transient_index
         _desorp_transient_elapsed_time
         _desorp_transient_pressure
         _desorp_transient_temperature
-        _desorp_transient_loading
+        _desorp_transient_amount
         1    0.0   100.0    298.15    4.21
         1   10.0   100.2    298.15    4.21
         1   20.0   100.0    298.15    4.21

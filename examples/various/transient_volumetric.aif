@@ -22,7 +22,7 @@ data_transient_volumetric_N2
     _units_temperature                "K"
     _units_pressure                   "kPa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
     _units_time                       "s"
 
     # equilibrium adsorption data (3 points for brevity)
@@ -35,10 +35,10 @@ data_transient_volumetric_N2
         0.200   101.325   1.210
 
     # time-resolved pressure trace during each adsorption dosing step
-    # _adsorp_transient_step links to the row index (1-based) in the
+    # _adsorp_transient_index links to the row index (1-based) in the
     # adsorption loop above
     loop_
-        _adsorp_transient_step
+        _adsorp_transient_index
         _adsorp_transient_elapsed_time
         _adsorp_transient_pressure
         _adsorp_transient_temperature

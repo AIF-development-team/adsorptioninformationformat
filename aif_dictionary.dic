@@ -3019,16 +3019,16 @@ save_ADSORP_TRANSIENT
     Data items in the adsorp_transient category record optional loop
     columns for time-resolved (raw instrument) traces during the
     adsorption branch. Each row records an instantaneous reading;
-    the _step column links rows to the corresponding equilibrium
+    the _index column links rows to the corresponding equilibrium
     point in the adsorption data loop (1-based index).
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ADSORP_TRANSIENT
-    _category.key_id             _adsorp_transient_step
+    _category.key_id             _adsorp_transient_index
 save_
 
-save_adsorp_transient.step
-    _definition.id               'adsorp_transient.step'
+save_adsorp_transient.index
+    _definition.id               'adsorp_transient.index'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -3038,9 +3038,9 @@ save_adsorp_transient.step
     adsorption data loop
 ;
     _name.category_id            ADSORP_TRANSIENT
-    _name.object_id              step
-    _type.purpose                Describe
-    _type.source                 Recorded
+    _name.object_id              index
+    _type.purpose                Key
+    _type.source                 Assigned
     _type.container              Single
     _type.contents               Integer
 save_
@@ -3083,6 +3083,25 @@ save_adsorp_transient.pressure
     _units.code                  'see _units_pressure'
 save_
 
+save_adsorp_transient.fugacity
+    _definition.id               'adsorp_transient.fugacity'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous fugacity recorded during the adsorption dosing
+    step (see _units_pressure)
+;
+    _name.category_id            ADSORP_TRANSIENT
+    _name.object_id              fugacity
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
 save_adsorp_transient.temperature
     _definition.id               'adsorp_transient.temperature'
     _definition.scope            Item
@@ -3102,23 +3121,137 @@ save_adsorp_transient.temperature
     _units.code                  'see _units_temperature'
 save_
 
-save_adsorp_transient.loading
-    _definition.id               'adsorp_transient.loading'
+save_adsorp_transient.amount
+    _definition.id               'adsorp_transient.amount'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Instantaneous amount adsorbed recorded during the adsorption
-    dosing step (see _units_loading)
+    dosing step (see _units_sorbed_amount)
 ;
     _name.category_id            ADSORP_TRANSIENT
-    _name.object_id              loading
+    _name.object_id              amount
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_adsorp_transient.amount_excess
+    _definition.id               'adsorp_transient.amount_excess'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous excess amount adsorbed recorded during the
+    adsorption dosing step (see _units_sorbed_amount)
+;
+    _name.category_id            ADSORP_TRANSIENT
+    _name.object_id              amount_excess
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_adsorp_transient.amount_absolute
+    _definition.id               'adsorp_transient.amount_absolute'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous absolute amount adsorbed recorded during the
+    adsorption dosing step (see _units_sorbed_amount)
+;
+    _name.category_id            ADSORP_TRANSIENT
+    _name.object_id              amount_absolute
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_adsorp_transient.amount_net
+    _definition.id               'adsorp_transient.amount_net'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous net amount adsorbed recorded during the adsorption
+    dosing step (see _units_sorbed_amount)
+;
+    _name.category_id            ADSORP_TRANSIENT
+    _name.object_id              amount_net
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_adsorp_transient.fugacity_component_1
+    _definition.id               'adsorp_transient.fugacity_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous fugacity of component 1 recorded during the
+    adsorption dosing step (see _units_pressure)
+;
+    _name.category_id            ADSORP_TRANSIENT
+    _name.object_id              fugacity_component_1
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_adsorp_transient.composition_component_1
+    _definition.id               'adsorp_transient.composition_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous composition of component 1 recorded during the
+    adsorption dosing step (see _units_composition_type)
+;
+    _name.category_id            ADSORP_TRANSIENT
+    _name.object_id              composition_component_1
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_adsorp_transient.amount_component_1
+    _definition.id               'adsorp_transient.amount_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous amount of component 1 adsorbed recorded during the
+    adsorption dosing step (see _units_sorbed_amount)
+;
+    _name.category_id            ADSORP_TRANSIENT
+    _name.object_id              amount_component_1
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
 save_
 
 ##############################################################################
@@ -3141,11 +3274,11 @@ save_DESORP_TRANSIENT
 ;
     _name.category_id            AIF_CORE
     _name.object_id              DESORP_TRANSIENT
-    _category.key_id             _desorp_transient_step
+    _category.key_id             _desorp_transient_index
 save_
 
-save_desorp_transient.step
-    _definition.id               'desorp_transient.step'
+save_desorp_transient.index
+    _definition.id               'desorp_transient.index'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -3155,9 +3288,9 @@ save_desorp_transient.step
     desorption data loop
 ;
     _name.category_id            DESORP_TRANSIENT
-    _name.object_id              step
-    _type.purpose                Describe
-    _type.source                 Recorded
+    _name.object_id              index
+    _type.purpose                Key
+    _type.source                 Assigned
     _type.container              Single
     _type.contents               Integer
 save_
@@ -3200,6 +3333,25 @@ save_desorp_transient.pressure
     _units.code                  'see _units_pressure'
 save_
 
+save_desorp_transient.fugacity
+    _definition.id               'desorp_transient.fugacity'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous fugacity recorded during the desorption step (see
+    _units_pressure)
+;
+    _name.category_id            DESORP_TRANSIENT
+    _name.object_id              fugacity
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
 save_desorp_transient.temperature
     _definition.id               'desorp_transient.temperature'
     _definition.scope            Item
@@ -3219,23 +3371,137 @@ save_desorp_transient.temperature
     _units.code                  'see _units_temperature'
 save_
 
-save_desorp_transient.loading
-    _definition.id               'desorp_transient.loading'
+save_desorp_transient.amount
+    _definition.id               'desorp_transient.amount'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Instantaneous amount adsorbed recorded during the desorption
-    step (see _units_loading)
+    step (see _units_sorbed_amount)
 ;
     _name.category_id            DESORP_TRANSIENT
-    _name.object_id              loading
+    _name.object_id              amount
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_desorp_transient.amount_excess
+    _definition.id               'desorp_transient.amount_excess'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous excess amount adsorbed recorded during the
+    desorption step (see _units_sorbed_amount)
+;
+    _name.category_id            DESORP_TRANSIENT
+    _name.object_id              amount_excess
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_desorp_transient.amount_absolute
+    _definition.id               'desorp_transient.amount_absolute'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous absolute amount adsorbed recorded during the
+    desorption step (see _units_sorbed_amount)
+;
+    _name.category_id            DESORP_TRANSIENT
+    _name.object_id              amount_absolute
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_desorp_transient.amount_net
+    _definition.id               'desorp_transient.amount_net'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous net amount adsorbed recorded during the desorption
+    step (see _units_sorbed_amount)
+;
+    _name.category_id            DESORP_TRANSIENT
+    _name.object_id              amount_net
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+save_desorp_transient.fugacity_component_1
+    _definition.id               'desorp_transient.fugacity_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous fugacity of component 1 recorded during the
+    desorption step (see _units_pressure)
+;
+    _name.category_id            DESORP_TRANSIENT
+    _name.object_id              fugacity_component_1
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
+save_desorp_transient.composition_component_1
+    _definition.id               'desorp_transient.composition_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous composition of component 1 recorded during the
+    desorption step (see _units_composition_type)
+;
+    _name.category_id            DESORP_TRANSIENT
+    _name.object_id              composition_component_1
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_composition_type'
+save_
+
+save_desorp_transient.amount_component_1
+    _definition.id               'desorp_transient.amount_component_1'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Instantaneous amount of component 1 adsorbed recorded during the
+    desorption step (see _units_sorbed_amount)
+;
+    _name.category_id            DESORP_TRANSIENT
+    _name.object_id              amount_component_1
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
 save_
 
 ##############################################################################
