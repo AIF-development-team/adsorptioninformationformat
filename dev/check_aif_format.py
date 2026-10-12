@@ -5,17 +5,26 @@ Validates that:
 - All three files (JSON, DIC, LinkML YAML) carry the same version
 - The version is either the __AIF_VERSION__ placeholder or valid semver
 - Required fields are present in each format
+
+With ``--release-tag vX.Y.Z`` the check becomes strict: every artifact must
+carry exactly X.Y.Z and no ``__AIF_VERSION__`` placeholder may remain.
+With ``--expect-placeholder`` the opposite holds: every artifact must still
+hold the placeholder (used on develop and feature branches).
 """
 
+import argparse
 import json
 import re
 import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
 PLACEHOLDER = "__AIF_VERSION__"
 # Accept optional leading 'v' in version strings (e.g. 'v1.2.3').
-SEMVER_RE = re.compile(r"^v?\d+\.\d+\.\d+$")
+_PRERELEASE = r"(?:-[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)*)?"
+SEMVER_RE = re.compile(rf"^v?\d+\.\d+\.\d+{_PRERELEASE}$")
+RELEASE_TAG_RE = re.compile(rf"^v?(\d+\.\d+\.\d+{_PRERELEASE})$")
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -208,35 +217,109 @@ def check_example_file(path: Path) -> tuple[list[str], list[str]]:
     return versions, errors
 
 
-def main() -> int:
-    json_path = REPO_ROOT / "aif_dictionary.json"
-    dic_path = REPO_ROOT / "aif_dictionary.dic"
-    yaml_path = REPO_ROOT / "aif_dictionary.yaml"
-    aif_path = REPO_ROOT / "example.aif"
+def release_version_from_tag(tag: str) -> str:
+    """Return the bare X.Y.Z for a ``vX.Y.Z`` tag, or raise ValueError."""
+    match = RELEASE_TAG_RE.match(tag)
+    if not match:
+        raise ValueError(f"Invalid release tag {tag!r} (expected vX.Y.Z or vX.Y.Z-prerelease)")
+    return match.group(1)
 
-    all_errors: list[str] = []
-    all_versions: list[str] = []
 
-    for checker, path in [
-        (check_json, json_path),
-        (check_dic, dic_path),
-        (check_yaml, yaml_path),
-        (check_example_file, aif_path),
-    ]:
-        if not path.exists():
-            all_errors.append(f"{path.name}: file not found")
-            continue
-        versions, errors = checker(path)
-        all_errors.extend(errors)
-        all_versions.extend(versions)
-
-    # include example files
+def _payload_files() -> list[Path]:
+    """Every versioned artifact that ships in a release."""
+    files = [
+        REPO_ROOT / name
+        for name in (
+            "aif_dictionary.json",
+            "aif_dictionary.dic",
+            "aif_dictionary.yaml",
+            "example.aif",
+        )
+    ]
     examples_dir = REPO_ROOT / "examples"
     if examples_dir.exists():
-        for path in examples_dir.rglob("*.aif"):
-            versions, errors = check_example_file(path)
-            all_errors.extend(errors)
-            all_versions.extend(versions)
+        files.extend(sorted(examples_dir.rglob("*.aif")))
+    return files
+
+
+def _rel(path: Path) -> str:
+    return path.relative_to(REPO_ROOT).as_posix()
+
+
+def check_release(
+    version: str, found: list[tuple[str, str]], payload: list[Path]
+) -> list[str]:
+    """Strict release checks: exact version everywhere, no placeholders left."""
+    errors: list[str] = []
+    if not found:
+        errors.append("no versions found in the release payload")
+    for name, found_version in found:
+        # Placeholders are reported by the text scan below.
+        if found_version != PLACEHOLDER and found_version != version:
+            errors.append(
+                f"{name}: version {found_version!r} does not match "
+                f"release {version!r}"
+            )
+    for path in payload:
+        if path.exists() and PLACEHOLDER in path.read_text(encoding="utf-8"):
+            errors.append(f"{_rel(path)}: unresolved {PLACEHOLDER} placeholder")
+    return errors
+
+
+def main(argv: Sequence[str] = ()) -> int:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
+        "--release-tag",
+        metavar="TAG",
+        help="strict release mode: require every artifact to carry this version",
+    )
+    mode.add_argument(
+        "--expect-placeholder",
+        action="store_true",
+        help=f"development mode: require every artifact to hold {PLACEHOLDER}",
+    )
+    args = parser.parse_args(list(argv))
+
+    release_version = None
+    if args.release_tag is not None:
+        try:
+            release_version = release_version_from_tag(args.release_tag)
+        except ValueError as exc:
+            _fail(str(exc))
+            return 1
+
+    checkers = {
+        ".json": check_json,
+        ".dic": check_dic,
+        ".yaml": check_yaml,
+        ".aif": check_example_file,
+    }
+    payload = _payload_files()
+
+    all_errors: list[str] = []
+    found: list[tuple[str, str]] = []
+
+    for path in payload:
+        if not path.exists():
+            all_errors.append(f"{_rel(path)}: file not found")
+            continue
+        versions, errors = checkers[path.suffix](path)
+        all_errors.extend(errors)
+        found.extend((_rel(path), v) for v in versions)
+
+    if release_version is not None:
+        all_errors.extend(check_release(release_version, found, payload))
+
+    if args.expect_placeholder:
+        all_errors.extend(
+            f"{name}: stamped version {v!r}; development branches must keep "
+            f"{PLACEHOLDER}"
+            for name, v in found
+            if v != PLACEHOLDER
+        )
+
+    all_versions = [v for _, v in found]
 
     # Cross-file consistency
     unique = set(all_versions)
@@ -250,7 +333,7 @@ def main() -> int:
         if not _is_valid_version(v):
             all_errors.append(
                 f'Invalid version format: "{v}" '
-                f"(expected semver X.Y.Z or {PLACEHOLDER})"
+                f"(expected semver X.Y.Z[-prerelease] or {PLACEHOLDER})"
             )
 
     # Report
@@ -265,4 +348,4 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(sys.argv[1:]))

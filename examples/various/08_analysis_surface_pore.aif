@@ -11,8 +11,8 @@ data_bet_pore_analysis
     _exptl_instrument                 "TriStar-II-3020"
     _exptl_isotherm_type              "absolute"
 
-    _adsnt_material_id                "SBA-15"
-    _adsnt_sample_id                  "SBA15-syn7-02"
+    _adsnt_material_name              "SBA-15"
+    _adsnt_sample_name                "SBA15-syn7-02"
     _adsnt_sample_mass                0.0987
 
     _adsorptive_name                  "Nitrogen"
@@ -32,7 +32,7 @@ data_bet_pore_analysis
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
     _units_surface_area               "m2/g"
     _units_pore_volume                "cm3/g"
     _units_pore_size                  "nm"

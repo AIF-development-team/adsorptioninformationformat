@@ -11,30 +11,25 @@ data_co2_calorimetry
     _exptl_instrument                 "TGA-DSC-001"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_id                "MIL-53(Al)"
-    _adsnt_sample_id                  "MIL53Al-S03"
+    _adsnt_material_name              "MIL-53(Al)"
+    _adsnt_sample_name                "MIL53Al-S03"
     _adsnt_sample_mass                0.0456
 
     _adsorptive_name                  "Carbon Dioxide"
     _adsorptive_info                  "CO2"
     _adsorptive_cas                   "124-38-9"
-    _adsorptive_molecular_weight      44.01
-    _adsorptive_critical_temperature  304.13
-    _adsorptive_critical_pressure     7377300.0
-    _adsorptive_kinetic_diameter      3.3
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
     _units_enthalpy                   "kJ/mol"
-    _units_molecular_weight           "g/mol"
 
     loop_
         _adsorp_index
         _adsorp_pressure
         _adsorp_p0
-        _adsorp_loading
+        _adsorp_amount
         _adsorp_enthalpy_differential
         _adsorp_enthalpy_integral
         1 1000.0    7377300.0   0.15   -38.2   -5.73

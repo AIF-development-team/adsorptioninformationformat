@@ -11,31 +11,27 @@ data_high_pressure_ch4
     _exptl_instrument                 "HPVA-II-100"
     _exptl_isotherm_type              "excess"
 
-    _adsnt_material_id                "AX-21"
-    _adsnt_sample_id                  "AX21-HP-03"
+    _adsnt_material_name              "AX-21"
+    _adsnt_sample_name                "AX21-HP-03"
     _adsnt_sample_mass                0.5123
     _adsnt_sample_density             2.2
 
     _adsorptive_name                  "Methane"
     _adsorptive_info                  "CH4"
     _adsorptive_cas                   "74-82-8"
-    _adsorptive_molecular_weight      16.043
-    _adsorptive_critical_temperature  190.56
-    _adsorptive_critical_pressure     4599200.0
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
-    _units_loading                    "mmol/g"
+    _units_sorbed_amount              "mmol/g"
     _units_density                    "g/cm3"
-    _units_molecular_weight           "g/mol"
 
     loop_
         _adsorp_index
         _adsorp_pressure
-        _adsorp_loading
-        _adsorp_loading_excess
-        _adsorp_loading_absolute
+        _adsorp_amount
+        _adsorp_amount_excess
+        _adsorp_amount_absolute
         1 100000.0     0.45   0.45   0.46
         2 500000.0     1.89   1.89   1.95
         3 1000000.0    3.12   3.12   3.28

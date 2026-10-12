@@ -2,21 +2,33 @@ name: Validate AIF Dictionaries
 
 on:
   push:
-    branches: [develop, master, 'feature/**', 'release/**']
+    branches: [develop, master, 'feature/**', 'release/**', 'hotfix/**']
   pull_request:
-    branches: [develop, master]
+    branches: [develop, master, 'release/**', 'hotfix/**']
+  workflow_call:
+    inputs:
+      release-tag:
+        description: Release tag (vX.Y.Z) to validate strictly; empty for development checks.
+        type: string
+        default: ''
+
+permissions:
+  contents: read
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.x"
+
+      - name: Install test dependencies
+        run: python -m pip install pytest
 
       - name: Validate JSON syntax
         run: python -m json.tool aif_dictionary.json > /dev/null
@@ -24,5 +36,24 @@ jobs:
       - name: Check version consistency across all dictionaries
         run: python dev/check_aif_format.py
 
+      - name: Strict release check (exact version, no placeholders)
+        if: inputs.release-tag != ''
+        env:
+          RELEASE_TAG: ${{ inputs.release-tag }}
+        run: python dev/check_aif_format.py --release-tag "$RELEASE_TAG"
+
+      - name: Development branches must keep the version placeholder
+        if: inputs.release-tag == ''
+        env:
+          TARGET_BRANCH: ${{ github.base_ref || github.ref_name }}
+        run: |
+          case "$TARGET_BRANCH" in
+            develop|feature/*) python dev/check_aif_format.py --expect-placeholder ;;
+            *) echo "Placeholder not enforced on $TARGET_BRANCH" ;;
+          esac
+
       - name: Check YAML/DIC are in sync with JSON schema
         run: python dev/sync_dictionaries.py --check
+
+      - name: Run tests
+        run: python -m pytest -q -c dev/pytest.ini
