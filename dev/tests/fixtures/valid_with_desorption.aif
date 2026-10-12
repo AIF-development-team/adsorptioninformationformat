@@ -1,0 +1,42 @@
+# Valid AIF file with both adsorption and desorption branches
+
+data_test_with_desorption
+
+    _audit_aif_version                "__AIF_VERSION__"
+
+    _exptl_temperature                77.35
+    _exptl_method                     "volumetric"
+    _exptl_isotherm_type              "absolute"
+
+    _adsnt_material_name              "Zeolite-4A"
+    _adsnt_sample_name                "Z4A-test-01"
+    _adsnt_sample_mass                0.2000
+
+    _adsorptive_name                  "Nitrogen"
+
+    _units_temperature                "K"
+    _units_pressure                   "Pa"
+    _units_mass                       "g"
+    _units_sorbed_amount              "mmol/g"
+
+    loop_
+        _adsorp_index
+        _adsorp_pressure
+        _adsorp_p0
+        _adsorp_amount
+        1  1000.0   101325.0  0.50
+        2  5000.0   101325.0  1.20
+        3  20000.0  101325.0  2.10
+        4  60000.0  101325.0  3.40
+        5  101325.0 101325.0  4.00
+
+    loop_
+        _desorp_index
+        _desorp_pressure
+        _desorp_p0
+        _desorp_amount
+        1  101325.0 101325.0  4.00
+        2  60000.0  101325.0  3.45
+        3  20000.0  101325.0  2.15
+        4  5000.0   101325.0  1.25
+        5  1000.0   101325.0  0.55

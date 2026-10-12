@@ -3,60 +3,68 @@ name: Update AIF Version
 on:
   push:
     tags:
-      - '*'
+      - 'v*.*.*'
+
+permissions:
+  contents: read
 
 jobs:
+  # Full validation (sync, tests, strict version check) of the tagged commit.
+  validate:
+    uses: ./.github/workflows/validate.yml
+    with:
+      release-tag: ${{ github.ref_name }}
+
   new_release:
+    needs: validate
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - name: Validate JSON syntax
-        run: python -m json.tool aif_dictionary.json > /dev/null
-
-      - name: Check version consistency across all dictionaries
-        run: python dev/check_aif_format.py
-
-      - name: Check YAML/DIC are in sync with JSON schema
-        run: python dev/sync_dictionaries.py --check
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
 
       - name: Validate version bump
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          # Get the previous tag (the one before the current tag)
-          current_tag="${{ github.ref_name }}"
-          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
+          # Prerelease tags (X.Y.Z-suffix) sort before their release.
+          previous_tag=$(git -c versionsort.suffix=- tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$' | grep -vxF "$RELEASE_TAG" | head -n 1 || echo "")
           if [ -n "$previous_tag" ]; then
-            python dev/update_version.py --check --version "$current_tag" --previous "$previous_tag"
+            python dev/update_version.py --check --version "$RELEASE_TAG" --previous "$previous_tag"
           else
             echo "No previous tag found — skipping version comparison."
           fi
 
       - name: Generate Changelog
-        id: changelog
-        run: |
-          current_tag="${{ github.ref_name }}"
-          previous_tag=$(git tag --sort=-v:refname | grep -v "^${current_tag}$" | head -n 1 || echo "")
-          if [ -n "$previous_tag" ]; then
-            changelog=$(git log "$previous_tag"..HEAD --pretty=format:"- %s")
-          else
-            changelog=$(git log --pretty=format:"- %s")
-          fi
-          {
-            echo 'changelog<<EOF'
-            echo "$changelog"
-            echo 'EOF'
-          } >> $GITHUB_ENV
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          body: ${{ env.changelog }}
-          draft: false
-          prerelease: false
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          previous_tag=$(git -c versionsort.suffix=- tag --sort=-v:refname | grep -E '^v?[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$' | grep -vxF "$RELEASE_TAG" | head -n 1 || echo "")
+          if [ -n "$previous_tag" ]; then
+            git log "$previous_tag"..HEAD --pretty=format:"- %s" > "$RUNNER_TEMP/changelog.md"
+          else
+            git log --pretty=format:"- %s" > "$RUNNER_TEMP/changelog.md"
+          fi
+
+      # gh is preinstalled on GitHub-hosted runners (third-party actions are blocked by org policy).
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          # A '-' after X.Y.Z (e.g. v1.0.0-beta.1) marks a prerelease.
+          flags=()
+          if [[ "$RELEASE_TAG" == *-* ]]; then flags+=(--prerelease); fi
+          gh release create "$RELEASE_TAG" \
+            --verify-tag \
+            --title "Release $RELEASE_TAG" \
+            --notes-file "$RUNNER_TEMP/changelog.md" \
+            "${flags[@]}"
