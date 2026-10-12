@@ -239,6 +239,25 @@ save_exptl.temperature
 ;
 save_
 
+save_exptl.pressure
+    _definition.id               'exptl.pressure'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Pressure held constant during an isobar measurement, analogue of
+    _exptl_temperature for an isotherm (see _units_pressure)
+;
+    _name.category_id            EXPTL
+    _name.object_id              pressure
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_pressure'
+save_
+
 save_exptl.method
     _definition.id               'exptl.method'
     _definition.scope            Item
@@ -2996,6 +3015,84 @@ save_desorp.amount_component_10
 ;
     _name.category_id            DESORP
     _name.object_id              amount_component_10
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_sorbed_amount'
+save_
+
+##############################################################################
+#                                                                            #
+#                              ISOBAR CATEGORY                               #
+#                                                                            #
+##############################################################################
+
+save_ISOBAR
+    _definition.id               ISOBAR
+    _definition.scope            Category
+    _definition.class            Loop
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the isobar category record loop columns for an
+    isobar, i.e. the amount adsorbed as a function of temperature at
+    constant pressure. These fields appear inside a STAR loop_
+    construct, with one row per data point.
+;
+    _name.category_id            AIF_CORE
+    _name.object_id              ISOBAR
+    _category.key_id             _isobar_index
+save_
+
+save_isobar.index
+    _definition.id               'isobar.index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Index of the isobar data point, starting from 1 and incrementing
+    by 1 for each point.
+;
+    _name.category_id            ISOBAR
+    _name.object_id              index
+    _type.purpose                Key
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_isobar.temperature
+    _definition.id               'isobar.temperature'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Temperature at each isobar data point (see _units_temperature)
+;
+    _name.category_id            ISOBAR
+    _name.object_id              temperature
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+    _units.code                  'see _units_temperature'
+save_
+
+save_isobar.amount
+    _definition.id               'isobar.amount'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Amount adsorbed at each isobar data point (see
+    _units_sorbed_amount)
+;
+    _name.category_id            ISOBAR
+    _name.object_id              amount
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
