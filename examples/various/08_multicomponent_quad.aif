@@ -1,6 +1,6 @@
 data_multicomponent_quad_Fieback
 
-    _audit_aif_version                "__AIF_VERSION__"
+    _audit_aif_version                "1.0.0-beta2"
 
     _exptl_temperature                298.0
     _exptl_method                     "other"
