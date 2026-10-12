@@ -914,7 +914,7 @@
         },
         "_analysis_fit_rmse": {
           "type": "number",
-          "description": "Root-mean-square error of the fit (see _units_loading)"
+          "description": "Root-mean-square error of the fit (see _units_sorbed_amount)"
         }
       }
     },

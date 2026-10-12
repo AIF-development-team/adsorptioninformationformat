@@ -3479,14 +3479,14 @@ save_analysis_fit.rmse
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Root-mean-square error of the fit (see _units_loading)'
+    _description.text            'Root-mean-square error of the fit (see _units_sorbed_amount)'
     _name.category_id            ANALYSIS_FIT
     _name.object_id              rmse
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
-    _units.code                  'see _units_loading'
+    _units.code                  'see _units_sorbed_amount'
 save_
 
 ##############################################################################

@@ -894,7 +894,7 @@ slots:
 
   analysis_fit_rmse:
     aliases: ["_analysis_fit_rmse"]
-    description: Root-mean-square error of the fit (see _units_loading)
+    description: Root-mean-square error of the fit (see _units_sorbed_amount)
     range: float
 
   # ── Analysis Fit Parameters ─────────────────
