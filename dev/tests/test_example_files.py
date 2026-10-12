@@ -169,7 +169,7 @@ def test_has_adsorp_or_desorp_loop(aif_text):
     """AIF files should contain at least one adsorption or desorption data loop."""
     path, text = aif_text
     has_data = bool(
-        re.search(r"_adsorp_pressure|_adsorp_loading|_desorp_pressure|_desorp_loading", text)
+        re.search(r"_adsorp_pressure|_adsorp_loading|_desorp_pressure|_desorp_loading|_isobar_amount", text)
     )
     assert has_data, (
         f"{path.name}: no adsorption or desorption data columns found"

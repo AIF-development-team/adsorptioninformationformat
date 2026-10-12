@@ -82,6 +82,10 @@
           "type": "number",
           "description": "Temperature at which the experiment was conducted (see _units_temperature)"
         },
+        "_exptl_pressure": {
+          "type": "number",
+          "description": "Pressure held constant during an isobar measurement, analogue of _exptl_temperature for an isotherm (see _units_pressure)"
+        },
         "_exptl_method": {
           "type": "string",
           "description": "Experimental technique used to measure the amount adsorbed",
@@ -778,6 +782,30 @@
           "description": "Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         }
       }
+    },
+
+    "isobar": {
+      "$comment": "Isobar Data: Loop columns for an isobar, i.e. the amount adsorbed as a function of temperature at constant pressure. These fields appear inside a STAR loop_ construct, with one row per data point.",
+      "x-schema-star-definition-id": "isobar",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": "_isobar_index",
+      "type": "object",
+      "properties": {
+        "_isobar_index": {
+          "type": "number",
+          "description": "Index of the isobar data point, starting from 1 and incrementing by 1 for each point.",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_isobar_temperature": {
+          "type": "number",
+          "description": "Temperature at each isobar data point (see _units_temperature)"
+        },
+       "_isobar_amount": {
+          "type": "number",
+          "description": "Amount adsorbed at each isobar data point (see _units_sorbed_amount)"
+        }
+      }
     }
   },
 
@@ -799,6 +827,7 @@
     { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
     { "$ref": "#/definitions/desorption_data" },
+    { "$ref": "#/definitions/isobar" },
     {
       "if": {
         "anyOf": [
@@ -997,6 +1026,9 @@
     "_desorp_amount_component_9": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_desorp_amount_component_10": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_exptl_temperature": ["_units_temperature"],
+    "_exptl_pressure": ["_units_pressure"],
+    "_isobar_temperature": ["_units_temperature"],
+   "_isobar_amount": ["_units_sorbed_amount"],
     "_simltn_code": ["_exptl_method"],
     "_simltn_forcefield_adsorbent": ["_exptl_method"],
     "_simltn_forcefield_adsorptive": ["_exptl_method"],
