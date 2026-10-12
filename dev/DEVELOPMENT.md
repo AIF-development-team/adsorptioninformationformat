@@ -22,7 +22,7 @@ The workflow for this project involves:
 
 - Git for source control
 - [Semantic versioning](https://semver.org/) for defining versions
-- The [Git Flow model](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) as a development philosophy
+- The [Git Flow model](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for feature work, with PR-based releases (see [Release process](#release-process))
 - Scripts for propagating version strings when ready for release
 - Local pre-commit / pre-push hooks and CI for checking file consistency
 - GitHub Actions for automatically generating releases
@@ -38,6 +38,7 @@ The version across branches:
 
 - On the `master` branch, all files contain the latest released version.
 - On the `develop` branch, the version is replaced by a placeholder (`__AIF_VERSION__`).
+  Feature branches and `develop` must never contain a stamped version; CI enforces this.
 - Each tag has file version strings corresponding to its version.
 
 The version must be consistent across **all** dictionary representations
@@ -55,7 +56,7 @@ The `dev/` directory contains helper scripts used during development and CI:
 
 | Script | Purpose |
 |---|---|
-| [check_aif_format.py](check_aif_format.py) | Validates version consistency across all three dictionary formats. Pass `--release-tag vX.Y.Z` for strict release mode: every artifact (dictionaries, `example.aif`, `examples/**/*.aif`) must carry exactly `X.Y.Z` and no `__AIF_VERSION__` may remain. |
+| [check_aif_format.py](check_aif_format.py) | Validates version consistency across all three dictionary formats. Pass `--release-tag vX.Y.Z` for strict release mode: every artifact (dictionaries, `example.aif`, `examples/**/*.aif`) must carry exactly `X.Y.Z` and no `__AIF_VERSION__` may remain. Pass `--expect-placeholder` for the opposite check used on `develop`/`feature/**`: every artifact must still hold `__AIF_VERSION__`. |
 | [sync_dictionaries.py](sync_dictionaries.py) | Regenerates `aif_dictionary.yaml` and `aif_dictionary.dic` from the JSON schema. Pass `--check` to verify they are in sync without modifying files. |
 | [update_version.py](update_version.py) | Stamps the version in all dictionary files, `example.aif`, and any `.aif` files under `examples/`. Auto-detects the version from the current `release/*` branch name, or accepts `--version <ver>` explicitly. |
 | [check_placeholder_on_tag_push.py](check_placeholder_on_tag_push.py) | Pre-push hook that blocks tag pushes when `__AIF_VERSION__` placeholders are still present. |
@@ -71,7 +72,10 @@ Two workflows run automatically:
   `master`, `release/**` or `hotfix/**`. Validates JSON syntax,
   version consistency (`check_aif_format.py`), and dictionary sync
   (`sync_dictionaries.py --check`), then runs the tracked test suite under
-  `dev/tests/` with pytest. It is also a reusable workflow: when called with a
+  `dev/tests/` with pytest. On `develop` and `feature/**` (pushes, and PRs
+  targeting `develop`) it also runs `check_aif_format.py --expect-placeholder`,
+  so a stamped version cannot reach those branches. It is also a reusable
+  workflow: when called with a
   `release-tag` input it additionally runs the strict release check.
 - **`.github/workflows/main.yml`** — on `vX.Y.Z` tag pushes. A `validate` job
   calls `validate.yml` with the tag (so the tagged commit gets the full test
@@ -104,51 +108,62 @@ The following hooks are configured in [.pre-commit-config.yaml](.pre-commit-conf
 
 ## Release process
 
-Use the **bare version** (e.g. `1.0.0` or `1.0.0-beta`, without a leading `v`)
-as `<release-version>` everywhere below. Git Flow prepends the configured tag
-prefix itself, so `git flow release finish v1.0.0` would create the tag
-`vv1.0.0`. Branches are named `release/<release-version>` and tags
-`v<release-version>`.
+A release branch exists only to carry the version stamp. It is cut from
+`develop`, stamped, merged into `master` by pull request, and **never merged
+back into `develop`**, so `develop` keeps the placeholder. As a consequence:
 
-1. **Create a release branch** from `develop`:
+- **No fixes on a release branch.** Fix on `develop` first, then cut the release.
+- Use the full tag name, with the leading `v` (e.g. `v1.0.0` or
+  `v1.0.0-beta`), as `<tag>`. The release branch is `release/<tag>`; the
+  version stamped into the files is the tag without the `v`.
+
+Pushing to `master` should require a pull request and the `validate` status check.
+
+1. **Cut the release branch** from an up-to-date `develop`:
 
    ```bash
-   git flow release start <release-version>
+   git checkout develop && git pull
+   git checkout -b release/<tag>
    ```
 
-2. **Verify dictionary and examples** are correctly updated. If the JSON schema
-   was changed, regenerate the derived files:
+2. **Record `master` as an ancestor** (skip for the very first release). Run this
+   while on `release/<tag>`. The command marks `master` as merged
+   but keeps every file of `release/<tag>` unchanged (`master`'s old stamp is
+   discarded):
+
+   ```bash
+   git merge -s release/<tag> origin/master -m "Sync master into release/<tag>"
+   ```
+
+3. **Regenerate derived files if the schema changed**, then **stamp** with
+   [update_version.py](update_version.py) and check the result:
 
    ```bash
    python dev/sync_dictionaries.py
+   python dev/update_version.py --version <tag>
+   python dev/check_aif_format.py --release-tag <tag>
+   git commit -am "Prepare release <tag>"
+   git push -u origin release/<tag>
    ```
 
-3. **Stamp the version** by running [update_version.py](update_version.py),
-   which replaces the `__AIF_VERSION__` placeholder in all three dictionary
-   files, `example.aif`, and any `.aif` files under `examples/`:
+4. **Open a pull request** from `release/<tag>` into `master`. Wait
+   for the `validate` check, then merge it. Do not open a PR into `develop`.
+
+5. **Tag the merge commit on `master`**; pushing the tag triggers the release
+   workflow:
 
    ```bash
-   python dev/update_version.py
-   git add -A
-   git commit -m "Prepare release <release-version>"
-   python dev/check_aif_format.py --release-tag v<release-version>
-   ```
-
-4. **Finish the release branch** (tags and merges into `master` and `develop`):
-
-   ```bash
-   git flow release finish <release-version>
-   ```
-
-5. **Push everything** to trigger the GitHub release workflow:
-
-   ```bash
-   git push --all
-   git push --tags
+   git checkout master && git pull
+   git tag -a <tag> -m "Release <tag>"
+   git push origin <tag>
    ```
 
 6. **Verify** on [GitHub](https://github.com/AIF-development-team/adsorptioninformationformat)
-   that the release was created successfully.
+   that the release was created (prerelease tags are published as pre-releases).
+
+`develop` will show as "behind" `master` because of the stamp and sync commits;
+this is expected. A hotfix applied on `master` must also be applied to
+`develop` separately (e.g. by cherry-pick).
 
 ## Appendix: Git Flow
 
@@ -159,11 +174,12 @@ branches.
 
 - **Feature** branches (`feature/xyz`) are created from `develop` and merged
   back into `develop` when complete.
-- **Release** branches (`release/1.0.2`) are created from `develop`, stamped
-  with a version, tagged (e.g. `v1.0.2`), and merged into both `master` and
-  `develop`.
+- **Release** branches (`release/v1.0.2`) are created from `develop`, stamped
+  with a version, and merged into `master` by pull request, then tagged
+  (e.g. `v1.0.2`). They are not merged back into `develop` (see
+  [Release process](#release-process)); do not use `git flow release`.
 - **Hotfix** branches are created from `master` for urgent fixes and merged
-  back into both `master` and `develop`.
+  back into `master`; apply the same fix to `develop` separately.
 
 ### Initialize Git Flow
 
@@ -171,12 +187,8 @@ branches.
 git flow init
 ```
 
-Use the default settings for all prompts, except set the version tag prefix
-to `v`:
-
-```
-Version tag prefix? [] → v
-```
+Use the default settings for all prompts. (Releases do not use Git Flow's
+release commands, so the version tag prefix is not used.)
 
 ### Feature workflow
 
@@ -186,7 +198,8 @@ git flow feature start <feature-name>
 git flow feature finish <feature-name>   # merges into develop
 ```
 
+Or open a pull request from `feature/<feature-name>` into `develop`.
+
 ### Release workflow
 
-See the [Release process](#release-process) section above for the full
-step-by-step procedure.
+See the [Release process](#release-process) section above.
