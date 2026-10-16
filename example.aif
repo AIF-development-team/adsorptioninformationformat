@@ -2,7 +2,7 @@
 
 data_example_isotherm_aif
 
-    _audit_aif_version                "1.0.0-beta2"
+    _audit_aif_version                "1.0.0"
     _audit_creation_date              2025-01-01T00:00:00Z
     _audit_creation_software          "AIF-generator-1.0"
 

@@ -132,7 +132,7 @@ Pushing to `master` should require a pull request and the `validate` status chec
    discarded):
 
    ```bash
-   git merge -s release/<tag> origin/master -m "Sync master into release/<tag>"
+   git merge -s ours origin/master -m "Sync master into release/<tag>"
    ```
 
 3. **Regenerate derived files if the schema changed**, then **stamp** with

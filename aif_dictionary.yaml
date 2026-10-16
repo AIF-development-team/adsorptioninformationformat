@@ -1,10 +1,10 @@
-id: https://github.com/AIF-development-team/adsorptioninformationformat/tree/1.0.0-beta2/aif_dictionary.yaml
+id: https://github.com/AIF-development-team/adsorptioninformationformat/tree/1.0.0/aif_dictionary.yaml
 name: aif
 title: Adsorption Information Format (AIF)
 description: >-
   Dictionary for STAR format adsorption data files. Reference: Evans et
   al., Langmuir 2021, 37, 4222-4226.
-version: "1.0.0-beta2"
+version: "1.0.0"
 license: MIT
 
 prefixes:
