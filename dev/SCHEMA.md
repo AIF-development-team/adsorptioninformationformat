@@ -179,6 +179,25 @@ Default: none. When absent, no category key is emitted for that section.
 
 This is used by the generator to set the DIC key information for loop-like sections such as adsorption or desorption data. A single key is written as `_category.key_id`; a list of keys (a composite key, e.g. `["_analysis_fit_param_index", "_analysis_fit_param_name"]`) is written as a `_category_key.name` loop listing every key item. Each key item should set `x-schema-star-type-purpose` to `Key`, or `Link` when it also references another loop.
 
+#### Pore size distribution categories
+
+PSD method metadata and distribution rows use separate categories:
+
+- `analysis_psd_method` is a `Set` containing `_analysis_psd_method_name`,
+  `_analysis_psd_method_branch`, `_analysis_psd_method_geometry`, and
+  `_analysis_psd_method_details`. These scalar fields describe one PSD method
+  context per data block.
+- `analysis_psd` is a `Loop` with one row per pore-size bin. Its key is
+  `_analysis_psd_index`, an assigned unique integer within the data block,
+  following the index convention used by the adsorption, desorption, and fit
+  summary loops. `_analysis_psd_dimension` is a measured value, not the key.
+  The other columns are `_analysis_psd_dv_dd` and
+  `_analysis_psd_cumulative_volume`.
+
+The shared `analysis_psd` naming groups related concepts without placing the
+method metadata in the distribution loop. See
+[the PSD example](../examples/various/analysis_surface_pore.aif).
+
 ### `x-deprecation-message`
 
 Type: string
@@ -264,4 +283,3 @@ Default: none.
 This is used for enum domains such as experimental methods or digitization methods so the generated schema can carry clear documentation for each option.
 
 ---
-

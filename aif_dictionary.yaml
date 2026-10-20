@@ -809,7 +809,7 @@ slots:
 
   analysis_method:
     aliases: ["_analysis_method"]
-    description: "Analysis method(s) or description used for derived quantities, e.g. BET and HK"
+    description: General description of analysis method(s) used for the derived quantities.
 
   analysis_bet_area:
     aliases: ["_analysis_bet_area"]
@@ -823,12 +823,12 @@ slots:
 
   analysis_bet_pressure_range_min:
     aliases: ["_analysis_bet_pressure_range_min"]
-    description: Lower bound of the relative pressure range used for BET fitting
+    description: Lower bound of the relative pressure range used for BET SSA fitting
     range: float
 
   analysis_bet_pressure_range_max:
     aliases: ["_analysis_bet_pressure_range_max"]
-    description: Upper bound of the relative pressure range used for BET fitting
+    description: Upper bound of the relative pressure range used for BET SSA fitting
     range: float
 
   analysis_langmuir_area:
@@ -836,34 +836,64 @@ slots:
     description: Langmuir surface area (see _units_surface_area)
     range: float
 
+  analysis_langmuir_pressure_range_min:
+    aliases: ["_analysis_langmuir_pressure_range_min"]
+    description: Lower bound of the relative pressure range used for Langmuir SSA fitting
+    range: float
+
+  analysis_langmuir_pressure_range_max:
+    aliases: ["_analysis_langmuir_pressure_range_max"]
+    description: Upper bound of the relative pressure range used for Langmuir SSA fitting
+    range: float
+
   analysis_total_pore_volume:
     aliases: ["_analysis_total_pore_volume"]
     description: Total pore volume (see _units_pore_volume)
     range: float
 
-  analysis_total_pore_volume_pp0:
-    aliases: ["_analysis_total_pore_volume_pp0"]
-    description: Relative pressure p/p0 at which total pore volume was evaluated
+  analysis_total_pore_volume_pressure:
+    aliases: ["_analysis_total_pore_volume_pressure"]
+    description: Relative pressure p/p0 at which total pore volume was evaluated (dimensionless)
     range: float
 
-  analysis_pore_size_method:
-    aliases: ["_analysis_pore_size_method"]
+  # ── Analysis PSD Method ─────────────────────
+
+  analysis_psd_method_name:
+    aliases: ["_analysis_psd_method_name"]
     description: "Method for determining pore size distribution, e.g. NLDFT-Carbon-N2"
 
-  analysis_pore_geometry:
-    aliases: ["_analysis_pore_geometry"]
+  analysis_psd_method_branch:
+    aliases: ["_analysis_psd_method_branch"]
+    description: "Branch where the pore size method was applied, e.g. adsorption, desorption"
+
+  analysis_psd_method_geometry:
+    aliases: ["_analysis_psd_method_geometry"]
     description: "Geometry of the pores, e.g. cylindrical, slit-shaped"
+
+  analysis_psd_method_details:
+    aliases: ["_analysis_psd_method_details"]
+    description: "Additional details about the pore size method, e.g. thickness function, goodness of fit, etc"
 
   # ── Analysis PSD ────────────────────────────
 
-  analysis_psd_size:
-    aliases: ["_analysis_psd_size"]
+  analysis_psd_index:
+    aliases: ["_analysis_psd_index"]
+    description: Unique integer index identifying this pore-size bin within the data block
+    range: integer
+
+  analysis_psd_dimension:
+    aliases: ["_analysis_psd_dimension"]
     description: Pore characteristic dimension in a pore-size distribution loop (see _units_pore_size)
     range: float
 
   analysis_psd_dv_dd:
     aliases: ["_analysis_psd_dv_dd"]
     description: "Differential pore volume dV/dD at each pore size in a PSD loop, in units of _units_pore_volume per _units_pore_size"
+    range: float
+
+  analysis_psd_cumulative_volume:
+    aliases: ["_analysis_psd_cumulative_volume"]
+    description: "Cumulative pore volume at each pore size in a PSD loop, in units of _units_pore_volume"
     range: float
 
   # ── Analysis Fit Summary ────────────────────
@@ -876,6 +906,10 @@ slots:
   analysis_fit_model:
     aliases: ["_analysis_fit_model"]
     description: "Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth"
+
+  analysis_fit_branch:
+    aliases: ["_analysis_fit_branch"]
+    description: "Branch of the isotherm used for the fit, e.g. adsorption or desorption, or cycle 1 etc."
 
   analysis_fit_r_squared:
     aliases: ["_analysis_fit_r_squared"]
@@ -1028,8 +1062,10 @@ classes:
       A single row of the Analysis PSD sub-loop.
       Corresponds to a row in an AIF loop_ block.
     slots:
-      - analysis_psd_size
+      - analysis_psd_index
+      - analysis_psd_dimension
       - analysis_psd_dv_dd
+      - analysis_psd_cumulative_volume
 
   AnalysisFitSummary:
     description: >-
@@ -1038,6 +1074,7 @@ classes:
     slots:
       - analysis_fit_index
       - analysis_fit_model
+      - analysis_fit_branch
       - analysis_fit_r_squared
       - analysis_fit_rmse
 
@@ -1142,10 +1179,15 @@ classes:
       - analysis_bet_pressure_range_min
       - analysis_bet_pressure_range_max
       - analysis_langmuir_area
+      - analysis_langmuir_pressure_range_min
+      - analysis_langmuir_pressure_range_max
       - analysis_total_pore_volume
-      - analysis_total_pore_volume_pp0
-      - analysis_pore_size_method
-      - analysis_pore_geometry
+      - analysis_total_pore_volume_pressure
+      # Analysis PSD Method
+      - analysis_psd_method_name
+      - analysis_psd_method_branch
+      - analysis_psd_method_geometry
+      - analysis_psd_method_details
     attributes:
       adsorptive_component:
         description: Adsorptive Component sub-loop rows (loop_ block).

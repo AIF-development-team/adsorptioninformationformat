@@ -3162,8 +3162,8 @@ save_analysis.method
     _definition.update           2026-03-09
     _description.text
 ;
-    Analysis method(s) or description used for derived quantities,
-    e.g. BET and HK
+    General description of analysis method(s) used for the derived
+    quantities.
 ;
     _name.category_id            ANALYSIS
     _name.object_id              method
@@ -3209,7 +3209,8 @@ save_analysis.bet_pressure_range_min
     _definition.update           2026-03-09
     _description.text
 ;
-    Lower bound of the relative pressure range used for BET fitting
+    Lower bound of the relative pressure range used for BET SSA
+    fitting
 ;
     _name.category_id            ANALYSIS
     _name.object_id              bet_pressure_range_min
@@ -3226,7 +3227,8 @@ save_analysis.bet_pressure_range_max
     _definition.update           2026-03-09
     _description.text
 ;
-    Upper bound of the relative pressure range used for BET fitting
+    Upper bound of the relative pressure range used for BET SSA
+    fitting
 ;
     _name.category_id            ANALYSIS
     _name.object_id              bet_pressure_range_max
@@ -3251,6 +3253,42 @@ save_analysis.langmuir_area
     _units.code                  'see _units_surface_area'
 save_
 
+save_analysis.langmuir_pressure_range_min
+    _definition.id               'analysis.langmuir_pressure_range_min'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Lower bound of the relative pressure range used for Langmuir SSA
+    fitting
+;
+    _name.category_id            ANALYSIS
+    _name.object_id              langmuir_pressure_range_min
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
+save_analysis.langmuir_pressure_range_max
+    _definition.id               'analysis.langmuir_pressure_range_max'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Upper bound of the relative pressure range used for Langmuir SSA
+    fitting
+;
+    _name.category_id            ANALYSIS
+    _name.object_id              langmuir_pressure_range_max
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
 save_analysis.total_pore_volume
     _definition.id               'analysis.total_pore_volume'
     _definition.scope            Item
@@ -3266,25 +3304,47 @@ save_analysis.total_pore_volume
     _units.code                  'see _units_pore_volume'
 save_
 
-save_analysis.total_pore_volume_pp0
-    _definition.id               'analysis.total_pore_volume_pp0'
+save_analysis.total_pore_volume_pressure
+    _definition.id               'analysis.total_pore_volume_pressure'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
     Relative pressure p/p0 at which total pore volume was evaluated
+    (dimensionless)
 ;
     _name.category_id            ANALYSIS
-    _name.object_id              total_pore_volume_pp0
+    _name.object_id              total_pore_volume_pressure
     _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
 save_
 
-save_analysis.pore_size_method
-    _definition.id               'analysis.pore_size_method'
+##############################################################################
+#                                                                            #
+#                        ANALYSIS_PSD_METHOD CATEGORY                        #
+#                                                                            #
+##############################################################################
+
+save_ANALYSIS_PSD_METHOD
+    _definition.id               ANALYSIS_PSD_METHOD
+    _definition.scope            Category
+    _definition.class            Set
+    _definition.update           2026-03-09
+    _description.text
+;
+    Data items in the analysis_psd_method category record single-
+    value metadata describing the method used for the pore size
+    distribution in this data block.
+;
+    _name.category_id            AIF_CORE
+    _name.object_id              ANALYSIS_PSD_METHOD
+save_
+
+save_analysis_psd_method.name
+    _definition.id               'analysis_psd_method.name'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -3293,22 +3353,58 @@ save_analysis.pore_size_method
     Method for determining pore size distribution, e.g. NLDFT-
     Carbon-N2
 ;
-    _name.category_id            ANALYSIS
-    _name.object_id              pore_size_method
+    _name.category_id            ANALYSIS_PSD_METHOD
+    _name.object_id              name
     _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Text
 save_
 
-save_analysis.pore_geometry
-    _definition.id               'analysis.pore_geometry'
+save_analysis_psd_method.branch
+    _definition.id               'analysis_psd_method.branch'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Branch where the pore size method was applied, e.g. adsorption,
+    desorption
+;
+    _name.category_id            ANALYSIS_PSD_METHOD
+    _name.object_id              branch
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_psd_method.geometry
+    _definition.id               'analysis_psd_method.geometry'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text            'Geometry of the pores, e.g. cylindrical, slit-shaped'
-    _name.category_id            ANALYSIS
-    _name.object_id              pore_geometry
+    _name.category_id            ANALYSIS_PSD_METHOD
+    _name.object_id              geometry
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_psd_method.details
+    _definition.id               'analysis_psd_method.details'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Additional details about the pore size method, e.g. thickness
+    function, goodness of fit, etc
+;
+    _name.category_id            ANALYSIS_PSD_METHOD
+    _name.object_id              details
     _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
@@ -3329,15 +3425,34 @@ save_ANALYSIS_PSD
     _description.text
 ;
     Data items in the analysis_psd category record loop columns for
-    pore size distribution data. One row per diameter bin.
+    pore size distribution data. One row per pore-size bin,
+    identified by _analysis_psd_index.
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ANALYSIS_PSD
-    _category.key_id             '_analysis_psd.size'
+    _category.key_id             '_analysis_psd.index'
 save_
 
-save_analysis_psd.size
-    _definition.id               'analysis_psd.size'
+save_analysis_psd.index
+    _definition.id               'analysis_psd.index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Unique integer index identifying this pore-size bin within the
+    data block
+;
+    _name.category_id            ANALYSIS_PSD
+    _name.object_id              index
+    _type.purpose                Key
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Integer
+save_
+
+save_analysis_psd.dimension
+    _definition.id               'analysis_psd.dimension'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -3347,8 +3462,8 @@ save_analysis_psd.size
     (see _units_pore_size)
 ;
     _name.category_id            ANALYSIS_PSD
-    _name.object_id              size
-    _type.purpose                Key
+    _name.object_id              dimension
+    _type.purpose                Measurand
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
@@ -3373,6 +3488,24 @@ save_analysis_psd.dv_dd
     _type.contents               Real
 save_
 
+save_analysis_psd.cumulative_volume
+    _definition.id               'analysis_psd.cumulative_volume'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Cumulative pore volume at each pore size in a PSD loop, in units
+    of _units_pore_volume
+;
+    _name.category_id            ANALYSIS_PSD
+    _name.object_id              cumulative_volume
+    _type.purpose                Measurand
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Real
+save_
+
 ##############################################################################
 #                                                                            #
 #                       ANALYSIS_FIT_SUMMARY CATEGORY                        #
@@ -3387,8 +3520,8 @@ save_ANALYSIS_FIT
     _description.text
 ;
     Data items in the analysis_fit category record loop columns for
-    recording fitted isotherm models.       One row per model,
-    linked to fit parameters via _analysis_fit_index.
+    recording fitted isotherm models. One row per model, linked to
+    fit parameters via _analysis_fit_index.
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ANALYSIS_FIT
@@ -3417,6 +3550,24 @@ save_analysis_fit.model
     _description.text            'Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth'
     _name.category_id            ANALYSIS_FIT
     _name.object_id              model
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
+save_analysis_fit.branch
+    _definition.id               'analysis_fit.branch'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Branch of the isotherm used for the fit, e.g. adsorption or
+    desorption, or cycle 1 etc.
+;
+    _name.category_id            ANALYSIS_FIT
+    _name.object_id              branch
     _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
@@ -3466,8 +3617,8 @@ save_ANALYSIS_FIT_PARAM
     _description.text
 ;
     Data items in the analysis_fit_param category record loop
-    columns for the parameters of each fitted model.       Linked to
-    the fit summary via _analysis_fit_param_index referencing
+    columns for the parameters of each fitted model. Linked to the
+    fit summary via _analysis_fit_param_index referencing
     _analysis_fit_index. Each row is identified by the pair
     (_analysis_fit_param_index, _analysis_fit_param_name).
 ;

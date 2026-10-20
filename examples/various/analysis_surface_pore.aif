@@ -18,16 +18,6 @@ data_bet_pore_analysis
     _adsorptive_name                  "Nitrogen"
     _adsorptive_info                  "N2"
 
-    _analysis_method                   "BET area, Langmuir area, pore volume, t-plot, NLDFT"
-    _analysis_bet_area                 820.5
-    _analysis_bet_c_constant           145.3
-    _analysis_bet_pressure_range_min   0.05
-    _analysis_bet_pressure_range_max   0.30
-    _analysis_langmuir_area            1105.2
-    _analysis_total_pore_volume        1.05
-    _analysis_total_pore_volume_pp0    0.99
-    _analysis_pore_size_method         "NLDFT-Carbon-N2"
-    _analysis_pore_geometry            "cylindrical"
 
     _units_temperature                "K"
     _units_pressure                   "Pa"
@@ -60,18 +50,31 @@ data_bet_pore_analysis
         16 95000.0    101325.0  30.12
         17 99000.0    101325.0  38.45
 
+    _analysis_method                        "BET area, Langmuir area, pore volume, t-plot, NLDFT"
+    _analysis_bet_area                      820.5
+    _analysis_bet_c_constant                145.3
+    _analysis_bet_pressure_range_min        0.05
+    _analysis_bet_pressure_range_max        0.30
+    _analysis_langmuir_area                 1105.2
+    _analysis_total_pore_volume             1.05
+    _analysis_total_pore_volume_pressure    99000.0
+    _analysis_psd_method_name               "NLDFT-Carbon-N2"
+    _analysis_psd_method_branch             "adsorption"
+    _analysis_psd_method_geometry           "cylindrical"
+
     loop_
-        _analysis_psd_size
+        _analysis_psd_index
+        _analysis_psd_dimension
         _analysis_psd_dv_dd
-        1.0    0.001
-        2.0    0.005
-        3.0    0.012
-        4.0    0.034
-        5.0    0.089
-        6.0    0.234
-        7.0    0.567
-        8.0    0.312
-        9.0    0.089
-        10.0   0.023
-        12.0   0.008
-        15.0   0.003
+        1     1.0    0.001
+        2     2.0    0.005
+        3     3.0    0.012
+        4     4.0    0.034
+        5     5.0    0.089
+        6     6.0    0.234
+        7     7.0    0.567
+        8     8.0    0.312
+        9     9.0    0.089
+        10    10.0   0.023
+        11    12.0   0.008
+        12    15.0   0.003

@@ -237,6 +237,25 @@ def test_dependent_required_fields_present(aif_text):
             assert not missing, f"{path.name}: {pname} requires {missing}"
 
 
+def test_data_names_are_defined_in_dictionary(aif_text):
+    """Every data name in an example must be defined or match a supported pattern."""
+    path, text = aif_text
+    defined = {
+        name.lower()
+        for section in _SCHEMA["definitions"].values()
+        for name in section.get("properties", {})
+    }
+    patterns = [
+        re.compile(pattern, re.IGNORECASE)
+        for pattern in _SCHEMA.get("patternProperties", {})
+    ]
+    unknown = sorted(
+        name for name in _data_names(text)
+        if name.lower() not in defined and not any(pattern.search(name) for pattern in patterns)
+    )
+    assert not unknown, f"{path.name}: undefined data name(s) {unknown}"
+
+
 def test_analysis_fit_parameters_reference_existing_fits(aif_text):
     path, text = aif_text
     loops = _parse_loops(text)
@@ -256,8 +275,9 @@ def test_analysis_examples_present():
     combined = "\n".join(p.read_text(encoding="utf-8") for p in ALL_AIF_FILES)
     for name in (
         "_analysis_bet_area",
-        "_analysis_pore_size_method",
-        "_analysis_psd_size",
+        "_analysis_psd_method_name",
+        "_analysis_psd_index",
+        "_analysis_psd_dimension",
         "_analysis_fit_index",
         "_analysis_fit_param_index",
     ):

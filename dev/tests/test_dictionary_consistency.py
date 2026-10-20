@@ -414,6 +414,40 @@ def test_adsorptive_fields_depend_on_adsorptive_name(json_schema):
 # ── Analysis sections ─────────────────────────────────────────────────────────
 
 
+def test_analysis_psd_method_is_separate_set(json_schema, ddlm_text):
+    defs = json_schema["definitions"]
+    method = defs["analysis_psd_method"]
+    assert method["x-schema-star-definition-id"] == "analysis_psd_method"
+    assert method["x-schema-star-definition-class"] == "Set"
+    assert "x-schema-star-category-key" not in method
+    assert {"$ref": "#/definitions/analysis_psd_method"} in json_schema["allOf"]
+    assert set(method["properties"]) == {
+        "_analysis_psd_method_name",
+        "_analysis_psd_method_branch",
+        "_analysis_psd_method_geometry",
+        "_analysis_psd_method_details",
+    }
+    for section in ("analysis", "analysis_psd"):
+        assert not set(method["properties"]) & set(defs[section]["properties"])
+    for pname in method["properties"]:
+        save_name, _ = sd._ddlm_save_name(pname, "analysis_psd_method")
+        block = _ddlm_item_block(ddlm_text, save_name)
+        assert re.search(r"_name\.category_id\s+ANALYSIS_PSD_METHOD\b", block, re.I)
+
+
+def test_analysis_psd_loop_index(json_schema):
+    psd = json_schema["definitions"]["analysis_psd"]
+    assert psd["x-schema-star-definition-class"] == "Loop"
+    assert psd["x-schema-star-category-key"] == "_analysis_psd_index"
+    index = psd["properties"]["_analysis_psd_index"]
+    assert index["type"] == "integer"
+    assert index["x-schema-star-type-purpose"] == "Key"
+    assert index["x-schema-star-type-source"] == "Assigned"
+    dimension = psd["properties"]["_analysis_psd_dimension"]
+    assert dimension["type"] == "number"
+    assert dimension.get("x-schema-star-type-purpose", "Measurand") == "Measurand"
+
+
 def test_analysis_fit_loop_keys(json_schema):
     defs = json_schema["definitions"]
     assert defs["analysis_fit_summary"]["x-schema-star-category-key"] == "_analysis_fit_index"
@@ -427,5 +461,5 @@ def test_analysis_fit_loop_keys(json_schema):
 
 def test_analysis_psd_units(json_schema):
     deps = json_schema["dependentRequired"]
-    assert deps["_analysis_psd_size"] == ["_units_pore_size"]
+    assert deps["_analysis_psd_dimension"] == ["_units_pore_size"]
     assert set(deps["_analysis_psd_dv_dd"]) == {"_units_pore_volume", "_units_pore_size"}
