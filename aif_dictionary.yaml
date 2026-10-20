@@ -805,16 +805,6 @@ slots:
     description: Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)
     range: float
 
-  desorp_molefraction:
-    aliases: ["_desorp_molefraction"]
-    description: Mole fraction of the adsorptive in the gas phase for a multicomponent desorption measurement (see _units_composition_type)
-    range: float
-
-  desorp_selectivity:
-    aliases: ["_desorp_selectivity"]
-    description: Desorption selectivity for a specified component pair under the given conditions (unitless ratio)
-    range: float
-
   # ── Analysis ────────────────────────────────
 
   analysis_method:
@@ -856,8 +846,8 @@ slots:
     description: Relative pressure p/p0 at which total pore volume was evaluated
     range: float
 
-  analysis_psd_method:
-    aliases: ["_analysis_psd_method"]
+  analysis_pore_size_method:
+    aliases: ["_analysis_pore_size_method"]
     description: "Method for determining pore size distribution, e.g. NLDFT-Carbon-N2"
 
   analysis_pore_geometry:
@@ -873,14 +863,14 @@ slots:
 
   analysis_psd_dv_dd:
     aliases: ["_analysis_psd_dv_dd"]
-    description: Differential pore volume dV/dD at each diameter in a PSD loop
+    description: "Differential pore volume dV/dD at each pore size in a PSD loop, in units of _units_pore_volume per _units_pore_size"
     range: float
 
   # ── Analysis Fit Summary ────────────────────
 
-  analysis_fit_id:
-    aliases: ["_analysis_fit_id"]
-    description: Unique integer key identifying this fit within the file
+  analysis_fit_index:
+    aliases: ["_analysis_fit_index"]
+    description: Unique integer index identifying this fit within the file
     range: integer
 
   analysis_fit_model:
@@ -899,9 +889,9 @@ slots:
 
   # ── Analysis Fit Parameters ─────────────────
 
-  analysis_fit_param_id:
-    aliases: ["_analysis_fit_param_id"]
-    description: Foreign key referencing _analysis_fit_id in the fit summary loop
+  analysis_fit_param_index:
+    aliases: ["_analysis_fit_param_index"]
+    description: Index of the fit this parameter belongs to; references _analysis_fit_index in the fit summary loop
     range: integer
 
   analysis_fit_param_name:
@@ -1032,8 +1022,6 @@ classes:
       - desorp_amount_component_8
       - desorp_amount_component_9
       - desorp_amount_component_10
-      - desorp_molefraction
-      - desorp_selectivity
 
   AnalysisPsd:
     description: >-
@@ -1048,7 +1036,7 @@ classes:
       A single row of the Analysis Fit Summary sub-loop.
       Corresponds to a row in an AIF loop_ block.
     slots:
-      - analysis_fit_id
+      - analysis_fit_index
       - analysis_fit_model
       - analysis_fit_r_squared
       - analysis_fit_rmse
@@ -1058,7 +1046,7 @@ classes:
       A single row of the Analysis Fit Parameters sub-loop.
       Corresponds to a row in an AIF loop_ block.
     slots:
-      - analysis_fit_param_id
+      - analysis_fit_param_index
       - analysis_fit_param_name
       - analysis_fit_param_value
       - analysis_fit_param_uncertainty
@@ -1156,7 +1144,7 @@ classes:
       - analysis_langmuir_area
       - analysis_total_pore_volume
       - analysis_total_pore_volume_pp0
-      - analysis_psd_method
+      - analysis_pore_size_method
       - analysis_pore_geometry
     attributes:
       adsorptive_component:

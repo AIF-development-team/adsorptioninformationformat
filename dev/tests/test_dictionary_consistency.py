@@ -279,3 +279,153 @@ def test_no_unrelated_field_claims_required_field_in_dic(json_schema, ddlm_text)
             f"{pname} is not required by the JSON schema but its DIC entry "
             "claims 'Required field.'"
         )
+
+
+# ── Loop keys, links and naming ───────────────────────────────────────────────
+
+
+def _loop_sections(json_schema: dict) -> dict[str, tuple[sd.SectionMeta, dict]]:
+    out = {}
+    for sk, sec in json_schema.get("definitions", {}).items():
+        meta = sd._build_section_meta(sk, sec)
+        if meta.dic_class == "Loop":
+            out[sk] = (meta, sd._section_properties(sec))
+    return out
+
+
+def _all_props(json_schema: dict) -> dict[str, dict]:
+    props: dict[str, dict] = {}
+    for sec in json_schema.get("definitions", {}).values():
+        props.update(sd._section_properties(sec))
+    return props
+
+
+def test_loop_category_keys_are_declared_and_typed_as_keys(json_schema):
+    """Every loop key must be a property of its section with purpose Key or Link."""
+    for sk, (meta, props) in _loop_sections(json_schema).items():
+        assert meta.category_keys, f"Loop section {sk!r} declares no category key"
+        for key in meta.category_keys:
+            assert key in props, f"{sk}: category key {key} is not a property of the section"
+            purpose = props[key].get("x-schema-star-type-purpose")
+            assert purpose in {"Key", "Link"}, (
+                f"{sk}: category key {key} has _type.purpose {purpose!r}, expected Key or Link"
+            )
+
+
+def test_linked_items_reference_a_loop_key(json_schema):
+    """``x-schema-star-linked-item`` must point at the category key of another loop."""
+    loop_keys = {
+        key: sk for sk, (meta, _) in _loop_sections(json_schema).items() for key in meta.category_keys
+    }
+    for sk, sec in json_schema.get("definitions", {}).items():
+        for pname, prop in sd._section_properties(sec).items():
+            target = prop.get("x-schema-star-linked-item")
+            if target is None:
+                continue
+            assert prop.get("x-schema-star-type-purpose") == "Link", (
+                f"{pname} links to {target} but its purpose is not Link"
+            )
+            assert target in loop_keys, f"{pname} links to {target}, which is not a loop key"
+            assert loop_keys[target] != sk, f"{pname} links to a key in its own section"
+
+
+def test_composite_keys_are_all_written_to_dic(json_schema, ddlm_text):
+    """Every member of a multi-item category key must appear in a _category_key.name loop."""
+    for sk, (meta, _) in _loop_sections(json_schema).items():
+        block = re.search(
+            rf"^save_{meta.dic_id.upper()}\n(.*?)\nsave_\n", ddlm_text, re.DOTALL | re.MULTILINE
+        )
+        assert block, f"No category frame for {sk}"
+        block = block.group(1)
+        if len(meta.category_keys) == 1:
+            key_reference = sd._ddlm_tag_reference(meta.category_keys[0], meta.prefix)
+            assert re.search(
+                rf"_category\.key_id\s+{re.escape(key_reference)}(?:\s|$)", block
+            ), sk
+            continue
+        m = re.search(r"_category_key\.name\s*\n((?:\s+'_[\w.]+')+\s*)", block)
+        assert m, f"{sk}: composite key not written as a _category_key.name loop"
+        expected = [
+            sd._ddlm_tag_reference(key, meta.prefix) for key in meta.category_keys
+        ]
+        assert m.group(1).split() == expected
+
+
+def test_linked_items_are_written_to_dic(json_schema, ddlm_text):
+    save_names = _all_pname_save_names(json_schema)
+    for pname, prop in _all_props(json_schema).items():
+        target = prop.get("x-schema-star-linked-item")
+        if target:
+            block = _ddlm_item_block(ddlm_text, save_names[pname])
+            target_reference = f"'_{save_names[target]}'"
+            assert re.search(
+                rf"_name\.linked_item_id\s+{re.escape(target_reference)}(?:\s|$)", block
+            ), pname
+
+
+def test_no_field_uses_another_categorys_prefix(json_schema):
+    """A field must not start with the tag prefix of a different, more specific category
+    (e.g. a field ``_analysis_psd_x`` in ``analysis`` when ``analysis_psd`` exists)."""
+    metas = {
+        sk: sd._build_section_meta(sk, sec) for sk, sec in json_schema["definitions"].items()
+    }
+    for sk, sec in json_schema["definitions"].items():
+        own = metas[sk].prefix
+        for pname in sd._section_properties(sec):
+            for other_sk, other in metas.items():
+                if other_sk == sk or len(other.prefix) <= len(own):
+                    continue
+                assert not pname.startswith(f"_{other.prefix}_"), (
+                    f"{pname} (category {own}) clashes with category prefix {other.prefix}"
+                )
+
+
+def test_unit_references_are_dependencies(json_schema):
+    """A field whose description says ``(see _units_x)`` must depend on ``_units_x``."""
+    props = _all_props(json_schema)
+    deps = json_schema.get("dependentRequired", {})
+    for pname, prop in props.items():
+        for unit in re.findall(r"\(see (_units_\w+)\)", prop.get("description", "")):
+            assert unit in props, f"{pname} references undefined unit field {unit}"
+            assert unit in deps.get(pname, []), (
+                f"{pname} references {unit} but does not list it in dependentRequired"
+            )
+
+
+def test_dependent_required_names_exist(json_schema):
+    props = _all_props(json_schema)
+    for pname, deps in json_schema.get("dependentRequired", {}).items():
+        assert pname in props, f"dependentRequired key {pname} is not a defined field"
+        for dep in deps:
+            assert dep in props, f"{pname} depends on undefined field {dep}"
+
+
+def test_adsorptive_fields_depend_on_adsorptive_name(json_schema):
+    deps = json_schema.get("dependentRequired", {})
+    adsorptive = sd._section_properties(json_schema["definitions"]["adsorptive"])
+    for pname in adsorptive:
+        if pname == "_adsorptive_name":
+            continue
+        assert "_adsorptive_name" in deps.get(pname, []), (
+            f"{pname} should depend on _adsorptive_name"
+        )
+
+
+# ── Analysis sections ─────────────────────────────────────────────────────────
+
+
+def test_analysis_fit_loop_keys(json_schema):
+    defs = json_schema["definitions"]
+    assert defs["analysis_fit_summary"]["x-schema-star-category-key"] == "_analysis_fit_index"
+    assert defs["analysis_fit_parameters"]["x-schema-star-category-key"] == [
+        "_analysis_fit_param_index",
+        "_analysis_fit_param_name",
+    ]
+    param_index = defs["analysis_fit_parameters"]["properties"]["_analysis_fit_param_index"]
+    assert param_index["x-schema-star-linked-item"] == "_analysis_fit_index"
+
+
+def test_analysis_psd_units(json_schema):
+    deps = json_schema["dependentRequired"]
+    assert deps["_analysis_psd_size"] == ["_units_pore_size"]
+    assert set(deps["_analysis_psd_dv_dd"]) == {"_units_pore_volume", "_units_pore_size"}

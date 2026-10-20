@@ -38,6 +38,7 @@ This makes the JSON Schema both valid as a general JSON document and expressive 
 | `x-schema-star-type-purpose` | property | DIC `_type.purpose` | `Describe`/`Measurand` by type |
 | `x-schema-star-type-source` | property | DIC `_type.source` | `Recorded` or `Assigned` by context |
 | `x-schema-star-type-container` | property | DIC `_type.container` | `Single` |
+| `x-schema-star-linked-item` | property | DIC `_name.linked_item_id` (foreign key) | none |
 | `x-linkml-name` | root | LinkML schema name | none |
 | `x-linkml-license` | root | schema license | none |
 | `x-linkml-prefixes` | root | namespace mapping | none |
@@ -176,7 +177,7 @@ Purpose: identifies the key field or fields that define a loop row in a STAR `Lo
 
 Default: none. When absent, no category key is emitted for that section.
 
-This is used by the generator to set the DIC `_category_key.name` information for loop-like sections such as adsorption or desorption data.
+This is used by the generator to set the DIC key information for loop-like sections such as adsorption or desorption data. A single key is written as `_category.key_id`; a list of keys (a composite key, e.g. `["_analysis_fit_param_index", "_analysis_fit_param_name"]`) is written as a `_category_key.name` loop listing every key item. Each key item should set `x-schema-star-type-purpose` to `Key`, or `Link` when it also references another loop.
 
 ### `x-deprecation-message`
 
@@ -219,6 +220,16 @@ Default: inferred from the JSON type:
 - `integer` → `Recorded`
 
 The AIF schema often sets this explicitly to `Assigned` for identifiers or labels that are not measured directly.
+
+### `x-schema-star-linked-item`
+
+Type: string
+
+Purpose: names the data item in another loop that this property references (a foreign key). It is written as DIC `_name.linked_item_id`. Such properties should set `x-schema-star-type-purpose` to `Link`.
+
+Example: `_analysis_fit_param_index` links to `_analysis_fit_index`.
+
+Default: none.
 
 ---
 

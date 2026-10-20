@@ -29,6 +29,7 @@ data_mof_structure_link
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
+    _units_molecular_weight           "g/mol"
     _units_sorbed_amount              "mmol/g"
 
     loop_

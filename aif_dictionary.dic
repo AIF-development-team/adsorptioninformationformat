@@ -767,7 +767,7 @@ save_ADSORPTIVE_COMPONENT
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ADSORPTIVE_COMPONENT
-    _category.key_id             _adsorptive_component_index
+    _category.key_id             '_adsorptive_component.index'
 save_
 
 save_adsorptive_component.index
@@ -1583,7 +1583,7 @@ save_ADSORP
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ADSORP
-    _category.key_id             _adsorp_index
+    _category.key_id             '_adsorp.index'
 save_
 
 save_adsorp.index
@@ -2369,7 +2369,7 @@ save_DESORP
 ;
     _name.category_id            AIF_CORE
     _name.object_id              DESORP
-    _category.key_id             _desorp_index
+    _category.key_id             '_desorp.index'
 save_
 
 save_desorp.index
@@ -3133,44 +3133,6 @@ save_desorp.amount_component_10
     _units.code                  'see _units_sorbed_amount'
 save_
 
-save_desorp.molefraction
-    _definition.id               'desorp.molefraction'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Mole fraction of the adsorptive in the gas phase for a
-    multicomponent desorption measurement (see
-    _units_composition_type)
-;
-    _name.category_id            DESORP
-    _name.object_id              molefraction
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-    _units.code                  'see _units_composition_type'
-save_
-
-save_desorp.selectivity
-    _definition.id               'desorp.selectivity'
-    _definition.scope            Item
-    _definition.class            Datum
-    _definition.update           2026-03-09
-    _description.text
-;
-    Desorption selectivity for a specified component pair under the
-    given conditions (unitless ratio)
-;
-    _name.category_id            DESORP
-    _name.object_id              selectivity
-    _type.purpose                Measurand
-    _type.source                 Recorded
-    _type.container              Single
-    _type.contents               Real
-save_
-
 ##############################################################################
 #                                                                            #
 #                             ANALYSIS CATEGORY                              #
@@ -3321,8 +3283,8 @@ save_analysis.total_pore_volume_pp0
     _type.contents               Real
 save_
 
-save_analysis.psd_method
-    _definition.id               'analysis.psd_method'
+save_analysis.pore_size_method
+    _definition.id               'analysis.pore_size_method'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
@@ -3332,7 +3294,7 @@ save_analysis.psd_method
     Carbon-N2
 ;
     _name.category_id            ANALYSIS
-    _name.object_id              psd_method
+    _name.object_id              pore_size_method
     _type.purpose                Encode
     _type.source                 Recorded
     _type.container              Single
@@ -3371,7 +3333,7 @@ save_ANALYSIS_PSD
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ANALYSIS_PSD
-    _category.key_id             _analysis_psd_size
+    _category.key_id             '_analysis_psd.size'
 save_
 
 save_analysis_psd.size
@@ -3386,7 +3348,7 @@ save_analysis_psd.size
 ;
     _name.category_id            ANALYSIS_PSD
     _name.object_id              size
-    _type.purpose                Measurand
+    _type.purpose                Key
     _type.source                 Recorded
     _type.container              Single
     _type.contents               Real
@@ -3400,7 +3362,8 @@ save_analysis_psd.dv_dd
     _definition.update           2026-03-09
     _description.text
 ;
-    Differential pore volume dV/dD at each diameter in a PSD loop
+    Differential pore volume dV/dD at each pore size in a PSD loop,
+    in units of _units_pore_volume per _units_pore_size
 ;
     _name.category_id            ANALYSIS_PSD
     _name.object_id              dv_dd
@@ -3424,24 +3387,24 @@ save_ANALYSIS_FIT
     _description.text
 ;
     Data items in the analysis_fit category record loop columns for
-    recording fitted isotherm models. One row per model, linked to
-    fit parameters via _analysis_fit_id.
+    recording fitted isotherm models.       One row per model,
+    linked to fit parameters via _analysis_fit_index.
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ANALYSIS_FIT
-    _category.key_id             _analysis_fit_id
+    _category.key_id             '_analysis_fit.index'
 save_
 
-save_analysis_fit.id
-    _definition.id               'analysis_fit.id'
+save_analysis_fit.index
+    _definition.id               'analysis_fit.index'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
-    _description.text            'Unique integer key identifying this fit within the file'
+    _description.text            'Unique integer index identifying this fit within the file'
     _name.category_id            ANALYSIS_FIT
-    _name.object_id              id
+    _name.object_id              index
     _type.purpose                Key
-    _type.source                 Recorded
+    _type.source                 Assigned
     _type.container              Single
     _type.contents               Integer
 save_
@@ -3503,28 +3466,34 @@ save_ANALYSIS_FIT_PARAM
     _description.text
 ;
     Data items in the analysis_fit_param category record loop
-    columns for the parameters of each fitted model. Linked to the
-    fit summary via _analysis_fit_param_id referencing
-    _analysis_fit_id.
+    columns for the parameters of each fitted model.       Linked to
+    the fit summary via _analysis_fit_param_index referencing
+    _analysis_fit_index. Each row is identified by the pair
+    (_analysis_fit_param_index, _analysis_fit_param_name).
 ;
     _name.category_id            AIF_CORE
     _name.object_id              ANALYSIS_FIT_PARAM
-    _category.key_id             _analysis_fit_param_id
+    loop_
+        _category_key.name
+        '_analysis_fit_param.index'
+        '_analysis_fit_param.name'
 save_
 
-save_analysis_fit_param.id
-    _definition.id               'analysis_fit_param.id'
+save_analysis_fit_param.index
+    _definition.id               'analysis_fit_param.index'
     _definition.scope            Item
     _definition.class            Datum
     _definition.update           2026-03-09
     _description.text
 ;
-    Foreign key referencing _analysis_fit_id in the fit summary loop
+    Index of the fit this parameter belongs to; references
+    _analysis_fit_index in the fit summary loop
 ;
     _name.category_id            ANALYSIS_FIT_PARAM
-    _name.object_id              id
-    _type.purpose                Key
-    _type.source                 Recorded
+    _name.object_id              index
+    _name.linked_item_id         '_analysis_fit.index'
+    _type.purpose                Link
+    _type.source                 Assigned
     _type.container              Single
     _type.contents               Integer
 save_
@@ -3537,8 +3506,8 @@ save_analysis_fit_param.name
     _description.text            'Name of the fitted parameter, e.g. q_max, K_L, n'
     _name.category_id            ANALYSIS_FIT_PARAM
     _name.object_id              name
-    _type.purpose                Encode
-    _type.source                 Recorded
+    _type.purpose                Key
+    _type.source                 Assigned
     _type.container              Single
     _type.contents               Text
 save_

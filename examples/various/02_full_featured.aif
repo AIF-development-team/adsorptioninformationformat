@@ -40,10 +40,13 @@ data_full_featured_aif
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_mass                       "g"
+    _units_molecular_weight           "g/mol"
     _units_sorbed_amount              "mmol/g"
     _units_density                    "g/cm3"
     _units_time                       "hours"
     _units_enthalpy                   "kJ/mol"
+    _units_surface_area               "m2/g"
+    _units_pore_volume                "cm3/g"
 
     loop_
         _adsorp_index
@@ -78,7 +81,7 @@ data_full_featured_aif
         9 500.0      6427400.0   0.09
 
     loop_
-        _analysis_fit_id
+        _analysis_fit_index
         _analysis_fit_model
         _analysis_fit_r_squared
         _analysis_fit_rmse
@@ -87,7 +90,7 @@ data_full_featured_aif
         3  "Toth"      0.9996  0.015
 
     loop_
-        _analysis_fit_param_id
+        _analysis_fit_param_index
         _analysis_fit_param_name
         _analysis_fit_param_value
         _analysis_fit_param_uncertainty
