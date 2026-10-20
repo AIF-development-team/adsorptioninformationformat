@@ -219,6 +219,18 @@
         "_adsorptive_formula": {
           "type": "string",
           "description": "Chemical formula of the adsorptive"
+        },
+        "_adsorptive_molecular_weight": {
+          "type": "number",
+          "description": "Molecular weight of the adsorptive (see _units_molecular_weight)"
+        },
+        "_adsorptive_kinetic_diameter": {
+          "type": "number",
+          "description": "Kinetic diameter of the adsorptive molecule (see _units_kinetic_diameter)"
+        },
+        "_adsorptive_quadrupole_moment": {
+          "type": "number",
+          "description": "Quadrupole moment of the adsorptive (see _units_quadrupole_moment)"
         }
       }
     },
@@ -431,6 +443,31 @@
         "_units_concentration": {
           "type": "string",
           "description": "Unit of concentration. Requires _units_composition_type = concentration",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_units_surface_area": {
+          "type": "string",
+          "description": "Unit of surface area values in this file, e.g. m2/g",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_units_pore_volume": {
+          "type": "string",
+          "description": "Unit of pore volume values in this file, e.g. cm3/g",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_units_pore_size": {
+          "type": "string",
+          "description": "Unit of pore characteristic dimension values in this file, e.g. nm",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_units_kinetic_diameter": {
+          "type": "string",
+          "description": "Unit of kinetic diameter values in this file, e.g. angstrom",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_units_quadrupole_moment": {
+          "type": "string",
+          "description": "Unit of quadrupole moment values in this file, e.g. Debye·Å",
           "x-schema-star-type-source": "Assigned"
         }
       }
@@ -778,6 +815,178 @@
           "description": "Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         }
       }
+    },
+
+    "analysis": {
+      "$comment": "Analysis: Derived scalar quantities from standard analysis methods (BET, Langmuir, pore characterization). These are single-value metadata fields summarising the analysis results.",
+      "x-schema-star-definition-id": "analysis",
+      "x-schema-star-definition-class": "Set",
+      "type": "object",
+      "properties": {
+        "_analysis_method": {
+          "type": "string",
+          "description": "General description of analysis method(s) used for the derived quantities."
+        },
+        "_analysis_bet_area": {
+          "type": "number",
+          "description": "BET surface area (see _units_surface_area)"
+        },
+        "_analysis_bet_c_constant": {
+          "type": "number",
+          "description": "BET C constant (dimensionless)"
+        },
+        "_analysis_bet_pressure_range_min": {
+          "type": "number",
+          "description": "Lower bound of the relative pressure range used for BET SSA fitting"
+        },
+        "_analysis_bet_pressure_range_max": {
+          "type": "number",
+          "description": "Upper bound of the relative pressure range used for BET SSA fitting"
+        },
+        "_analysis_langmuir_area": {
+          "type": "number",
+          "description": "Langmuir surface area (see _units_surface_area)"
+        },
+        "_analysis_langmuir_pressure_range_min": {
+          "type": "number",
+          "description": "Lower bound of the relative pressure range used for Langmuir SSA fitting"
+        },
+        "_analysis_langmuir_pressure_range_max": {
+          "type": "number",
+          "description": "Upper bound of the relative pressure range used for Langmuir SSA fitting"
+        },
+        "_analysis_total_pore_volume": {
+          "type": "number",
+          "description": "Total pore volume (see _units_pore_volume)"
+        },
+        "_analysis_total_pore_volume_pressure": {
+          "type": "number",
+          "description": "Relative pressure p/p0 at which total pore volume was evaluated (dimensionless)"
+        }
+      }
+    },
+
+    "analysis_psd_method": {
+      "$comment": "Analysis PSD Method: Single-value metadata describing the method used for the pore size distribution in this data block.",
+      "x-schema-star-definition-id": "analysis_psd_method",
+      "x-schema-star-definition-class": "Set",
+      "type": "object",
+      "properties": {
+        "_analysis_psd_method_name": {
+          "type": "string",
+          "description": "Method for determining pore size distribution, e.g. NLDFT-Carbon-N2"
+        },
+        "_analysis_psd_method_branch": {
+          "type": "string",
+          "description": "Branch where the pore size method was applied, e.g. adsorption, desorption"
+        },
+        "_analysis_psd_method_geometry": {
+          "type": "string",
+          "description": "Geometry of the pores, e.g. cylindrical, slit-shaped"
+        },
+        "_analysis_psd_method_details": {
+          "type": "string",
+          "description": "Additional details about the pore size method, e.g. thickness function, goodness of fit, etc"
+        }
+      }
+    },
+
+    "analysis_psd": {
+      "$comment": "Analysis PSD: Loop columns for pore size distribution data. One row per pore-size bin, identified by _analysis_psd_index.",
+      "x-schema-star-definition-id": "analysis_psd",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": "_analysis_psd_index",
+      "type": "object",
+      "properties": {
+        "_analysis_psd_index": {
+          "type": "integer",
+          "description": "Unique integer index identifying this pore-size bin within the data block",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_analysis_psd_dimension": {
+          "type": "number",
+          "description": "Pore characteristic dimension in a pore-size distribution loop (see _units_pore_size)"
+        },
+        "_analysis_psd_dv_dd": {
+          "type": "number",
+          "description": "Differential pore volume dV/dD at each pore size in a PSD loop, in units of _units_pore_volume per _units_pore_size"
+        },
+        "_analysis_psd_cumulative_volume": {
+          "type": "number",
+          "description": "Cumulative pore volume at each pore size in a PSD loop, in units of _units_pore_volume"
+        }
+      }
+    },
+
+    "analysis_fit_summary": {
+      "$comment": "Analysis Fit Summary: Loop columns for recording fitted isotherm models. One row per model, linked to fit parameters via _analysis_fit_index.",
+      "x-schema-star-definition-id": "analysis_fit",
+      "x-schema-star-definition-class": "Loop",
+            "x-schema-star-category-key": "_analysis_fit_index",
+      "type": "object",
+      "properties": {
+              "_analysis_fit_index": {
+          "type": "integer",
+                "description": "Unique integer index identifying this fit within the file",
+                "x-schema-star-type-purpose": "Key",
+                "x-schema-star-type-source": "Assigned"
+              },
+        "_analysis_fit_model": {
+          "type": "string",
+          "description": "Name of the fitted isotherm model, e.g. Langmuir, DSL, Toth"
+        },
+        "_analysis_fit_branch": {
+          "type": "string",
+          "description": "Branch of the isotherm used for the fit, e.g. adsorption or desorption, or cycle 1 etc."
+        },
+        "_analysis_fit_r_squared": {
+          "type": "number",
+          "description": "Coefficient of determination (R-squared) for the fit"
+        },
+        "_analysis_fit_rmse": {
+          "type": "number",
+          "description": "Root-mean-square error of the fit (see _units_sorbed_amount)"
+        }
+      }
+    },
+
+    "analysis_fit_parameters": {
+      "$comment": "Analysis Fit Parameters: Loop columns for the parameters of each fitted model. Linked to the fit summary via _analysis_fit_param_index referencing _analysis_fit_index. Each row is identified by the pair (_analysis_fit_param_index, _analysis_fit_param_name).",
+      "x-schema-star-definition-id": "analysis_fit_param",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": [
+        "_analysis_fit_param_index",
+        "_analysis_fit_param_name"
+      ],
+      "type": "object",
+      "properties": {
+              "_analysis_fit_param_index": {
+          "type": "integer",
+                "description": "Index of the fit this parameter belongs to; references _analysis_fit_index in the fit summary loop",
+                "x-schema-star-type-purpose": "Link",
+                "x-schema-star-type-source": "Assigned",
+                "x-schema-star-linked-item": "_analysis_fit_index"
+              },
+              "_analysis_fit_param_name": {
+                "type": "string",
+                "description": "Name of the fitted parameter, e.g. q_max, K_L, n",
+                "x-schema-star-type-purpose": "Key",
+                "x-schema-star-type-source": "Assigned"
+              },
+        "_analysis_fit_param_value": {
+          "type": "number",
+          "description": "Fitted value of the parameter"
+        },
+        "_analysis_fit_param_uncertainty": {
+          "type": "number",
+          "description": "Uncertainty of the fitted parameter value"
+        },
+        "_analysis_fit_param_unit": {
+          "type": "string",
+          "description": "Unit of the fitted parameter, e.g. mmol/g, 1/Pa"
+        }
+      }
     }
   },
 
@@ -799,6 +1008,11 @@
     { "$ref": "#/definitions/units" },
     { "$ref": "#/definitions/adsorption_data" },
     { "$ref": "#/definitions/desorption_data" },
+    { "$ref": "#/definitions/analysis" },
+    { "$ref": "#/definitions/analysis_psd_method" },
+    { "$ref": "#/definitions/analysis_psd" },
+    { "$ref": "#/definitions/analysis_fit_summary" },
+    { "$ref": "#/definitions/analysis_fit_parameters" },
     {
       "if": {
         "anyOf": [
@@ -997,6 +1211,15 @@
     "_desorp_amount_component_9": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_desorp_amount_component_10": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_exptl_temperature": ["_units_temperature"],
+    "_adsorptive_molecular_weight": ["_adsorptive_name", "_units_molecular_weight"],
+    "_adsorptive_kinetic_diameter": ["_adsorptive_name", "_units_kinetic_diameter"],
+    "_adsorptive_quadrupole_moment": ["_adsorptive_name", "_units_quadrupole_moment"],
+    "_analysis_bet_area": ["_units_surface_area"],
+    "_analysis_langmuir_area": ["_units_surface_area"],
+    "_analysis_total_pore_volume": ["_units_pore_volume"],
+    "_analysis_psd_dimension": ["_units_pore_size"],
+    "_analysis_psd_dv_dd": ["_units_pore_volume", "_units_pore_size"],
+    "_analysis_fit_rmse": ["_units_sorbed_amount"],
     "_simltn_code": ["_exptl_method"],
     "_simltn_forcefield_adsorbent": ["_exptl_method"],
     "_simltn_forcefield_adsorptive": ["_exptl_method"],

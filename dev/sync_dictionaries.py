@@ -358,6 +358,12 @@ def _ddlm_save_name(cif_name: str, cat_prefix: str) -> tuple[str, str]:
     return f"{cat_prefix}.{rest}", rest
 
 
+def _ddlm_tag_reference(cif_name: str, cat_prefix: str) -> str:
+    """Return a quoted DDLm tag reference for a CIF data name."""
+    save_name, _ = _ddlm_save_name(cif_name, cat_prefix)
+    return f"'_{save_name}'"
+
+
 def _yaml_range(name, prop: dict) -> str | None:
     """LinkML range, or *None* when the default (``string``) applies."""
     if "enum" in prop:
@@ -737,7 +743,14 @@ def _ddlm_category_block(sk: str, meta: SectionMeta, ddlm_date: str) -> list[str
                 f"Loop section '{sk}' has no x-schema-star-category-key"
                 " — required by DDLm."
             )
-        lines.append(_ddlm_kv("_category.key_id", meta.category_keys[0]))
+        if len(meta.category_keys) == 1:
+            key_reference = _ddlm_tag_reference(meta.category_keys[0], meta.prefix)
+            lines.append(_ddlm_kv("_category.key_id", key_reference))
+        else:
+            lines.append("    loop_")
+            lines.append("        _category_key.name")
+            for key in meta.category_keys:
+                lines.append(f"        {_ddlm_tag_reference(key, meta.prefix)}")
     lines.append("save_")
     return lines
 
@@ -749,6 +762,7 @@ def _ddlm_item_block(
     ddlm_definition_id: str,
     ddlm_date: str,
     req_index: RequiredIndex,
+    linked_item_names: dict[str, str],
 ) -> list[str]:
     save_name, rest_name = _ddlm_save_name(pname, cat_prefix)
     lines: list[str] = []
@@ -761,6 +775,15 @@ def _ddlm_item_block(
     lines.append(_ddlm_description(prop.get("description", "")))
     lines.append(_ddlm_kv("_name.category_id", ddlm_definition_id))
     lines.append(_ddlm_kv("_name.object_id", rest_name))
+    if "x-schema-star-linked-item" in prop:
+        linked_item = prop["x-schema-star-linked-item"]
+        if linked_item not in linked_item_names:
+            raise ValueError(
+                f"Item '{pname}' links to undefined item '{linked_item}'."
+            )
+        lines.append(
+            _ddlm_kv("_name.linked_item_id", linked_item_names[linked_item])
+        )
     lines.append(_ddlm_kv("_type.purpose", _prop_purpose(prop)))
     lines.append(_ddlm_kv("_type.source", _prop_source(prop)))
     lines.append(_ddlm_kv("_type.container", _prop_container(prop)))
@@ -792,6 +815,11 @@ def generate_ddlm(schema: dict) -> str:
         sk: _build_section_meta(sk, definitions[sk]) for sk in section_keys
     }
     req_index = _build_required_index(schema)
+    linked_item_names = {
+        pname: _ddlm_tag_reference(pname, section_metas[sk].prefix)
+        for sk in section_keys
+        for pname in _section_properties(definitions[sk])
+    }
 
     lines: list[str] = [
         *_ddlm_header(schema),
@@ -804,7 +832,13 @@ def generate_ddlm(schema: dict) -> str:
         for pname, prop in _section_properties(definitions[sk]).items():
             lines.extend(
                 _ddlm_item_block(
-                    pname, prop, meta.prefix, meta.dic_id.upper(), ddlm_date, req_index
+                    pname,
+                    prop,
+                    meta.prefix,
+                    meta.dic_id.upper(),
+                    ddlm_date,
+                    req_index,
+                    linked_item_names,
                 )
             )
 
