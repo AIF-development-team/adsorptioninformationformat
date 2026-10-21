@@ -36,6 +36,8 @@ enums:
         description: Computational simulation method.
       other:
         description: Other method not listed.
+      unspecified:
+        description: ""
   ExptlIsothermType:
     description: Type of adsorption isotherm.
     permissible_values:

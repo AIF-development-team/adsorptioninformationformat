@@ -86,7 +86,7 @@
           "type": "string",
           "description": "Experimental technique used to measure the amount adsorbed",
           "x-schema-star-type-purpose": "State",
-          "enum": ["volumetric", "gravimetric", "chromatographic", "simulation", "other"],
+          "enum": ["volumetric", "gravimetric", "chromatographic", "simulation", "other", "unspecified"],
           "x-enum-name": "ExperimentalMethod",
           "x-enum-description": "Method used to determine amount adsorbed.",
           "x-enum-descriptions": {

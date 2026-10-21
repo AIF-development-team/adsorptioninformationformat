@@ -259,6 +259,7 @@ save_exptl.method
         chromatographic  'Chromatographic method.'
         simulation       'Computational simulation method.'
         other            'Other method not listed.'
+        unspecified      ''
     _description.common
 ;
     Required field.
