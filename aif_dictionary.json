@@ -778,6 +778,126 @@
           "description": "Loading of the tenth component in the adsorbed phase for a multicomponent desorption measurement (see _units_sorbed_amount)"
         }
       }
+    },
+
+    "adsorption_transient_data": {
+      "$comment": "Section 9 — Adsorption Transient Data: Optional loop columns for time-resolved (raw instrument) traces during the adsorption branch. Each row records an instantaneous reading; the _index column links rows to the corresponding equilibrium point in the adsorption data loop (1-based index).",
+      "x-schema-star-definition-id": "adsorp_transient",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": ["_adsorp_transient_index", "_adsorp_transient_elapsed_time"],
+      "type": "object",
+      "properties": {
+        "_adsorp_transient_index": {
+          "type": "integer",
+          "description": "1-based index of the corresponding equilibrium point in the adsorption data loop",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_adsorp_transient_elapsed_time": {
+          "type": "number",
+          "description": "Time elapsed since the beginning of this dosing step (see _units_time)"
+        },
+        "_adsorp_transient_pressure": {
+          "type": "number",
+          "description": "Instantaneous pressure recorded during the adsorption dosing step (see _units_pressure)"
+        },
+        "_adsorp_transient_fugacity": {
+          "type": "number",
+          "description": "Instantaneous fugacity recorded during the adsorption dosing step (see _units_pressure)"
+        },
+        "_adsorp_transient_temperature": {
+          "type": "number",
+          "description": "Instantaneous temperature recorded during the adsorption dosing step (see _units_temperature)"
+        },
+        "_adsorp_transient_amount": {
+          "type": "number",
+          "description": "Instantaneous amount adsorbed recorded during the adsorption dosing step (see _units_sorbed_amount)"
+        },
+        "_adsorp_transient_amount_excess": {
+          "type": "number",
+          "description": "Instantaneous excess amount adsorbed recorded during the adsorption dosing step (see _units_sorbed_amount)"
+        },
+        "_adsorp_transient_amount_absolute": {
+          "type": "number",
+          "description": "Instantaneous absolute amount adsorbed recorded during the adsorption dosing step (see _units_sorbed_amount)"
+        },
+        "_adsorp_transient_amount_net": {
+          "type": "number",
+          "description": "Instantaneous net amount adsorbed recorded during the adsorption dosing step (see _units_sorbed_amount)"
+        },
+        "_adsorp_transient_fugacity_component_1": {
+          "type": "number",
+          "description": "Instantaneous fugacity of component 1 recorded during the adsorption dosing step (see _units_pressure)"
+        },
+        "_adsorp_transient_composition_component_1": {
+          "type": "number",
+          "description": "Instantaneous composition of component 1 recorded during the adsorption dosing step (see _units_composition_type)"
+        },
+        "_adsorp_transient_amount_component_1": {
+          "type": "number",
+          "description": "Instantaneous amount of component 1 adsorbed recorded during the adsorption dosing step (see _units_sorbed_amount)"
+        }
+      }
+    },
+
+    "desorption_transient_data": {
+      "$comment": "Section 10 — Desorption Transient Data: Optional loop columns for time-resolved (raw instrument) traces during the desorption branch. Mirrors the adsorption transient data section.",
+      "x-schema-star-definition-id": "desorp_transient",
+      "x-schema-star-definition-class": "Loop",
+      "x-schema-star-category-key": ["_desorp_transient_index", "_desorp_transient_elapsed_time"],
+      "type": "object",
+      "properties": {
+        "_desorp_transient_index": {
+          "type": "integer",
+          "description": "1-based index of the corresponding equilibrium point in the desorption data loop",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_desorp_transient_elapsed_time": {
+          "type": "number",
+          "description": "Time elapsed since the beginning of this desorption step (see _units_time)"
+        },
+        "_desorp_transient_pressure": {
+          "type": "number",
+          "description": "Instantaneous pressure recorded during the desorption step (see _units_pressure)"
+        },
+        "_desorp_transient_fugacity": {
+          "type": "number",
+          "description": "Instantaneous fugacity recorded during the desorption step (see _units_pressure)"
+        },
+        "_desorp_transient_temperature": {
+          "type": "number",
+          "description": "Instantaneous temperature recorded during the desorption step (see _units_temperature)"
+        },
+        "_desorp_transient_amount": {
+          "type": "number",
+          "description": "Instantaneous amount adsorbed recorded during the desorption step (see _units_sorbed_amount)"
+        },
+        "_desorp_transient_amount_excess": {
+          "type": "number",
+          "description": "Instantaneous excess amount adsorbed recorded during the desorption step (see _units_sorbed_amount)"
+        },
+        "_desorp_transient_amount_absolute": {
+          "type": "number",
+          "description": "Instantaneous absolute amount adsorbed recorded during the desorption step (see _units_sorbed_amount)"
+        },
+        "_desorp_transient_amount_net": {
+          "type": "number",
+          "description": "Instantaneous net amount adsorbed recorded during the desorption step (see _units_sorbed_amount)"
+        },
+        "_desorp_transient_fugacity_component_1": {
+          "type": "number",
+          "description": "Instantaneous fugacity of component 1 recorded during the desorption step (see _units_pressure)"
+        },
+        "_desorp_transient_composition_component_1": {
+          "type": "number",
+          "description": "Instantaneous composition of component 1 recorded during the desorption step (see _units_composition_type)"
+        },
+        "_desorp_transient_amount_component_1": {
+          "type": "number",
+          "description": "Instantaneous amount of component 1 adsorbed recorded during the desorption step (see _units_sorbed_amount)"
+        }
+      }
     }
   },
 
@@ -877,7 +997,9 @@
       "anyOf": [
         { "required": ["_exptl_temperature"] }
       ]
-    }
+    },
+    { "$ref": "#/definitions/adsorption_transient_data" },
+    { "$ref": "#/definitions/desorption_transient_data" }
   ],
 
   "patternProperties": {
@@ -952,6 +1074,17 @@
     "_adsorp_amount_component_8": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_adsorp_amount_component_9": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_adsorp_amount_component_10": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
+    "_adsorp_transient_elapsed_time": ["_units_time"],
+    "_adsorp_transient_pressure": ["_units_pressure"],
+    "_adsorp_transient_fugacity": ["_units_pressure"],
+    "_adsorp_transient_temperature": ["_units_temperature"],
+    "_adsorp_transient_amount": ["_units_sorbed_amount"],
+    "_adsorp_transient_amount_excess": ["_units_sorbed_amount", "_adsorp_transient_amount"],
+    "_adsorp_transient_amount_absolute": ["_units_sorbed_amount", "_adsorp_transient_amount"],
+    "_adsorp_transient_amount_net": ["_units_sorbed_amount", "_adsorp_transient_amount"],
+    "_adsorp_transient_fugacity_component_1": ["_units_pressure", "_adsorptive_component_name", "_adsorptive_component_index"],
+    "_adsorp_transient_composition_component_1": ["_units_composition_type", "_adsorptive_component_name", "_adsorptive_component_index"],
+    "_adsorp_transient_amount_component_1": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_adsorptive_cas": ["_adsorptive_name"],
     "_adsorptive_formula": ["_adsorptive_name"],
     "_adsorptive_inchi": ["_adsorptive_name"],
@@ -996,6 +1129,17 @@
     "_desorp_amount_component_8": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_desorp_amount_component_9": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_desorp_amount_component_10": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
+    "_desorp_transient_elapsed_time": ["_units_time"],
+    "_desorp_transient_pressure": ["_units_pressure"],
+    "_desorp_transient_fugacity": ["_units_pressure"],
+    "_desorp_transient_temperature": ["_units_temperature"],
+    "_desorp_transient_amount": ["_units_sorbed_amount"],
+    "_desorp_transient_amount_excess": ["_units_sorbed_amount", "_desorp_transient_amount"],
+    "_desorp_transient_amount_absolute": ["_units_sorbed_amount", "_desorp_transient_amount"],
+    "_desorp_transient_amount_net": ["_units_sorbed_amount", "_desorp_transient_amount"],
+    "_desorp_transient_fugacity_component_1": ["_units_pressure", "_adsorptive_component_name", "_adsorptive_component_index"],
+    "_desorp_transient_composition_component_1": ["_units_composition_type", "_adsorptive_component_name", "_adsorptive_component_index"],
+    "_desorp_transient_amount_component_1": ["_units_sorbed_amount", "_adsorptive_component_name", "_adsorptive_component_index"],
     "_exptl_temperature": ["_units_temperature"],
     "_simltn_code": ["_exptl_method"],
     "_simltn_forcefield_adsorbent": ["_exptl_method"],
