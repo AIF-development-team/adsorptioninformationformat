@@ -261,6 +261,87 @@ class TestDeprecatedPropagation:
         assert "required: true" not in concentration_block
 
 
+# ── DIC category keys and links ──────────────────────────────────────────────
+
+
+def _loop_meta(keys) -> sd.SectionMeta:
+    return sd.SectionMeta(
+        dic_id="fit_param",
+        dic_class="Loop",
+        prefix="fit_param",
+        yaml_label="Fit Param",
+        dic_desc="",
+        category_keys=keys,
+    )
+
+
+class TestDdlmCategoryKeys:
+    def test_single_key_uses_category_key_id(self):
+        block = "\n".join(
+            sd._ddlm_category_block(
+                "fit", _loop_meta(["_fit_param_index"]), "2026-01-01"
+            )
+        )
+        assert re.search(r"_category\.key_id\s+'_fit_param\.index'", block)
+        assert "_category_key.name" not in block
+
+    def test_composite_key_lists_every_key(self):
+        keys = ["_fit_param_index", "_fit_param_name"]
+        block = "\n".join(sd._ddlm_category_block("fit", _loop_meta(keys), "2026-01-01"))
+        assert "_category.key_id" not in block
+        loop = re.search(
+            r"loop_\s*\n\s*_category_key\.name\s*\n((?:\s+'_fit_param\.\w+'\n)+)",
+            block + "\n",
+        )
+        assert loop, block
+        assert loop.group(1).split() == ["'_fit_param.index'", "'_fit_param.name'"]
+
+    def test_loop_without_key_raises(self):
+        with pytest.raises(ValueError):
+            sd._ddlm_category_block("fit", _loop_meta([]), "2026-01-01")
+
+
+class TestDdlmLinkedItem:
+    def _block(self, prop: dict) -> str:
+        req = sd.RequiredIndex(frozenset(), ())
+        return "\n".join(
+            sd._ddlm_item_block(
+                "_fit_param_index",
+                prop,
+                "fit_param",
+                "FIT_PARAM",
+                "2026-01-01",
+                req,
+                {"_fit_index": "'_fit.index'"},
+            )
+        )
+
+    def test_linked_item_emitted(self):
+        block = self._block({
+            "type": "integer",
+            "x-schema-star-type-purpose": "Link",
+            "x-schema-star-linked-item": "_fit_index",
+        })
+        assert re.search(r"_name\.linked_item_id\s+'_fit\.index'", block)
+        assert re.search(r"_type\.purpose\s+Link", block)
+
+    def test_no_linked_item_by_default(self):
+        assert "_name.linked_item_id" not in self._block({"type": "integer"})
+
+    def test_undefined_linked_item_raises(self):
+        req = sd.RequiredIndex(frozenset(), ())
+        with pytest.raises(ValueError, match="links to undefined item"):
+            sd._ddlm_item_block(
+                "_fit_param_index",
+                {"x-schema-star-linked-item": "_missing_item"},
+                "fit_param",
+                "FIT_PARAM",
+                "2026-01-01",
+                req,
+                {},
+            )
+
+
 # ── integration: --check must pass on the committed files ───────────────────
 
 

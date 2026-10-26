@@ -30,6 +30,7 @@ data_gcmc_simulation
     _units_temperature                "K"
     _units_pressure                   "Pa"
     _units_sorbed_amount              "mmol/g"
+    _units_molecular_weight           "g/mol"
 
     loop_
         _adsorp_index
