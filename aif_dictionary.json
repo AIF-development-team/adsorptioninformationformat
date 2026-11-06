@@ -219,6 +219,10 @@
         "_adsorptive_formula": {
           "type": "string",
           "description": "Chemical formula of the adsorptive"
+        },
+        "_adsorptive_EOS": {
+          "type": "string",
+          "description": "Descriptor / name of the Equation of State used to obtain properties of the adsorptive phase (single- or multicomponent)"
         }
       }
     },

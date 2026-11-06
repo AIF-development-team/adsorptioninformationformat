@@ -213,6 +213,10 @@ slots:
     aliases: ["_adsorptive_formula"]
     description: Chemical formula of the adsorptive
 
+  adsorptive_EOS:
+    aliases: ["_adsorptive_EOS"]
+    description: Descriptor / name of the Equation of State used to obtain properties of the adsorptive phase (single- or multicomponent)
+
   # ── Adsorptive Component ────────────────────
 
   adsorptive_component_index:
@@ -926,6 +930,7 @@ classes:
       - adsorptive_cas
       - adsorptive_smiles
       - adsorptive_formula
+      - adsorptive_EOS
       # Simulation
       - simltn_code
       - simltn_size
