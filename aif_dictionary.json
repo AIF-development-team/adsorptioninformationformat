@@ -219,6 +219,10 @@
         "_adsorptive_formula": {
           "type": "string",
           "description": "Chemical formula of the adsorptive"
+        },
+        "_adsorptive_EOS": {
+          "type": "string",
+          "description": "Descriptor / name of the Equation of State used to obtain properties of the adsorptive phase (single- or multicomponent)"
         }
       }
     },
@@ -444,8 +448,14 @@
       "type": "object",
       "properties": {
         "_adsorp_index": {
-          "type": "number",
+          "type": "integer",
           "description": "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point.",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
+        },
+        "_adsorp_cycle_index": {
+          "type": "integer",
+          "description": "description here",
           "x-schema-star-type-purpose": "Key",
           "x-schema-star-type-source": "Assigned"
         },
@@ -616,7 +626,7 @@
       "type": "object",
       "properties": {
         "_desorp_index": {
-          "type": "number",
+          "type": "integer",
           "description": "Index of the desorption data point, starting from 1 and incrementing by 1 for each point.",
           "x-schema-star-type-purpose": "Key",
           "x-schema-star-type-source": "Assigned"

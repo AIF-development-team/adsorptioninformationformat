@@ -693,6 +693,24 @@ save_adsorptive.formula
     _type.contents               Text
 save_
 
+save_adsorptive.EOS
+    _definition.id               'adsorptive.EOS'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text
+;
+    Descriptor / name of the Equation of State used to obtain
+    properties of the adsorptive phase (single- or multicomponent)
+;
+    _name.category_id            ADSORPTIVE
+    _name.object_id              EOS
+    _type.purpose                Encode
+    _type.source                 Recorded
+    _type.container              Single
+    _type.contents               Text
+save_
+
 ##############################################################################
 #                                                                            #
 #                       ADSORPTIVE_COMPONENT CATEGORY                        #
@@ -1472,7 +1490,21 @@ save_adsorp.index
     _type.purpose                Key
     _type.source                 Assigned
     _type.container              Single
-    _type.contents               Real
+    _type.contents               Integer
+save_
+
+save_adsorp.cycle_index
+    _definition.id               'adsorp.cycle_index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'description here'
+    _name.category_id            ADSORP
+    _name.object_id              cycle_index
+    _type.purpose                Key
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Integer
 save_
 
 save_adsorp.pressure
@@ -2258,7 +2290,7 @@ save_desorp.index
     _type.purpose                Key
     _type.source                 Assigned
     _type.container              Single
-    _type.contents               Real
+    _type.contents               Integer
 save_
 
 save_desorp.pressure

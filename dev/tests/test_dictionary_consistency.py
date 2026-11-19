@@ -186,7 +186,7 @@ def test_adsnt_sample_name_exists_in_json(json_schema):
 
 def test_exptl_method_enum_consistent_across_formats(json_schema, yaml_text, ddlm_text):
     """The ExperimentalMethod enum values must appear in all three formats."""
-    expected_values = {"volumetric", "gravimetric", "chromatographic", "simulation", "other"}
+    expected_values = {"volumetric", "gravimetric", "chromatographic", "simulation", "other", "unspecified"}
 
     # JSON
     method_prop = (

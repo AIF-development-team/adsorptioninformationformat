@@ -213,6 +213,10 @@ slots:
     aliases: ["_adsorptive_formula"]
     description: Chemical formula of the adsorptive
 
+  adsorptive_EOS:
+    aliases: ["_adsorptive_EOS"]
+    description: Descriptor / name of the Equation of State used to obtain properties of the adsorptive phase (single- or multicomponent)
+
   # ── Adsorptive Component ────────────────────
 
   adsorptive_component_index:
@@ -373,7 +377,12 @@ slots:
   adsorp_index:
     aliases: ["_adsorp_index"]
     description: "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point."
-    range: float
+    range: integer
+
+  adsorp_cycle_index:
+    aliases: ["_adsorp_cycle_index"]
+    description: description here
+    range: integer
 
   adsorp_pressure:
     aliases: ["_adsorp_pressure"]
@@ -575,7 +584,7 @@ slots:
   desorp_index:
     aliases: ["_desorp_index"]
     description: "Index of the desorption data point, starting from 1 and incrementing by 1 for each point."
-    range: float
+    range: integer
 
   desorp_pressure:
     aliases: ["_desorp_pressure"]
@@ -797,6 +806,7 @@ classes:
       Corresponds to a row in an AIF loop_ block for adsorption.
     slots:
       - adsorp_index
+      - adsorp_cycle_index
       - adsorp_pressure
       - adsorp_fugacity
       - adsorp_p0
@@ -926,6 +936,7 @@ classes:
       - adsorptive_cas
       - adsorptive_smiles
       - adsorptive_formula
+      - adsorptive_EOS
       # Simulation
       - simltn_code
       - simltn_size
