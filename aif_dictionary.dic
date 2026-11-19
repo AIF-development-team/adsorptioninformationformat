@@ -1493,6 +1493,20 @@ save_adsorp.index
     _type.contents               Integer
 save_
 
+save_adsorp.cycle_index
+    _definition.id               'adsorp.cycle_index'
+    _definition.scope            Item
+    _definition.class            Datum
+    _definition.update           2026-03-09
+    _description.text            'description here'
+    _name.category_id            ADSORP
+    _name.object_id              cycle_index
+    _type.purpose                Key
+    _type.source                 Assigned
+    _type.container              Single
+    _type.contents               Integer
+save_
+
 save_adsorp.pressure
     _definition.id               'adsorp.pressure'
     _definition.scope            Item

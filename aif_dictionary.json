@@ -453,6 +453,12 @@
           "x-schema-star-type-purpose": "Key",
           "x-schema-star-type-source": "Assigned"
         },
+        "_adsorp_cycle_index": {
+          "type": "integer",
+          "description": "description here",
+          "x-schema-star-type-purpose": "Key",
+          "x-schema-star-type-source": "Assigned"
+        },
         "_adsorp_pressure": {
           "type": "number",
           "description": "Equilibrium pressure at each adsorption data point (see _units_pressure)"

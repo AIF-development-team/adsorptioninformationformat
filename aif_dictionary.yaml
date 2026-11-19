@@ -379,6 +379,11 @@ slots:
     description: "Index of the adsorption data point, starting from 1 and incrementing by 1 for each point."
     range: integer
 
+  adsorp_cycle_index:
+    aliases: ["_adsorp_cycle_index"]
+    description: description here
+    range: integer
+
   adsorp_pressure:
     aliases: ["_adsorp_pressure"]
     description: Equilibrium pressure at each adsorption data point (see _units_pressure)
@@ -801,6 +806,7 @@ classes:
       Corresponds to a row in an AIF loop_ block for adsorption.
     slots:
       - adsorp_index
+      - adsorp_cycle_index
       - adsorp_pressure
       - adsorp_fugacity
       - adsorp_p0
